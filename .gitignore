@@ -7,7 +7,6 @@ bin
 # Node
 /node_modules
 npm-debug.log
-Dotnet_and_Angular.sln
 # IDEs and editors
 .idea/
 .project
