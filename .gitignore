@@ -35,3 +35,4 @@ testem.log
 .angular/
 # System files
 .DS_Store
+appsettings.json
