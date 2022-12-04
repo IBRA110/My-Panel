@@ -29,10 +29,48 @@ Build any .NET Core sample using the .NET Core CLI, which is installed with [the
 these commands from the CLI in the directory of any sample:
 
 ```console
-dotnet dev-certs https --trust
 dotnet build
 dotnet run
 ```
+## to trust browser https
+```console
+dotnet dev-certs https --trust
+``` 
+
+## add package Sqlite
+```console
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+``` 
+
+## add package Sql server
+```console
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+``` 
+
+## install dotnet entity framework
+```console
+dotnet tool install --global dotnet-ef --version 7.0.0
+``` 
+
+## add package dotnet entity framework design
+```console
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 7.0.0
+``` 
+
+## create initial migrations in folder Migrations
+```console
+dotnet ef migrations add InitialCreate -o Data/Migrations
+``` 
+
+## update database
+```console
+dotnet ef database update
+``` 
+
+## add new migrations
+```console
+dotnet ef migrations add UserPasswordAdded - it is name of new migration
+``` 
 
 These will install any needed dependencies, build the project, and run
 the project respectively.
