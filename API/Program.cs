@@ -1,8 +1,18 @@
+using API.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<DataContext>(options => 
+{
+    options.UseSqlite("Connection string");
+});
 
 var app = builder.Build();
 
