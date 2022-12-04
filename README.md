@@ -29,6 +29,7 @@ Build any .NET Core sample using the .NET Core CLI, which is installed with [the
 these commands from the CLI in the directory of any sample:
 
 ```console
+dotnet dev-certs https --trust
 dotnet build
 dotnet run
 ```
