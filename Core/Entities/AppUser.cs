@@ -1,8 +1,15 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Core.Entities
 {
-    public class AppUser
+    public interface IEntity
     {
-        public int Id { get; set; }
+        public Ulid Id { get; set; }
+    }
+    public class AppUser : IEntity
+    {
+        [Key]
+        public Ulid Id { get; set; }
         public string UserName { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }

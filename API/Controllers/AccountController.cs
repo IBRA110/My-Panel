@@ -21,6 +21,7 @@ namespace API.Controllers
             HMACSHA512 hmac = new HMACSHA512();
             AppUser user = new AppUser
             {
+                Id = Ulid.NewUlid(),
                 UserName = username,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password)),
                 PasswordSalt = hmac.Key
