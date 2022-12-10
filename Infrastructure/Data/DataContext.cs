@@ -40,7 +40,7 @@ namespace Infrastructure.Data
         {
             private static readonly ConverterMappingHints DefaultHints = new ConverterMappingHints(size: 16);
 
-            public UlidToBytesConverter(ConverterMappingHints? mappingHints = null)
+            public UlidToBytesConverter(ConverterMappingHints mappingHints = null)
                 : base(
                         convertToProviderExpression: x => x.ToByteArray(),
                         convertFromProviderExpression: x => new Ulid(x),
