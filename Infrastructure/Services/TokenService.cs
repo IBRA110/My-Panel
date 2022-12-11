@@ -1,7 +1,7 @@
-using API.Interfaces;
+using Core.Interfaces;
 using Core.Entities;
 
-namespace API.Services
+namespace Infrastructure.Services
 {
     public class TokenService : ITokenService
     {

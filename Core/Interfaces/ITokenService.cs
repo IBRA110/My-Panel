@@ -1,6 +1,6 @@
 using Core.Entities;
 
-namespace API.Interfaces
+namespace Core.Interfaces
 {
     public interface ITokenService
     {

@@ -1,5 +1,5 @@
-using API.Interfaces;
-using API.Services;
+using Core.Interfaces;
+using Infrastructure.Services;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
