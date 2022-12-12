@@ -39,11 +39,14 @@ namespace API.Controllers
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-
+            
+            string refreshToken = _tokenService.CreateRefreshToken();
+            
             return new UserDTO
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                AccessToken = _tokenService.CreateAccessToken(user),
+                RefreshToken = refreshToken
             };
         }
         [HttpPost("login")]
@@ -66,11 +69,14 @@ namespace API.Controllers
                     return Unauthorized("Invalid password");
                 }
             }
-
+            
+            string refreshToken = _tokenService.CreateRefreshToken();
+            
             return new UserDTO
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                AccessToken = _tokenService.CreateAccessToken(user),
+                RefreshToken = refreshToken
             };
         }
         private async Task<bool> UserExists(string username)

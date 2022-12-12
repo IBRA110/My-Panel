@@ -4,6 +4,7 @@ namespace Core.Interfaces
 {
     public interface ITokenService
     {
-        string CreateToken(AppUser user);
+        string CreateAccessToken(AppUser user);
+        string CreateRefreshToken();
     }
 }
