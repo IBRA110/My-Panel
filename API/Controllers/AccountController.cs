@@ -40,14 +40,8 @@ namespace API.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             
-            string refreshToken = _tokenService.CreateRefreshToken();
             
-            return new UserDTO
-            {
-                Username = user.UserName,
-                AccessToken = _tokenService.CreateAccessToken(user),
-                RefreshToken = refreshToken
-            };
+            return Ok("Success!");
         }
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDTO)

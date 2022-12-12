@@ -22,15 +22,15 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("BLOB");
 
                     b.Property<byte[]>("PasswordHash")
-                        .IsRequired()
                         .HasColumnType("BLOB");
 
                     b.Property<byte[]>("PasswordSalt")
-                        .IsRequired()
                         .HasColumnType("BLOB");
 
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
