@@ -64,11 +64,10 @@ namespace API.Controllers
                 }
             }
             
-            string refreshToken = _tokenService.CreateRefreshToken();
+            string refreshToken = _tokenService.CreateRefreshToken(user);
             
             return new UserDTO
             {
-                Username = user.UserName,
                 AccessToken = _tokenService.CreateAccessToken(user),
                 RefreshToken = refreshToken
             };

@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Cryptography;
 
 namespace Infrastructure.Services
 {
@@ -19,7 +20,10 @@ namespace Infrastructure.Services
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.NameId, user.UserName)
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Id.ToString()),
+                new Claim(ClaimTypes.DateOfBirth, user.Id.ToString()),
             };
 
             SigningCredentials creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
@@ -38,9 +42,18 @@ namespace Infrastructure.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public string CreateRefreshToken()
+        public string CreateRefreshToken(AppUser user)
         {
-            return "";
+            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Expires = DateTime.Now.AddMinutes(15),
+            };
+            
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+
+            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
         }
     }
 }
