@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Cryptography;
 
 namespace Infrastructure.Services
 {
@@ -20,10 +19,8 @@ namespace Infrastructure.Services
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Id.ToString()),
-                new Claim(ClaimTypes.DateOfBirth, user.Id.ToString()),
+                new Claim(type: "Id", user.Id.ToString()),
+                new Claim(type: "UserName", user.UserName)
             };
 
             SigningCredentials creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
@@ -44,16 +41,7 @@ namespace Infrastructure.Services
 
         public string CreateRefreshToken(AppUser user)
         {
-            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Expires = DateTime.Now.AddMinutes(15),
-            };
-            
-            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-
-            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
-
-            return tokenHandler.WriteToken(token);
+            return "";
         }
     }
 }
