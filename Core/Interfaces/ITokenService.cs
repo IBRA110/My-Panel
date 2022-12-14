@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using Core.Entities;
 
 namespace Core.Interfaces
@@ -6,5 +7,7 @@ namespace Core.Interfaces
     {
         string CreateAccessToken(AppUser user);
         string CreateRefreshToken(AppUser user);
+        JwtSecurityToken GetDecodedAccessToken(string parameter);
+        string GetDecodedRefreshToken(string parameter);
     }
 }

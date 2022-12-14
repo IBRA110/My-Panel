@@ -6,6 +6,10 @@ using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using System.Net.Http.Headers;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 
 namespace API.Controllers
 {
@@ -43,6 +47,7 @@ namespace API.Controllers
             
             return Ok("Success!");
         }
+        
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDTO)
         {
@@ -73,6 +78,36 @@ namespace API.Controllers
             {
                 AccessToken = _tokenService.CreateAccessToken(user),
                 RefreshToken = refreshToken
+            };
+        }
+
+        [HttpPost("refresh")]
+        [Authorize]
+        public async Task<ActionResult<UserDTO>> Refresh([FromHeader] string authorization, RefreshTokenDTO refreshToken)
+        {
+
+            AuthenticationHeaderValue.TryParse(authorization, out AuthenticationHeaderValue headerValue);
+
+            string accessToken = headerValue.Parameter;
+
+            JwtSecurityToken jwtSecurityToken = _tokenService.GetDecodedAccessToken(accessToken);
+
+            Ulid id = Ulid.Parse(jwtSecurityToken.Claims.First(c => c.Type == "Id").Value);
+            
+            AppUser user = await _context.Users
+                .SingleOrDefaultAsync(x => x.Id == id);
+
+            if (user == null || refreshToken.Refreshtoken != user.RefreshToken)
+            {
+                return Unauthorized("Invalid token");
+            }
+            
+            
+            
+            return new UserDTO
+            {
+                AccessToken = _tokenService.CreateAccessToken(user),
+                RefreshToken = _tokenService.CreateRefreshToken(user)
             };
         }
         private async Task<bool> UserExists(string username)

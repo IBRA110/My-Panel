@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Cryptography;
 
 namespace Infrastructure.Services
 {
@@ -42,11 +41,32 @@ namespace Infrastructure.Services
 
         public string CreateRefreshToken(AppUser user)
         {
-            byte[] randomNumber = new byte[64];
-            RandomNumberGenerator rng = RandomNumberGenerator.Create();
-            rng.GetBytes(randomNumber);
             
-            return Convert.ToBase64String(randomNumber);
+            byte[] dataBytes = Encoding.UTF8.GetBytes(DateTime.Now.AddMinutes(15).ToString() + " . " + user.UserName);
+
+            string refreshToken = Convert.ToBase64String(dataBytes, Base64FormattingOptions.InsertLineBreaks);
+
+            return refreshToken;
+        }
+
+        public JwtSecurityToken GetDecodedAccessToken(string parameter)
+        {
+            
+            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+
+            JwtSecurityToken jwtSecurityToken = handler.ReadJwtToken(parameter);
+
+            return jwtSecurityToken;
+        }
+        
+        public string GetDecodedRefreshToken(string parameter)
+        {
+            byte[] base64EncodedBytes = Convert.FromBase64String(parameter);
+            
+            string inputString = Encoding.UTF8.GetString(base64EncodedBytes);
+
+            return inputString;
         }
     }
 }
+
