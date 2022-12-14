@@ -66,6 +66,9 @@ namespace API.Controllers
             
             string refreshToken = _tokenService.CreateRefreshToken(user);
             
+            user.RefreshToken = refreshToken;
+            await _context.SaveChangesAsync();
+
             return new UserDTO
             {
                 AccessToken = _tokenService.CreateAccessToken(user),
