@@ -63,9 +63,9 @@ namespace Infrastructure.Services
         {
             byte[] base64EncodedBytes = Convert.FromBase64String(parameter);
             
-            string inputString = Encoding.UTF8.GetString(base64EncodedBytes);
+            string refreshToken = Encoding.UTF8.GetString(base64EncodedBytes);
 
-            return inputString;
+            return refreshToken;
         }
     }
 }
