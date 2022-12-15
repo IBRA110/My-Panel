@@ -17,11 +17,13 @@ namespace API.Controllers
     {
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
+        private readonly IDateService _dateService;
 
-        public AccountController(DataContext context, ITokenService tokenService)
+        public AccountController(DataContext context, ITokenService tokenService, IDateService dateService)
         {
             _tokenService = tokenService;
             _context = context;
+            _dateService = dateService;
         }
 
         [HttpPost("register")]
@@ -102,7 +104,13 @@ namespace API.Controllers
                 return Unauthorized("Invalid token");
             }
             
+            string decodedRefreshToken = _tokenService.GetDecodedRefreshToken(user.RefreshToken);
+            DateTime expiryDate = _dateService.GetDateFromRefreshToken(decodedRefreshToken);
             
+            if (DateTime.Now > expiryDate)
+            {
+                return BadRequest("Token expired");
+            }
             
             return new UserDTO
             {

@@ -10,6 +10,7 @@ namespace API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IDateService, DateService>();
 
             services.AddDbContext<DataContext>(options => 
             {
