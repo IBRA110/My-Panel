@@ -101,11 +101,14 @@ namespace API.Controllers
             {
                 return Unauthorized("Invalid token");
             }
+
+            user.RefreshToken = _tokenService.CreateRefreshToken(user);
+            await _context.SaveChangesAsync();
             
             return new UserDTO
             {
                 AccessToken = _tokenService.CreateAccessToken(user),
-                RefreshToken = _tokenService.CreateRefreshToken(user)
+                RefreshToken = user.RefreshToken
             };
         }
         private async Task<bool> UserExists(string username)

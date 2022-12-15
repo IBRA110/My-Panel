@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Cryptography;
 
 namespace Infrastructure.Services
 {
@@ -41,8 +42,18 @@ namespace Infrastructure.Services
 
         public string CreateRefreshToken(AppUser user)
         {
+            Dictionary<string, string> hashData = new Dictionary<string, string>()
+            {
+                { "id", user.Id.ToString() },
+                { "name", user.UserName },
+                { "date", DateTime.Now.ToString() },
+                { "Ulid", new Ulid().ToString() }
+            };
             
-            byte[] dataBytes = Encoding.UTF8.GetBytes(DateTime.Now.AddMinutes(10).ToString() + " . " + user.UserName);
+            byte[] dataBytes = Encoding.UTF8.GetBytes(hashData.ToString() + new byte[64]);
+
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(dataBytes);
 
             string refreshToken = Convert.ToBase64String(dataBytes, Base64FormattingOptions.InsertLineBreaks);
 
