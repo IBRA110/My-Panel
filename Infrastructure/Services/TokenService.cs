@@ -42,7 +42,7 @@ namespace Infrastructure.Services
         public string CreateRefreshToken(AppUser user)
         {
             
-            byte[] dataBytes = Encoding.UTF8.GetBytes(DateTime.Now.AddMinutes(15).ToString() + " . " + user.UserName);
+            byte[] dataBytes = Encoding.UTF8.GetBytes(DateTime.Now.AddMinutes(10).ToString() + " . " + user.UserName);
 
             string refreshToken = Convert.ToBase64String(dataBytes, Base64FormattingOptions.InsertLineBreaks);
 
@@ -51,7 +51,6 @@ namespace Infrastructure.Services
 
         public JwtSecurityToken GetDecodedAccessToken(string parameter)
         {
-            
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
 
             JwtSecurityToken jwtSecurityToken = handler.ReadJwtToken(parameter);
