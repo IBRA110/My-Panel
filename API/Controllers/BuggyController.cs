@@ -24,6 +24,7 @@ namespace API.Controllers
         [HttpGet("not-found")]
         public ActionResult<AppUser> GetNotFound()
         {
+
             var thing = _context.Users.Find(new Ulid());
             if (thing == null) 
             {
@@ -35,11 +36,14 @@ namespace API.Controllers
         [HttpGet("server-error")]
         public ActionResult<string> GetServerError()
         {
-            var thing = _context.Users.Find(-1);
+
+            var thing = _context.Users.Find(new Ulid());
             // can return null!!!
             var thingToReturn = thing.ToString();
 
             return thingToReturn;
+
+
         }
 
         [HttpGet("bad-request")]

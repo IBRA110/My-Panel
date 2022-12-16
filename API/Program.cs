@@ -1,4 +1,5 @@
 using API.Extensions;
+using API.Middleware;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -18,11 +19,7 @@ builder.Services.AddCors();
 
 WebApplication app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 

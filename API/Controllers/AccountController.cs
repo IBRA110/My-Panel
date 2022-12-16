@@ -9,7 +9,6 @@ using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Http.Headers;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 
 namespace API.Controllers
 {
