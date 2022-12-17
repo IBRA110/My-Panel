@@ -15,8 +15,6 @@ builder.Services.AddIdentityServices(builder.Configuration);
 
 builder.Services.AddCors();
 
-
-
 WebApplication app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
