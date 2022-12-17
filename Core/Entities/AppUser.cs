@@ -21,5 +21,16 @@ namespace Core.Entities
         public ICollection<Photo> Photos { get; set; }
         public ICollection<Image> Pictures { get; set; }
 
+        public int GetAge()
+        {
+            DateTime today = DateTime.Today;
+            Int32 age = today.Year - DateOfBirth.Year;
+            
+            if (DateOfBirth.Date > today.AddYears(-age))
+            {
+                age--;
+            }
+            return age;
+        }
     }
 }
