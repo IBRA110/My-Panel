@@ -1,18 +1,25 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Core.Entities
 {
-    public interface IEntity
+    public class AppUser : BaseEntity
     {
-        public Ulid Id { get; set; }
-    }
-    public class AppUser : IEntity
-    {
-        [Key]
-        public Ulid Id { get; set; }
         public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string RefreshToken { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string KnownAs { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
+        public DateTime LastActive { get; set; } = DateTime.Now;
+        public string Gender { get; set; }
+        public string Introduction { get; set; }
+        public string Interests { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public ICollection<Photo> Photos { get; set; }
+        public ICollection<Image> Pictures { get; set; }
+
     }
 }

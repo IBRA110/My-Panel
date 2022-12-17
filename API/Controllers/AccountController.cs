@@ -34,7 +34,6 @@ namespace API.Controllers
             HMACSHA512 hmac = new HMACSHA512();
             AppUser user = new AppUser
             {
-                Id = Ulid.NewUlid(),
                 UserName = registerDTO.Username,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDTO.Password)),
                 PasswordSalt = hmac.Key
@@ -50,7 +49,6 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDTO)
         {
-            
 
             AppUser user = await _context.Users
                     .SingleOrDefaultAsync(x => x.UserName.ToLower() == loginDTO.Username.ToLower());

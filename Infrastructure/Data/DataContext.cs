@@ -19,10 +19,10 @@ namespace Infrastructure.Data
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
                 // Don't use database-generated values for primary keys
-                if (typeof(IEntity).IsAssignableFrom(entityType.ClrType))
+                if (typeof(BaseEntity).IsAssignableFrom(entityType.ClrType))
                 {
                     modelBuilder.Entity(entityType.ClrType)
-                        .Property<Ulid>(nameof(IEntity.Id)).ValueGeneratedNever();
+                        .Property<Ulid>(nameof(BaseEntity.Id)).ValueGeneratedNever();
                 }
 
                 // Convert Ulids to bytea when persisting
