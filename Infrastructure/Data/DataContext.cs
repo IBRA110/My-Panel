@@ -12,6 +12,7 @@ namespace Infrastructure.Data
         }
 
         public DbSet<AppUser> Users { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var bytesConverter = new UlidToBytesConverter();
@@ -23,6 +24,11 @@ namespace Infrastructure.Data
                 {
                     modelBuilder.Entity(entityType.ClrType)
                         .Property<Ulid>(nameof(BaseEntity.Id)).ValueGeneratedNever();
+                }
+                if (typeof(ImageEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property<Ulid>(nameof(ImageEntity.AppUserId)).ValueGeneratedNever();
                 }
 
                 // Convert Ulids to bytea when persisting

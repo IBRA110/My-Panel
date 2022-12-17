@@ -19,7 +19,7 @@ namespace Core.Entities
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
-        public ICollection<Image> Pictures { get; set; }
+        public ICollection<Drawing> Pictures { get; set; }
 
         public int GetAge()
         {
