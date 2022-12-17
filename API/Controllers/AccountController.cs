@@ -26,6 +26,10 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO)
         {
+            if (await UserExists(registerDTO.Username))
+            {
+                throw new ArgumentException("Username is already taken");
+            } 
             
             HMACSHA512 hmac = new HMACSHA512();
             AppUser user = new AppUser
@@ -46,11 +50,14 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDTO)
         {
+            
+
             AppUser user = await _context.Users
-                .SingleOrDefaultAsync(x => x.UserName.ToLower() == loginDTO.Username.ToLower());
+                    .SingleOrDefaultAsync(x => x.UserName.ToLower() == loginDTO.Username.ToLower());
+
             if (user == null)
             {
-                return Unauthorized("Invalid username");
+                throw new ArgumentException("User does not exist!");
             }
             
             HMACSHA512 hmac = new HMACSHA512(user.PasswordSalt);
@@ -60,7 +67,7 @@ namespace API.Controllers
             {
                 if (computedHash[i] != user.PasswordHash[i])
                 {
-                    return Unauthorized("Invalid password");
+                    throw new ArgumentException("Password is wrong!");
                 }
             }
             
@@ -94,7 +101,7 @@ namespace API.Controllers
 
             if (user == null || refreshToken.Refreshtoken != user.RefreshToken)
             {
-                return Unauthorized("Invalid token");
+                throw new ArgumentException("Something went wrong!");
             }
 
             user.RefreshToken = _tokenService.CreateRefreshToken(user);
