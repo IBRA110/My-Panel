@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
-
+    [Authorize]
     public class UsersController : BaseApiController
     {
         private readonly DataContext _context;
@@ -16,14 +16,12 @@ namespace API.Controllers
         }
 
         [HttpGet()]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {            
             return await _context.Users.ToListAsync();
         }
         
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult<AppUser>> GetUser(Ulid id)
         {
             return await _context.Users.FindAsync(id);
