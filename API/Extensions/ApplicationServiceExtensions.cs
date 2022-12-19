@@ -1,7 +1,7 @@
 using API.Helpers;
-using Core.Interfaces;
-using Infrastructure.Data;
-using Infrastructure.Services;
+using API.Interfaces;
+using API.Data;
+using API.Services;
 using Microsoft.EntityFrameworkCore;
 
 

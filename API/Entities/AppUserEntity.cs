@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Core.Entities
+namespace API.Entities
 {
     public class AppUserEntity : BaseEntity
     {

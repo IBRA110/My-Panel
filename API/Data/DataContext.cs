@@ -1,8 +1,8 @@
-using Core.Entities;
+using API.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Infrastructure.Data
+namespace API.Data
 {
     public class DataContext : DbContext
     {

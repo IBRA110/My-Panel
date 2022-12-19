@@ -1,8 +1,8 @@
-using Core.Interfaces;
-using Core.Entities;
+using API.Interfaces;
+using API.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Data
+namespace API.Data
 {
     public class UserRepository : IUserRepository
     {

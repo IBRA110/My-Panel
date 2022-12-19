@@ -1,6 +1,6 @@
 using API.DTOs;
+using API.Entities;
 using AutoMapper;
-using Core.Entities;
 
 namespace API.Helpers
 {

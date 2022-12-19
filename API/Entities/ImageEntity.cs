@@ -1,4 +1,4 @@
-namespace Core.Entities
+namespace API.Entities
 {
     public class ImageEntity : BaseEntity
     {

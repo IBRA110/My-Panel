@@ -1,11 +1,11 @@
 using System.Security.Cryptography;
 using System.Text;
 using API.DTOs;
-using Core.Entities;
-using Infrastructure.Data;
+using API.Entities;
+using API.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Core.Interfaces;
+using API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Http.Headers;
 using System.IdentityModel.Tokens.Jwt;

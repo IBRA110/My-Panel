@@ -1,6 +1,7 @@
-using Core.Entities;
+using API.DTOs;
+using API.Entities;
 
-namespace Core.Interfaces
+namespace API.Interfaces
 {
     public interface IUserRepository
     {
@@ -13,5 +14,7 @@ namespace Core.Interfaces
         Task<AppUserEntity> GetUserByIdAsync(Ulid id);
         
         Task<AppUserEntity> GetUserByUsernameAsync(string username);
+
+        //Task<IEnumerable<MemberDTO>> GetMemberAsync();
     }
 }

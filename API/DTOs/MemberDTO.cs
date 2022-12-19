@@ -1,4 +1,4 @@
-using Core.Entities;
+using API.Entities;
 
 namespace API.DTOs
 {

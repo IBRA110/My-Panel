@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Core.Interfaces;
+using API.Interfaces;
 using API.DTOs;
 using AutoMapper;
 
@@ -22,6 +22,7 @@ namespace API.Controllers
         {    
             var users = await _userRepository.GetUsersAsync();
             var usersToReturn = _mapper.Map<IEnumerable<MemberDTO>>(users);
+            
             return Ok(usersToReturn);
         }
         
