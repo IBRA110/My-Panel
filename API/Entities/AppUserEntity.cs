@@ -22,17 +22,5 @@ namespace API.Entities
         public string Country { get; set; }
         public ICollection<PhotoEntity> Photos { get; set; }
         public ICollection<DrawingEntity> Pictures { get; set; }
-
-        public int GetAge()
-        {
-            DateTime today = DateTime.Today;
-            Int32 age = today.Year - DateOfBirth.Year;
-            
-            if (DateOfBirth.Date > today.AddYears(-age))
-            {
-                age--;
-            }
-            return age;
-        }
     }
 }
