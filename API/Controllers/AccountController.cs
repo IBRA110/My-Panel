@@ -32,7 +32,7 @@ namespace API.Controllers
             } 
             
             HMACSHA512 hmac = new HMACSHA512();
-            AppUser user = new AppUser
+            AppUserEntity user = new AppUserEntity
             {
                 UserName = registerDTO.Username,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDTO.Password)),
@@ -50,7 +50,7 @@ namespace API.Controllers
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDTO)
         {
 
-            AppUser user = await _context.Users
+            AppUserEntity user = await _context.Users
                     .SingleOrDefaultAsync(x => x.UserName.ToLower() == loginDTO.Username.ToLower());
 
             if (user == null)
@@ -94,7 +94,7 @@ namespace API.Controllers
 
             Ulid id = Ulid.Parse(jwtSecurityToken.Claims.First(c => c.Type == "Id").Value);
             
-            AppUser user = await _context.Users
+            AppUserEntity user = await _context.Users
                 .SingleOrDefaultAsync(x => x.Id == id);
 
             if (user == null || refreshToken.Refreshtoken != user.RefreshToken)

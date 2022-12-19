@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core.Entities
 {
-    public class AppUser : BaseEntity
+    public class AppUserEntity : BaseEntity
     {
         public string UserName { get; set; }
         public string FirstName { get; set; }
@@ -20,8 +20,8 @@ namespace Core.Entities
         public string Interests { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public ICollection<Photo> Photos { get; set; }
-        public ICollection<Drawing> Pictures { get; set; }
+        public ICollection<PhotoEntity> Photos { get; set; }
+        public ICollection<DrawingEntity> Pictures { get; set; }
 
         public int GetAge()
         {

@@ -12,17 +12,17 @@ namespace Infrastructure.Data
             _context = context;
         }
 
-        public async Task<AppUser> GetUserByIdAsync(Ulid id)
+        public async Task<AppUserEntity> GetUserByIdAsync(Ulid id)
         {
             return await _context.Users.FindAsync(id);
         }
          
-        public async Task<AppUser> GetUserByUsernameAsync(string username)
+        public async Task<AppUserEntity> GetUserByUsernameAsync(string username)
         {
            return await _context.Users.SingleOrDefaultAsync(x => x.UserName == username);
         }
 
-        public async Task<IEnumerable<AppUser>> GetUsersAsync()
+        public async Task<IEnumerable<AppUserEntity>> GetUsersAsync()
         {
             return await _context.Users.ToListAsync();
         }
@@ -32,7 +32,7 @@ namespace Infrastructure.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public void Update(AppUser user)
+        public void Update(AppUserEntity user)
         {
             _context.Entry(user).State = EntityState.Modified;
         }

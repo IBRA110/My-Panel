@@ -16,7 +16,7 @@ namespace Infrastructure.Services
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
         }
-        public string CreateAccessToken(AppUser user)
+        public string CreateAccessToken(AppUserEntity user)
         {
             List<Claim> claims = new List<Claim>
             {
@@ -40,7 +40,7 @@ namespace Infrastructure.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public string CreateRefreshToken(AppUser user)
+        public string CreateRefreshToken(AppUserEntity user)
         {
             Dictionary<string, string> hashData = new Dictionary<string, string>()
             {

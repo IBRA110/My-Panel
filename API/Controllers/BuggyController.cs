@@ -22,7 +22,7 @@ namespace API.Controllers
         }
         
         [HttpGet("not-found")]
-        public ActionResult<AppUser> GetNotFound()
+        public ActionResult<AppUserEntity> GetNotFound()
         {
 
             var thing = _context.Users.Find(new Ulid());

@@ -4,14 +4,14 @@ namespace Core.Interfaces
 {
     public interface IUserRepository
     {
-        void Update(AppUser user);
+        void Update(AppUserEntity user);
 
         Task<bool> SaveAllAsync();
 
-        Task<IEnumerable<AppUser>> GetUsersAsync();
+        Task<IEnumerable<AppUserEntity>> GetUsersAsync();
         
-        Task<AppUser> GetUserByIdAsync(Ulid id);
+        Task<AppUserEntity> GetUserByIdAsync(Ulid id);
         
-        Task<AppUser> GetUserByUsernameAsync(string username);
+        Task<AppUserEntity> GetUserByUsernameAsync(string username);
     }
 }

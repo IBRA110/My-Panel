@@ -11,7 +11,7 @@ namespace Infrastructure.Data
 
         }
 
-        public DbSet<AppUser> Users { get; set; }
+        public DbSet<AppUserEntity> Users { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
