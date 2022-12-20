@@ -36,23 +36,7 @@ namespace API.Data
         {
             return await _context.Users.FindAsync(id);
         }
-         
-        public async Task<AppUserEntity> GetUserByUsernameAsync(string username)
-        {
-            return await _context.Users
-                .Include(p => p.Photos)
-                .Include(p => p.Pictures)
-                .SingleOrDefaultAsync(x => x.UserName == username);
-        }
-
-        public async Task<IEnumerable<AppUserEntity>> GetUsersAsync()
-        {
-            return await _context.Users
-                .Include(p => p.Photos)
-                .Include(p => p.Pictures)
-                .ToListAsync();
-        }
-        
+                
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;

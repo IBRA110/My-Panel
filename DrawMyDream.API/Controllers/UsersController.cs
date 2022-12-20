@@ -51,8 +51,7 @@ namespace API.Controllers
 
             Ulid id = Ulid.Parse(jwtSecurityToken.Claims.First(c => c.Type == "Id").Value);
             
-            AppUserEntity user = await _context.Users
-                .SingleOrDefaultAsync(x => x.Id == id);
+            AppUserEntity user = await _userRepository.GetUserByIdAsync(id);
 
             _mapper.Map(memberUpdateDTO, user);
 
