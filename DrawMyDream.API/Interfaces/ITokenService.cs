@@ -7,7 +7,5 @@ namespace API.Interfaces
     {
         string CreateAccessToken(AppUserEntity user);
         string CreateRefreshToken(AppUserEntity user);
-        JwtSecurityToken GetDecodedAccessToken(string parameter);
-        string GetDecodedRefreshToken(string parameter);
     }
 }

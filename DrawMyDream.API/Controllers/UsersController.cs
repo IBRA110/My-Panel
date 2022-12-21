@@ -3,11 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using API.Interfaces;
 using API.DTOs;
 using AutoMapper;
-using System.Net.Http.Headers;
-using System.IdentityModel.Tokens.Jwt;
-using API.Data;
 using API.Entities;
-using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace API.Controllers
 {
@@ -16,14 +13,10 @@ namespace API.Controllers
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        private readonly ITokenService _tokenService;
-        private readonly DataContext _context;
-        public UsersController(IUserRepository userRepository, IMapper mapper, ITokenService tokenService, DataContext context)
+        public UsersController(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;
-            _tokenService = tokenService;
-            _context = context;
         }
 
         [HttpGet()]
@@ -41,23 +34,22 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateUser([FromHeader] string authorization, MemberUpdateDTO memberUpdateDTO)
-        {
-            AuthenticationHeaderValue.TryParse(authorization, out AuthenticationHeaderValue headerValue);
-
-            string accessToken = headerValue.Parameter;
-
-            JwtSecurityToken jwtSecurityToken = _tokenService.GetDecodedAccessToken(accessToken);
-
-            Ulid id = Ulid.Parse(jwtSecurityToken.Claims.First(c => c.Type == "Id").Value);
+        public async Task<ActionResult> UpdateUser(MemberUpdateDTO memberUpdateDTO)
+        {            
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             
+            Ulid id = Ulid.Parse(identity.FindFirst("Id").Value);
+   
             AppUserEntity user = await _userRepository.GetUserByIdAsync(id);
 
             _mapper.Map(memberUpdateDTO, user);
 
             _userRepository.Update(user);
 
-            if (await _userRepository.SaveAllAsync()) return NoContent();
+            if (await _userRepository.SaveAllAsync())
+            {
+                return NoContent();
+            } 
 
             return BadRequest("Failed to update user");
         }

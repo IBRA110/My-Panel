@@ -58,24 +58,6 @@ namespace API.Services
 
             return refreshToken;
         }
-
-        public JwtSecurityToken GetDecodedAccessToken(string parameter)
-        {
-            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-
-            JwtSecurityToken jwtSecurityToken = handler.ReadJwtToken(parameter);
-
-            return jwtSecurityToken;
-        }
-        
-        public string GetDecodedRefreshToken(string parameter)
-        {
-            byte[] base64EncodedBytes = Convert.FromBase64String(parameter);
-            
-            string refreshToken = Encoding.UTF8.GetString(base64EncodedBytes);
-
-            return refreshToken;
-        }
     }
 }
 

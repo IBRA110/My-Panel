@@ -9,18 +9,21 @@ using API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Http.Headers;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
+        private readonly IUserRepository _userRepository;
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
 
-        public AccountController(DataContext context, ITokenService tokenService)
+        public AccountController(DataContext context, ITokenService tokenService, IUserRepository userRepository)
         {
             _tokenService = tokenService;
             _context = context;
+            _userRepository = userRepository;
         }
 
         [HttpPost("register")]
@@ -83,19 +86,14 @@ namespace API.Controllers
 
         [HttpPost("refresh")]
         [Authorize]
-        public async Task<ActionResult<UserDTO>> Refresh([FromHeader] string authorization, RefreshTokenDTO refreshToken)
+        public async Task<ActionResult<UserDTO>> Refresh(RefreshTokenDTO refreshToken)
         {
 
-            AuthenticationHeaderValue.TryParse(authorization, out AuthenticationHeaderValue headerValue);
-
-            string accessToken = headerValue.Parameter;
-
-            JwtSecurityToken jwtSecurityToken = _tokenService.GetDecodedAccessToken(accessToken);
-
-            Ulid id = Ulid.Parse(jwtSecurityToken.Claims.First(c => c.Type == "Id").Value);
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
             
-            AppUserEntity user = await _context.Users
-                .SingleOrDefaultAsync(x => x.Id == id);
+            Ulid id = Ulid.Parse(identity.FindFirst("Id").Value);
+   
+            AppUserEntity user = await _userRepository.GetUserByIdAsync(id);
 
             if (user == null || refreshToken.Refreshtoken != user.RefreshToken)
             {
