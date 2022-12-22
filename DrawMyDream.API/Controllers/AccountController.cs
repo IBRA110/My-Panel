@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using System.Net.Http.Headers;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace API.Controllers
