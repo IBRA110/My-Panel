@@ -23,6 +23,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 
+app.UseStaticFiles();
+
 app.UseAuthorization();
 
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
