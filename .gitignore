@@ -2,7 +2,9 @@ obj
 bin
 .vscode
 
-
+*.png
+*.jpg
+*.jpeg
 *.db
 # Node
 /node_modules
