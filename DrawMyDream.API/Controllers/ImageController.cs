@@ -12,7 +12,6 @@ namespace DrawMyDream.API.Controllers
         {
             try
             {
-
                 string FileName = file.FileName;
 
                 string uniqueFileName = Guid.NewGuid().ToString() + "_" + FileName;
