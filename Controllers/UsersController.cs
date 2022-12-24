@@ -88,6 +88,36 @@ namespace API.Controllers
                 
             return BadRequest("Error!");
         }
+        
+        [HttpDelete("delete-photo/{photoId}")]
+        public async Task<ActionResult> DeletePhoto(Ulid photoId)
+        {
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            
+            Ulid id = Ulid.Parse(identity.FindFirst("Id").Value);
+   
+            AppUserEntity user = await _userRepository.GetUserByIdAsync(id);
+
+            PhotoEntity photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
+
+            if (photo == null)
+            {
+                return NotFound();
+            }
+
+            if (photo.IsMain)
+            {
+                return BadRequest("You cannot delete your main photo");
+            }
+            
+            System.IO.File.Delete(Directory.GetCurrentDirectory() + "/wwwroot/"+ photo.Url);  
+            
+            user.Photos.Remove(photo);
+
+            if (await _userRepository.SaveAllAsync()) return Ok();
+
+            return BadRequest("Failed to delete the photo");
+        }
 
     }
 }
