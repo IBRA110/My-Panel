@@ -89,6 +89,37 @@ namespace API.Controllers
             return BadRequest("Error!");
         }
         
+        [HttpPut("set-main-photo/{photoId}")]
+        public async Task<ActionResult> SetMainPhoto(Ulid photoId)
+        {
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            
+            Ulid id = Ulid.Parse(identity.FindFirst("Id").Value);
+   
+            AppUserEntity user = await _userRepository.GetUserByIdAsync(id);
+
+            PhotoEntity photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
+
+            if (photo.IsMain)
+            {
+                return BadRequest("This is already your main photo");
+            }
+
+            PhotoEntity currentMain = user.Photos.FirstOrDefault(x => x.IsMain);
+            
+            if (currentMain != null)
+            { 
+                currentMain.IsMain = false;
+            }
+            photo.IsMain = true;
+
+            if (await _userRepository.SaveAllAsync())
+            { 
+                return NoContent();
+            }
+            return BadRequest("Failed to set main photo");
+        }
+        
         [HttpDelete("delete-photo/{photoId}")]
         public async Task<ActionResult> DeletePhoto(Ulid photoId)
         {
@@ -114,7 +145,10 @@ namespace API.Controllers
             
             user.Photos.Remove(photo);
 
-            if (await _userRepository.SaveAllAsync()) return Ok();
+            if (await _userRepository.SaveAllAsync())
+            {
+                return Ok();
+            }
 
             return BadRequest("Failed to delete the photo");
         }
