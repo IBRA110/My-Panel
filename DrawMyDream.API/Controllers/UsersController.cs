@@ -53,5 +53,45 @@ namespace API.Controllers
 
             return BadRequest("Failed to update user");
         }
+
+        [HttpPost("add-photo")]
+        public async Task<ActionResult> AddPhoto([FromForm]IFormFile file)
+        {
+            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
+            
+            Ulid id = Ulid.Parse(identity.FindFirst("Id").Value);
+   
+            AppUserEntity user = await _userRepository.GetUserByIdAsync(id);
+
+
+                string FileName = file.FileName;
+
+                string uniqueFileName = Guid.NewGuid().ToString() + "_" + FileName;
+
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", FileName);
+
+                file.CopyTo(new FileStream(imagePath, FileMode.Create));
+
+                PhotoEntity photo = new PhotoEntity
+                {
+                    Url = "images/" + FileName
+                };
+
+                if (user.Photos.Count == 0)
+                {
+                    Console.Write("1");
+                    photo.IsMain = true;
+                }
+
+                user.Photos.Add(photo);
+
+                if (await _userRepository.SaveAllAsync())
+                {
+                    return Ok("Upload Success!");
+                }
+                
+                return BadRequest("Error!");
+        }
+
     }
 }
