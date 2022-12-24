@@ -64,33 +64,37 @@ namespace API.Controllers
             AppUserEntity user = await _userRepository.GetUserByIdAsync(id);
 
 
-                string FileName = file.FileName;
+            string FileName = file.FileName;
 
-                string uniqueFileName = Guid.NewGuid().ToString() + "_" + FileName;
+            string uniqueFileName = Guid.NewGuid().ToString() + "_" + FileName;
 
-                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", FileName);
+            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", FileName);
 
-                file.CopyTo(new FileStream(imagePath, FileMode.Create));
+            file.CopyTo(new FileStream(imagePath, FileMode.Create));
 
-                PhotoEntity photo = new PhotoEntity
-                {
-                    Url = "images/" + FileName
-                };
+            PhotoEntity photo = new PhotoEntity
+            {
+                Url = "images/" + FileName
+            };
 
-                if (user.Photos.Count == 0)
-                {
-                    Console.Write("1");
-                    photo.IsMain = true;
-                }
+            if (user.Photos == null)
+            {
+                user.Photos = new List<PhotoEntity>();
+            }
 
-                user.Photos.Add(photo);
+            if (user.Photos.Count == 0)
+            {
+                photo.IsMain = true;
+            }
 
-                if (await _userRepository.SaveAllAsync())
-                {
-                    return Ok("Upload Success!");
-                }
+            user.Photos.Add(photo);
+
+            if (await _userRepository.SaveAllAsync())
+            {
+                return Ok("Upload Success!");
+            }
                 
-                return BadRequest("Error!");
+            return BadRequest("Error!");
         }
 
     }
