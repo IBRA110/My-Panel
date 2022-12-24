@@ -77,6 +77,11 @@ namespace API.Controllers
                 Url = "images/" + FileName
             };
 
+            if (user.Photos == null)
+            {
+                user.Photos = new List<PhotoEntity>();
+            }
+
             if (user.Photos.Count == 0)
             {
                 photo.IsMain = true;
