@@ -63,24 +63,16 @@ namespace API.Controllers
    
             AppUserEntity user = await _userRepository.GetUserByIdAsync(id);
 
+            string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
 
-            string FileName = file.FileName;
-
-            string uniqueFileName = Guid.NewGuid().ToString() + "_" + FileName;
-
-            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", FileName);
+            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", uniqueFileName);
 
             file.CopyTo(new FileStream(imagePath, FileMode.Create));
 
             PhotoEntity photo = new PhotoEntity
             {
-                Url = "images/" + FileName
+                Url = "images/" + uniqueFileName
             };
-
-            if (user.Photos == null)
-            {
-                user.Photos = new List<PhotoEntity>();
-            }
 
             if (user.Photos.Count == 0)
             {

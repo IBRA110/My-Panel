@@ -34,7 +34,9 @@ namespace API.Data
 
         public async Task<AppUserEntity> GetUserByIdAsync(Ulid id)
         {
-            return await _context.Users.FindAsync(id);
+            return await _context.Users
+                .Include(p => p.Photos)
+                .SingleOrDefaultAsync(x => x.Id == id);
         }
                 
         public async Task<bool> SaveAllAsync()
