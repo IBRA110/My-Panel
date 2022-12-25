@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using AutoMapper;
 
 namespace API.Controllers
 {
@@ -16,12 +17,19 @@ namespace API.Controllers
         private readonly IUserRepository _userRepository;
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
+        private readonly IMapper _mapper;
 
-        public AccountController(DataContext context, ITokenService tokenService, IUserRepository userRepository)
+        public AccountController(
+            DataContext context, 
+            ITokenService tokenService, 
+            IUserRepository userRepository,
+            IMapper mapper
+        )
         {
             _tokenService = tokenService;
             _context = context;
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
@@ -32,18 +40,18 @@ namespace API.Controllers
                 throw new ArgumentException("Username is already taken");
             } 
             
+            AppUserEntity user = _mapper.Map<AppUserEntity>(registerDTO);
+
             HMACSHA512 hmac = new HMACSHA512();
-            AppUserEntity user = new AppUserEntity
-            {
-                UserName = registerDTO.Username,
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDTO.Password)),
-                PasswordSalt = hmac.Key,
-            };
+            
+            user.UserName = registerDTO.Username;
+            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDTO.Password));
+            user.PasswordSalt = hmac.Key;
+
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            
-            
+             
             return Ok("Success!");
         }
         
