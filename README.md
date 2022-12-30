@@ -1,9 +1,9 @@
 # Draw My Dream
-<div class='end'>
+<div class='end' style='display: flex; justify-conten: center; align-items: center;'>
 <img src='https://github.com/IBRA110/IBRA110/blob/main/images/csharp.png' style="width: 50px; height: 50px;">
 <img src='https://github.com/IBRA110/IBRA110/blob/main/images/netCore.png' style="width: 50px; height: 50px;">
 <img src='https://github.com/IBRA110/IBRA110/blob/main/images/entityFramework.png' style="width: 50px; height: 50px;">
-<img src='https://github.com/IBRA110/IBRA110/blob/main/images/docker.png' style="width: 80px; height: 60px;">
+<img src='https://github.com/IBRA110/IBRA110/blob/main/images/docker.png' style="width: 70px; height: 60px;">
 </div>
 
 ### For certificates see https://aka.ms/aspnet/https-trust-dev-cert.
