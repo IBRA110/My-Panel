@@ -1,5 +1,6 @@
 # Draw My Dream
 
+### for certificates see https://aka.ms/aspnet/https-trust-dev-cert.
 
 # .NET Samples
 
