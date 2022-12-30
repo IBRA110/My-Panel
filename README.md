@@ -1,5 +1,5 @@
 # Draw My Dream
-<p align="center">
+<p>
 <img src='https://github.com/IBRA110/IBRA110/blob/main/images/csharp.png' style="width: 100px; height: 100px;">
 <img src='https://github.com/IBRA110/IBRA110/blob/main/images/netCore.png' style="width: 100px; height: 100px;">
 <img src='https://github.com/IBRA110/IBRA110/blob/main/images/entityFramework.png' style="width: 100px; height: 100px;">
