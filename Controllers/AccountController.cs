@@ -38,7 +38,11 @@ namespace API.Controllers
             if (await UserExists(registerDTO.Username))
             {
                 throw new ArgumentException("Username is already taken");
-            } 
+            }
+            if (await EmailExists(registerDTO.Email))
+            {
+                throw new ArgumentException("Email is already taken");
+            }
             
             AppUserEntity user = _mapper.Map<AppUserEntity>(registerDTO);
 
@@ -118,6 +122,11 @@ namespace API.Controllers
         private async Task<bool> UserExists(string username)
         {
             return await _context.Users.AnyAsync(x => x.UserName.ToLower() == username.ToLower());
+        }
+
+        private async Task<bool> EmailExists(string email)
+        {
+            return await _context.Users.AnyAsync(x => x.Email == email);
         }
     }
 }
