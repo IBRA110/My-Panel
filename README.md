@@ -1,4 +1,10 @@
 # Draw My Dream
+<div class='end'>
+<img src='https://github.com/IBRA110/IBRA110/blob/main/images/csharp.png' style="width: 50px; height: 50px;">
+<img src='https://github.com/IBRA110/IBRA110/blob/main/images/netCore.png' style="width: 50px; height: 50px;">
+<img src='https://github.com/IBRA110/IBRA110/blob/main/images/entityFramework.png' style="width: 50px; height: 50px;">
+<img src='https://github.com/IBRA110/IBRA110/blob/main/images/docker.png' style="width: 80px; height: 60px;">
+</div>
 
 ### For certificates see https://aka.ms/aspnet/https-trust-dev-cert.
 
@@ -43,10 +49,6 @@ these commands from the CLI in the directory of any sample:
 dotnet build
 dotnet run
 ```
-## to trust browser https
-```console
-dotnet dev-certs https --trust
-``` 
 
 These will install any needed dependencies, build the project, and run
 the project respectively.
