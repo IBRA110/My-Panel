@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Infrastructure.Data.Migrations
+namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -17,7 +17,7 @@ namespace Infrastructure.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
 
-            modelBuilder.Entity("Core.Entities.AppUser", b =>
+            modelBuilder.Entity("API.Entities.AppUserEntity", b =>
                 {
                     b.Property<byte[]>("Id")
                         .HasColumnType("BLOB");
@@ -75,7 +75,7 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Core.Entities.Drawing", b =>
+            modelBuilder.Entity("API.Entities.DrawingEntity", b =>
                 {
                     b.Property<byte[]>("Id")
                         .HasColumnType("BLOB");
@@ -94,7 +94,7 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("Drawings");
                 });
 
-            modelBuilder.Entity("Core.Entities.Photo", b =>
+            modelBuilder.Entity("API.Entities.PhotoEntity", b =>
                 {
                     b.Property<byte[]>("Id")
                         .HasColumnType("BLOB");
@@ -119,9 +119,9 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("Core.Entities.Drawing", b =>
+            modelBuilder.Entity("API.Entities.DrawingEntity", b =>
                 {
-                    b.HasOne("Core.Entities.AppUser", "AppUser")
+                    b.HasOne("API.Entities.AppUserEntity", "AppUser")
                         .WithMany("Pictures")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -130,9 +130,9 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("Core.Entities.Photo", b =>
+            modelBuilder.Entity("API.Entities.PhotoEntity", b =>
                 {
-                    b.HasOne("Core.Entities.AppUser", "AppUser")
+                    b.HasOne("API.Entities.AppUserEntity", "AppUser")
                         .WithMany("Photos")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -141,7 +141,7 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("Core.Entities.AppUser", b =>
+            modelBuilder.Entity("API.Entities.AppUserEntity", b =>
                 {
                     b.Navigation("Photos");
 
