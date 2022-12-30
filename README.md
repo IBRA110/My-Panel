@@ -1,6 +1,16 @@
 # Draw My Dream
 
-### for certificates see https://aka.ms/aspnet/https-trust-dev-cert.
+### For certificates see https://aka.ms/aspnet/https-trust-dev-cert.
+
+### Docker must be installed!
+
+https://docs.docker.com/engine/install/debian/
+
+```console
+sudo docker build -t draw .
+sudo docker run -d -p 8000:80 -e "ASPNETCORE_ENVIRONMENT=Development" --name draw_my_dream draw
+sudo docker stop draw_my_dream
+```
 
 # .NET Samples
 
