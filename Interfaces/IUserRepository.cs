@@ -1,5 +1,6 @@
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 
 namespace API.Interfaces
 {
@@ -8,7 +9,7 @@ namespace API.Interfaces
         void Update(AppUserEntity user);
         Task<bool> SaveAllAsync();
         Task<AppUserEntity> GetUserByIdAsync(Ulid id);
-        Task<IEnumerable<MemberDTO>> GetMembersAsync();
+        Task<PagedList<MemberDTO>> GetMembersAsync(UserParams params);
         Task<MemberDTO> GetMemberAsync(string username);
     }
 }
