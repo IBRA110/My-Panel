@@ -40,7 +40,12 @@ namespace API.Data
                 .Include(p => p.Photos)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
-                
+        public async Task<AppUserEntity> GetUserByUsernameAsync(string username)
+        {
+            return await _context.Users
+                .Include(p => p.Photos)
+                .SingleOrDefaultAsync(x => x.UserName == username);
+        }
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
