@@ -5,6 +5,8 @@ using API.DTOs;
 using AutoMapper;
 using API.Entities;
 using System.Security.Claims;
+using API.Helpers;
+using API.Extensions;
 
 namespace API.Controllers
 {
@@ -20,10 +22,11 @@ namespace API.Controllers
         }
 
         [HttpGet()]
-        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery]UserParams userParams)
         {    
-            var users = await _userRepository.GetMembersAsync();
-            
+            PagedList<MemberDTO> users = await _userRepository.GetMembersAsync(userParams);
+            Response.AddPaginationHeader(users.CurrentPage, 
+                users.PageSize, users.TotalCount, users.TotalPages);
             return Ok(users);
         }
         

@@ -9,7 +9,7 @@ namespace API.Interfaces
         void Update(AppUserEntity user);
         Task<bool> SaveAllAsync();
         Task<AppUserEntity> GetUserByIdAsync(Ulid id);
-        Task<PagedList<MemberDTO>> GetMembersAsync(UserParams params);
+        Task<PagedList<MemberDTO>> GetMembersAsync(UserParams userParams);
         Task<MemberDTO> GetMemberAsync(string username);
     }
 }
