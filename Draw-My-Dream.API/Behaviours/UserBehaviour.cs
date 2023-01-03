@@ -29,10 +29,13 @@ namespace API.Behaviours
 
         public async Task<PagedList<MemberDTO>> GetMembersAsync(UserParams userParams)
         {
-            IQueryable<MemberDTO> query = _context.Users
-                .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider)
-                .AsNoTracking();
-            return await PagedList<MemberDTO>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
+            IQueryable<AppUserEntity> query = _context.Users.AsQueryable();
+
+            query = query.Where(u => u.UserName != userParams.CurrentUsername);
+
+            return await PagedList<MemberDTO>.CreateAsync(query.ProjectTo<MemberDTO>(_mapper
+                .ConfigurationProvider).AsNoTracking(), 
+                    userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<AppUserEntity> GetUserByIdAsync(Ulid id)
