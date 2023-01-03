@@ -1,11 +1,11 @@
-using API.Interfaces;
-using Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using API.DTOs;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using API.DTOs;
 using API.Helpers;
+using API.Interfaces;
 using Infrastracture.Data;
+using Core.Entities;
 
 namespace API.Behaviours
 {
