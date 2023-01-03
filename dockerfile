@@ -14,16 +14,10 @@ COPY . ./
 WORKDIR Draw-My-Dream.API/
 RUN dotnet publish -c Release -o out
 
-WORKDIR Draw-My-Dream.Infrastructure/
-RUN dotnet publish -c Release -o out
-
-WORKDIR Draw-My-Dream.Core/
-RUN dotnet publish -c Release -o out
-
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
 WORKDIR /app
 
-COPY --from=build-env /app/drawmydream.db .
-COPY --from=build-env /app/out .
+COPY --from=build-env /app/Draw-My-Dream.API/drawmydream.db .
+COPY --from=build-env app/Draw-My-Dream.API/out .
 
 ENTRYPOINT ["dotnet", "API.dll"]
