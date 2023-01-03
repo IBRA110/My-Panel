@@ -1,8 +1,11 @@
 using System.Net;
 using System.Text.Json;
 using Core.Errors;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 
-namespace API.Middleware
+namespace Core.Middleware
 {
     public class ExceptionMiddleware
     {
