@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "Draw-My-Dream.API\API.csproj", "{0A305462-598D-4B0A-B900-278CF03C4033}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Draw-My-Dream.Core\Core.csproj", "{971E5E36-1E29-451D-8E04-BC849538E01D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Draw-My-Dream.Infrastructure\Infrastructure.csproj", "{26A6CC0B-1B93-4674-800B-0B2B511D65DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A305462-598D-4B0A-B900-278CF03C4033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A305462-598D-4B0A-B900-278CF03C4033}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A305462-598D-4B0A-B900-278CF03C4033}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A305462-598D-4B0A-B900-278CF03C4033}.Release|Any CPU.Build.0 = Release|Any CPU
+		{971E5E36-1E29-451D-8E04-BC849538E01D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{971E5E36-1E29-451D-8E04-BC849538E01D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{971E5E36-1E29-451D-8E04-BC849538E01D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{971E5E36-1E29-451D-8E04-BC849538E01D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26A6CC0B-1B93-4674-800B-0B2B511D65DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26A6CC0B-1B93-4674-800B-0B2B511D65DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26A6CC0B-1B93-4674-800B-0B2B511D65DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26A6CC0B-1B93-4674-800B-0B2B511D65DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
