@@ -1,6 +1,6 @@
 namespace API.DTOs
 {
-    public class UserDTO
+    public class LoginResponseDTO
     {
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }

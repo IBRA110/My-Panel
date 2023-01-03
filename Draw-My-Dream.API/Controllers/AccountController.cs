@@ -33,7 +33,7 @@ namespace API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO)
+        public async Task<ActionResult<string>> Register(RegisterDTO registerDTO)
         {
             if (await UserExists(registerDTO.Username))
             {
@@ -60,7 +60,7 @@ namespace API.Controllers
         }
         
         [HttpPost("login")]
-        public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDTO)
+        public async Task<ActionResult<LoginResponseDTO>> Login(LoginDTO loginDTO)
         {
 
             AppUserEntity user = await _context.Users
@@ -87,7 +87,7 @@ namespace API.Controllers
             user.RefreshToken = refreshToken;
             await _context.SaveChangesAsync();
 
-            return new UserDTO
+            return new LoginResponseDTO
             {
                 AccessToken = _tokenService.CreateAccessToken(user),
                 RefreshToken = refreshToken
@@ -96,7 +96,7 @@ namespace API.Controllers
 
         [HttpPost("refresh")]
         [Authorize]
-        public async Task<ActionResult<UserDTO>> Refresh(RefreshTokenDTO refreshToken)
+        public async Task<ActionResult<LoginResponseDTO>> Refresh(RefreshTokenDTO refreshToken)
         {
 
             ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -113,7 +113,7 @@ namespace API.Controllers
             user.RefreshToken = _tokenService.CreateRefreshToken(user);
             await _context.SaveChangesAsync();
             
-            return new UserDTO
+            return new LoginResponseDTO
             {
                 AccessToken = _tokenService.CreateAccessToken(user),
                 RefreshToken = user.RefreshToken
