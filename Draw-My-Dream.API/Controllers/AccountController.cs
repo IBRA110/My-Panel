@@ -18,18 +18,21 @@ namespace API.Controllers
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
-
+        private readonly IUserInterface _userInterface;
+        
         public AccountController(
             DataContext context, 
             ITokenService tokenService, 
             IUserInterface userRepository,
-            IMapper mapper
+            IMapper mapper,
+            IUserInterface userInterface
         )
         {
             _tokenService = tokenService;
             _context = context;
             _userRepository = userRepository;
             _mapper = mapper;
+            _userInterface = userInterface;
         }
 
         [HttpPost("register")]
@@ -98,12 +101,7 @@ namespace API.Controllers
         [Authorize]
         public async Task<ActionResult<LoginResponseDTO>> Refresh(RefreshTokenDTO refreshToken)
         {
-
-            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            
-            Ulid id = Ulid.Parse(identity.FindFirst("Id").Value);
-   
-            AppUserEntity user = await _userRepository.GetUserByIdAsync(id);
+            AppUserEntity user = await _userInterface.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
             if (user == null || refreshToken.Refreshtoken != user.RefreshToken)
             {

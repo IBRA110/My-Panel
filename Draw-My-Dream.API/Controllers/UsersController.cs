@@ -4,7 +4,6 @@ using API.Interfaces;
 using API.DTOs;
 using AutoMapper;
 using Core.Entities;
-using System.Security.Claims;
 using API.Helpers;
 using API.Extensions;
 
@@ -13,24 +12,23 @@ namespace API.Controllers
     [Authorize]
     public class UsersController : BaseApiController
     {
-        private readonly IUserInterface _userRepository;
+        private readonly IUserInterface _userInterface;
         private readonly IMapper _mapper;
-        public UsersController(IUserInterface userRepository, IMapper mapper)
+        public UsersController(IUserInterface userInterface, IMapper mapper)
         {
-            _userRepository = userRepository;
+            _userInterface = userInterface;
             _mapper = mapper;
         }
 
         [HttpGet()]
         public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery]UserParams userParams)
         {   
-            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            
-            AppUserEntity user = await _userRepository.GetUserByUsernameAsync(identity.FindFirst("UserName").Value);
-            
+
+            AppUserEntity user = await _userInterface.GetUserByUsernameAsync(User.FindFirst("UserName")?.Value);
+
             userParams.CurrentUsername = user.UserName;
             
-            PagedList<MemberDTO> users = await _userRepository.GetMembersAsync(userParams);
+            PagedList<MemberDTO> users = await _userInterface.GetMembersAsync(userParams);
             
             Response.AddPaginationHeader(users.CurrentPage, 
                 users.PageSize, users.TotalCount, users.TotalPages);
@@ -40,23 +38,20 @@ namespace API.Controllers
         [HttpGet("{username}")] 
         public async Task<ActionResult<MemberDTO>> GetUserByUserName(string username)
         {
-            return await _userRepository.GetMemberAsync(username);
+            return await _userInterface.GetMemberAsync(username);
         }
 
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDTO memberUpdateDTO)
-        {            
-            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            
-            Ulid id = Ulid.Parse(identity.FindFirst("Id").Value);
+        {
    
-            AppUserEntity user = await _userRepository.GetUserByIdAsync(id);
+            AppUserEntity user = await _userInterface.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
             _mapper.Map(memberUpdateDTO, user);
 
-            _userRepository.Update(user);
+            _userInterface.Update(user);
 
-            if (await _userRepository.SaveAllAsync())
+            if (await _userInterface.SaveAllAsync())
             {
                 return NoContent();
             } 
@@ -67,11 +62,8 @@ namespace API.Controllers
         [HttpPost("add-photo")]
         public async Task<ActionResult> AddPhoto([FromForm]IFormFile file)
         {
-            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            
-            Ulid id = Ulid.Parse(identity.FindFirst("Id").Value);
    
-            AppUserEntity user = await _userRepository.GetUserByIdAsync(id);
+            AppUserEntity user = await _userInterface.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
             string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
 
@@ -91,7 +83,7 @@ namespace API.Controllers
 
             user.Photos.Add(photo);
 
-            if (await _userRepository.SaveAllAsync())
+            if (await _userInterface.SaveAllAsync())
             {
                 return Ok("Upload Success!");
             }
@@ -102,11 +94,8 @@ namespace API.Controllers
         [HttpPut("set-main-photo/{photoId}")]
         public async Task<ActionResult> SetMainPhoto(Ulid photoId)
         {
-            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            
-            Ulid id = Ulid.Parse(identity.FindFirst("Id").Value);
-   
-            AppUserEntity user = await _userRepository.GetUserByIdAsync(id);
+               
+            AppUserEntity user = await _userInterface.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
             PhotoEntity photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
 
@@ -123,7 +112,7 @@ namespace API.Controllers
             }
             photo.IsMain = true;
 
-            if (await _userRepository.SaveAllAsync())
+            if (await _userInterface.SaveAllAsync())
             { 
                 return NoContent();
             }
@@ -133,11 +122,8 @@ namespace API.Controllers
         [HttpDelete("delete-photo/{photoId}")]
         public async Task<ActionResult> DeletePhoto(Ulid photoId)
         {
-            ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-            
-            Ulid id = Ulid.Parse(identity.FindFirst("Id").Value);
    
-            AppUserEntity user = await _userRepository.GetUserByIdAsync(id);
+            AppUserEntity user = await _userInterface.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
             PhotoEntity photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
 
@@ -155,7 +141,7 @@ namespace API.Controllers
             
             user.Photos.Remove(photo);
 
-            if (await _userRepository.SaveAllAsync())
+            if (await _userInterface.SaveAllAsync())
             {
                 return Ok();
             }
