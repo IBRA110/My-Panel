@@ -1,0 +1,89 @@
+.messages{
+    position: fixed;
+    z-index: 1200;
+    bottom: 10%;
+    right: 5%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .success, .error, .warning, .information{
+        width: 300px;
+        min-height: 50px;
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 10px;
+        padding: 10px;
+        position: relative;
+        margin: 10px;
+        font-size: 14px;
+        overflow: hidden;
+        transition: all 10s ease;
+        transition-delay: 10s;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+        &.hideAlertMessage{
+        opacity: 0;
+        visibility: hidden;
+        }
+
+        .message-type{
+        font-family: 'Roboto Condensed', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        color: rgb(0, 0, 0);
+        }
+
+        .close{
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        box-shadow: none;
+        font-size: 18px;
+        border: none;
+        border-radius: 0;
+        background-color: transparent;
+        }
+        .close:active{
+        transform: translate(0, 0);
+        }
+        .icon{
+        padding-top: 2.5px;
+        }
+        p{
+        width: 200px;
+        margin: 0;
+        color: var(--text-secondary);
+        font-family: 'Roboto', 'sans-serif';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
+        }
+    }
+    .success{
+        border-left: 4px solid #2EB23B;
+        color: rgba(0, 0, 0, 0.8);
+    }
+    .error{
+        border-left: 4px solid #FF0000;
+        color: rgba(0, 0, 0, 0.8);
+    }
+    .warning{
+        border-left: 4px solid #CF7C00;
+        color: rgba(0, 0, 0, 0.8);
+
+    }
+    .information{
+        border-left: 4px solid #0C88F9;
+        color: rgba(0, 0, 0, 0.8);
+
+    }
+
+}
