@@ -6,6 +6,6 @@ namespace Core.Entities
     public class PhotoEntity : ImageEntity
     {
         public bool IsMain { get; set; }
-        public string PublicId { get; set;}
+        public ICollection<ImageLikeEntity> LikedImages { get; set; }
     }
 }

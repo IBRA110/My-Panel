@@ -12,9 +12,10 @@ namespace Infrastracture.Data
         }
 
         public DbSet<AppUserEntity> Users { get; set; }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             var bytesConverter = new UlidToBytesConverter();
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
