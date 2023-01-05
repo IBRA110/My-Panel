@@ -22,6 +22,6 @@ namespace API.DTOs
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<PhotoDTO> Photos { get; set; }
-        public ICollection<DrawingEntity> Pictures { get; set; }
+        public ICollection<DrawingDTO> Pictures { get; set; }
     }
 }
