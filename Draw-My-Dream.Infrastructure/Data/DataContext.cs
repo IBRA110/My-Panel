@@ -15,6 +15,7 @@ namespace Infrastracture.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ImageLikeEntity>().HasKey(like => new { like.LikedImageId, like.LikedUserId });
 
             var bytesConverter = new UlidToBytesConverter();
 
