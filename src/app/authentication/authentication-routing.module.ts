@@ -6,6 +6,18 @@ const routes: Routes = [
   {
     path: '',
     component: AuthenticationComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./sign-in/sing-in.module').then((m) => m.SignInModule),
+      },
+      {
+        path: 'sign-up',
+        loadChildren: () =>
+          import('./sign-up/sing-up.module').then((m) => m.SignUpModule),
+      },
+    ],
   },
 ];
 
