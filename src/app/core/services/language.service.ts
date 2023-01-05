@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 
 import { Language } from '../interfaces/language.interface';
 import { LocalStorageService } from './local-storage.service';
+import { LocalStorageKeysEnum } from '../enums/local-storage-keys.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class LanguageService {
 
   public setLanguage(language: Language): void {
     this.localStorageService.saveData(
-      'current_language',
+      LocalStorageKeysEnum.CURRENT_LANGUAGE,
       JSON.stringify({
         id: language.id,
         name: language.name.toLowerCase(),
