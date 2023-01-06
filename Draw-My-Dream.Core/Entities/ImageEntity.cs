@@ -9,6 +9,6 @@ namespace Core.Entities
         public AppUserEntity AppUser { get; set; }
         public Ulid AppUserId { get; set; }
         public bool IsMain { get; set; }
-        public ICollection<ImageLikeEntity> LikedImages { get; set; }
+        public ICollection<ImageLikeEntity> Likes{ get; set; }
     }
 }

@@ -16,12 +16,41 @@ namespace API.Controllers
             _userInterface = userInterface;
         }
         [HttpPost]
-        public async Task<ActionResult> AddLike(AddLikeDTO addLikeDTO)
+        public async Task<ActionResult> ToggleLike(ToggleLikeDTO toggleLikeDTO)
         {
+            AppUserEntity likedUser = await _userInterface.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
             
-            AppUserEntity imageOwner = await _userInterface.GetUserByIdAsync(addLikeDTO.ImageOwnerId);
+            AppUserEntity imageOwner = await _userInterface.GetUserByIdAsync(toggleLikeDTO.ImageOwnerId);
             
-            return Ok();
+            ImageEntity image = imageOwner.Images.FirstOrDefault(x => x.Id == toggleLikeDTO.ImageId);
+            
+            ImageLikeEntity like = image.Likes.FirstOrDefault(x => x.LikedUserId == likedUser.Id);
+
+            if (like is null)
+            {
+                like = new ImageLikeEntity
+                {
+                    LikedImageId = image.Id,
+                    LikedUserId = likedUser.Id
+                };
+                
+                image.Likes.Add(like);
+
+                if (await _userInterface.SaveAllAsync())
+                { 
+                    return Ok("Liked");
+                }
+                return BadRequest("Something went wrong!");
+            }
+            
+            image.Likes.Remove(like);
+            
+            if (await _userInterface.SaveAllAsync())
+            { 
+                return Ok("Liked");
+            }
+            
+            return BadRequest("Something went wrong!");      
         }
     }
 }
