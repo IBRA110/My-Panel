@@ -71,17 +71,17 @@ namespace API.Controllers
 
             file.CopyTo(new FileStream(imagePath, FileMode.Create));
 
-            PhotoEntity photo = new PhotoEntity
+            ImageEntity photo = new ImageEntity
             {
                 Url = "images/" + uniqueFileName
             };
 
-            if (user.Photos.Count == 0)
+            if (user.Images.Count == 0)
             {
                 photo.IsMain = true;
             }
 
-            user.Photos.Add(photo);
+            user.Images.Add(photo);
 
             if (await _userInterface.SaveAllAsync())
             {
@@ -91,26 +91,26 @@ namespace API.Controllers
             return BadRequest("Error!");
         }
         
-        [HttpPut("set-main-photo/{photoId}")]
-        public async Task<ActionResult> SetMainPhoto(Ulid photoId)
+        [HttpPut("set-main-photo/{imageId}")]
+        public async Task<ActionResult> SetMainPhoto(Ulid imageId)
         {
                
             AppUserEntity user = await _userInterface.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
-            PhotoEntity photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
+            ImageEntity image = user.Images.FirstOrDefault(x => x.Id == imageId);
 
-            if (photo.IsMain)
+            if (image.IsMain)
             {
                 return BadRequest("This is already your main photo");
             }
 
-            PhotoEntity currentMain = user.Photos.FirstOrDefault(x => x.IsMain);
+            ImageEntity currentMain = user.Images.FirstOrDefault(x => x.IsMain);
             
             if (currentMain != null)
             { 
                 currentMain.IsMain = false;
             }
-            photo.IsMain = true;
+            image.IsMain = true;
 
             if (await _userInterface.SaveAllAsync())
             { 
@@ -119,27 +119,27 @@ namespace API.Controllers
             return BadRequest("Failed to set main photo");
         }
         
-        [HttpDelete("delete-photo/{photoId}")]
-        public async Task<ActionResult> DeletePhoto(Ulid photoId)
+        [HttpDelete("delete-photo/{imageId}")]
+        public async Task<ActionResult> DeletePhoto(Ulid imageId)
         {
    
             AppUserEntity user = await _userInterface.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
-            PhotoEntity photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
+            ImageEntity image = user.Images.FirstOrDefault(x => x.Id == imageId);
 
-            if (photo == null)
+            if (image == null)
             {
                 return NotFound();
             }
 
-            if (photo.IsMain)
+            if (image.IsMain)
             {
                 return BadRequest("You cannot delete your main photo");
             }
             
-            System.IO.File.Delete(Directory.GetCurrentDirectory() + "/wwwroot/" + photo.Url);  
+            System.IO.File.Delete(Directory.GetCurrentDirectory() + "/wwwroot/" + image.Url);  
             
-            user.Photos.Remove(photo);
+            user.Images.Remove(image);
 
             if (await _userInterface.SaveAllAsync())
             {

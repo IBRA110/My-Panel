@@ -1,6 +1,6 @@
 namespace API.DTOs
 {
-    public class PhotoDTO
+    public class ImageDTO
     {
         public Ulid id { get; set; }
         public string Url { get; set; }

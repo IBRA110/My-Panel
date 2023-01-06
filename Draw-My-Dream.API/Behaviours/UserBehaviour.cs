@@ -52,7 +52,7 @@ namespace API.Behaviours
         public async Task<AppUserEntity> GetUserByUsernameAsync(string username)
         {
             return await _context.Users
-                .Include(p => p.Photos)
+                .Include(p => p.Images)
                 .SingleOrDefaultAsync(x => x.UserName == username);
         }
         public async Task<bool> SaveAllAsync()

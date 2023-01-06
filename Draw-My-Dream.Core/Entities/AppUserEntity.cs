@@ -18,7 +18,6 @@ namespace Core.Entities
         public string Interests { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public ICollection<PhotoEntity> Photos { get; set; }
-        public ICollection<DrawingEntity> Pictures { get; set; }
+        public ICollection<ImageEntity> Images { get; set; }
     }
 }
