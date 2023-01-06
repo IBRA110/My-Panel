@@ -3,16 +3,19 @@ using System;
 using Infrastracture.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Infrastracture.Data.Migrations
+namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230106172725_addedIdToLikeEntity")]
+    partial class addedIdToLikeEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
@@ -99,18 +102,23 @@ namespace Infrastracture.Data.Migrations
 
             modelBuilder.Entity("Core.Entities.ImageLikeEntity", b =>
                 {
+                    b.Property<byte[]>("LikedImageId")
+                        .HasColumnType("BLOB");
+
                     b.Property<byte[]>("LikedUserId")
                         .HasColumnType("BLOB");
 
-                    b.Property<byte[]>("LikedImageId")
-                        .IsRequired()
+                    b.Property<byte[]>("ImageEntityId")
                         .HasColumnType("BLOB");
 
-                    b.HasKey("LikedUserId");
+                    b.Property<Guid>("id")
+                        .HasColumnType("TEXT");
 
-                    b.HasIndex("LikedImageId");
+                    b.HasKey("LikedImageId", "LikedUserId");
 
-                    b.ToTable("Likes");
+                    b.HasIndex("ImageEntityId");
+
+                    b.ToTable("ImageLikeEntity");
                 });
 
             modelBuilder.Entity("Core.Entities.ImageEntity", b =>
@@ -126,13 +134,9 @@ namespace Infrastracture.Data.Migrations
 
             modelBuilder.Entity("Core.Entities.ImageLikeEntity", b =>
                 {
-                    b.HasOne("Core.Entities.ImageEntity", "Image")
+                    b.HasOne("Core.Entities.ImageEntity", null)
                         .WithMany("Likes")
-                        .HasForeignKey("LikedImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Image");
+                        .HasForeignKey("ImageEntityId");
                 });
 
             modelBuilder.Entity("Core.Entities.AppUserEntity", b =>

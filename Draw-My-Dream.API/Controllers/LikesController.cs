@@ -15,7 +15,7 @@ namespace API.Controllers
         {
             _userInterface = userInterface;
         }
-        [HttpPost]
+        [HttpPut]
         public async Task<ActionResult> ToggleLike(ToggleLikeDTO toggleLikeDTO)
         {
             AppUserEntity likedUser = await _userInterface.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
@@ -35,7 +35,7 @@ namespace API.Controllers
                 };
                 
                 image.Likes.Add(like);
-
+                
                 if (await _userInterface.SaveAllAsync())
                 { 
                     return Ok("Liked");
@@ -44,10 +44,9 @@ namespace API.Controllers
             }
             
             image.Likes.Remove(like);
-            
             if (await _userInterface.SaveAllAsync())
             { 
-                return Ok("Liked");
+                return Ok("Unliked");
             }
             
             return BadRequest("Something went wrong!");      

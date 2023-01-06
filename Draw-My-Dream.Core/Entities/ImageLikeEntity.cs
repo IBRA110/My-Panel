@@ -4,5 +4,6 @@ namespace Core.Entities
     {
         public Ulid LikedUserId { get; set; }
         public Ulid LikedImageId { get; set; }
+        public ImageEntity Image { get; set; }
     }
 }
