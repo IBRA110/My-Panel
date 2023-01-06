@@ -12,11 +12,19 @@ namespace Infrastracture.Data
         }
 
         public DbSet<AppUserEntity> Users { get; set; }
-
+        public DbSet<ImageLikeEntity> Likes { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ImageLikeEntity>().HasKey(like => new { like.LikedImageId, like.LikedUserId });
-
+            modelBuilder.Entity<ImageLikeEntity>().HasKey(like => new { like.LikedUserId });
+            
+            modelBuilder.Entity<ImageLikeEntity>()
+                .HasOne(s => s.Image)
+                .WithMany(l => l.Likes)
+                .HasForeignKey(s => s.LikedImageId)
+                .OnDelete(DeleteBehavior.Cascade);
+            
+            
             var bytesConverter = new UlidToBytesConverter();
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
