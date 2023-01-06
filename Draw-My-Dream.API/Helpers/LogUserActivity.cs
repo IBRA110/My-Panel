@@ -15,10 +15,11 @@ namespace API.Helpers
                 return;
             }
 
-            Ulid id = Ulid.Parse(resultContext.HttpContext.User.FindFirst("UserName")?.Value);
+            string id = resultContext.HttpContext.User.FindFirst("UserName")?.Value;
+            
             IUserInterface repo = resultContext.HttpContext.RequestServices.GetService<IUserInterface>();
 
-            AppUserEntity user = await repo.GetUserByIdAsync(id);
+            AppUserEntity user = await repo.GetUserByUsernameAsync(id);
 
             user.LastActive = DateTime.Now;
             await repo.SaveAllAsync();

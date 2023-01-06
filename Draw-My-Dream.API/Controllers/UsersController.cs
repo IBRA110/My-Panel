@@ -137,7 +137,7 @@ namespace API.Controllers
                 return BadRequest("You cannot delete your main photo");
             }
             
-            System.IO.File.Delete(Directory.GetCurrentDirectory() + "/wwwroot/" + image.Url);  
+            System.IO.File.Delete(Directory.GetCurrentDirectory() + "/wwwroot/images/" + image.Url);  
             
             user.Images.Remove(image);
 
