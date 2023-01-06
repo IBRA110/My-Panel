@@ -23,7 +23,7 @@ namespace API.Controllers
             AppUserEntity imageOwner = await _userInterface.GetUserByIdAsync(toggleLikeDTO.ImageOwnerId);
             
             ImageEntity image = imageOwner.Images.FirstOrDefault(x => x.Id == toggleLikeDTO.ImageId);
-            
+           
             ImageLikeEntity like = image.Likes.FirstOrDefault(x => x.LikedUserId == likedUser.Id);
 
             if (like is null)
