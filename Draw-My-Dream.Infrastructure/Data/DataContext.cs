@@ -15,7 +15,7 @@ namespace Infrastracture.Data
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ImageLikeEntity>().HasKey(like => new { like.LikedUserId, like.LikedImageId });
+            modelBuilder.Entity<ImageLikeEntity>().HasKey(like => new { like.LikedUserId });
             
             modelBuilder.Entity<ImageLikeEntity>()
                 .HasOne(s => s.Image)
