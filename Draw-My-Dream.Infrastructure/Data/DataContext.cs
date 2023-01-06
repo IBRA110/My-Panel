@@ -12,11 +12,10 @@ namespace Infrastracture.Data
         }
 
         public DbSet<AppUserEntity> Users { get; set; }
-        public DbSet<ImageLikeEntity> Likes { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ImageLikeEntity>().HasKey(like => new { like.LikedUserId });
+            modelBuilder.Entity<ImageLikeEntity>().HasKey(like => new { like.LikedUserId, like.LikedImageId });
             
             modelBuilder.Entity<ImageLikeEntity>()
                 .HasOne(s => s.Image)
