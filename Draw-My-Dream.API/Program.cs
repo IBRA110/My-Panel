@@ -1,6 +1,6 @@
 using System.Reflection;
 using API.Extensions;
-using Core.Middleware;
+using Infrastracture.Middleware;
 using Microsoft.OpenApi.Models;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
