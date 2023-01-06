@@ -67,10 +67,6 @@ namespace API.Controllers
 
             string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
 
-            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", uniqueFileName);
-
-            file.CopyTo(new FileStream(imagePath, FileMode.Create));
-
             ImageEntity photo = new ImageEntity
             {
                 Url = "images/" + uniqueFileName
@@ -85,6 +81,9 @@ namespace API.Controllers
 
             if (await _userInterface.SaveAllAsync())
             {
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", uniqueFileName);
+                file.CopyTo(new FileStream(imagePath, FileMode.Create));
+
                 return Ok("Upload Success!");
             }
                 

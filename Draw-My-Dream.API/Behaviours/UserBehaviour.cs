@@ -47,6 +47,7 @@ namespace API.Behaviours
         public async Task<AppUserEntity> GetUserByIdAsync(Ulid id)
         {
             return await _context.Users
+                .Include(p => p.Images)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
         public async Task<AppUserEntity> GetUserByUsernameAsync(string username)
