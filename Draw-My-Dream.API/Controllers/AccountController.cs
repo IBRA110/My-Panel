@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 using AutoMapper;
 
 namespace API.Controllers
@@ -67,7 +66,7 @@ namespace API.Controllers
         {
 
             AppUserEntity user = await _context.Users
-                    .SingleOrDefaultAsync(x => x.UserName.ToLower() == loginDTO.Username.ToLower());
+                    .SingleOrDefaultAsync(x => x.UserName.ToLower() == loginDTO.UserName.ToLower());
 
             if (user == null)
             {
@@ -103,7 +102,7 @@ namespace API.Controllers
         {
             AppUserEntity user = await _userInterface.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
-            if (user == null || refreshToken.Refreshtoken != user.RefreshToken)
+            if (user == null || refreshToken.RefreshToken != user.RefreshToken)
             {
                 throw new ArgumentException("Something went wrong!");
             }

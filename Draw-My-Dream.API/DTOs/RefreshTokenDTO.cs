@@ -2,6 +2,6 @@ namespace API.DTOs
 {
     public class RefreshTokenDTO
     {
-        public string Refreshtoken { get; set; }
+        public string RefreshToken { get; set; }
     }
 }
