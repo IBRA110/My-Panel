@@ -7,7 +7,9 @@ import {
   AlertType,
 } from '../ui/ui-alert-messages/ui-alert-messages.interfaces';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root',
+})
 export class UiAlertMessagesService {
   private subject = new Subject<Alert>();
   private defaultId = 'default-alert';

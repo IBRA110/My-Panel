@@ -10,6 +10,7 @@ import { ThemeModule } from './core/theme/theme.module';
 import { lightTheme } from './core/theme/themes/lignt.theme';
 import { darkTheme } from './core/theme/themes/dark.theme';
 import { UiAlertMessagesModule } from './core/ui/ui-alert-messages/ui-alert-messages.module';
+import { ThemeService } from './core/theme/theme.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +30,7 @@ import { UiAlertMessagesModule } from './core/ui/ui-alert-messages/ui-alert-mess
       },
     }),
   ],
-  providers: [],
+  providers: [ThemeService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
