@@ -18,5 +18,7 @@ export class SignInComponent implements OnInit {
     });
   }
 
-  public onSignIn(): void {}
+  public onSignIn(): void {
+    console.log(this.signInForm.value);
+  }
 }

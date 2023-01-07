@@ -28,5 +28,5 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  public onSignUp() {}
+  public onSignUp(): void {}
 }
