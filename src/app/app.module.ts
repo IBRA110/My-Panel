@@ -9,13 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './core/theme/theme.module';
 import { lightTheme } from './core/theme/themes/lignt.theme';
 import { darkTheme } from './core/theme/themes/dark.theme';
-import { UiAlertMessagesComponent } from './core/ui/ui-alert-messages/ui-alert-messages/ui-alert-messages.component';
+import { UiAlertMessagesModule } from './core/ui/ui-alert-messages/ui-alert-messages.module';
 
 @NgModule({
-  declarations: [AppComponent, UiAlertMessagesComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    UiAlertMessagesModule,
     ThemeModule.forRoot({
       themes: [lightTheme, darkTheme],
       active: 'light',
