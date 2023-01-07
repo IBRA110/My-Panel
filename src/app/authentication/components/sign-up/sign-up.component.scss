@@ -1,25 +1,35 @@
-.form{
+.container{
   background-color: rgba(255,255,255,0.13);
   border-radius: 10px;
   border: 2px solid rgba(255,255,255,0.1);
   box-shadow: 0 0 40px rgba(8,7,16,0.6);
-  font-family: 'Poppins',sans-serif;
-  display: flex;
   backdrop-filter: blur(10px);
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
   color: #e5e5e5;
-  gap: 30px;
-  padding: 30px;
-    
+
   &-title{
     font-size: 32px;
     font-weight: 500;
     line-height: 42px;
     text-align: center;
   }
-     
+}
+.form{
+  font-family: 'Poppins',sans-serif;
+  display: flex;
+  width: 800px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  padding: 30px;
+  
+  &-passwords{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 30px;
+  }
+  
   &-control{
     display: flex;
     flex-direction: column;

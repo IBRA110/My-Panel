@@ -1,26 +1,75 @@
-<form class="form" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
-  <h3 class="form-title">Login Here</h3>
-  <div class="form-control">
-    <label class="form-control_label" for="username">Username</label>
-    <input
-      class="form-control_input"
-      type="text"
-      placeholder="Email or Phone"
-      id="username"
-    />
-  </div>
-  <div class="form-control">
-    <label class="form-control_label" for="password">Password</label>
-    <input
-      class="form-control_input"
-      type="password"
-      placeholder="Password"
-      id="password"
-    />
-  </div>
-  <div class="form-links">
-    <a>Forgot Password?</a>
-    <a>Sign Up</a>
-  </div>
-  <button type="submit" class="form-button">Sign In</button>
-</form>
+<div class="container">
+  <h3 class="container-title">Sign Up Here</h3>
+  <form class="form" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+    <div class="form-control">
+      <label class="form-control_label" for="username">User Name</label>
+      <input
+        class="form-control_input"
+        type="text"
+        placeholder="Username"
+        id="username"
+        formControlName="userName"
+      />
+    </div>
+    <div class="form-control">
+      <label class="form-control_label" for="email">Email</label>
+      <input
+        formControlName="email"
+        class="form-control_input"
+        type="text"
+        placeholder="Username"
+        id="email"
+      />
+    </div>
+    <div class="form-passwords" formGroupName="passwords">
+      <div class="form-control">
+        <label class="form-control_label" for="password">Password</label>
+        <input
+          class="form-control_input"
+          type="password"
+          id="password"
+          name="password"
+          formControlName="password"
+          placeholder="Password"
+        />
+      </div>
+      <div class="form-control">
+        <label class="form-control_label" for="confirmpassword"
+          >Confirm Password</label
+        >
+        <input
+          class="form-control_input"
+          type="password"
+          id="confirmpassword"
+          name="confirmpassword"
+          formControlName="confirmpassword"
+          placeholder="Confirm Password"
+        />
+      </div>
+    </div>
+    <div class="form-control">
+      <label class="form-control_label" for="firstName">First Name</label>
+      <input
+        formControlName="firstName"
+        class="form-control_input"
+        type="text"
+        placeholder="First Name"
+        id="firstName"
+      />
+    </div>
+    <div class="form-control">
+      <label class="form-control_label" for="lastName">Last Name</label>
+      <input
+        formControlName="lastName"
+        class="form-control_input"
+        type="text"
+        placeholder="Last Name"
+        id="lastName"
+      />
+    </div>
+    <div class="form-links">
+      <a>Sign In</a>
+    </div>
+    <button type="submit" class="form-button">Sign Up</button>
+  </form>
+</div>
