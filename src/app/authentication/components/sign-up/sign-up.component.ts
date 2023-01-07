@@ -32,14 +32,12 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  public onSignUp(): void {
-    console.log(this.signUpForm.value);
-  }
+  public onSignUp(): void {}
 
   private passwordCheck(control: FormGroup): { [s: string]: boolean } {
     if (control.get('password').value != control.get('confirmpassword').value) {
       return { notsame: true };
     }
-    return null;
+    return { notsame: false };
   }
 }
