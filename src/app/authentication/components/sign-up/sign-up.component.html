@@ -1,1 +1,26 @@
-<p>sign-up works!</p>
+<form class="form" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+  <h3 class="form-title">Login Here</h3>
+  <div class="form-control">
+    <label class="form-control_label" for="username">Username</label>
+    <input
+      class="form-control_input"
+      type="text"
+      placeholder="Email or Phone"
+      id="username"
+    />
+  </div>
+  <div class="form-control">
+    <label class="form-control_label" for="password">Password</label>
+    <input
+      class="form-control_input"
+      type="password"
+      placeholder="Password"
+      id="password"
+    />
+  </div>
+  <div class="form-links">
+    <a>Forgot Password?</a>
+    <a>Sign Up</a>
+  </div>
+  <button type="submit" class="form-button">Sign In</button>
+</form>
