@@ -15,10 +15,13 @@ export class SignUpComponent implements OnInit {
   public ngOnInit(): void {
     this.signUpForm = new FormGroup<SignUpForm>({
       userName: new FormControl('', Validators.required),
-      passwords: new FormGroup({
-        password: new FormControl('', Validators.required),
-        confirmpassword: new FormControl('', Validators.required),
-      }),
+      passwords: new FormGroup(
+        {
+          password: new FormControl('', Validators.required),
+          confirmpassword: new FormControl('', Validators.required),
+        },
+        this.passwordCheck,
+      ),
       email: new FormControl(''),
       firstName: new FormControl(''),
       lastName: new FormControl(''),
@@ -31,5 +34,12 @@ export class SignUpComponent implements OnInit {
 
   public onSignUp(): void {
     console.log(this.signUpForm.value);
+  }
+
+  private passwordCheck(control: FormGroup): { [s: string]: boolean } {
+    if (control.get('password').value != control.get('confirmpassword').value) {
+      return { notsame: true };
+    }
+    return null;
   }
 }
