@@ -2,6 +2,9 @@
   width: 100vw;
   height: 100vh;
   background-color: #080710;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   &-background{
     width: 430px;
@@ -34,11 +37,5 @@
       right: -30px;
       bottom: -80px;
     }
-  }
-  &-forms{
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left: 50%;
-    top: 50%;
   }
 }

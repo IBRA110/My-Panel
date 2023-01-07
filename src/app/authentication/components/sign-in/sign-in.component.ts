@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 export interface SignInForm {
   userName: FormControl<string | null>;
@@ -12,15 +13,18 @@ export interface SignInForm {
   styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent implements OnInit {
-  public form: FormGroup<SignInForm> = new FormGroup<SignInForm>({
+  public signInForm: FormGroup<SignInForm> = new FormGroup<SignInForm>({
     userName: new FormControl<string>(''),
     password: new FormControl<string>(''),
   });
+  public constructor(private http: HttpClient) {}
 
   public ngOnInit() {
-    this.form = new FormGroup<SignInForm>({
+    this.signInForm = new FormGroup<SignInForm>({
       userName: new FormControl<string>('', Validators.required),
       password: new FormControl<string>('', Validators.required),
     });
   }
+
+  public onSignup() {}
 }
