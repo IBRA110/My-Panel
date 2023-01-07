@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SignUpForm } from '../../data-assets/interfaces/form.interface';
 
@@ -9,6 +9,7 @@ import { SignUpForm } from '../../data-assets/interfaces/form.interface';
 })
 export class SignUpComponent implements OnInit {
   public signUpForm: FormGroup<SignUpForm>;
+  @Output() public onClick = new EventEmitter();
   public constructor() {}
 
   public ngOnInit(): void {

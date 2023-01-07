@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './authentication.component.html',
   styleUrls: ['./authentication.component.scss'],
 })
-export class AuthenticationComponent {}
+export class AuthenticationComponent {
+  public isSignIn: boolean = true;
+
+  public toggleForms(): void {
+    this.isSignIn = !this.isSignIn;
+  }
+}
