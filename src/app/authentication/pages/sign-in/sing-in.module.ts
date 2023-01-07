@@ -5,10 +5,7 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [SignInComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild([{ path: '', component: SignInComponent }]),
-  ],
+  imports: [CommonModule],
   exports: [SignInComponent],
 })
 export class SignInModule {}
