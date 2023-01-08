@@ -10,6 +10,7 @@ export class UiButtonComponent {
   @Input() public text: string;
   @Input() public type: string;
   @Input() public icon: string;
+  @Input() public isDisabled: boolean = false;
   @Input() public scssClass: string = UiButtonStyleEnum.DEFAULT;
   @Output() public onClick = new EventEmitter();
 }
