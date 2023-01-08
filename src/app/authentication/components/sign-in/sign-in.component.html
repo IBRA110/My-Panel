@@ -1,5 +1,5 @@
 <form class="form" [formGroup]="signInForm" (ngSubmit)="onSignIn()">
-  <h3 class="form-title">Login Here</h3>
+  <h3 class="form-title">Sign In Here</h3>
   <div class="form-control">
     <label class="form-control_label" for="username">Username</label>
     <input
@@ -22,5 +22,5 @@
     <a>Forgot Password?</a>
     <a (click)="onClick.emit()">Sign Up</a>
   </div>
-  <button type="submit" class="form-button">Sign In</button>
+  <app-ui-button [type]="'submit'" [text]="'Sign In'"></app-ui-button>
 </form>
