@@ -1,4 +1,3 @@
-import { range } from 'rxjs';
 import { Theme } from '../theme.interface';
 
 export const lightTheme: Theme = {
