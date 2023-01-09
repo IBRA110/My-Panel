@@ -1,28 +1,22 @@
-<div class="date-picker">
+<div class="date">
   <div
-    class="date-picker-body"
+    class="date-body"
     [ngClass]="{ open: isOpen }"
     (click)="isOpen = false"
   ></div>
   <div class="date-button">
     <p>Date:</p>
     <p>
-      {{ dateService.startDate | async | moment : 'DD.MM.YYYY' }}
-    </p>
-    <p *ngIf="!isStart">
-      {{ dateService.endDate | async | moment : 'DD.MM.YYYY' }}
+      {{ dateService.Date$ | async | moment : 'DD.MM.YYYY' }}
     </p>
     <app-ui-button (onClick)="openCalendar()"></app-ui-button>
   </div>
 
-  <div class="table" [ngClass]="{ open: isOpen }">
-    <div class="buttons">
+  <div class="date-table" [ngClass]="{ open: isOpen }">
+    <div class="date-table_buttons">
       <app-ui-button [text]="'<'" (onClick)="next()"></app-ui-button>
-      <p *ngIf="isStart">
-        {{ dateService.startDate | async | moment : 'MMMM' }}
-      </p>
-      <p *ngIf="!isStart">
-        {{ dateService.endDate | async | moment : 'MMMM' }}
+      <p>
+        {{ dateService.Date$ | async | moment : 'MMMM' }}
       </p>
       <app-ui-button [text]="'>'" (onClick)="prev()"></app-ui-button>
     </div>

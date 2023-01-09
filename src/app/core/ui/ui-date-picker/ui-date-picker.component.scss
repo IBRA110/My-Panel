@@ -1,14 +1,14 @@
-.date-picker{
+.date{
     position: relative;
     width: 290px;
   
-    .date-button{
+    &-button{
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 20px;
     }
-    .date-picker-body{
+    &-body{
       position: fixed;
       top: 0;
       left: 0;
@@ -22,7 +22,7 @@
         visibility: visible;
       }
     }
-    .table{
+    &-table{
       position: absolute;
       opacity: 0;
       visibility: hidden;
@@ -39,7 +39,7 @@
         visibility: visible;
       }
   
-      .buttons{
+      &_buttons{
         display: flex;
         justify-content: space-between;
         align-items: center;

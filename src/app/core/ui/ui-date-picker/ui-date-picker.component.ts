@@ -21,15 +21,9 @@ export class UiDatePickerComponent implements OnInit {
   public constructor(public dateService: UiDatePickerService) {}
 
   public ngOnInit() {
-    if (this.isStart) {
-      this.dateService.startDate
-        .pipe(untilDestroyed(this))
-        .subscribe(this.generate.bind(this));
-    } else {
-      this.dateService.endDate
-        .pipe(untilDestroyed(this))
-        .subscribe(this.generate.bind(this));
-    }
+    this.dateService.Date$.pipe(untilDestroyed(this)).subscribe(
+      this.generate.bind(this),
+    );
   }
 
   private generate(now: moment.Moment) {
@@ -63,7 +57,7 @@ export class UiDatePickerComponent implements OnInit {
   }
 
   public select(day: moment.Moment): void {
-    this.dateService.changeDate(day, this.isStart);
+    this.dateService.changeDate(day);
     this.openCalendar();
   }
 
@@ -72,9 +66,9 @@ export class UiDatePickerComponent implements OnInit {
   }
 
   public next(): void {
-    this.dateService.changeMonth(-1, this.isStart);
+    this.dateService.changeMonth(-1);
   }
   public prev(): void {
-    this.dateService.changeMonth(1, this.isStart);
+    this.dateService.changeMonth(1);
   }
 }
