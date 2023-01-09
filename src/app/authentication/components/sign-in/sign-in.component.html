@@ -1,7 +1,7 @@
 <form class="form" [formGroup]="signInForm" (ngSubmit)="onSignIn()">
   <h3 class="form-title">Sign In Here</h3>
   <div class="form-control">
-    <label class="form-control_label" for="username">Username</label>
+    <label class="form-control_label" for="username">User Name</label>
     <input
       class="form-control_input"
       formControlName="userName"
@@ -20,7 +20,9 @@
   </div>
   <div class="form-links">
     <a>Forgot Password?</a>
-    <a (click)="onClick.emit()">{{ 'AUTHENTICATION.SIGN_UP' | translate }}</a>
+    <a (click)="onClick.emit()">{{
+      textEditor.getCamelCase('AUTHENTICATION.SIGN_UP' | translate)
+    }}</a>
   </div>
   <app-ui-button [type]="'submit'" [text]="'Sign In'"></app-ui-button>
 </form>
