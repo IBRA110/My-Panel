@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UiButtonModule } from 'src/app/core/ui/ui-button/ui-button.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { UiInputModule } from 'src/app/core/ui/ui-input/ui-input.module';
+import { UiDatePickerModule } from 'src/app/core/ui/ui-date-picker/ui-date-picker.module';
 
 @NgModule({
   declarations: [SignUpComponent],
@@ -14,6 +15,7 @@ import { UiInputModule } from 'src/app/core/ui/ui-input/ui-input.module';
     UiButtonModule,
     TranslateModule,
     UiInputModule,
+    UiDatePickerModule,
   ],
   exports: [SignUpComponent],
 })

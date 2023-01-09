@@ -94,6 +94,9 @@
         ></app-ui-input>
       </div>
     </div>
+    <div class="form-control">
+      <app-ui-date-picker [isStart]="true"></app-ui-date-picker>
+    </div>
     <div class="form-links">
       <a (click)="onClick.emit()">{{
         'AUTHENTICATION.SIGN_IN' | translate | titlecase
