@@ -1,9 +1,10 @@
+@import "src/app/core/mixins/fonts";
+
 .form{
   background-color: var(--backgorund-transparent-color);
   border-radius: 10px;
   border: 2px solid var(--border-color);
   box-shadow: 0 0 40px var(--box-shadow-color);
-  font-family: 'Poppins',sans-serif;
   display: flex;
   backdrop-filter: blur(10px);
   flex-direction: column;
@@ -13,10 +14,7 @@
   padding: 30px;
     
   &-title{
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 42px;
-    text-align: center;
+    @include Heading_3;
   }
    
   &-control{
@@ -27,8 +25,7 @@
  
     &_label{
       display: block;
-      font-size: 16px;
-      font-weight: 500;
+      @include Input_Label;
     }
     &_input{
       display: block;
@@ -37,20 +34,9 @@
       background-color: var(--input-backgound-color);
       border-radius: 3px;
       padding: 0 10px;
-      font-size: 14px;
-      font-weight: 300;
+      @include Input;
       
     }
-  }
-  &-button{
-    width: 100%;
-    background-color: #ffffff;
-    color: #080710;
-    padding: 15px 0;
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
   }
   &-links{
     padding: 0 2px; 
@@ -60,10 +46,11 @@
     width: 100%;
 
     a{
+      @include Link_Small;
       cursor: pointer;
     }
     a:last-child{
-      font-size: 18px;
+      @include Link;
     }
   }
 }
