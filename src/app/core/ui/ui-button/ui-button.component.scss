@@ -17,4 +17,7 @@
   &:disabled{
     background: var(--button-disabled-background-color);
   }
+  &:focus{
+    box-shadow: 0 0 5px var(--base-items-focus-color);
+  }
 }  
