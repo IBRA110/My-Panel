@@ -10,4 +10,5 @@ export class UiInputComponent {
   @Input() public name: string;
   @Input() public class: string;
   @Input() public label: string;
+  @Input() public isChecked: boolean;
 }
