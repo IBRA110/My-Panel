@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +18,7 @@ import { ThemeService } from './core/theme/theme.service';
     BrowserModule,
     AppRoutingModule,
     UiAlertMessagesModule,
+    HttpClientModule,
     ThemeModule.forRoot({
       themes: [lightTheme, darkTheme],
       active: 'light',

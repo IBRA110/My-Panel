@@ -1,10 +1,6 @@
 {
-    "HEADER": {
-      "LOCATIONS": "LOCATIONS",
-      "ABOUT_US": "ABOUT US",
-      "EVENTS": "EVENTS",
-      "SHOP": "SHOP",
-      "OUR_CONTACTS": "OUR CONTACTS",
-      "BOOKING": "BOOKING"
+    "AUTHENTICATION": {
+      "SIGN_IN" : "sign in",
+      "SIGN_UP" : "sign up"
     }
 }
