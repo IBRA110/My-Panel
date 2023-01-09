@@ -1,6 +1,15 @@
 {
     "AUTHENTICATION": {
+      "SIGN_IN_HERE": "sign in here",
+      "SIGN_UP_HERE": "sign up here",
       "SIGN_IN" : "sign in",
-      "SIGN_UP" : "sign up"
+      "SIGN_UP" : "sign up",
+      "USER_NAME": "user name",
+      "EMAIL": "email",
+      "PASSWORD": "password",
+      "FORGOT_PASSWORD": "forgot password?",
+      "CONFIRM_PASSWORD": "confirm password",
+      "FIRST_NAME": "first name",
+      "LAST_NAME": "last name"
     }
 }

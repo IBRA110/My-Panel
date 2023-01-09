@@ -1,7 +1,11 @@
 <form class="form" [formGroup]="signInForm" (ngSubmit)="onSignIn()">
-  <h3 class="form-title">Sign In Here</h3>
+  <h3 class="form-title">
+    {{ 'AUTHENTICATION.SIGN_IN_HERE' | translate | titlecase }}
+  </h3>
   <div class="form-control">
-    <label class="form-control_label" for="username">User Name</label>
+    <label class="form-control_label" for="username">{{
+      'AUTHENTICATION.USER_NAME' | translate | titlecase
+    }}</label>
     <input
       class="form-control_input"
       formControlName="userName"
@@ -10,7 +14,9 @@
     />
   </div>
   <div class="form-control">
-    <label class="form-control_label" for="password">Password</label>
+    <label class="form-control_label" for="password">{{
+      'AUTHENTICATION.PASSWORD' | translate | titlecase
+    }}</label>
     <input
       class="form-control_input"
       formControlName="password"
@@ -19,10 +25,13 @@
     />
   </div>
   <div class="form-links">
-    <a>Forgot Password?</a>
+    <a>{{ 'AUTHENTICATION.FORGOT_PASSWORD' | translate | titlecase }}</a>
     <a (click)="onClick.emit()">{{
-      textEditor.getCamelCase('AUTHENTICATION.SIGN_UP' | translate)
+      'AUTHENTICATION.SIGN_UP' | translate | titlecase
     }}</a>
   </div>
-  <app-ui-button [type]="'submit'" [text]="'Sign In'"></app-ui-button>
+  <app-ui-button
+    [type]="'submit'"
+    [text]="'AUTHENTICATION.SIGN_IN' | translate | titlecase"
+  ></app-ui-button>
 </form>

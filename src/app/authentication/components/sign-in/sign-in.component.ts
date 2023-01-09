@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TextEditorService } from 'src/app/core/services/text-editor.service';
 import { SignInForm } from '../../data-assets/interfaces/form.interface';
 
 @Component({
@@ -11,7 +10,7 @@ import { SignInForm } from '../../data-assets/interfaces/form.interface';
 export class SignInComponent implements OnInit {
   public signInForm: FormGroup<SignInForm>;
   @Output() public onClick = new EventEmitter();
-  public constructor(public textEditor: TextEditorService) {}
+  public constructor() {}
 
   public ngOnInit(): void {
     this.signInForm = new FormGroup<SignInForm>({

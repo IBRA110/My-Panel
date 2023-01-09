@@ -1,8 +1,12 @@
 <div class="container">
-  <h3 class="container-title">Sign Up Here</h3>
+  <h3 class="container-title">
+    {{ 'AUTHENTICATION.SIGN_UP_HERE' | translate | titlecase }}
+  </h3>
   <form class="form" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
     <div class="form-control">
-      <label class="form-control_label" for="username">User Name</label>
+      <label class="form-control_label" for="username">{{
+        'AUTHENTICATION.USER_NAME' | translate | titlecase
+      }}</label>
       <input
         class="form-control_input"
         type="text"
@@ -11,7 +15,9 @@
       />
     </div>
     <div class="form-control">
-      <label class="form-control_label" for="email">Email</label>
+      <label class="form-control_label" for="email">{{
+        'AUTHENTICATION.EMAIL' | translate | titlecase
+      }}</label>
       <input
         formControlName="email"
         class="form-control_input"
@@ -21,7 +27,9 @@
     </div>
     <div class="form-passwords" formGroupName="passwords">
       <div class="form-control">
-        <label class="form-control_label" for="password">Password</label>
+        <label class="form-control_label" for="password">{{
+          'AUTHENTICATION.PASSWORD' | translate | titlecase
+        }}</label>
         <input
           class="form-control_input"
           type="password"
@@ -31,9 +39,9 @@
         />
       </div>
       <div class="form-control">
-        <label class="form-control_label" for="confirmpassword"
-          >Confirm Password</label
-        >
+        <label class="form-control_label" for="confirmpassword">{{
+          'AUTHENTICATION.CONFIRM_PASSWORD' | translate | titlecase
+        }}</label>
         <input
           class="form-control_input"
           type="password"
@@ -44,7 +52,9 @@
       </div>
     </div>
     <div class="form-control">
-      <label class="form-control_label" for="firstName">First Name</label>
+      <label class="form-control_label" for="firstName">{{
+        'AUTHENTICATION.FIRST_NAME' | translate | titlecase
+      }}</label>
       <input
         formControlName="firstName"
         class="form-control_input"
@@ -53,7 +63,9 @@
       />
     </div>
     <div class="form-control">
-      <label class="form-control_label" for="lastName">Last Name</label>
+      <label class="form-control_label" for="lastName">{{
+        'AUTHENTICATION.LAST_NAME' | translate | titlecase
+      }}</label>
       <input
         formControlName="lastName"
         class="form-control_input"
@@ -62,8 +74,13 @@
       />
     </div>
     <div class="form-links">
-      <a (click)="onClick.emit()">Sign In</a>
-      <app-ui-button [type]="'submit'" [text]="'Sign Up'"></app-ui-button>
+      <a (click)="onClick.emit()">{{
+        'AUTHENTICATION.SIGN_IN' | translate | titlecase
+      }}</a>
+      <app-ui-button
+        [type]="'submit'"
+        [text]="'AUTHENTICATION.SIGN_UP' | translate | titlecase"
+      ></app-ui-button>
     </div>
   </form>
 </div>
