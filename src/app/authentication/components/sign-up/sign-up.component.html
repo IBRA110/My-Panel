@@ -73,6 +73,26 @@
         id="lastName"
       />
     </div>
+    <div class="form-control">
+      <div class="form-control_label">Gender</div>
+      <div class="form-control_radio">
+        <app-ui-input
+          [type]="'radio'"
+          [name]="'gender'"
+          [label]="'male'"
+        ></app-ui-input>
+        <app-ui-input
+          [type]="'radio'"
+          [name]="'gender'"
+          [label]="'female'"
+        ></app-ui-input>
+        <app-ui-input
+          [type]="'radio'"
+          [name]="'gender'"
+          [label]="'other'"
+        ></app-ui-input>
+      </div>
+    </div>
     <div class="form-links">
       <a (click)="onClick.emit()">{{
         'AUTHENTICATION.SIGN_IN' | translate | titlecase

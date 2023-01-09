@@ -16,5 +16,7 @@ export const lightTheme: Theme = {
     '--button-disabled-background-color':
       ' linear-gradient(rgb(156, 156, 156), rgb(212, 212, 212))',
     '--button-text-color': 'rgb(255, 255, 255, 0.9)',
+    '--base-items-color': 'rgb(35, 162, 246)',
+    '--base-items-focus-color': 'rgb(24, 69, 173)',
   },
 };
