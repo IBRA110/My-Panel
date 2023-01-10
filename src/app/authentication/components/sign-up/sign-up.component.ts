@@ -1,7 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { UiButtonStyleEnum } from 'src/app/core/enums/ui-button-style.enum';
 import { SignUpForm } from '../../data-assets/interfaces/form.interface';
+import { signUp } from '../../data-assets/store/authentication.actions';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,7 +13,7 @@ import { SignUpForm } from '../../data-assets/interfaces/form.interface';
 export class SignUpComponent implements OnInit {
   public signUpForm: FormGroup<SignUpForm>;
   @Output() public onClick = new EventEmitter();
-  public constructor() {}
+  public constructor(private store: Store) {}
 
   public ngOnInit(): void {
     this.signUpForm = new FormGroup<SignUpForm>({
@@ -24,16 +26,18 @@ export class SignUpComponent implements OnInit {
         this.passwordCheck,
       ),
       email: new FormControl(''),
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      gender: new FormControl(''),
-      dateOfBirth: new FormControl(),
-      city: new FormControl(''),
-      country: new FormControl(''),
     });
   }
 
-  public onSignUp(): void {}
+  public onSignUp(): void {
+    this.store.dispatch(
+      signUp({
+        userName: this.signUpForm.get('userName').value,
+        email: this.signUpForm.get('email').value,
+        password: this.signUpForm.get('passwords.password').value,
+      }),
+    );
+  }
 
   private passwordCheck(control: FormGroup): { [s: string]: boolean } {
     if (control.get('password').value != control.get('confirmpassword').value) {

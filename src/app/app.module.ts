@@ -14,6 +14,13 @@ import { ThemeService } from './core/theme/theme.service';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
+import {
+  authenticationFeatureKey,
+  reducer,
+} from './authentication/data-assets/store/authentication.reduser';
+import { EffectsModule } from '@ngrx/effects';
+import { BookingEffects } from './authentication/data-assets/store/authentication.effects';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +29,7 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     UiAlertMessagesModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     ThemeModule.forRoot({
       themes: [lightTheme, darkTheme],
       active: 'light',
@@ -34,10 +42,12 @@ import { environment } from 'src/environments/environment';
       },
     }),
     StoreModule.forRoot({}),
+    StoreModule.forFeature(authenticationFeatureKey, reducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
+    EffectsModule.forRoot([BookingEffects]),
   ],
   providers: [ThemeService],
   bootstrap: [AppComponent],

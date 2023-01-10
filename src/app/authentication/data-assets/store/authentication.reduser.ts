@@ -1,13 +1,20 @@
 import { Action, createReducer, on } from '@ngrx/store';
+import { signInSuccess } from './authentication.actions';
 import { AuthenticationState, initialState } from './authentication.state';
 
-export const authenticationFeatureKey = 'authentication';
+export const authenticationFeatureKey = 'auth';
 
-const bookingsReducer = createReducer(initialState);
+const authenticationReducer = createReducer(
+  initialState,
+  on(signInSuccess, (state, { authTokens }) => ({
+    ...state,
+    authTokens,
+  })),
+);
 
 export function reducer(
   state: AuthenticationState | undefined,
   action: Action,
 ) {
-  return bookingsReducer(state, action);
+  return authenticationReducer(state, action);
 }

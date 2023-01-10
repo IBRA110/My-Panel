@@ -1,9 +1,9 @@
+import { AuthTokens } from '../interfaces/auth.interface';
+
 export interface AuthenticationState {
-  accessToken: string;
-  refreshToken: string;
+  authTokens: AuthTokens;
 }
 
 export const initialState: AuthenticationState = {
-  accessToken: '',
-  refreshToken: '',
+  authTokens: null,
 };
