@@ -1,105 +1,116 @@
 {
-    "root": true,
-    "ignorePatterns": ["projects/**/*", "src/generated/*"],
-    "overrides": [
-        {
-        "files": [
-            "*.ts"
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*",
+    "src/generated/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json",
+          "e2e/tsconfig.json"
         ],
-        "parserOptions": {
-            "project": [
-            "tsconfig.json",
-            "e2e/tsconfig.json"
-            ],
-            "createDefaultProgram": true
-        },
-        "extends": [
-            "plugin:@angular-eslint/recommended",
-            "plugin:@angular-eslint/template/process-inline-templates"
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "plugins": [
+        "eslint-plugin-prettier"
+      ],
+      "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "trailingComma": "all",
+            "printWidth": 80,
+            "useTabs": false,
+            "tabWidth": 2,
+            "singleQuote": true,
+            "semi": true,
+            "bracketSpacing": true,
+            "arrowParens": "always",
+            "endOfLine": "auto"
+          }
         ],
-        "plugins": [
-            "eslint-plugin-prettier"
+        "no-console": [
+          "error"
         ],
-        "rules": {
-            "prettier/prettier": [
-            "error",
-            {
-                "trailingComma": "all",
-                "printWidth": 80,
-                "useTabs": false,
-                "tabWidth": 2,
-                "singleQuote": true,
-                "semi": true,
-                "bracketSpacing": true,
-                "arrowParens": "always",
-                "endOfLine": "auto"
-            }
+        "@angular-eslint/no-output-rename": 0,
+        "@angular-eslint/no-output-on-prefix": 0,
+        "@angular-eslint/component-class-suffix": 0,
+        "@angular-eslint/no-input-rename": 0,
+        "keyword-spacing": [
+          "error"
+        ],
+        "space-before-blocks": [
+          "error"
+        ],
+        "no-underscore-dangle": [
+          "error",
+          {
+            "allowAfterThis": true
+          }
+        ],
+        "@typescript-eslint/no-non-null-assertion": "error",
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "property",
+            "modifiers": [
+              "static"
             ],
-            "no-console": [
-            "error"
+            "format": [
+              "PascalCase"
             ],
-            "@angular-eslint/no-output-rename": 0,
-            "@angular-eslint/no-output-on-prefix": 0,
-            "@angular-eslint/component-class-suffix": 0,
-            "@angular-eslint/no-input-rename": 0,
-            "keyword-spacing": [
-            "error"
-            ],
-            "space-before-blocks": [
-            "error"
-            ],
-            "no-underscore-dangle": [
-            "error",
-            {
-                "allowAfterThis": true
-            }
-            ],
-            "@typescript-eslint/no-non-null-assertion": "error",
-            "@typescript-eslint/naming-convention": [
-            "error",
-            {
-                "selector": "property",
-                "modifiers": [
-                "static"
-                ],
-                "format": [
-                "PascalCase"
-                ],
-                "leadingUnderscore": "forbid"
-            }
-            ],
-            "@typescript-eslint/explicit-member-accessibility": [
-            "error",
-            {
-                "accessibility": "explicit" 
-            }
-            ]
-        }
-        },
-        {
-            "files": [
-                "*.html"
-            ],
-            "extends": [
-                "plugin:@angular-eslint/template/recommended"
-            ],
-            "rules": {
-                "prettier/prettier": [
-                    "error",
-                    {
-                        "@angular-eslint/template/no-negated-async": "off",
-                        "trailingComma": "all",
-                        "printWidth": 80,
-                        "useTabs": false,
-                        "tabWidth": 2,
-                        "singleQuote": true,
-                        "semi": true,
-                        "bracketSpacing": true,
-                        "arrowParens": "always",
-                        "endOfLine": "auto"
-                    }
-                ]
-            }
-        }
-    ]
+            "leadingUnderscore": "forbid"
+          }
+        ],
+        "@typescript-eslint/explicit-member-accessibility": [
+          "error",
+          {
+            "accessibility": "explicit"
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "@angular-eslint/template/no-negated-async": "off",
+            "trailingComma": "all",
+            "printWidth": 80,
+            "useTabs": false,
+            "tabWidth": 2,
+            "singleQuote": true,
+            "semi": true,
+            "bracketSpacing": true,
+            "arrowParens": "always",
+            "endOfLine": "auto"
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:@ngrx/recommended"
+      ]
+    }
+  ]
 }
