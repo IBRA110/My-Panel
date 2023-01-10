@@ -1,5 +1,4 @@
 .date{
-    position: relative;
     width: 290px;
   
     &-button{
@@ -8,20 +7,7 @@
       justify-content: center;
       gap: 20px;
     }
-    &-body{
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      opacity: 0;
-      visibility: hidden;
-  
-      &.open{
-        opacity: 1;
-        visibility: visible;
-      }
-    }
+
     &-table{
       position: absolute;
       opacity: 0;

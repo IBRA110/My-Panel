@@ -1,8 +1,4 @@
 <div class="auth">
-  <div class="auth-background">
-    <div class="auth-background_shape"></div>
-    <div class="auth-background_shape"></div>
-  </div>
   <div class="auth-forms">
     <app-sign-in (onClick)="toggleForms()" *ngIf="isSignIn"></app-sign-in>
     <app-sign-up (onClick)="toggleForms()" *ngIf="!isSignIn"></app-sign-up>

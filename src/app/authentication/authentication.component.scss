@@ -3,40 +3,11 @@
   height: 100vh;
   background-color: var(--background-color);
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   color: var(--base-text-color);
-  
-  &-background{
-    width: 430px;
-    height: 520px;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left: 50%;
-    top: 50%;
-    
-    &_shape{
-      height: 200px;
-      width: 200px;
-      position: absolute;
-      border-radius: 50%;
-    }
-    &_shape:first-child{
-      background: linear-gradient(
-          #1845ad,
-          #23a2f6
-      );
-      left: -80px;
-      top: -80px;
-    }
-    &_shape:last-child{
-      background: linear-gradient(
-          to right,
-          #ff512f,
-          #f09819
-      );
-      right: -30px;
-      bottom: -80px;
-    }
+
+  &-forms{
+    height: 100%;
   }
 }

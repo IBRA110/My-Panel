@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SignInForm } from '../../data-assets/interfaces/form.interface';
+import { UiButtonStyleEnum } from './../../../core/enums/ui-button-style.enum';
 
 @Component({
   selector: 'app-sign-in',
@@ -20,4 +21,8 @@ export class SignInComponent implements OnInit {
   }
 
   public onSignIn(): void {}
+
+  public get scssClass(): typeof UiButtonStyleEnum {
+    return UiButtonStyleEnum;
+  }
 }

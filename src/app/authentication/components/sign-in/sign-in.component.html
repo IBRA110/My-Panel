@@ -26,12 +26,18 @@
   </div>
   <div class="form-links">
     <a>{{ 'AUTHENTICATION.FORGOT_PASSWORD' | translate | titlecase }}</a>
-    <a (click)="onClick.emit()">{{
-      'AUTHENTICATION.SIGN_UP' | translate | titlecase
-    }}</a>
   </div>
-  <app-ui-button
-    [type]="'submit'"
-    [text]="'AUTHENTICATION.SIGN_IN' | translate | titlecase"
-  ></app-ui-button>
+  <div class="form-links">
+    <app-ui-button
+      (onClick)="onClick.emit()"
+      [type]="'submit'"
+      [text]="'AUTHENTICATION.SIGN_UP' | translate | titlecase"
+      [scssClass]="scssClass.DARK"
+    ></app-ui-button>
+    <app-ui-button
+      [type]="'submit'"
+      [text]="'AUTHENTICATION.SIGN_IN' | translate | titlecase"
+      [scssClass]="scssClass.DEFAULT"
+    ></app-ui-button>
+  </div>
 </form>

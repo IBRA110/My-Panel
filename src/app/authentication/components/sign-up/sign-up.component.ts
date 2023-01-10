@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UiButtonStyleEnum } from 'src/app/core/enums/ui-button-style.enum';
 import { SignUpForm } from '../../data-assets/interfaces/form.interface';
 
 @Component({
@@ -39,5 +40,8 @@ export class SignUpComponent implements OnInit {
       return { notsame: true };
     }
     return { notsame: false };
+  }
+  public get scssClass(): typeof UiButtonStyleEnum {
+    return UiButtonStyleEnum;
   }
 }

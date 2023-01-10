@@ -7,9 +7,10 @@
       "USER_NAME": "user name",
       "EMAIL": "email",
       "PASSWORD": "password",
-      "FORGOT_PASSWORD": "forgot password?",
       "CONFIRM_PASSWORD": "confirm password",
       "FIRST_NAME": "first name",
-      "LAST_NAME": "last name"
+      "LAST_NAME": "last name",
+      "FORGOT_PASSWORD": "forgot password?",
+      "HAVE_ACCOUNT": "have an account?"
     }
 }

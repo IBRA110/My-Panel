@@ -1,28 +1,29 @@
 @import "src/app/core/mixins/fonts";
 
 .container{
-  background-color: var(--backgorund-transparent-color);
-  border-radius: 10px;
   border: 2px solid var(--border-color);
   box-shadow: 0 0 40px var(--box-shadow-color);
-  backdrop-filter: blur(10px);
   padding-top: 30px;
+  height: 100%;
 
-  &-title{
-    @include Heading_3;
-  }
+
 }
 .form{
   display: flex;
-  width: 800px;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 30px;
   padding: 30px;
+  height: 100%;
+  
+  &-title{
+    @include Heading_3;
+  }
   
   &-passwords{
     display: flex;
+    flex-direction: column;
     width: 100%;
     justify-content: space-between;
     gap: 30px;
@@ -49,7 +50,7 @@
     &_input{
       display: block;
       height: 50px;
-      width: 350px;
+      width: 400px;
       background-color: var(--input-backgound-color);
       border-radius: 3px;
       padding: 0 10px;
