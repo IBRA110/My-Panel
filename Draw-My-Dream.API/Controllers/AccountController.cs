@@ -35,15 +35,15 @@ namespace API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<string>> Register(RegisterDTO registerDTO)
+        public async Task<ActionResult<SuccessDTO>> Register(RegisterDTO registerDTO)
         {
             if (await UserExists(registerDTO.Username))
             {
-                throw new ArgumentException("Username is already taken");
+                throw new Exception("Username is already taken");
             }
             if (await EmailExists(registerDTO.Email))
             {
-                throw new ArgumentException("Email is already taken");
+                throw new Exception("Email is already taken");
             }
             
             AppUserEntity user = _mapper.Map<AppUserEntity>(registerDTO);
@@ -58,7 +58,10 @@ namespace API.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
              
-            return Ok("Success!");
+            return new SuccessDTO
+            {
+                Message = "Registration Successful"
+            };
         }
         
         [HttpPost("login")]
