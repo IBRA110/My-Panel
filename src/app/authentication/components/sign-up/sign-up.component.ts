@@ -2,8 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { UiButtonStyleEnum } from 'src/app/core/enums/ui-button-style.enum';
-import { SignUpForm } from '../../data-assets/interfaces/form.interface';
-import { signUp } from '../../data-assets/store/authentication.actions';
+import { SignUpForm } from '../../data-access/interfaces/form.interface';
+import { signUp } from '../../data-access/store/authentication.actions';
 
 @Component({
   selector: 'app-sign-up',

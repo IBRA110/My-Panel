@@ -17,9 +17,9 @@ import { environment } from 'src/environments/environment';
 import {
   authenticationFeatureKey,
   reducer,
-} from './authentication/data-assets/store/authentication.reduser';
+} from './authentication/data-access/store/authentication.reduser';
 import { EffectsModule } from '@ngrx/effects';
-import { BookingEffects } from './authentication/data-assets/store/authentication.effects';
+import { BookingEffects } from './authentication/data-access/store/authentication.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({

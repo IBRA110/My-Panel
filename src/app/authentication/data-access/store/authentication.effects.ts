@@ -25,11 +25,13 @@ export class BookingEffects {
             password: action.password,
           })
           .pipe(
-            map((data: string) => {
+            map((data: any) => {
+							console.log(data)
               this.messageService.callSuccessMessage(data);
               return signUpSuccess();
             }),
             catchError((err) => {
+							console.log(err)
               return of(signUpFailed());
             }),
           );
