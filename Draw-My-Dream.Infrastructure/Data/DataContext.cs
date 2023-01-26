@@ -12,6 +12,7 @@ namespace Infrastracture.Data
         }
 
         public DbSet<AppUserEntity> Users { get; set; }
+        public DbSet<MessageEntity> Messages { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,6 +24,15 @@ namespace Infrastracture.Data
                 .HasForeignKey(s => s.LikedImageId)
                 .OnDelete(DeleteBehavior.Cascade);
             
+            modelBuilder.Entity<MessageEntity>()
+                .HasOne(u => u.Recipient)
+                .WithMany(m => m.MessagesRecevied)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<MessageEntity>()
+                .HasOne(u => u.Sender)
+                .WithMany(m => m.MessagesSent)
+                .OnDelete(DeleteBehavior.Restrict);
             
             var bytesConverter = new UlidToBytesConverter();
 
@@ -38,6 +48,13 @@ namespace Infrastracture.Data
                 {
                     modelBuilder.Entity(entityType.ClrType)
                         .Property<Ulid>(nameof(ImageEntity.AppUserId)).ValueGeneratedNever();
+                }
+                if (typeof(MessageEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property<Ulid>(nameof(MessageEntity.RecipientId)).ValueGeneratedNever();
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property<Ulid>(nameof(MessageEntity.SenderId)).ValueGeneratedNever();
                 }
 
                 // Convert Ulids to bytea when persisting

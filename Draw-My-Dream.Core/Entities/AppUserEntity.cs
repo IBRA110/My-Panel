@@ -19,5 +19,7 @@ namespace Core.Entities
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<ImageEntity> Images { get; set; }
+        public ICollection<MessageEntity> MessagesSent { get; set; }
+        public ICollection<MessageEntity> MessagesRecevied { get; set; }
     }
 }
