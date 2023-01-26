@@ -31,10 +31,14 @@ export class UiAlertMessagesComponent implements OnInit {
           return;
         }
         this.alerts.push(alert);
-        setTimeout(
-          () => (this.alerts[this.alerts.length - 1].isHide = true),
-          150,
-        );
+
+        if (this.alerts.length) {
+          setTimeout(
+            () => (this.alerts[this.alerts.length - 1].isHide = true),
+            150,
+          );
+        }
+
         setTimeout(() => {
           this.alerts.pop();
         }, 20000);
