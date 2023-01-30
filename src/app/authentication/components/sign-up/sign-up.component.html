@@ -1,70 +1,68 @@
-<div class="container">
-  <form class="form" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
-    <h3 class="form-title">
-      {{ 'AUTHENTICATION.SIGN_UP_HERE' | translate | titlecase }}
-    </h3>
+<form class="form" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+  <h3 class="form-title">
+    {{ 'AUTHENTICATION.SIGN_UP_HERE' | translate | titlecase }}
+  </h3>
+  <div class="form-control">
+    <label class="form-control_label" for="username">{{
+      'AUTHENTICATION.USER_NAME' | translate | titlecase
+    }}</label>
+    <input
+      class="form-control_input"
+      type="text"
+      id="username"
+      formControlName="userName"
+    />
+  </div>
+  <div class="form-control">
+    <label class="form-control_label" for="email">{{
+      'AUTHENTICATION.EMAIL' | translate | titlecase
+    }}</label>
+    <input
+      formControlName="email"
+      class="form-control_input"
+      type="text"
+      id="email"
+    />
+  </div>
+  <div class="form-passwords" formGroupName="passwords">
     <div class="form-control">
-      <label class="form-control_label" for="username">{{
-        'AUTHENTICATION.USER_NAME' | translate | titlecase
+      <label class="form-control_label" for="password">{{
+        'AUTHENTICATION.PASSWORD' | translate | titlecase
       }}</label>
       <input
         class="form-control_input"
-        type="text"
-        id="username"
-        formControlName="userName"
+        type="password"
+        id="password"
+        name="password"
+        formControlName="password"
       />
     </div>
     <div class="form-control">
-      <label class="form-control_label" for="email">{{
-        'AUTHENTICATION.EMAIL' | translate | titlecase
+      <label class="form-control_label" for="confirmpassword">{{
+        'AUTHENTICATION.CONFIRM_PASSWORD' | translate | titlecase
       }}</label>
       <input
-        formControlName="email"
         class="form-control_input"
-        type="text"
-        id="email"
+        type="password"
+        id="confirmpassword"
+        name="confirmpassword"
+        formControlName="confirmpassword"
       />
     </div>
-    <div class="form-passwords" formGroupName="passwords">
-      <div class="form-control">
-        <label class="form-control_label" for="password">{{
-          'AUTHENTICATION.PASSWORD' | translate | titlecase
-        }}</label>
-        <input
-          class="form-control_input"
-          type="password"
-          id="password"
-          name="password"
-          formControlName="password"
-        />
-      </div>
-      <div class="form-control">
-        <label class="form-control_label" for="confirmpassword">{{
-          'AUTHENTICATION.CONFIRM_PASSWORD' | translate | titlecase
-        }}</label>
-        <input
-          class="form-control_input"
-          type="password"
-          id="confirmpassword"
-          name="confirmpassword"
-          formControlName="confirmpassword"
-        />
-      </div>
-    </div>
-    <div class="form-links">
-      <a>{{ 'AUTHENTICATION.HAVE_ACCOUNT' | translate | titlecase }}</a>
-    </div>
-    <div class="form-links">
-      <app-ui-button
-        (onClick)="onClick.emit()"
-        [text]="'AUTHENTICATION.SIGN_IN' | translate | titlecase"
-        [scssClass]="scssClass.DARK"
-      ></app-ui-button>
-      <app-ui-button
-        [type]="'submit'"
-        [text]="'AUTHENTICATION.SIGN_UP' | translate | titlecase"
-        [scssClass]="scssClass.DEFAULT"
-      ></app-ui-button>
-    </div>
-  </form>
-</div>
+  </div>
+  <div class="form-links">
+    <a>{{ 'AUTHENTICATION.HAVE_ACCOUNT' | translate | titlecase }}</a>
+  </div>
+  <div class="form-links">
+    <app-ui-button
+      (onClick)="onClick.emit()"
+      [text]="'AUTHENTICATION.SIGN_IN' | translate | titlecase"
+      [scssClass]="scssClass.DARK"
+    ></app-ui-button>
+    <app-ui-button
+      [type]="'submit'"
+      [text]="'AUTHENTICATION.SIGN_UP' | translate | titlecase"
+      [scssClass]="scssClass.DEFAULT"
+    ></app-ui-button>
+  </div>
+</form>

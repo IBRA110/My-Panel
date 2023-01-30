@@ -1,14 +1,9 @@
 @import "src/app/core/mixins/fonts";
 
-.container{
+.form{
+  background-color: var(--backgorund-transparent-color);
   border: 2px solid var(--border-color);
   box-shadow: 0 0 40px var(--box-shadow-color);
-  padding-top: 30px;
-  height: 100%;
-
-
-}
-.form{
   display: flex;
   flex-direction: column;
   justify-content: center;
