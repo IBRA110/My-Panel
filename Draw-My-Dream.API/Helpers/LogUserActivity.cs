@@ -17,7 +17,7 @@ namespace API.Helpers
 
             string id = resultContext.HttpContext.User.FindFirst("UserName")?.Value;
             
-            IUserInterface repo = resultContext.HttpContext.RequestServices.GetService<IUserInterface>();
+            IUserBehaviour repo = resultContext.HttpContext.RequestServices.GetService<IUserBehaviour>();
 
             AppUserEntity user = await repo.GetUserByUsernameAsync(id);
 

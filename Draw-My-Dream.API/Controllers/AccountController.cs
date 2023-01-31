@@ -13,25 +13,22 @@ namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
-        private readonly IUserInterface _userRepository;
+        private readonly IUserBehaviour _userBehaviour;
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
-        private readonly IUserInterface _userInterface;
         
         public AccountController(
             DataContext context, 
             ITokenService tokenService, 
-            IUserInterface userRepository,
-            IMapper mapper,
-            IUserInterface userInterface
+            IUserBehaviour userBehaviour,
+            IMapper mapper
         )
         {
             _tokenService = tokenService;
             _context = context;
-            _userRepository = userRepository;
+            _userBehaviour = userBehaviour;
             _mapper = mapper;
-            _userInterface = userInterface;
         }
 
         [HttpPost("register")]
@@ -103,7 +100,7 @@ namespace API.Controllers
         [Authorize]
         public async Task<ActionResult<LoginResponseDTO>> Refresh(RefreshTokenDTO refreshToken)
         {
-            AppUserEntity user = await _userInterface.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
+            AppUserEntity user = await _userBehaviour.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
             if (user == null || refreshToken.RefreshToken != user.RefreshToken)
             {

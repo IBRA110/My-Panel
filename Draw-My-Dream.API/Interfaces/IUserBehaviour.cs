@@ -4,7 +4,7 @@ using API.Helpers;
 
 namespace API.Interfaces
 {
-    public interface IUserInterface
+    public interface IUserBehaviour
     {
         void Update(AppUserEntity user);
         Task<bool> SaveAllAsync();

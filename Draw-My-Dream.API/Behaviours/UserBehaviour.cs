@@ -9,7 +9,7 @@ using Core.Entities;
 
 namespace API.Behaviours
 {
-    public class UserBehaviour : IUserInterface
+    public class UserBehaviour : IUserBehaviour
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;

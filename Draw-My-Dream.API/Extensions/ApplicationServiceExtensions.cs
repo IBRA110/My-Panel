@@ -12,7 +12,8 @@ namespace API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IUserInterface, UserBehaviour>();
+            services.AddScoped<IUserBehaviour, UserBehaviour>();
+            services.AddScoped<IMessageBehaviour, MessageBehaviour>();
             services.AddScoped<LogUserActivity>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddDbContext<DataContext>(options => 
