@@ -35,7 +35,7 @@ namespace API.Controllers
             return Ok(users);
         }
         
-        [HttpGet("{username}")] 
+        [HttpGet("{username}")]
         public async Task<ActionResult<MemberDTO>> GetUserByUserName(string username)
         {
             return await _userBehaviour.GetMemberAsync(username);

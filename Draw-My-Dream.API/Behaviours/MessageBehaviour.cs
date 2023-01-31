@@ -11,7 +11,7 @@ namespace API.Behaviours
         private readonly DataContext _context;
         public MessageBehaviour(DataContext context)
         {
-            
+            _context = context;
         }
         public void AddMessage(MessageEntity message)
         {
@@ -38,9 +38,9 @@ namespace API.Behaviours
             throw new NotImplementedException();
         }
 
-        public Task<bool> SaveAllAsync()
+        public async Task<bool> SaveAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }
