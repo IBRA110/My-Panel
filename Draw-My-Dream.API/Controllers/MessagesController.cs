@@ -1,4 +1,6 @@
 using API.DTOs;
+using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Core.Entities;
@@ -54,6 +56,18 @@ namespace API.Controllers
 
 
             return BadRequest("Failed to send message");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<MessageDTO>>> GetMessageUser([FromQuery] MessageParams messageParams)
+        {
+            messageParams.UserName = User.FindFirst("UserName").Value;
+            
+            PagedList<MessageDTO> messages = await _messageBehaviour.GetMessagesForUser(messageParams);
+            
+            Response.AddPaginationHeader(messages.CurrentPage, messages.PageSize, messages.TotalCount, messages.TotalPages);
+
+            return messages;
         }
     }
 }
