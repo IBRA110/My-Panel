@@ -12,8 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title ="Draw-My-Dream", Version = "v1", });
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    string xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    string xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
 });
 
@@ -31,9 +31,10 @@ app.UseHttpsRedirection();
 
 app.UseSwagger();
 
-app.UseSwaggerUI(c =>
+app.UseSwaggerUI(opt =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestService");
+    opt.SwaggerEndpoint("/swagger/v1/swagger.json", "TestService");
+    opt.DefaultModelsExpandDepth(-1);
 });
 
 app.UseAuthentication();
