@@ -69,5 +69,47 @@ namespace API.Controllers
 
             return messages;
         }
+
+        [HttpGet("thread/{username}")]
+        public async Task<ActionResult<IEnumerable<MessageDTO>>> GetMessageThread(string username)
+        {
+            string currentUserName = User.FindFirst("UserName").Value;
+
+            return Ok(await _messageBehaviour.GetMessageThread(currentUserName, username));
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteMessage(Ulid id)
+        {
+            string userName = User.FindFirst("UserName").Value;
+            MessageEntity message = await _messageBehaviour.GetMessage(id);
+
+            if (message.Sender.UserName != userName && message.Recipient.UserName != userName)
+            {
+                return Unauthorized();
+            }
+
+            if (message.Sender.UserName == userName)
+            {
+                message.SenderDeleted = true;
+            }
+
+            if (message.Recipient.UserName == userName)
+            {
+                message.RecipientDeleted = true;
+            }
+            
+            if (message.SenderDeleted && message.RecipientDeleted)
+            {
+                _messageBehaviour.DeleteMessage(message);
+            }
+
+            if (await _messageBehaviour.SaveAllAsync())
+            {
+                return Ok();
+            }
+            
+            return BadRequest("Problem deleting the message");
+        }
     }
 }
