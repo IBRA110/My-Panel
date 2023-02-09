@@ -1,31 +1,34 @@
 using System.Security.Cryptography;
 using API.DTOs;
 using Core.Entities;
-using Infrastracture.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
         private readonly IUserBehaviour _userBehaviour;
-        private readonly DataContext _context;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
-        
+        private readonly UserManager<AppUserEntity> _userManager;
+        private readonly SignInManager<AppUserEntity> _signInManager;
         public AccountController(
-            DataContext context, 
+            UserManager<AppUserEntity> userManager,
+            SignInManager<AppUserEntity> signInManager,
             ITokenService tokenService, 
             IUserBehaviour userBehaviour,
             IMapper mapper
         )
         {
+            _signInManager = signInManager;
+            _userManager = userManager;
             _tokenService = tokenService;
-            _context = context;
             _userBehaviour = userBehaviour;
             _mapper = mapper;
         }
@@ -48,8 +51,12 @@ namespace API.Controllers
             
             user.UserName = registerDTO.Username;
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            IdentityResult result = await _userManager.CreateAsync(user, registerDTO.Password);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
              
             return new SuccessDTO
             {
@@ -61,18 +68,26 @@ namespace API.Controllers
         public async Task<ActionResult<LoginResponseDTO>> Login(LoginDTO loginDTO)
         {
 
-            AppUserEntity user = await _context.Users
+            AppUserEntity user = await _userManager.Users
+                    .Include(u => u.Images)
                     .SingleOrDefaultAsync(x => x.UserName.ToLower() == loginDTO.UserName.ToLower());
 
             if (user == null)
             {
-                throw new ArgumentException("User does not exist!");
+                return Unauthorized("User does not exist!");
             }
-            
+
+            SignInResult result = await _signInManager.CheckPasswordSignInAsync(user, loginDTO.Password, false);
+
+            if (!result.Succeeded)
+            {
+                return Unauthorized("password is wrong!");
+            }
+
             string refreshToken = _tokenService.CreateRefreshToken(user);
             
             user.RefreshToken = refreshToken;
-            await _context.SaveChangesAsync();
+            await _userBehaviour.SaveAllAsync();
 
             return new LoginResponseDTO
             {
@@ -93,7 +108,8 @@ namespace API.Controllers
             }
 
             user.RefreshToken = _tokenService.CreateRefreshToken(user);
-            await _context.SaveChangesAsync();
+
+            await _userBehaviour.SaveAllAsync();
             
             return new LoginResponseDTO
             {
@@ -103,12 +119,12 @@ namespace API.Controllers
         }
         private async Task<bool> UserExists(string username)
         {
-            return await _context.Users.AnyAsync(x => x.UserName.ToLower() == username.ToLower());
+            return await _userManager.Users.AnyAsync(x => x.UserName.ToLower() == username.ToLower());
         }
 
         private async Task<bool> EmailExists(string email)
         {
-            return await _context.Users.AnyAsync(x => x.Email == email);
+            return await _userManager.Users.AnyAsync(x => x.Email == email);
         }
     }
 }
