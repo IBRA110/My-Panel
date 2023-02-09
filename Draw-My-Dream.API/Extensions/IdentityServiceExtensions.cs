@@ -1,5 +1,8 @@
 using System.Text;
+using Core.Entities;
+using Infrastracture.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 namespace API.Extensions
@@ -8,6 +11,16 @@ namespace API.Extensions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
+            services.AddIdentityCore<AppUserEntity>(opt => 
+            {
+                opt.Password.RequireNonAlphanumeric = false;
+            })
+                .AddRoles<AppRoleEntity>()
+                .AddRoleManager<RoleManager<AppRoleEntity>>()
+                .AddSignInManager<SignInManager<AppUserEntity>>()
+                .AddRoleValidator<RoleValidator<AppRoleEntity>>()
+                .AddEntityFrameworkStores<DataContext>();
+            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
