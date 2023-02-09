@@ -44,11 +44,11 @@ namespace API.Behaviours
                     userParams.PageNumber, userParams.PageSize);
         }
 
-        public async Task<AppUserEntity> GetUserByIdAsync(Ulid id)
+        public async Task<AppUserEntity> GetUserByIdAsync(string id)
         {
             return await _context.Users
                 .Include(p => p.Images).ThenInclude(subItem => subItem.Likes)
-                .SingleOrDefaultAsync(x => x.UserId == id);
+                .SingleOrDefaultAsync(x => x.Id == id);
         }
         public async Task<AppUserEntity> GetUserByUsernameAsync(string username)
         {

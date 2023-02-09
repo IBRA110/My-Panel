@@ -18,20 +18,20 @@ namespace API.Controllers
         [HttpPut]
         public async Task<ActionResult> ToggleLike(ToggleLikeDTO toggleLikeDTO)
         {
-            AppUserEntity likedUser = await _userBehaviour.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
+            AppUserEntity likedUser = await _userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
             
             AppUserEntity imageOwner = await _userBehaviour.GetUserByIdAsync(toggleLikeDTO.ImageOwnerId);
             
             ImageEntity image = imageOwner.Images.FirstOrDefault(x => x.Id == toggleLikeDTO.ImageId);
            
-            ImageLikeEntity like = image.Likes.FirstOrDefault(x => x.LikedUserId == likedUser.UserId);
+            ImageLikeEntity like = image.Likes.FirstOrDefault(x => x.LikedUserId == likedUser.Id);
 
             if (like is null)
             {
                 like = new ImageLikeEntity
                 {
                     LikedImageId = image.Id,
-                    LikedUserId = likedUser.UserId
+                    LikedUserId = likedUser.Id
                 };
                 
                 image.Likes.Add(like);

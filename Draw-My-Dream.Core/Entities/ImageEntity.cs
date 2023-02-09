@@ -5,10 +5,10 @@ namespace Core.Entities
     [Table("Images")]
     public class ImageEntity
     {
-        public Ulid Id { get; set; } = Ulid.NewUlid();
+        public string Id { get; set; } = Ulid.NewUlid().ToString();
         public string Url { get; set; }
         public AppUserEntity AppUser { get; set; }
-        public Ulid AppUserId { get; set; }
+        public string AppUserId { get; set; }
         public bool IsMain { get; set; }
         public ICollection<ImageLikeEntity> Likes { get; set; }
     }

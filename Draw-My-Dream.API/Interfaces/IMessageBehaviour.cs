@@ -8,7 +8,7 @@ namespace API.Interfaces
     {
         void AddMessage(MessageEntity message);
         void DeleteMessage(MessageEntity message);
-        Task<MessageEntity> GetMessage(Ulid id);
+        Task<MessageEntity> GetMessage(string id);
         Task<PagedList<MessageDTO>> GetMessagesForUser(MessageParams messageParams);
         Task<IEnumerable<MessageDTO>> GetMessageThread(string currentUserName, string recipiendUserName);
         Task<bool> SaveAllAsync();

@@ -28,12 +28,12 @@ namespace API.Behaviours
             _context.Messages.Remove(message);
         }
 
-        public async Task<MessageEntity> GetMessage(Ulid id)
+        public async Task<MessageEntity> GetMessage(string id)
         {
             return await _context.Messages
                 .Include(u => u.Sender)
                 .Include(u => u.Recipient)
-                .SingleOrDefaultAsync(x => x.MessageId == id);
+                .SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<PagedList<MessageDTO>> GetMessagesForUser(MessageParams messageParams)

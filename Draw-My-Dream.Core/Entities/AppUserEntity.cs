@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Core.Entities
 {
-    public class AppUserEntity : IdentityUser<int>
+    public class AppUserEntity : IdentityUser<string>
     {
-        public Ulid UserId { get; set; } = Ulid.NewUlid();
+        public override string Id { get; set; } = Ulid.NewUlid().ToString();
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string RefreshToken { get; set; }

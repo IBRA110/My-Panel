@@ -25,7 +25,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<MessageDTO>> CreateMessage(CreateMessageDTO createMessageDTO)
         {
-            AppUserEntity sender = await _userBehaviour.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
+            AppUserEntity sender = await _userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
             
             if (sender.FirstName == createMessageDTO.RecipientUserName.ToLower())
             {
@@ -79,7 +79,7 @@ namespace API.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult> DeleteMessage(Ulid id)
+        public async Task<ActionResult> DeleteMessage(string id)
         {
             string userName = User.FindFirst("UserName").Value;
             MessageEntity message = await _messageBehaviour.GetMessage(id);
