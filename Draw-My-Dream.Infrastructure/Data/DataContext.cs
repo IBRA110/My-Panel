@@ -18,6 +18,7 @@ namespace Infrastracture.Data
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ImageLikeEntity>().HasKey(like => new { like.LikedUserId });
 
             modelBuilder.Entity<AppUserEntity>()
@@ -57,6 +58,13 @@ namespace Infrastracture.Data
                 {
                     modelBuilder.Entity(entityType.ClrType)
                         .Property<Ulid>(nameof(ImageEntity.AppUserId)).ValueGeneratedNever();
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property<Ulid>(nameof(ImageEntity.Id)).ValueGeneratedNever();
+                }
+                if (typeof(AppUserEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property<Ulid>(nameof(AppUserEntity.UserId)).ValueGeneratedNever();
                 }
                 if (typeof(MessageEntity).IsAssignableFrom(entityType.ClrType))
                 {
@@ -64,6 +72,8 @@ namespace Infrastracture.Data
                         .Property<Ulid>(nameof(MessageEntity.RecipientId)).ValueGeneratedNever();
                     modelBuilder.Entity(entityType.ClrType)
                         .Property<Ulid>(nameof(MessageEntity.SenderId)).ValueGeneratedNever();
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property<Ulid>(nameof(MessageEntity.MessageId)).ValueGeneratedNever();
                 }
 
                 // Convert Ulids to bytea when persisting

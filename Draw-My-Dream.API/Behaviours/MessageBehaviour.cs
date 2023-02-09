@@ -33,7 +33,7 @@ namespace API.Behaviours
             return await _context.Messages
                 .Include(u => u.Sender)
                 .Include(u => u.Recipient)
-                .SingleOrDefaultAsync(x => x.messageId == id);
+                .SingleOrDefaultAsync(x => x.MessageId == id);
         }
 
         public async Task<PagedList<MessageDTO>> GetMessagesForUser(MessageParams messageParams)

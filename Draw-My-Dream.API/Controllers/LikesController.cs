@@ -22,16 +22,16 @@ namespace API.Controllers
             
             AppUserEntity imageOwner = await _userBehaviour.GetUserByIdAsync(toggleLikeDTO.ImageOwnerId);
             
-            ImageEntity image = imageOwner.Images.FirstOrDefault(x => x.imageId == toggleLikeDTO.ImageId);
+            ImageEntity image = imageOwner.Images.FirstOrDefault(x => x.Id == toggleLikeDTO.ImageId);
            
-            ImageLikeEntity like = image.Likes.FirstOrDefault(x => x.LikedUserId == likedUser.userId);
+            ImageLikeEntity like = image.Likes.FirstOrDefault(x => x.LikedUserId == likedUser.UserId);
 
             if (like is null)
             {
                 like = new ImageLikeEntity
                 {
-                    LikedImageId = image.imageId,
-                    LikedUserId = likedUser.userId
+                    LikedImageId = image.Id,
+                    LikedUserId = likedUser.UserId
                 };
                 
                 image.Likes.Add(like);

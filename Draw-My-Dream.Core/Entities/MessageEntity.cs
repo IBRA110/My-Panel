@@ -3,7 +3,7 @@ namespace Core.Entities
     public class MessageEntity
     {
         public int Id { get; set; }
-        public Ulid messageId { get; set; } = Ulid.NewUlid();
+        public Ulid MessageId { get; set; } = Ulid.NewUlid();
         public Ulid SenderId { get; set; }
         public string SenderUserName { get; set; }
         public AppUserEntity Sender { get; set; }

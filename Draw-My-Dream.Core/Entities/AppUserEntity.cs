@@ -4,7 +4,7 @@ namespace Core.Entities
 {
     public class AppUserEntity : IdentityUser<int>
     {
-        public Ulid userId { get; set; } = Ulid.NewUlid();
+        public Ulid UserId { get; set; } = Ulid.NewUlid();
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string RefreshToken { get; set; }

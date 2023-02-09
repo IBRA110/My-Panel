@@ -48,7 +48,7 @@ namespace API.Behaviours
         {
             return await _context.Users
                 .Include(p => p.Images).ThenInclude(subItem => subItem.Likes)
-                .SingleOrDefaultAsync(x => x.userId == id);
+                .SingleOrDefaultAsync(x => x.UserId == id);
         }
         public async Task<AppUserEntity> GetUserByUsernameAsync(string username)
         {
