@@ -96,7 +96,7 @@ namespace API.Controllers
                
             AppUserEntity user = await _userBehaviour.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
-            ImageEntity image = user.Images.FirstOrDefault(x => x.Id == imageId);
+            ImageEntity image = user.Images.FirstOrDefault(x => x.imageId == imageId);
 
             if (image.IsMain)
             {
@@ -124,7 +124,7 @@ namespace API.Controllers
    
             AppUserEntity user = await _userBehaviour.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
-            ImageEntity image = user.Images.FirstOrDefault(x => x.Id == imageId);
+            ImageEntity image = user.Images.FirstOrDefault(x => x.imageId == imageId);
 
             if (image == null)
             {

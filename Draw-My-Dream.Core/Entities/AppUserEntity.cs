@@ -1,13 +1,12 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace Core.Entities
 {
-    public class AppUserEntity : BaseEntity
+    public class AppUserEntity : IdentityUser<int>
     {
-        public string UserName { get; set; }
+        public Ulid userId { get; set; } = Ulid.NewUlid();
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Email { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
         public string RefreshToken { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string KnownAs { get; set; }
@@ -21,5 +20,6 @@ namespace Core.Entities
         public ICollection<ImageEntity> Images { get; set; }
         public ICollection<MessageEntity> MessagesSent { get; set; }
         public ICollection<MessageEntity> MessagesRecevied { get; set; }
+        public ICollection<AppUserRoleEntity> UserRoles { get; set; }
     }
 }
