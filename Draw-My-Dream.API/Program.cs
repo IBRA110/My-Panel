@@ -1,6 +1,10 @@
 using System.Reflection;
 using API.Extensions;
+using Core.Entities;
+using Infrastracture.Data;
 using Infrastracture.Middleware;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -39,12 +43,28 @@ app.UseSwaggerUI(opt =>
 
 app.UseAuthentication();
 
-app.UseStaticFiles();
-
 app.UseAuthorization();
+
+app.UseStaticFiles();
 
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
 
 app.MapControllers();
+
+IServiceScope scope = app.Services.CreateScope();
+IServiceProvider services = scope.ServiceProvider;
+try
+{
+    DataContext context = services.GetRequiredService<DataContext>();
+    UserManager<AppUserEntity> userManager = services.GetRequiredService<UserManager<AppUserEntity>>();
+    RoleManager<AppRoleEntity> roleManager = services.GetRequiredService<RoleManager<AppRoleEntity>>();
+    await context.Database.MigrateAsync();
+    await Seed.SeedUsers(userManager, roleManager);
+}
+catch (Exception ex)
+{
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "An error occurred during migration");
+}
 
 app.Run("http://localhost:5000");
