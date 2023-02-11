@@ -9,7 +9,7 @@ using API.Extensions;
 
 namespace API.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class UsersController : BaseApiController
     {
         private readonly IUserBehaviour _userBehaviour;
