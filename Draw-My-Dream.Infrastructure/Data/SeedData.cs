@@ -6,8 +6,7 @@ namespace Infrastracture.Data
 {
     public class Seed
     {
-        public static async Task SeedUsers(UserManager<AppUserEntity> userManager, 
-            RoleManager<AppRoleEntity> roleManager)
+        public static async Task SeedUsers(UserManager<AppUserEntity> userManager, RoleManager<AppRoleEntity> roleManager)
         {
             if (await userManager.Users.AnyAsync())
             {
@@ -16,9 +15,9 @@ namespace Infrastracture.Data
 
             List<AppRoleEntity> roles = new List<AppRoleEntity>
             {
-                new AppRoleEntity { Name = "Member" },
                 new AppRoleEntity { Name = "Admin" },
                 new AppRoleEntity { Name = "Moderator" },
+                new AppRoleEntity { Name = "Member" },
             };
 
             foreach (var role in roles)

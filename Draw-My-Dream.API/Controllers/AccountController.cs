@@ -47,13 +47,19 @@ namespace API.Controllers
             
             AppUserEntity user = _mapper.Map<AppUserEntity>(registerDTO);
 
-            HMACSHA512 hmac = new HMACSHA512();
             
             user.UserName = registerDTO.Username;
 
             IdentityResult result = await _userManager.CreateAsync(user, registerDTO.Password);
 
             if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            IdentityResult roleResult = await _userManager.AddToRoleAsync(user, "Member");
+
+            if (!roleResult.Succeeded)
             {
                 return BadRequest(result.Errors);
             }
@@ -91,7 +97,7 @@ namespace API.Controllers
 
             return new LoginResponseDTO
             {
-                AccessToken = _tokenService.CreateAccessToken(user),
+                AccessToken = await _tokenService.CreateAccessToken(user),
                 RefreshToken = refreshToken
             };
         }
@@ -106,6 +112,7 @@ namespace API.Controllers
             {
                 throw new ArgumentException("Something went wrong!");
             }
+            
 
             user.RefreshToken = _tokenService.CreateRefreshToken(user);
 
@@ -113,7 +120,7 @@ namespace API.Controllers
             
             return new LoginResponseDTO
             {
-                AccessToken = _tokenService.CreateAccessToken(user),
+                AccessToken = await _tokenService.CreateAccessToken(user),
                 RefreshToken = user.RefreshToken
             };
         }
