@@ -20,7 +20,7 @@ namespace Infrastracture.Data
                 new AppRoleEntity { Name = "Member" },
             };
 
-            foreach (var role in roles)
+            foreach (AppRoleEntity role in roles)
             {
                 await roleManager.CreateAsync(role);
             }

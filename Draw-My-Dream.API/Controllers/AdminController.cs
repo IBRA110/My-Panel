@@ -33,6 +33,38 @@ namespace API.Controllers
             return Ok(users);
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpPost("edit-roles/{Id}")]
+        public async Task<ActionResult> EditRoles(string id, [FromQuery] string roles)
+        {
+            string[] selectedRoles = roles.Split(",").ToArray();
+
+            AppUserEntity user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return NotFound("Could not find user");
+            }
+            
+            IList<string> userRoles = await _userManager.GetRolesAsync(user);
+
+            IdentityResult result = await _userManager.AddToRolesAsync(user, selectedRoles.Except(userRoles));
+
+            if (!result.Succeeded)
+            {
+                return BadRequest("Failed to add to roles");
+            }
+
+            result = await _userManager.RemoveFromRolesAsync(user, userRoles.Except(selectedRoles));
+
+            if (!result.Succeeded)
+            {
+                return BadRequest("Failed to remove from roles");
+            }
+
+            return Ok(await _userManager.GetRolesAsync(user));
+        }
+
         [Authorize(Policy = "ModeratePhotoRole")]
         [HttpGet("photos-to-moderate")]
         public ActionResult GetPhotosForModeration()
