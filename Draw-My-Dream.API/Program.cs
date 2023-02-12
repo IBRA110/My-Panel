@@ -57,6 +57,7 @@ app.UseCors(x => x.AllowAnyHeader()
 
 app.MapControllers();
 app.MapHub<PresenceHub>("hubs/presence");
+app.MapHub<MessageHub>("hubs/message");
 
 IServiceScope scope = app.Services.CreateScope();
 IServiceProvider services = scope.ServiceProvider;
