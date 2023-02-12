@@ -1,5 +1,6 @@
 using System.Reflection;
 using API.Extensions;
+using API.SignalR;
 using Core.Entities;
 using Infrastracture.Data;
 using Infrastracture.Middleware;
@@ -27,6 +28,8 @@ builder.Services.AddIdentityServices(builder.Configuration);
 
 builder.Services.AddCors();
 
+builder.Services.AddSignalR();
+
 WebApplication app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
@@ -47,9 +50,13 @@ app.UseAuthorization();
 
 app.UseStaticFiles();
 
-app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+app.UseCors(x => x.AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials()
+    .WithOrigins("http://localhost:4200"));
 
 app.MapControllers();
+app.MapHub<PresenceHub>("hubs/presence");
 
 IServiceScope scope = app.Services.CreateScope();
 IServiceProvider services = scope.ServiceProvider;

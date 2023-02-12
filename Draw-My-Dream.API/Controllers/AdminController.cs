@@ -11,7 +11,7 @@ namespace API.Controllers
         private readonly UserManager<AppUserEntity> _userManager;
         public AdminController(UserManager<AppUserEntity> userManager)
         {
-            userManager = _userManager;
+            _userManager = userManager;
         }
 
         [Authorize(Policy = "RequireAdminRole")]
