@@ -54,7 +54,6 @@ namespace API.Controllers
                 return Ok(_mapper.Map<MessageDTO>(message));
             }
 
-
             return BadRequest("Failed to send message");
         }
 
