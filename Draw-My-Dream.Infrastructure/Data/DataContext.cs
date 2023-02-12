@@ -14,6 +14,8 @@ namespace Infrastracture.Data
 
         }
         public DbSet<MessageEntity> Messages { get; set; }
+        public DbSet<GroupEntity> Groups { get; set; }
+        public DbSet<ConnectionEntity> Connections { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

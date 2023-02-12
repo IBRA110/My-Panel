@@ -18,6 +18,29 @@ namespace API.Behaviours
             _context = context;
             _mapper = mapper;
         }
+
+        public void AddGroup(GroupEntity group)
+        {
+            _context.Groups.Add(group);
+        }
+
+        public void RemoveConnection(ConnectionEntity connection)
+        {
+            _context.Connections.Remove(connection);
+        }
+
+        public async Task<ConnectionEntity> GetConnection(string connectionId)
+        {
+            return await _context.Connections.FindAsync(connectionId);
+        }
+
+        public async Task<GroupEntity> GetMessageGroup(string groupName)
+        {
+            return await _context.Groups
+                .Include(x => x.Connections)
+                .FirstOrDefaultAsync(x => x.Name == groupName);
+        }
+
         public void AddMessage(MessageEntity message)
         {
             _context.Messages.Add(message);

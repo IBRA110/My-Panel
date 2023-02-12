@@ -6,6 +6,10 @@ namespace API.Interfaces
 {
     public interface IMessageBehaviour
     {
+        void AddGroup(GroupEntity group);
+        void RemoveConnection(ConnectionEntity connection);
+        Task<ConnectionEntity> GetConnection(string connectionId);
+        Task<GroupEntity> GetMessageGroup(string groupName);
         void AddMessage(MessageEntity message);
         void DeleteMessage(MessageEntity message);
         Task<MessageEntity> GetMessage(string id);
