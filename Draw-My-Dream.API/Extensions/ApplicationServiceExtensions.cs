@@ -4,6 +4,7 @@ using API.Interfaces;
 using Infrastracture.Data;
 using API.Services;
 using API.Behaviours;
+using API.SignalR;
 
 namespace API.Extensions
 {
@@ -11,6 +12,7 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+            services.AddSingleton<PresenceTracker>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserBehaviour, UserBehaviour>();
             services.AddScoped<IMessageBehaviour, MessageBehaviour>();
