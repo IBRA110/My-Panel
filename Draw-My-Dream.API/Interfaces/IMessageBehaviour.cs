@@ -10,6 +10,7 @@ namespace API.Interfaces
         void RemoveConnection(ConnectionEntity connection);
         Task<ConnectionEntity> GetConnection(string connectionId);
         Task<GroupEntity> GetMessageGroup(string groupName);
+        Task<GroupEntity> GetGroupForConnection(string connectionId);
         void AddMessage(MessageEntity message);
         void DeleteMessage(MessageEntity message);
         Task<MessageEntity> GetMessage(string id);

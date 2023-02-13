@@ -113,5 +113,13 @@ namespace API.Behaviours
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<GroupEntity> GetGroupForConnection(string connectionId)
+        {
+            return await _context.Groups
+                .Include(c => c.Connections)
+                .Where(c => c.Connections.Any(x => x.ConnectionId == connectionId))
+                .FirstOrDefaultAsync();
+        }
     }
 }
