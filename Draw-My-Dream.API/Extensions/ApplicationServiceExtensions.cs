@@ -14,8 +14,7 @@ namespace API.Extensions
         {
             services.AddSingleton<PresenceTracker>();
             services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IUserBehaviour, UserBehaviour>();
-            services.AddScoped<IMessageBehaviour, MessageBehaviour>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<LogUserActivity>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddDbContext<DataContext>(options => 

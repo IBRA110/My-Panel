@@ -109,10 +109,6 @@ namespace API.Behaviours
             return _mapper.Map<IEnumerable<MessageDTO>>(messages);
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
 
         public async Task<GroupEntity> GetGroupForConnection(string connectionId)
         {

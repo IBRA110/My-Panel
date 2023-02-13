@@ -22,41 +22,6 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<MessageDTO>> CreateMessage(CreateMessageDTO createMessageDTO)
-        {
-            AppUserEntity sender = await _userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
-            
-            if (sender.FirstName == createMessageDTO.RecipientUserName.ToLower())
-            {
-                return BadRequest("You cannot send messages to yourself");
-            }
-            
-            AppUserEntity recipient = await _userBehaviour.GetUserByUsernameAsync(createMessageDTO.RecipientUserName);
-            
-            if (recipient == null)
-            {
-                return NotFound();
-            }
-            MessageEntity message = new MessageEntity
-            {
-                Sender = sender,
-                Recipient = recipient,
-                SenderUserName = sender.UserName,
-                RecipientUserName = recipient.UserName,
-                Content = createMessageDTO.Content
-            };
-
-            _messageBehaviour.AddMessage(message);
-
-            if (await _messageBehaviour.SaveAllAsync()) 
-            {
-                return Ok(_mapper.Map<MessageDTO>(message));
-            }
-
-            return BadRequest("Failed to send message");
-        }
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MessageDTO>>> GetMessageUser([FromQuery] MessageParams messageParams)
         {
