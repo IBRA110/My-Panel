@@ -23,10 +23,10 @@ namespace API.SignalR
             HttpContext httpContext = Context.GetHttpContext();
 
             string otherUser = httpContext.Request.Query["user"].ToString();
-
             string groupName = GetGroupName(Context.User.FindFirst("UserName")?.Value, otherUser);
 
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+            await AddToGroup(Context, groupName);
 
             IEnumerable<MessageDTO> messages = await _messageBehaviour.GetMessageThread(Context.User.FindFirst("UserName")?.Value, otherUser);
 
@@ -36,6 +36,8 @@ namespace API.SignalR
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
+            await RemoveFromMessageGroup(Context.ConnectionId);
+
             await base.OnDisconnectedAsync(exception);
         }
 
@@ -63,14 +65,45 @@ namespace API.SignalR
                 RecipientUserName = recipient.UserName,
                 Content = createMessageDTO.Content
             };
- 
+
+            string groupName = GetGroupName(sender.UserName, recipient.UserName);
+    
+            GroupEntity group = await _messageBehaviour.GetMessageGroup(groupName);
+
+            if (group.Connections.Any(x => x.UserName == recipient.UserName))
+            {
+                message.DateRead = DateTime.UtcNow;
+            }
+
             _messageBehaviour.AddMessage(message);
 
             if (await _messageBehaviour.SaveAllAsync()) 
-            {
-                string group = GetGroupName(sender.UserName, recipient.UserName);
-                await Clients.Group(group).SendAsync("NewMessage", _mapper.Map<MessageDTO>(message));
+            {                
+                await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageDTO>(message));
             }
+        }
+
+        private async Task<bool> AddToGroup(HubCallerContext context, string groupName)
+        {
+            GroupEntity group = await _messageBehaviour.GetMessageGroup(groupName);
+            ConnectionEntity connection = new ConnectionEntity(Context.ConnectionId, Context.User.FindFirst("UserName").Value);
+
+            if (group == null)
+            {
+                group = new GroupEntity(groupName);
+                _messageBehaviour.AddGroup(group);
+            }
+
+            group.Connections.Add(connection);
+
+            return await _messageBehaviour.SaveAllAsync();
+        }
+
+        private async Task RemoveFromMessageGroup(string connectionId)
+        {
+            ConnectionEntity connection = await _messageBehaviour.GetConnection(connectionId);
+            _messageBehaviour.RemoveConnection(connection);
+            await _messageBehaviour.SaveAllAsync();
         }
 
         private string GetGroupName(string caller, string other)
