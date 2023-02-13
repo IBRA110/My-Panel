@@ -5,8 +5,7 @@ namespace Core.Entities
     public class ConnectionEntity
     {
         public ConnectionEntity()
-        {
-            
+        {         
         }
         public ConnectionEntity(string connectionId, string userName)
         {

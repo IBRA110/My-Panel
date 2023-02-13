@@ -6,7 +6,6 @@ namespace Core.Entities
     {
         public GroupEntity()
         {
-             
         }
         public GroupEntity(string name)
         {
