@@ -12,23 +12,23 @@ namespace API.Controllers
     [Authorize]
     public class UsersController : BaseApiController
     {
-        private readonly IUserBehaviour _userBehaviour;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public UsersController(IUserBehaviour userBehaviour, IMapper mapper)
+        public UsersController(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _userBehaviour = userBehaviour;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet()]
         public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery]UserParams userParams)
         {   
 
-            AppUserEntity user = await _userBehaviour.GetUserByUsernameAsync(User.FindFirst("UserName")?.Value);
+            AppUserEntity user = await _unitOfWork.userBehaviour.GetUserByUsernameAsync(User.FindFirst("UserName")?.Value);
 
             userParams.CurrentUsername = user.UserName;
             
-            PagedList<MemberDTO> users = await _userBehaviour.GetMembersAsync(userParams);
+            PagedList<MemberDTO> users = await _unitOfWork.userBehaviour.GetMembersAsync(userParams);
             
             Response.AddPaginationHeader(users.CurrentPage, 
                 users.PageSize, users.TotalCount, users.TotalPages);
@@ -38,20 +38,20 @@ namespace API.Controllers
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDTO>> GetUserByUserName(string username)
         {
-            return await _userBehaviour.GetMemberAsync(username);
+            return await _unitOfWork.userBehaviour.GetMemberAsync(username);
         }
 
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDTO memberUpdateDTO)
         {
    
-            AppUserEntity user = await _userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity user = await _unitOfWork.userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
 
             _mapper.Map(memberUpdateDTO, user);
 
-            _userBehaviour.Update(user);
+            _unitOfWork.userBehaviour.Update(user);
 
-            if (await _userBehaviour.SaveAllAsync())
+            if (await _unitOfWork.Complete())
             {
                 return NoContent();
             } 
@@ -63,7 +63,7 @@ namespace API.Controllers
         public async Task<ActionResult> AddPhoto([FromForm]IFormFile file)
         {
    
-            AppUserEntity user = await _userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity user = await _unitOfWork.userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
 
             string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
 
@@ -79,7 +79,7 @@ namespace API.Controllers
 
             user.Images.Add(photo);
 
-            if (await _userBehaviour.SaveAllAsync())
+            if (await _unitOfWork.Complete())
             {
                 string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", uniqueFileName);
                 file.CopyTo(new FileStream(imagePath, FileMode.Create));
@@ -94,7 +94,7 @@ namespace API.Controllers
         public async Task<ActionResult> SetMainPhoto(string imageId)
         {
                
-            AppUserEntity user = await _userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity user = await _unitOfWork.userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
 
             ImageEntity image = user.Images.FirstOrDefault(x => x.Id == imageId);
 
@@ -111,7 +111,7 @@ namespace API.Controllers
             }
             image.IsMain = true;
 
-            if (await _userBehaviour.SaveAllAsync())
+            if (await _unitOfWork.Complete())
             { 
                 return NoContent();
             }
@@ -122,7 +122,7 @@ namespace API.Controllers
         public async Task<ActionResult> DeletePhoto(string imageId)
         {
    
-            AppUserEntity user = await _userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity user = await _unitOfWork.userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
 
             ImageEntity image = user.Images.FirstOrDefault(x => x.Id == imageId);
 
@@ -140,7 +140,7 @@ namespace API.Controllers
             
             user.Images.Remove(image);
 
-            if (await _userBehaviour.SaveAllAsync())
+            if (await _unitOfWork.Complete())
             {
                 return Ok();
             }

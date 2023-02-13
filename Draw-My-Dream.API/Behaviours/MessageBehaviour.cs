@@ -95,16 +95,7 @@ namespace API.Behaviours
             
             List<MessageEntity> unreadMessages = messages.Where(m => m.DateRead == null 
                 && m.Recipient.UserName == currentUserName).ToList();
-            
-            if (unreadMessages.Any())
-            {
-                foreach (var message in unreadMessages)
-                {
-                    message.DateRead = DateTime.UtcNow;
-                }
-
-                await _context.SaveChangesAsync();
-            }
+        
 
             return _mapper.Map<IEnumerable<MessageDTO>>(messages);
         }

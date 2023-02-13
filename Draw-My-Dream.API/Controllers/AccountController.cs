@@ -12,7 +12,7 @@ namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
-        private readonly IUserBehaviour _userBehaviour;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
         private readonly UserManager<AppUserEntity> _userManager;
@@ -20,15 +20,15 @@ namespace API.Controllers
         public AccountController(
             UserManager<AppUserEntity> userManager,
             SignInManager<AppUserEntity> signInManager,
-            ITokenService tokenService, 
-            IUserBehaviour userBehaviour,
-            IMapper mapper
+            ITokenService tokenService,
+            IMapper mapper,
+            IUnitOfWork unitOfWork
         )
         {
+            _unitOfWork = unitOfWork; 
             _signInManager = signInManager;
             _userManager = userManager;
             _tokenService = tokenService;
-            _userBehaviour = userBehaviour;
             _mapper = mapper;
         }
 
@@ -92,7 +92,7 @@ namespace API.Controllers
             string refreshToken = _tokenService.CreateRefreshToken(user);
             
             user.RefreshToken = refreshToken;
-            await _userBehaviour.SaveAllAsync();
+            await _unitOfWork.Complete();
 
             return new LoginResponseDTO
             {
@@ -105,7 +105,7 @@ namespace API.Controllers
         [Authorize]
         public async Task<ActionResult<LoginResponseDTO>> Refresh(RefreshTokenDTO refreshToken)
         {
-            AppUserEntity user = await _userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity user = await _unitOfWork.userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
 
             if (user == null || refreshToken.RefreshToken != user.RefreshToken)
             {
@@ -115,7 +115,7 @@ namespace API.Controllers
 
             user.RefreshToken = _tokenService.CreateRefreshToken(user);
 
-            await _userBehaviour.SaveAllAsync();
+            await _unitOfWork.Complete();
             
             return new LoginResponseDTO
             {

@@ -9,18 +9,17 @@ namespace API.Controllers
     [Authorize]
     public class LikesController : BaseApiController
     {
-        private readonly IUserBehaviour _userBehaviour;
-        
-        public LikesController(IUserBehaviour userBehaviour)
+        private readonly IUnitOfWork _unitOfWork;
+        public LikesController(IUnitOfWork unitOfWork)
         {
-            _userBehaviour = userBehaviour;
+            _unitOfWork = unitOfWork;
         }
         [HttpPut]
         public async Task<ActionResult> ToggleLike(ToggleLikeDTO toggleLikeDTO)
         {
-            AppUserEntity likedUser = await _userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity likedUser = await _unitOfWork.userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
             
-            AppUserEntity imageOwner = await _userBehaviour.GetUserByIdAsync(toggleLikeDTO.ImageOwnerId);
+            AppUserEntity imageOwner = await _unitOfWork.userBehaviour.GetUserByIdAsync(toggleLikeDTO.ImageOwnerId);
             
             ImageEntity image = imageOwner.Images.FirstOrDefault(x => x.Id == toggleLikeDTO.ImageId);
            
@@ -36,7 +35,7 @@ namespace API.Controllers
                 
                 image.Likes.Add(like);
                 
-                if (await _userBehaviour.SaveAllAsync())
+                if (await _unitOfWork.Complete())
                 { 
                     return Ok("Liked");
                 }
@@ -44,7 +43,7 @@ namespace API.Controllers
             }
             
             image.Likes.Remove(like);
-            if (await _userBehaviour.SaveAllAsync())
+            if (await _unitOfWork.Complete())
             { 
                 return Ok("Unliked");
             }

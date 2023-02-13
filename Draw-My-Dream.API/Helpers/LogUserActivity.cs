@@ -17,12 +17,12 @@ namespace API.Helpers
 
             string id = resultContext.HttpContext.User.FindFirst("UserName")?.Value;
             
-            IUserBehaviour repo = resultContext.HttpContext.RequestServices.GetService<IUserBehaviour>();
+            IUnitOfWork uow = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();
 
-            AppUserEntity user = await repo.GetUserByUsernameAsync(id);
+            AppUserEntity user = await uow.userBehaviour.GetUserByUsernameAsync(id);
 
-            user.LastActive = DateTime.Now;
-            await repo.SaveAllAsync();
+            user.LastActive = DateTime.UtcNow;
+            await uow.Complete();
 
         }
     }

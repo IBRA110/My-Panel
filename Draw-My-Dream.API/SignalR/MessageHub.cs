@@ -8,16 +8,14 @@ namespace API.SignalR
 {
     public class MessageHub : Hub
     {
-        private readonly IMessageBehaviour _messageBehaviour;
+        
         private readonly IMapper _mapper;
-        private readonly IUserBehaviour _userBehaviour;
+        private IUnitOfWork _unitOfWork;
         private readonly IHubContext<PresenceHub> _presenceHub;
         private readonly PresenceTracker _tracker;
-        public MessageHub(IMessageBehaviour messageBehaviour, IMapper mapper, 
-            IUserBehaviour userBehaviour, IHubContext<PresenceHub> presenceHub, PresenceTracker tracker)
+        public MessageHub(IUnitOfWork unitOfWork, IMapper mapper, IHubContext<PresenceHub> presenceHub, PresenceTracker tracker)
         {
-            _messageBehaviour = messageBehaviour;
-            _userBehaviour = userBehaviour;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _presenceHub = presenceHub;
             _tracker = tracker;
@@ -26,17 +24,24 @@ namespace API.SignalR
         public override async Task OnConnectedAsync()
         {
             HttpContext httpContext = Context.GetHttpContext();
-
+            
+            string user = Context.User.FindFirst("UserName")?.Value;
+            
             string otherUser = httpContext.Request.Query["user"].ToString();
-            string groupName = GetGroupName(Context.User.FindFirst("UserName")?.Value, otherUser);
+            string groupName = GetGroupName(user, otherUser);
 
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
             GroupEntity group = await AddToGroup(groupName);
 
             await Clients.Group(groupName).SendAsync("UpdatedGroup", group);
 
-            IEnumerable<MessageDTO> messages = await _messageBehaviour.GetMessageThread(Context.User.FindFirst("UserName")?.Value, otherUser);
+            IEnumerable<MessageDTO> messages = await _unitOfWork.messageBehaviour.GetMessageThread(user, otherUser);
 
+            if (_unitOfWork.HasChanges())
+            {
+                await _unitOfWork.Complete();
+            }
+            
             await Clients.Caller.SendAsync("ReceiveMessageThread", messages);
 
         }
@@ -51,14 +56,14 @@ namespace API.SignalR
 
         public async Task SendMessage(CreateMessageDTO createMessageDTO)
         {
-            AppUserEntity sender = await _userBehaviour.GetUserByIdAsync(Context.User.FindFirst("Id").Value);
+            AppUserEntity sender = await _unitOfWork.userBehaviour.GetUserByIdAsync(Context.User.FindFirst("Id").Value);
             
             if (sender.FirstName == createMessageDTO.RecipientUserName.ToLower())
             {
                 throw new HubException("You cannot send messages to yourself");
             }
             
-            AppUserEntity recipient = await _userBehaviour.GetUserByUsernameAsync(createMessageDTO.RecipientUserName);
+            AppUserEntity recipient = await _unitOfWork.userBehaviour.GetUserByUsernameAsync(createMessageDTO.RecipientUserName);
             
             if (recipient == null)
             {
@@ -76,7 +81,7 @@ namespace API.SignalR
 
             string groupName = GetGroupName(sender.UserName, recipient.UserName);
     
-            GroupEntity group = await _messageBehaviour.GetMessageGroup(groupName);
+            GroupEntity group = await _unitOfWork.messageBehaviour.GetMessageGroup(groupName);
 
             if (group.Connections.Any(x => x.UserName == recipient.UserName))
             {
@@ -92,9 +97,9 @@ namespace API.SignalR
                 }
             }
 
-            _messageBehaviour.AddMessage(message);
+            _unitOfWork.messageBehaviour.AddMessage(message);
 
-            if (await _messageBehaviour.SaveAllAsync()) 
+            if (await _unitOfWork.Complete()) 
             {                
                 await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageDTO>(message));
             }
@@ -102,18 +107,18 @@ namespace API.SignalR
 
         private async Task<GroupEntity> AddToGroup(string groupName)
         {
-            GroupEntity group = await _messageBehaviour.GetMessageGroup(groupName);
+            GroupEntity group = await _unitOfWork.messageBehaviour.GetMessageGroup(groupName);
             ConnectionEntity connection = new ConnectionEntity(Context.ConnectionId, Context.User.FindFirst("UserName").Value);
 
             if (group == null)
             {
                 group = new GroupEntity(groupName);
-                _messageBehaviour.AddGroup(group);
+                _unitOfWork.messageBehaviour.AddGroup(group);
             }
 
             group.Connections.Add(connection);
 
-            if (await _messageBehaviour.SaveAllAsync())
+            if (await _unitOfWork.Complete())
             {
                 return group;
             }
@@ -123,10 +128,10 @@ namespace API.SignalR
 
         private async Task<GroupEntity> RemoveFromMessageGroup()
         {
-            GroupEntity group = await _messageBehaviour.GetGroupForConnection(Context.ConnectionId);
+            GroupEntity group = await _unitOfWork.messageBehaviour.GetGroupForConnection(Context.ConnectionId);
             ConnectionEntity connection = group.Connections.FirstOrDefault(x => x.ConnectionId == Context.ConnectionId);
-            _messageBehaviour.RemoveConnection(connection);
-            if (await _messageBehaviour.SaveAllAsync())
+            _unitOfWork.messageBehaviour.RemoveConnection(connection);
+            if (await _unitOfWork.Complete())
             {
                 return group;
             }

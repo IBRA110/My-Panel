@@ -2,7 +2,6 @@ using API.DTOs;
 using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
-using AutoMapper;
 using Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,14 +11,10 @@ namespace API.Controllers
     [Authorize]
     public class MessagesController : BaseApiController
     {
-        private readonly IUserBehaviour _userBehaviour;
-        private readonly IMessageBehaviour _messageBehaviour;
-        private readonly IMapper _mapper;
-        public MessagesController(IUserBehaviour userBehaviour, IMessageBehaviour messageBehaviour, IMapper mapper)
+        private readonly IUnitOfWork _unitOfWork;
+        public MessagesController(IUnitOfWork unitOfWork)
         {
-            _userBehaviour = userBehaviour;
-            _messageBehaviour = messageBehaviour;
-            _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
@@ -27,26 +22,18 @@ namespace API.Controllers
         {
             messageParams.UserName = User.FindFirst("UserName").Value;
             
-            PagedList<MessageDTO> messages = await _messageBehaviour.GetMessagesForUser(messageParams);
+            PagedList<MessageDTO> messages = await _unitOfWork.messageBehaviour.GetMessagesForUser(messageParams);
             
             Response.AddPaginationHeader(messages.CurrentPage, messages.PageSize, messages.TotalCount, messages.TotalPages);
 
             return messages;
         }
 
-        [HttpGet("thread/{username}")]
-        public async Task<ActionResult<IEnumerable<MessageDTO>>> GetMessageThread(string username)
-        {
-            string currentUserName = User.FindFirst("UserName").Value;
-
-            return Ok(await _messageBehaviour.GetMessageThread(currentUserName, username));
-        }
-
         [HttpDelete]
         public async Task<ActionResult> DeleteMessage(string id)
         {
             string userName = User.FindFirst("UserName").Value;
-            MessageEntity message = await _messageBehaviour.GetMessage(id);
+            MessageEntity message = await _unitOfWork.messageBehaviour.GetMessage(id);
 
             if (message.Sender.UserName != userName && message.Recipient.UserName != userName)
             {
@@ -65,10 +52,10 @@ namespace API.Controllers
             
             if (message.SenderDeleted && message.RecipientDeleted)
             {
-                _messageBehaviour.DeleteMessage(message);
+                _unitOfWork.messageBehaviour.DeleteMessage(message);
             }
 
-            if (await _messageBehaviour.SaveAllAsync())
+            if (await _unitOfWork.Complete())
             {
                 return Ok();
             }
