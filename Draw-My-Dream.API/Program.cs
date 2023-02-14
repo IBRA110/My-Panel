@@ -1,5 +1,6 @@
 using System.Reflection;
 using API.Extensions;
+using API.GraphQL;
 using API.SignalR;
 using Core.Entities;
 using Infrastracture.Data;
@@ -11,6 +12,7 @@ using Microsoft.OpenApi.Models;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddGraphQLServer().AddQueryType<Queries>();
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -18,7 +20,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title ="Draw-My-Dream", Version = "v1", });
     string xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    string xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    string xmlPath = System.IO.Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
 });
 
@@ -55,9 +57,12 @@ app.UseCors(x => x.AllowAnyHeader()
     .AllowCredentials()
     .WithOrigins("http://localhost:4200"));
 
+
 app.MapControllers();
 app.MapHub<PresenceHub>("hubs/presence");
 app.MapHub<MessageHub>("hubs/message");
+app.MapGraphQL("/graphql");
+
 
 IServiceScope scope = app.Services.CreateScope();
 IServiceProvider services = scope.ServiceProvider;

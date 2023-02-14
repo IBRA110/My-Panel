@@ -81,7 +81,7 @@ namespace API.Controllers
 
             if (await _unitOfWork.Complete())
             {
-                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", uniqueFileName);
+                string imagePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", uniqueFileName);
                 file.CopyTo(new FileStream(imagePath, FileMode.Create));
 
                 return Ok("Upload Success!");
