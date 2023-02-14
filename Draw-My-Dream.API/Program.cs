@@ -12,7 +12,13 @@ using Microsoft.OpenApi.Models;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddGraphQLServer().AddQueryType<Queries>();
+builder.Services
+    .AddGraphQLServer()
+    .AddQueryType<UsersQueries>()
+    .AddMutationType<AccountMutations>()
+    .AddProjections()
+    .AddFiltering()
+    .AddSorting();
 
 builder.Services.AddEndpointsApiExplorer();
 
