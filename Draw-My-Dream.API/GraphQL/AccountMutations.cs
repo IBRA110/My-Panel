@@ -3,6 +3,9 @@ using API.Interfaces;
 using AutoMapper;
 using Core.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace API.GraphQL
 {
@@ -15,7 +18,7 @@ namespace API.GraphQL
             RegisterDTO registerDTO)
         {
             
-            if (await unitOfWork.UserExists(registerDTO.Username))
+            if (await unitOfWork.UserExists(registerDTO.UserName))
             {
                 throw new GraphQLException("Username is already taken");
             }
@@ -26,7 +29,7 @@ namespace API.GraphQL
             
             AppUserEntity user = mapper.Map<AppUserEntity>(registerDTO);
             
-            user.UserName = registerDTO.Username;
+            user.UserName = registerDTO.UserName;
 
             IdentityResult result = await userManager.CreateAsync(user, registerDTO.Password);
 
@@ -47,6 +50,41 @@ namespace API.GraphQL
             return new SuccessDTO
             {
                 Message = "Registration Successful"
+            };
+        }
+        
+        public async Task<LoginResponseDTO> Login(
+            [Service]IUnitOfWork unitOfWork,
+            [Service]UserManager<AppUserEntity> userManager,
+            [Service]SignInManager<AppUserEntity> signInManager,
+            [Service]ITokenService tokenService,
+            LoginDTO loginDTO)
+        {
+            AppUserEntity user = await userManager.Users
+                    .Include(u => u.Images)
+                    .SingleOrDefaultAsync(x => x.UserName.ToLower() == loginDTO.UserName.ToLower());
+
+            if (user == null)
+            {
+                throw new GraphQLException("User does not exist!");
+            }
+
+            SignInResult result = await signInManager.CheckPasswordSignInAsync(user, loginDTO.Password, false);
+
+            if (!result.Succeeded)
+            {
+                throw new GraphQLException("password is wrong!");
+            }
+
+            string refreshToken = tokenService.CreateRefreshToken(user);
+            
+            user.RefreshToken = refreshToken;
+            await unitOfWork.Complete();
+
+            return new LoginResponseDTO
+            {
+                AccessToken = await tokenService.CreateAccessToken(user),
+                RefreshToken = refreshToken
             };
         }
     }

@@ -35,7 +35,7 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<SuccessDTO>> Register(RegisterDTO registerDTO)
         {
-            if (await UserExists(registerDTO.Username))
+            if (await UserExists(registerDTO.UserName))
             {
                 throw new Exception("Username is already taken");
             }
@@ -47,7 +47,7 @@ namespace API.Controllers
             AppUserEntity user = _mapper.Map<AppUserEntity>(registerDTO);
 
             
-            user.UserName = registerDTO.Username;
+            user.UserName = registerDTO.UserName;
 
             IdentityResult result = await _userManager.CreateAsync(user, registerDTO.Password);
 
@@ -72,7 +72,6 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<LoginResponseDTO>> Login(LoginDTO loginDTO)
         {
-
             AppUserEntity user = await _userManager.Users
                     .Include(u => u.Images)
                     .SingleOrDefaultAsync(x => x.UserName.ToLower() == loginDTO.UserName.ToLower());
