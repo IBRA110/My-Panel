@@ -1,6 +1,9 @@
 using API.Interfaces;
 using AutoMapper;
+using Core.Entities;
 using Infrastracture.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Behaviours
 {
@@ -8,10 +11,12 @@ namespace API.Behaviours
     {
         private readonly IMapper _mapper;
         private readonly DataContext _context;
-        public UnitOfWork(DataContext context, IMapper mapper)
+        private readonly UserManager<AppUserEntity> _userManager;
+        public UnitOfWork(DataContext context, IMapper mapper, UserManager<AppUserEntity> userManager)
         {
             _mapper = mapper;
             _context = context;
+            _userManager = userManager;
 
         }
         public IUserBehaviour userBehaviour => new UserBehaviour(_context, _mapper);
@@ -26,6 +31,15 @@ namespace API.Behaviours
         public bool HasChanges()
         {
             return _context.ChangeTracker.HasChanges();
+        }
+        public async Task<bool> UserExists(string username)
+        {
+            return await _userManager.Users.AnyAsync(x => x.UserName.ToLower() == username.ToLower());
+        }
+
+        public async Task<bool> EmailExists(string email)
+        {
+            return await _userManager.Users.AnyAsync(x => x.Email == email);
         }
     }
 }
