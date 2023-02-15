@@ -7,12 +7,6 @@ namespace API.GraphQL
 {
     public class UsersQueries
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public UsersQueries(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         [UseProjection]
         [UseFiltering()]
         [UseSorting()]

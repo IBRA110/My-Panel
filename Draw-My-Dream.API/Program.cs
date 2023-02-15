@@ -12,11 +12,13 @@ using Microsoft.OpenApi.Models;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<UsersQueries>()
     .AddMutationType<AccountMutations>()
     .AddProjections()
+    .AddAuthorization()
     .AddFiltering()
     .AddSorting();
 
@@ -38,6 +40,7 @@ builder.Services.AddCors();
 
 builder.Services.AddSignalR();
 
+
 WebApplication app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
@@ -57,6 +60,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseStaticFiles();
+
+app.UseRouting();
 
 app.UseCors(x => x.AllowAnyHeader()
     .AllowAnyMethod()
