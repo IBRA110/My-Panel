@@ -96,18 +96,14 @@ namespace API.GraphQL
             ClaimsPrincipal claimsPrincipal,
             RefreshTokenDTO refreshToken)
         {
-            Console.WriteLine(claimsPrincipal.FindFirst("Id").Value);
+            
             AppUserEntity user = await unitOfWork.userBehaviour.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
 
             if (user == null || refreshToken.RefreshToken != user.RefreshToken)
             {
-                Console.WriteLine(refreshToken.RefreshToken);
-                Console.WriteLine(user.RefreshToken);
-                Console.WriteLine(user.UserName);
                 throw new ArgumentException("Something went wrong!");
             }
-            Console.WriteLine(user.Email, "3");
-            Console.WriteLine("2", user.UserName);
+
             user.RefreshToken = tokenService.CreateRefreshToken(user);
 
             await unitOfWork.Complete();
