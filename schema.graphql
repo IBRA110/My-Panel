@@ -1,0 +1,343 @@
+schema {
+  query: UsersQueries
+  mutation: AccountMutations
+}
+
+"""
+The `@specifiedBy` directive is used within the type system definition language
+to provide a URL for specifying the behavior of custom scalar definitions.
+"""
+directive @specifiedBy(
+  """
+  The specifiedBy URL points to a human-readable specification. This field will only read a result for scalar types.
+  """
+  url: String!
+) on SCALAR
+
+type AccountMutations {
+  registration(userName: String, email: String, password: String): SuccessDTO
+  login(login: LoginDTOInput): LoginResponseDTO
+  refresh(refreshToken: RefreshTokenDTOInput): LoginResponseDTO
+}
+
+enum ApplyPolicy {
+  BEFORE_RESOLVER
+  AFTER_RESOLVER
+  VALIDATION
+}
+
+type AppRoleEntity {
+  id: String
+  userRoles: [AppUserRoleEntity]
+  name: String
+  normalizedName: String
+  concurrencyStamp: String
+}
+
+input AppRoleEntityFilterInput {
+  and: [AppRoleEntityFilterInput!]
+  or: [AppRoleEntityFilterInput!]
+  id: StringOperationFilterInput
+  userRoles: ListFilterInputTypeOfAppUserRoleEntityFilterInput
+  name: StringOperationFilterInput
+  normalizedName: StringOperationFilterInput
+  concurrencyStamp: StringOperationFilterInput
+}
+
+type AppUserEntity {
+  id: String
+  firstName: String
+  lastName: String
+  refreshToken: String
+  dateOfBirth: DateTime!
+  knownAs: String
+  created: DateTime!
+  lastActive: DateTime!
+  gender: String
+  introduction: String
+  interests: String
+  city: String
+  country: String
+  images: [ImageEntity]
+  messagesSent: [MessageEntity]
+  messagesRecevied: [MessageEntity]
+  userRoles: [AppUserRoleEntity]
+  userName: String
+  normalizedUserName: String
+  email: String
+  normalizedEmail: String
+  emailConfirmed: Boolean!
+  passwordHash: String
+  securityStamp: String
+  concurrencyStamp: String
+  phoneNumber: String
+  phoneNumberConfirmed: Boolean!
+  twoFactorEnabled: Boolean!
+  lockoutEnd: DateTime
+  lockoutEnabled: Boolean!
+  accessFailedCount: Int!
+}
+
+input AppUserEntityFilterInput {
+  and: [AppUserEntityFilterInput!]
+  or: [AppUserEntityFilterInput!]
+  id: StringOperationFilterInput
+  firstName: StringOperationFilterInput
+  lastName: StringOperationFilterInput
+  refreshToken: StringOperationFilterInput
+  dateOfBirth: DateTimeOperationFilterInput
+  knownAs: StringOperationFilterInput
+  created: DateTimeOperationFilterInput
+  lastActive: DateTimeOperationFilterInput
+  gender: StringOperationFilterInput
+  introduction: StringOperationFilterInput
+  interests: StringOperationFilterInput
+  city: StringOperationFilterInput
+  country: StringOperationFilterInput
+  images: ListFilterInputTypeOfImageEntityFilterInput
+  messagesSent: ListFilterInputTypeOfMessageEntityFilterInput
+  messagesRecevied: ListFilterInputTypeOfMessageEntityFilterInput
+  userRoles: ListFilterInputTypeOfAppUserRoleEntityFilterInput
+  userName: StringOperationFilterInput
+  normalizedUserName: StringOperationFilterInput
+  email: StringOperationFilterInput
+  normalizedEmail: StringOperationFilterInput
+  emailConfirmed: BooleanOperationFilterInput
+  passwordHash: StringOperationFilterInput
+  securityStamp: StringOperationFilterInput
+  concurrencyStamp: StringOperationFilterInput
+  phoneNumber: StringOperationFilterInput
+  phoneNumberConfirmed: BooleanOperationFilterInput
+  twoFactorEnabled: BooleanOperationFilterInput
+  lockoutEnd: DateTimeOperationFilterInput
+  lockoutEnabled: BooleanOperationFilterInput
+  accessFailedCount: IntOperationFilterInput
+}
+
+input AppUserEntitySortInput {
+  id: SortEnumType
+  firstName: SortEnumType
+  lastName: SortEnumType
+  refreshToken: SortEnumType
+  dateOfBirth: SortEnumType
+  knownAs: SortEnumType
+  created: SortEnumType
+  lastActive: SortEnumType
+  gender: SortEnumType
+  introduction: SortEnumType
+  interests: SortEnumType
+  city: SortEnumType
+  country: SortEnumType
+  userName: SortEnumType
+  normalizedUserName: SortEnumType
+  email: SortEnumType
+  normalizedEmail: SortEnumType
+  emailConfirmed: SortEnumType
+  passwordHash: SortEnumType
+  securityStamp: SortEnumType
+  concurrencyStamp: SortEnumType
+  phoneNumber: SortEnumType
+  phoneNumberConfirmed: SortEnumType
+  twoFactorEnabled: SortEnumType
+  lockoutEnd: SortEnumType
+  lockoutEnabled: SortEnumType
+  accessFailedCount: SortEnumType
+}
+
+type AppUserRoleEntity {
+  user: AppUserEntity
+  role: AppRoleEntity
+  userId: String!
+  roleId: String!
+}
+
+input AppUserRoleEntityFilterInput {
+  and: [AppUserRoleEntityFilterInput!]
+  or: [AppUserRoleEntityFilterInput!]
+  user: AppUserEntityFilterInput
+  role: AppRoleEntityFilterInput
+  userId: StringOperationFilterInput
+  roleId: StringOperationFilterInput
+}
+
+input BooleanOperationFilterInput {
+  eq: Boolean
+  neq: Boolean
+}
+
+"""The `DateTime` scalar represents an ISO-8601 compliant date time type."""
+scalar DateTime
+
+input DateTimeOperationFilterInput {
+  eq: DateTime
+  neq: DateTime
+  in: [DateTime]
+  nin: [DateTime]
+  gt: DateTime
+  ngt: DateTime
+  gte: DateTime
+  ngte: DateTime
+  lt: DateTime
+  nlt: DateTime
+  lte: DateTime
+  nlte: DateTime
+}
+
+type ImageEntity {
+  id: String
+  url: String
+  appUser: AppUserEntity
+  appUserId: String
+  isMain: Boolean!
+  likes: [ImageLikeEntity]
+}
+
+input ImageEntityFilterInput {
+  and: [ImageEntityFilterInput!]
+  or: [ImageEntityFilterInput!]
+  id: StringOperationFilterInput
+  url: StringOperationFilterInput
+  appUser: AppUserEntityFilterInput
+  appUserId: StringOperationFilterInput
+  isMain: BooleanOperationFilterInput
+  likes: ListFilterInputTypeOfImageLikeEntityFilterInput
+}
+
+type ImageLikeEntity {
+  likedUserId: String
+  likedImageId: String
+  image: ImageEntity
+}
+
+input ImageLikeEntityFilterInput {
+  and: [ImageLikeEntityFilterInput!]
+  or: [ImageLikeEntityFilterInput!]
+  likedUserId: StringOperationFilterInput
+  likedImageId: StringOperationFilterInput
+  image: ImageEntityFilterInput
+}
+
+input IntOperationFilterInput {
+  eq: Int
+  neq: Int
+  in: [Int]
+  nin: [Int]
+  gt: Int
+  ngt: Int
+  gte: Int
+  ngte: Int
+  lt: Int
+  nlt: Int
+  lte: Int
+  nlte: Int
+}
+
+input ListFilterInputTypeOfAppUserRoleEntityFilterInput {
+  all: AppUserRoleEntityFilterInput
+  none: AppUserRoleEntityFilterInput
+  some: AppUserRoleEntityFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfImageEntityFilterInput {
+  all: ImageEntityFilterInput
+  none: ImageEntityFilterInput
+  some: ImageEntityFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfImageLikeEntityFilterInput {
+  all: ImageLikeEntityFilterInput
+  none: ImageLikeEntityFilterInput
+  some: ImageLikeEntityFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfMessageEntityFilterInput {
+  all: MessageEntityFilterInput
+  none: MessageEntityFilterInput
+  some: MessageEntityFilterInput
+  any: Boolean
+}
+
+input LoginDTOInput {
+  userName: String
+  password: String
+}
+
+type LoginResponseDTO {
+  accessToken: String
+  refreshToken: String
+}
+
+type MessageEntity {
+  id: String
+  senderId: String
+  senderUserName: String
+  sender: AppUserEntity
+  recipientId: String
+  recipientUserName: String
+  recipient: AppUserEntity
+  content: String
+  dateRead: DateTime
+  messageSent: DateTime!
+  senderDeleted: Boolean!
+  recipientDeleted: Boolean!
+}
+
+input MessageEntityFilterInput {
+  and: [MessageEntityFilterInput!]
+  or: [MessageEntityFilterInput!]
+  id: StringOperationFilterInput
+  senderId: StringOperationFilterInput
+  senderUserName: StringOperationFilterInput
+  sender: AppUserEntityFilterInput
+  recipientId: StringOperationFilterInput
+  recipientUserName: StringOperationFilterInput
+  recipient: AppUserEntityFilterInput
+  content: StringOperationFilterInput
+  dateRead: DateTimeOperationFilterInput
+  messageSent: DateTimeOperationFilterInput
+  senderDeleted: BooleanOperationFilterInput
+  recipientDeleted: BooleanOperationFilterInput
+}
+
+input RefreshTokenDTOInput {
+  refreshToken: String
+}
+
+enum SortEnumType {
+  ASC
+  DESC
+}
+
+input StringOperationFilterInput {
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String
+  neq: String
+  contains: String
+  ncontains: String
+  in: [String]
+  nin: [String]
+  startsWith: String
+  nstartsWith: String
+  endsWith: String
+  nendsWith: String
+}
+
+type SuccessDTO {
+  message: String
+}
+
+input UserParamsInput {
+  currentUsername: String
+  orderBy: String
+  pageNumber: Int!
+  pageSize: Int!
+}
+
+type UsersQueries {
+  users(userParams: UserParamsInput, where: AppUserEntityFilterInput, order: [AppUserEntitySortInput!]): [AppUserEntity]
+}
+

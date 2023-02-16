@@ -11,8 +11,9 @@ import { signUp } from '../../data-access/store/authentication.actions';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-  public signUpForm: FormGroup<SignUpForm>;
   @Output() public onClick = new EventEmitter();
+  public signUpForm: FormGroup<SignUpForm>;
+
   public constructor(private store: Store) {}
 
   public ngOnInit(): void {
@@ -45,6 +46,7 @@ export class SignUpComponent implements OnInit {
     }
     return { notsame: false };
   }
+
   public get scssClass(): typeof UiButtonStyleEnum {
     return UiButtonStyleEnum;
   }

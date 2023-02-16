@@ -21,6 +21,7 @@ import {
 import { EffectsModule } from '@ngrx/effects';
 import { BookingEffects } from './authentication/data-access/store/authentication.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -48,6 +49,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([BookingEffects]),
+    GraphQLModule,
   ],
   providers: [ThemeService],
   bootstrap: [AppComponent],
