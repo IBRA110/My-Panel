@@ -10,6 +10,7 @@ import { UiButtonStyleEnum } from './../../../core/enums/ui-button-style.enum';
 })
 export class SignInComponent implements OnInit {
   public signInForm: FormGroup<SignInForm>;
+  public typeOfInput: 'password' | 'text' = 'password';
   @Output() public onClick = new EventEmitter();
   public constructor() {}
 
@@ -24,5 +25,14 @@ export class SignInComponent implements OnInit {
 
   public get scssClass(): typeof UiButtonStyleEnum {
     return UiButtonStyleEnum;
+  }
+
+  public toggleType(): void {
+    if (this.typeOfInput === 'password') {
+      this.typeOfInput = 'text';
+      return;
+    }
+    this.typeOfInput = 'password';
+    return;
   }
 }

@@ -12,6 +12,7 @@ import { signUp } from '../../data-access/store/authentication.actions';
 })
 export class SignUpComponent implements OnInit {
   @Output() public onClick = new EventEmitter();
+  public typeOfInput: string[] = ['password', 'password'];
   public signUpForm: FormGroup<SignUpForm>;
 
   public constructor(private store: Store) {}
@@ -49,5 +50,14 @@ export class SignUpComponent implements OnInit {
 
   public get scssClass(): typeof UiButtonStyleEnum {
     return UiButtonStyleEnum;
+  }
+
+  public toggleType(i: number): void {
+    if (this.typeOfInput[i] === 'password') {
+      this.typeOfInput[i] = 'text';
+      return;
+    }
+    this.typeOfInput[i] = 'password';
+    return;
   }
 }
