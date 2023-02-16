@@ -15,12 +15,13 @@ builder.Services.AddControllers();
 
 builder.Services
     .AddGraphQLServer()
-    .AddQueryType<UsersQueries>()
-    .AddMutationType<AccountMutations>()
     .AddProjections()
     .AddAuthorization()
     .AddFiltering()
-    .AddSorting();
+    .AddSorting()
+    .AddQueryType<UsersQueries>()
+    .AddMutationType<AccountMutations>();
+
 
 builder.Services.AddEndpointsApiExplorer();
 

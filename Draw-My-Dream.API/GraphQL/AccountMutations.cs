@@ -16,18 +16,27 @@ namespace API.GraphQL
             [Service]IUnitOfWork unitOfWork, 
             [Service]IMapper mapper,
             [Service]UserManager<AppUserEntity> userManager,
-            RegisterDTO register)
+            string userName,
+            string email,
+            string password)
         {
             
-            if (await unitOfWork.UserExists(register.UserName))
+            if (await unitOfWork.UserExists(userName))
             {
                 throw new GraphQLException("Username is already taken");
             }
-            if (await unitOfWork.EmailExists(register.Email))
+            if (await unitOfWork.EmailExists(email))
             {
                 throw new GraphQLException("Email is already taken");
             }
             
+            RegisterDTO register = new RegisterDTO
+            {
+                UserName = userName,
+                Email = email,
+                Password = password
+            };
+
             AppUserEntity user = mapper.Map<AppUserEntity>(register);
             
             user.UserName = register.UserName;
