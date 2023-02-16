@@ -1,7 +1,7 @@
 {
     "AUTHENTICATION": {
-      "SIGN_IN_HERE": "sign in here",
-      "SIGN_UP_HERE": "sign up here",
+      "SIGN_IN_HERE": "Login form",
+      "SIGN_UP_HERE": "Registration form",
       "SIGN_IN" : "sign in",
       "SIGN_UP" : "sign up",
       "USER_NAME": "user name",
@@ -10,7 +10,7 @@
       "CONFIRM_PASSWORD": "confirm password",
       "FIRST_NAME": "first name",
       "LAST_NAME": "last name",
-      "FORGOT_PASSWORD": "forgot password?",
-      "HAVE_ACCOUNT": "have an account?"
+      "FORGOT_PASSWORD": "Forgot password?",
+      "HAVE_ACCOUNT": "Have an account?"
     }
 }
