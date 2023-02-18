@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
   padding: 30px;
   height: 100%;
     
@@ -22,7 +22,20 @@
     align-items: flex-start;
     gap: 10px;
     position: relative;
- 
+    
+    div{
+      opacity: 0;
+      visibility: hidden;
+      color: var(--error);
+
+      small{
+        @include Link_Small;
+      }
+      &.error{
+        opacity: 1;
+        visibility: visible;
+      }
+    }
     &_label{
       display: block;
       @include Input_Label;
@@ -36,6 +49,14 @@
       border-radius: 3px;
       padding: 0 10px;
       @include Input;
+
+      &.error{
+        box-shadow: var(--error) 0px 0px 0px 2px;
+
+        &:focus{
+          box-shadow: var(--error) 0px 0px 0px 2px;
+        }
+      }
 
       &:focus{
         box-shadow: var(--base-items-focus-color) 0px 0px 0px 2px;

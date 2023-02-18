@@ -11,7 +11,21 @@
       formControlName="userName"
       type="text"
       id="username"
+      [ngClass]="{
+        error:
+          signInForm.get('userName').touched &&
+          signInForm.get('userName').invalid
+      }"
     />
+    <div
+      [ngClass]="{
+        error:
+          signInForm.get('userName').touched &&
+          signInForm.get('userName').invalid
+      }"
+    >
+      <small>{{ 'AUTHENTICATION.ENTER_USERNAME' | translate }}</small>
+    </div>
   </div>
   <div class="form-control">
     <label class="form-control_label" for="password">{{
@@ -22,7 +36,21 @@
       formControlName="password"
       type="{{ typeOfInput }}"
       id="password"
+      [ngClass]="{
+        error:
+          signInForm.get('password').touched &&
+          signInForm.get('password').invalid
+      }"
     />
+    <div
+      [ngClass]="{
+        error:
+          signInForm.get('password').touched &&
+          signInForm.get('password').invalid
+      }"
+    >
+      <small>{{ 'AUTHENTICATION.ENTER_PASSWORD' | translate }}</small>
+    </div>
     <button (click)="toggleType()">
       <svg
         width="26"

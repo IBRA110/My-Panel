@@ -4,13 +4,15 @@
       "SIGN_UP_HERE": "Registration form",
       "SIGN_IN" : "sign in",
       "SIGN_UP" : "sign up",
-      "USER_NAME": "user name",
+      "USER_NAME": "username",
       "EMAIL": "email",
       "PASSWORD": "password",
       "CONFIRM_PASSWORD": "confirm password",
       "FIRST_NAME": "first name",
       "LAST_NAME": "last name",
       "FORGOT_PASSWORD": "Forgot password?",
-      "HAVE_ACCOUNT": "Have an account?"
+      "HAVE_ACCOUNT": "Have an account?",
+      "ENTER_USERNAME": "Enter username",
+      "ENTER_PASSWORD": "Enter password"
     }
 }

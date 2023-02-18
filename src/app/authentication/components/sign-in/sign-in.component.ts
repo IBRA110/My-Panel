@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SignInForm } from '../../data-access/interfaces/form.interface';
 import { UiButtonStyleEnum } from './../../../core/enums/ui-button-style.enum';
+import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,7 +13,7 @@ export class SignInComponent implements OnInit {
   public signInForm: FormGroup<SignInForm>;
   public typeOfInput: 'password' | 'text' = 'password';
   @Output() public onClick = new EventEmitter();
-  public constructor() {}
+  public constructor(private alertMessage: UiAlertMessagesService) {}
 
   public ngOnInit(): void {
     this.signInForm = new FormGroup<SignInForm>({
@@ -21,7 +22,13 @@ export class SignInComponent implements OnInit {
     });
   }
 
-  public onSignIn(): void {}
+  public onSignIn(): void {
+    if (this.signInForm.invalid) {
+      this.alertMessage.callWarningMessage('All Fields Are Required!!!');
+      return;
+    }
+    console.log(this.signInForm.value);
+  }
 
   public get scssClass(): typeof UiButtonStyleEnum {
     return UiButtonStyleEnum;

@@ -23,5 +23,7 @@ export const lightTheme: Theme = {
 
     '--base-items-color': 'rgba(69,151,132,255)',
     '--base-items-focus-color': 'rgba(3, 108, 135,255)',
+
+    '--error': 'rgb(191, 4, 4)',
   },
 };
