@@ -32,7 +32,7 @@ export class UiAlertMessagesComponent implements OnInit {
         }
         this.alerts.push(alert);
 
-        if (this.alerts.length) {
+        if (this.alerts.length > 0) {
           setTimeout(
             () => (this.alerts[this.alerts.length - 1].isHide = true),
             150,
@@ -40,7 +40,7 @@ export class UiAlertMessagesComponent implements OnInit {
         }
 
         setTimeout(() => {
-          this.alerts.pop();
+          this.alerts = this.alerts.filter((x) => x !== alert);
         }, 20000);
       });
 
