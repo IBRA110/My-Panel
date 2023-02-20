@@ -12,7 +12,6 @@ import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.
 export class SignInComponent implements OnInit {
   public signInForm: FormGroup<SignInForm>;
   public typeOfInput: 'password' | 'text' = 'password';
-  @Output() public onClick = new EventEmitter();
   public constructor(private alertMessage: UiAlertMessagesService) {}
 
   public ngOnInit(): void {
@@ -27,7 +26,6 @@ export class SignInComponent implements OnInit {
       this.alertMessage.callWarningMessage('All Fields Are Required!!!');
       return;
     }
-    console.log(this.signInForm.value);
   }
 
   public get scssClass(): typeof UiButtonStyleEnum {

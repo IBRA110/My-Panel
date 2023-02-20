@@ -1,5 +1,5 @@
 export enum UiButtonStyleEnum {
   DEFAULT = 'default',
-  DARK = 'dark',
+  TRANSPARENT = 'transparent',
   DANGER = 'danger',
 }

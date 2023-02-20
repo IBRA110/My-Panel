@@ -1,13 +1,18 @@
 @import "src/app/core/mixins/fonts";
 
+:host ::ng-deep {
+  width: 100%;
+}
+
 button{
   padding: 5px;
-  background: var(--button-background-default-color);
+  background-color: var(--button-background-default-color);
   color: var(--button-text-default-color);
   border-radius: 5px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   @include Button;
   cursor: pointer;
+  width: 100%;
 
   &:active{
     background: var(--button-active-background-default-color);
@@ -21,12 +26,18 @@ button{
 }
 .default{
   padding: 15px 60px;
+  width: 100%;
 }
-.dark{
+.transparent{
   padding: 15px 60px;
-  background: var(--button-background-dark-color);
+  background: var(--button-background-transparent-color);
+  border-radius: 2px;
+  border: 2px solid var(--button-hover-background-transparent-color);
+  box-shadow: none;
+  transition: all 200ms ease;
   
-  &:active{
-    background: var(--button-active-background-dark-color);
+  &:hover{
+    background-color: var(--button-hover-background-transparent-color);
+    color: var(--button-background-default-color);
   }
 } 

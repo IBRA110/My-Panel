@@ -32,6 +32,7 @@ export class BookingEffects {
               return signUpSuccess();
             }),
             catchError((err) => {
+              this.messageService.callErrorMessage(err);
               return of(signUpFailed());
             }),
           );

@@ -51,7 +51,7 @@
     >
       <small>{{ 'AUTHENTICATION.ENTER_PASSWORD' | translate }}</small>
     </div>
-    <button (click)="toggleType()">
+    <button (click)="toggleType()" type="button">
       <svg
         width="26"
         height="20"
@@ -70,11 +70,6 @@
     <a>{{ 'AUTHENTICATION.FORGOT_PASSWORD' | translate }}</a>
   </div>
   <div class="form-links">
-    <app-ui-button
-      (onClick)="onClick.emit()"
-      [text]="'AUTHENTICATION.SIGN_UP' | translate | titlecase"
-      [scssClass]="scssClass.DARK"
-    ></app-ui-button>
     <app-ui-button
       [type]="'submit'"
       [text]="'AUTHENTICATION.SIGN_IN' | translate | titlecase"

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UiButtonStyleEnum } from '../core/enums/ui-button-style.enum';
 
 @Component({
   selector: 'app-authentication',
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
 export class AuthenticationComponent {
   public isSignIn: boolean = true;
 
-  public toggleForms(): void {
-    this.isSignIn = !this.isSignIn;
+  public get scssClass(): typeof UiButtonStyleEnum {
+    return UiButtonStyleEnum;
   }
 }

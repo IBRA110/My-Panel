@@ -11,7 +11,6 @@ import { signUp } from '../../data-access/store/authentication.actions';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-  @Output() public onClick = new EventEmitter();
   public typeOfInput: string[] = ['password', 'password'];
   public signUpForm: FormGroup<SignUpForm>;
 

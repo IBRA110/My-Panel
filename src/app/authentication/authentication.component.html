@@ -1,10 +1,32 @@
 <div class="auth">
-  <img
-    src="/assets/images/background/the-night-time-streets-of-california-victoria-clark.jpg"
-    alt="backgound"
-  />
+  <div class="auth-background" [ngClass]="{ right: isSignIn }">
+    <div class="auth-background_image">
+      <img src="/assets/images/background/back.jpg" alt="back" />
+    </div>
+    <h1>DrawSY CRM</h1>
+    <h3>Welcome to DrawSY CRM!</h3>
+    <p>
+      The man who gets the most satisfactory results is not always the man with
+      the most brilliant single mind, but rather the man who can best coordinate
+      the brains and talents of his associates.
+    </p>
+    <div class="auth-background_button">
+      <app-ui-button
+        (onClick)="isSignIn = false"
+        *ngIf="isSignIn"
+        [text]="'AUTHENTICATION.SIGN_UP' | translate | titlecase"
+        [scssClass]="scssClass.TRANSPARENT"
+      ></app-ui-button>
+      <app-ui-button
+        (onClick)="isSignIn = true"
+        *ngIf="!isSignIn"
+        [text]="'AUTHENTICATION.SIGN_IN' | translate | titlecase"
+        [scssClass]="scssClass.TRANSPARENT"
+      ></app-ui-button>
+    </div>
+  </div>
   <div class="auth-forms">
-    <app-sign-in (onClick)="toggleForms()" *ngIf="isSignIn"></app-sign-in>
-    <app-sign-up (onClick)="toggleForms()" *ngIf="!isSignIn"></app-sign-up>
+    <app-sign-in></app-sign-in>
+    <app-sign-up></app-sign-up>
   </div>
 </div>
