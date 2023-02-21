@@ -68,18 +68,19 @@ namespace API.GraphQL
             [Service]UserManager<AppUserEntity> userManager,
             [Service]SignInManager<AppUserEntity> signInManager,
             [Service]ITokenService tokenService,
-            LoginDTO login)
+            string userName,
+            string password)
         {
             AppUserEntity user = await userManager.Users
                     .Include(u => u.Images)
-                    .SingleOrDefaultAsync(x => x.UserName.ToLower() == login.UserName.ToLower());
+                    .SingleOrDefaultAsync(x => x.UserName.ToLower() == userName.ToLower());
 
             if (user == null)
             {
                 throw new GraphQLException("User does not exist!");
             }
 
-            SignInResult result = await signInManager.CheckPasswordSignInAsync(user, login.Password, false);
+            SignInResult result = await signInManager.CheckPasswordSignInAsync(user, password, false);
 
             if (!result.Succeeded)
             {
@@ -103,12 +104,12 @@ namespace API.GraphQL
             [Service]IUnitOfWork unitOfWork,
             [Service]ITokenService tokenService,
             ClaimsPrincipal claimsPrincipal,
-            RefreshTokenDTO refreshToken)
+            string refreshToken)
         {
             
             AppUserEntity user = await unitOfWork.userBehaviour.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
 
-            if (user == null || refreshToken.RefreshToken != user.RefreshToken)
+            if (user == null || refreshToken != user.RefreshToken)
             {
                 throw new ArgumentException("Something went wrong!");
             }
@@ -121,6 +122,28 @@ namespace API.GraphQL
             {
                 AccessToken = await tokenService.CreateAccessToken(user),
                 RefreshToken = user.RefreshToken
+            };
+        }
+        
+        [Authorize]
+        public async Task<SuccessDTO> Logout([Service]IUnitOfWork unitOfWork, ClaimsPrincipal claimsPrincipal,
+            string refreshToken)
+        {
+            
+            AppUserEntity user = await unitOfWork.userBehaviour.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
+
+            if (user == null || refreshToken != user.RefreshToken)
+            {
+                throw new ArgumentException("Something went wrong!");
+            }
+
+            user.RefreshToken = null;
+
+            await unitOfWork.Complete();
+            
+            return new SuccessDTO
+            {
+                Message = "Logout Successful"
             };
         }
     }
