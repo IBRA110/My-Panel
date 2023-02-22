@@ -10,7 +10,6 @@
       class="form-control_input"
       formControlName="userName"
       type="text"
-      id="username"
       [ngClass]="{
         error:
           signInForm.get('userName').touched &&
@@ -35,7 +34,6 @@
       class="form-control_input"
       formControlName="password"
       type="{{ typeOfInput }}"
-      id="password"
       [ngClass]="{
         error:
           signInForm.get('password').touched &&

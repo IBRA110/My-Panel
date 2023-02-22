@@ -32,7 +32,7 @@ export class BookingEffects {
               return signUpSuccess();
             }),
             catchError((err) => {
-              this.messageService.callErrorMessage(err);
+              this.messageService.callErrorMessage(err.ApolloError);
               return of(signUpFailed());
             }),
           );

@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { UiButtonStyleEnum } from 'src/app/core/enums/ui-button-style.enum';
 import { SignUpForm } from '../../data-access/interfaces/form.interface';
 import { signUp } from '../../data-access/store/authentication.actions';
+import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,23 +15,38 @@ export class SignUpComponent implements OnInit {
   public typeOfInput: string[] = ['password', 'password'];
   public signUpForm: FormGroup<SignUpForm>;
 
-  public constructor(private store: Store) {}
+  public constructor(
+    private store: Store,
+    private alertMessageService: UiAlertMessagesService,
+  ) {}
 
   public ngOnInit(): void {
     this.signUpForm = new FormGroup<SignUpForm>({
       userName: new FormControl('', Validators.required),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+      ]),
       passwords: new FormGroup(
         {
-          password: new FormControl('', Validators.required),
+          password: new FormControl('', [
+            Validators.required,
+            Validators.pattern(
+              '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}',
+            ),
+          ]),
           confirmpassword: new FormControl('', Validators.required),
         },
         this.passwordCheck,
       ),
-      email: new FormControl(''),
     });
   }
 
   public onSignUp(): void {
+    if (this.signUpForm.invalid) {
+      this.alertMessageService.callWarningMessage('All Fields Are Required!!!');
+      return;
+    }
     this.store.dispatch(
       signUp({
         userName: this.signUpForm.get('userName').value,

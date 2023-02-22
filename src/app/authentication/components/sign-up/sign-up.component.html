@@ -6,23 +6,13 @@
     <label class="form-control_label" for="username">{{
       'AUTHENTICATION.USER_NAME' | translate | titlecase
     }}</label>
-    <input
-      class="form-control_input"
-      type="text"
-      id="username"
-      formControlName="userName"
-    />
+    <input class="form-control_input" type="text" formControlName="userName" />
   </div>
   <div class="form-control">
     <label class="form-control_label" for="email">{{
       'AUTHENTICATION.EMAIL' | translate | titlecase
     }}</label>
-    <input
-      formControlName="email"
-      class="form-control_input"
-      type="text"
-      id="email"
-    />
+    <input formControlName="email" class="form-control_input" type="text" />
   </div>
   <div class="form-passwords" formGroupName="passwords">
     <div class="form-control">
@@ -32,7 +22,6 @@
       <input
         class="form-control_input"
         type="{{ typeOfInput[0] }}"
-        id="password"
         name="password"
         formControlName="password"
       />
@@ -58,7 +47,6 @@
       <input
         class="form-control_input"
         type="{{ typeOfInput[1] }}"
-        id="confirmpassword"
         name="confirmpassword"
         formControlName="confirmpassword"
       />
