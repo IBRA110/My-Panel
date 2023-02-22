@@ -49,7 +49,15 @@
       border-radius: 3px;
       padding: 0 10px;
       @include Input;
+      
+      &.error{
+        box-shadow: var(--error) 0px 0px 0px 2px;
 
+        &:focus{
+          box-shadow: var(--error) 0px 0px 0px 2px;
+        }
+      }
+      
       &:focus{
         box-shadow: var(--base-items-focus-color) 0px 0px 0px 2px;
       }

@@ -24,6 +24,11 @@
         type="{{ typeOfInput[0] }}"
         name="password"
         formControlName="password"
+        [ngClass]="{
+          error:
+            signUpForm.get('passwords.password').touched &&
+            signUpForm.get('passwords.password').invalid
+        }"
       />
       <button (click)="toggleType(0)" type="button">
         <svg
