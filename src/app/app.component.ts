@@ -4,6 +4,7 @@ import { LocalStorageService } from './core/services/local-storage.service';
 import { ThemeService } from './core/theme/theme.service';
 import { LocalStorageKeysEnum } from './core/enums/local-storage-keys.enum';
 import { TranslateService } from '@ngx-translate/core';
+import { UiAlertMessagesService } from './core/services/ui-alert-messages.service';
 
 @Component({
   selector: 'app-root',
