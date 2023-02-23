@@ -70,19 +70,19 @@
     }
   }
   .success{
-      border-left: 4px solid #2EB23B;
+      border-left: 4px solid var(--success);
       color: rgba(0, 0, 0, 0.8);
   }
   .error{
-      border-left: 4px solid #FF0000;
+      border-left: 4px solid var(--error);
       color: rgba(0, 0, 0, 0.8);
   }
   .warning{
-      border-left: 4px solid #CF7C00;
+      border-left: 4px solid var(--warning);
       color: rgba(0, 0, 0, 0.8);
   }
   .information{
-      border-left: 4px solid #0C88F9;
+      border-left: 4px solid var(--info);
       color: rgba(0, 0, 0, 0.8);
   }
 }

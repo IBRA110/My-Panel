@@ -54,6 +54,11 @@
         type="{{ typeOfInput[1] }}"
         name="confirmpassword"
         formControlName="confirmpassword"
+        [ngClass]="{
+          error:
+            signUpForm.get('passwords.confirmpassword').touched &&
+            signUpForm.get('passwords.confirmpassword').invalid
+        }"
       />
       <button (click)="toggleType(1)" type="button">
         <svg
