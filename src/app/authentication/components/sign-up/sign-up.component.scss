@@ -126,9 +126,8 @@
     align-items: center;
     width: 100%;
 
-    a{
+    p{
       @include Link;
-      cursor: pointer;
     }
   }
 }

@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { UiButtonStyleEnum } from '../core/enums/ui-button-style.enum';
+import { Store } from '@ngrx/store';
+import { toKnowIsSignIn } from './data-access/store/authentication.selectors';
+import { Observable } from 'rxjs';
+import { toggleForms } from './data-access/store/authentication.actions';
 
 @Component({
   selector: 'app-authentication',
@@ -7,9 +11,14 @@ import { UiButtonStyleEnum } from '../core/enums/ui-button-style.enum';
   styleUrls: ['./authentication.component.scss'],
 })
 export class AuthenticationComponent {
-  public isSignIn: boolean = true;
+  public isToggleForm: Observable<boolean> = this.store.select(toKnowIsSignIn);
 
+  public constructor(private store: Store) {}
   public get scssClass(): typeof UiButtonStyleEnum {
     return UiButtonStyleEnum;
+  }
+
+  public toggleForm(isToggle: boolean): void {
+    this.store.dispatch(toggleForms({ payload: isToggle }));
   }
 }

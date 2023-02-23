@@ -22,3 +22,8 @@ export const signUp = createAction(
 export const signUpSuccess = createAction(AuthActions.SIGN_UP_SUCCESS);
 
 export const signUpFailed = createAction(AuthActions.SIGN_UP_FAILED);
+
+export const toggleForms = createAction(
+  AuthActions.TOGGLE_FORMS,
+  props<{ payload: boolean }>(),
+);

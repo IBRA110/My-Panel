@@ -1,5 +1,5 @@
 <div class="auth">
-  <div class="auth-background" [ngClass]="{ right: isSignIn }">
+  <div class="auth-background" [ngClass]="{ right: isToggleForm | async }">
     <div class="auth-background_image">
       <img src="/assets/images/background/back.jpg" alt="back" />
     </div>
@@ -10,14 +10,14 @@
     </p>
     <div class="auth-background_button">
       <app-ui-button
-        (onClick)="isSignIn = false"
-        *ngIf="isSignIn"
+        (onClick)="toggleForm(false)"
+        *ngIf="isToggleForm | async"
         [text]="'AUTHENTICATION.SIGN_UP' | translate | titlecase"
         [scssClass]="scssClass.TRANSPARENT"
       ></app-ui-button>
       <app-ui-button
-        (onClick)="isSignIn = true"
-        *ngIf="!isSignIn"
+        (onClick)="toggleForm(true)"
+        *ngIf="(isToggleForm | async) === false"
         [text]="'AUTHENTICATION.SIGN_IN' | translate | titlecase"
         [scssClass]="scssClass.TRANSPARENT"
       ></app-ui-button>

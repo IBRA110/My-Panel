@@ -5,4 +5,5 @@ export enum AuthActions {
   SIGN_UP = '[Auth] Sign up',
   SIGN_UP_SUCCESS = '[Auth] Sign up success',
   SIGN_UP_FAILED = '[Auth] Sign up failed',
+  TOGGLE_FORMS = '[Auth] Forms toggled',
 }
