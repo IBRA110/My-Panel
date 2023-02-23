@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 10px;
   padding: 30px;
   height: 100%;
   
@@ -18,7 +18,7 @@
     flex-direction: column;
     width: 100%;
     justify-content: space-between;
-    gap: 30px;
+    gap: 10px;
   }
   
   &-control{
@@ -27,6 +27,21 @@
     align-items: flex-start;
     gap: 10px;
     position: relative;
+
+    div{
+      opacity: 0;
+      visibility: hidden;
+      color: var(--error);
+
+      small{
+        @include Link_Small;
+      }
+      
+      &.error{
+        opacity: 1;
+        visibility: visible;
+      }
+    }
     
     &_radio{
       display: flex;

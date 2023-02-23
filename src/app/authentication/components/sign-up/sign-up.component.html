@@ -6,13 +6,47 @@
     <label class="form-control_label" for="username">{{
       'AUTHENTICATION.USER_NAME' | translate | titlecase
     }}</label>
-    <input class="form-control_input" type="text" formControlName="userName" />
+    <input
+      class="form-control_input"
+      type="text"
+      formControlName="userName"
+      [ngClass]="{
+        error:
+          signUpForm.get('userName').touched &&
+          signUpForm.get('userName').invalid
+      }"
+    />
+    <div
+      [ngClass]="{
+        error:
+          signUpForm.get('userName').touched &&
+          signUpForm.get('userName').invalid
+      }"
+    >
+      <small>{{ 'AUTHENTICATION.ENTER_USERNAME' | translate }}</small>
+    </div>
   </div>
   <div class="form-control">
     <label class="form-control_label" for="email">{{
       'AUTHENTICATION.EMAIL' | translate | titlecase
     }}</label>
-    <input formControlName="email" class="form-control_input" type="text" />
+    <input
+      formControlName="email"
+      class="form-control_input"
+      type="text"
+      [ngClass]="{
+        error:
+          signUpForm.get('email').touched && signUpForm.get('email').invalid
+      }"
+    />
+    <div
+      [ngClass]="{
+        error:
+          signUpForm.get('email').touched && signUpForm.get('email').invalid
+      }"
+    >
+      <small>{{ 'AUTHENTICATION.ENTER_EMAIL' | translate }}</small>
+    </div>
   </div>
   <div class="form-passwords" formGroupName="passwords">
     <div class="form-control">
@@ -44,6 +78,15 @@
         </svg>
         <span [ngClass]="{ visible: typeOfInput[0] === 'text' }"></span>
       </button>
+      <div
+        [ngClass]="{
+          error:
+            signUpForm.get('passwords.password').invalid &&
+            signUpForm.get('passwords.password').touched
+        }"
+      >
+        <span>{{ 'AUTHENTICATION.ENTER_PASSWORD' | translate }}</span>
+      </div>
     </div>
     <div class="form-control">
       <label class="form-control_label" for="confirmpassword">{{
@@ -56,8 +99,10 @@
         formControlName="confirmpassword"
         [ngClass]="{
           error:
-            signUpForm.get('passwords.confirmpassword').touched &&
-            signUpForm.get('passwords.confirmpassword').invalid
+            (signUpForm.get('passwords.confirmpassword').touched &&
+              signUpForm.get('passwords.confirmpassword').invalid) ||
+            (signUpForm.get('passwords').errors['notsame'] &&
+              signUpForm.get('passwords.confirmpassword').touched)
         }"
       />
       <button (click)="toggleType(1)" type="button">
@@ -74,6 +119,17 @@
         </svg>
         <span [ngClass]="{ visible: typeOfInput[1] === 'text' }"></span>
       </button>
+      <div
+        [ngClass]="{
+          error:
+            (signUpForm.get('passwords.confirmpassword').touched &&
+              signUpForm.get('passwords.confirmpassword').invalid) ||
+            (signUpForm.get('passwords').errors['notsame'] &&
+              signUpForm.get('passwords.confirmpassword').touched)
+        }"
+      >
+        <span>{{ 'AUTHENTICATION.SAME_PASSWORDS' | translate }}</span>
+      </div>
     </div>
   </div>
   <div class="form-links">

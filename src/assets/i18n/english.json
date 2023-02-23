@@ -12,8 +12,10 @@
       "LAST_NAME": "last name",
       "FORGOT_PASSWORD": "Forgot password?",
       "HAVE_ACCOUNT": "Have an account?",
-      "ENTER_USERNAME": "Enter username",
-      "ENTER_PASSWORD": "Enter password",
+      "ENTER_USERNAME": "Please Enter username",
+      "ENTER_PASSWORD": "Please Enter strong password",
+      "SAME_PASSWORDS": "Passwords must be same!",
+      "ENTER_EMAIL": "Please Enter a valid email!",
       "CRM": "DrawSY CRM",
       "WELCOME": "Welcome to DrawSY CRM!",
       "QUOTE": "The man who gets the most satisfactory results is not always the man with the most brilliant single mind, but rather the man who can best coordinate the brains and talents of his associates."
