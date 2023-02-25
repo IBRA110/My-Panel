@@ -8,10 +8,8 @@ import { UiAlertMessagesService } from './core/services/ui-alert-messages.servic
 
 @Component({
   selector: 'app-root',
-  template: ` <div app-theme>
-    <router-outlet></router-outlet>
-    <app-ui-alert-message></app-ui-alert-message>
-  </div>`,
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   private currentTheme: string = ThemesEnum.LIGHT;

@@ -17,8 +17,4 @@ export class AuthenticationComponent {
   public get scssClass(): typeof UiButtonStyleEnum {
     return UiButtonStyleEnum;
   }
-
-  public toggleForm(isToggle: boolean): void {
-    this.store.dispatch(toggleForms({ payload: isToggle }));
-  }
 }

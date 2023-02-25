@@ -3,7 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { UiButtonStyleEnum } from 'src/app/core/enums/ui-button-style.enum';
 import { SignUpForm } from '../../data-access/interfaces/form.interface';
-import { signUp } from '../../data-access/store/authentication.actions';
+import {
+  signUp,
+  toggleForms,
+} from '../../data-access/store/authentication.actions';
 import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 
 @Component({
@@ -74,5 +77,9 @@ export class SignUpComponent implements OnInit {
     }
     this.typeOfInput[i] = 'password';
     return;
+  }
+
+  public toggleForm(): void {
+    this.store.dispatch(toggleForms({ payload: true }));
   }
 }

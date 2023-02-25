@@ -73,5 +73,11 @@
       [text]="'AUTHENTICATION.SIGN_IN' | translate | titlecase"
       [scssClass]="scssClass.DEFAULT"
     ></app-ui-button>
+    <p>
+      {{ 'AUTHENTICATION.CREATE_A_NEW_ACCOUNT' | translate }}
+      <a (click)="toggleForm()">{{
+        'AUTHENTICATION.SIGN_UP' | translate | uppercase
+      }}</a>
+    </p>
   </div>
 </form>

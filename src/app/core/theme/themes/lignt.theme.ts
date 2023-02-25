@@ -8,10 +8,11 @@ export const lightTheme: Theme = {
     '--border-color': 'rgba(235, 237, 240, 0.1)',
     '--box-shadow-color': 'rgba(0, 0, 0, 0.6)',
 
-    '--base-text-color': 'rgb(87, 87, 87)',
+    '--base-text-color': 'rgb(255, 255, 255)',
     '--light-text-color': 'rgb(255,255,255)',
 
-    '--input-backgound-color': 'rgba(255,255,255,255)',
+    '--input-backgound-color': 'rgba(255,255,255, 0.3)',
+    '--input-error-color': 'rgb(255, 247, 0)',
 
     '--button-background-default-color': 'rgba(38, 112, 212, 255)',
     '--button-active-background-default-color': 'rgba(33, 101, 194)',

@@ -1,30 +1,9 @@
 <div class="auth">
-  <div class="auth-background" [ngClass]="{ right: isToggleForm | async }">
-    <div class="auth-background_image">
-      <img src="/assets/images/background/back.jpg" alt="back" />
-    </div>
-    <h1>{{ 'AUTHENTICATION.CRM' | translate }}</h1>
-    <h3>{{ 'AUTHENTICATION.WELCOME' | translate }}</h3>
-    <p>
-      {{ 'AUTHENTICATION.QUOTE' | translate }}
-    </p>
-    <div class="auth-background_button">
-      <app-ui-button
-        (onClick)="toggleForm(false)"
-        *ngIf="isToggleForm | async"
-        [text]="'AUTHENTICATION.SIGN_UP' | translate | titlecase"
-        [scssClass]="scssClass.TRANSPARENT"
-      ></app-ui-button>
-      <app-ui-button
-        (onClick)="toggleForm(true)"
-        *ngIf="(isToggleForm | async) === false"
-        [text]="'AUTHENTICATION.SIGN_IN' | translate | titlecase"
-        [scssClass]="scssClass.TRANSPARENT"
-      ></app-ui-button>
-    </div>
+  <div class="auth-background">
+    <img src="/assets/images/background/1.jpg" alt="back" />
   </div>
   <div class="auth-forms">
-    <app-sign-in></app-sign-in>
-    <app-sign-up></app-sign-up>
+    <app-sign-up *ngIf="(isToggleForm | async) === false"></app-sign-up>
+    <app-sign-in *ngIf="(isToggleForm | async) === true"></app-sign-in>
   </div>
 </div>

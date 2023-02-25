@@ -133,13 +133,16 @@
     </div>
   </div>
   <div class="form-links">
-    <p>{{ 'AUTHENTICATION.HAVE_ACCOUNT' | translate }}</p>
-  </div>
-  <div class="form-links">
     <app-ui-button
       [type]="'submit'"
       [text]="'AUTHENTICATION.SIGN_UP' | translate | titlecase"
       [scssClass]="scssClass.DEFAULT"
     ></app-ui-button>
+    <p>
+      {{ 'AUTHENTICATION.HAVE_ACCOUNT' | translate }}
+      <a (click)="toggleForm()">{{
+        'AUTHENTICATION.SIGN_IN' | translate | uppercase
+      }}</a>
+    </p>
   </div>
 </form>

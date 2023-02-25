@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SignInForm } from '../../data-access/interfaces/form.interface';
 import { UiButtonStyleEnum } from './../../../core/enums/ui-button-style.enum';
 import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
+import { Store } from '@ngrx/store';
+import { toggleForms } from '../../data-access/store/authentication.actions';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,7 +14,10 @@ import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.
 export class SignInComponent implements OnInit {
   public signInForm: FormGroup<SignInForm>;
   public typeOfInput: 'password' | 'text' = 'password';
-  public constructor(private alertMessage: UiAlertMessagesService) {}
+  public constructor(
+    private alertMessage: UiAlertMessagesService,
+    public store: Store,
+  ) {}
 
   public ngOnInit(): void {
     this.signInForm = new FormGroup<SignInForm>({
@@ -39,5 +44,9 @@ export class SignInComponent implements OnInit {
     }
     this.typeOfInput = 'password';
     return;
+  }
+
+  public toggleForm(): void {
+    this.store.dispatch(toggleForms({ payload: false }));
   }
 }

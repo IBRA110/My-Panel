@@ -1,8 +1,12 @@
 @import "src/app/core/mixins/fonts";
 
+:host, :host-context, ::ng-deep{
+  width: 100%;
+  height: 100%;
+}
 .auth{
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: var(--background-color);
   display: flex;
   justify-content: center;
@@ -11,71 +15,20 @@
   position: relative;
   
   &-background{
+    width: 100%;
+    height: 100%;
     position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 30px;
-    height: 100vh;
-    width: 50%;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    overflow: hidden;
-    transition: 300ms ease-in all;
-    color: var(--light-text-color);
-    
-    &_image{
-      position: absolute;
+
+    img{
       width: 100%;
       height: 100%;
-
-      &::before{
-        content: "";
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: -moz-linear-gradient(top,  rgba(0,255,180,0.75) 0%, rgba(38,112,212,0.75) 100%);
-        background: -webkit-linear-gradient(top,  rgba(0,255,180,0.75) 0%,rgba(38,112,212,0.75) 100%);
-        background: linear-gradient(to bottom,  rgba(0,255,180,0.75) 0%,rgba(38,112,212,0.75) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf00ffb4', endColorstr='#bf2670d4',GradientType=0 );
-      }
-
-      img{
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-      }
-    }
-    h1, h3, p{
-      z-index: 1;
-    }
-    h1{
-      @include Heading_1;
-    }
-
-    h3{
-      @include Heading_3;
-    }
-
-    p{
-      width: 450px;
-      @include Paragraph;
-    }
-    &_button{
-      width: 200px;
-      z-index: 1;
-    }
-
-    &.right{
-      top: 0;
-      left: 50%;
+      object-fit: fill;
     }
   }
 
   &-forms{
     display: flex;
+    z-index: 1;
     justify-content: space-around;
     width: 100%;
   }
