@@ -48,7 +48,12 @@
       border-radius: 3px;
       padding: 0 10px;
       @include Input;
+      color: var(--light-text-color);
 
+      &::-ms-reveal {
+        display: none;
+      }
+            
       &.error{
         box-shadow: var(--input-error-color) 0px 0px 0px 2px;
 
