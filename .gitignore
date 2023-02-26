@@ -17,6 +17,7 @@ npm-debug.log
 
 # Visual Studio Code
 .vscode/*
+.vs/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
