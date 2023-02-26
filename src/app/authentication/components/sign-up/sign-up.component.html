@@ -99,10 +99,8 @@
         formControlName="confirmpassword"
         [ngClass]="{
           error:
-            (signUpForm.get('passwords.confirmpassword').touched &&
-              signUpForm.get('passwords.confirmpassword').invalid) ||
-            (signUpForm.get('passwords').errors['notsame'] &&
-              signUpForm.get('passwords.confirmpassword').touched)
+            signUpForm.get('passwords.confirmpassword').touched &&
+            signUpForm.get('passwords.confirmpassword').invalid
         }"
       />
       <button (click)="toggleType(1)" type="button">
@@ -122,10 +120,8 @@
       <div
         [ngClass]="{
           error:
-            (signUpForm.get('passwords.confirmpassword').touched &&
-              signUpForm.get('passwords.confirmpassword').invalid) ||
-            (signUpForm.get('passwords').errors['notsame'] &&
-              signUpForm.get('passwords.confirmpassword').touched)
+            signUpForm.get('passwords.confirmpassword').touched &&
+            signUpForm.get('passwords.confirmpassword').invalid
         }"
       >
         <span>{{ 'AUTHENTICATION.SAME_PASSWORDS' | translate }}</span>

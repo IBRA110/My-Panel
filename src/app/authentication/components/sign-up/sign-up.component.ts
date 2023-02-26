@@ -30,20 +30,14 @@ export class SignUpComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
       ]),
-      passwords: new FormGroup(
-        {
-          password: new FormControl('', [
-            Validators.required,
-            Validators.pattern(
-              '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}',
-            ),
-          ]),
-          confirmpassword: new FormControl('', Validators.required),
-        },
-        this.passwordCheck,
-      ),
+      passwords: new FormGroup({
+        password: new FormControl('', Validators.required),
+        confirmpassword: new FormControl('', Validators.required),
+      }),
     });
   }
+
+  //TODO: https://codinglatte.com/posts/angular/cool-password-validation-angular/ password validation
 
   public onSignUp(): void {
     if (this.signUpForm.invalid) {
@@ -57,13 +51,6 @@ export class SignUpComponent implements OnInit {
         password: this.signUpForm.get('passwords.password').value,
       }),
     );
-  }
-
-  private passwordCheck(control: FormGroup): { [s: string]: boolean } {
-    if (control.get('password').value != control.get('confirmpassword').value) {
-      return { notsame: true };
-    }
-    return { notsame: false };
   }
 
   public get scssClass(): typeof UiButtonStyleEnum {
