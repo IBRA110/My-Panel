@@ -5,6 +5,7 @@ using API.SignalR;
 using Core.Entities;
 using Infrastracture.Data;
 using Infrastracture.Middleware;
+using Infrastructure.Middleware;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -75,6 +76,7 @@ app.MapHub<PresenceHub>("hubs/presence");
 app.MapHub<MessageHub>("hubs/message");
 app.MapGraphQL("/graphql");
 
+app.UseResponseMiddleware();
 
 IServiceScope scope = app.Services.CreateScope();
 IServiceProvider services = scope.ServiceProvider;
@@ -92,4 +94,4 @@ catch (Exception ex)
     logger.LogError(ex, "An error occurred during migration");
 }
 
-app.Run("http://localhost:5000");
+app.Run();

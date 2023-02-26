@@ -23,7 +23,7 @@ namespace API.GraphQL
             
             if (await unitOfWork.UserExists(userName))
             {
-                throw new GraphQLException("Username is already taken");
+                 throw new GraphQLException("Username is already taken");
             }
             if (await unitOfWork.EmailExists(email))
             {
