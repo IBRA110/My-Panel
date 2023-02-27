@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { UiAlertMessagesService } from '../../../services/ui-alert-messages.service';
@@ -20,6 +20,7 @@ export class UiAlertMessagesComponent implements OnInit {
   public constructor(
     private router: Router,
     private alertService: UiAlertMessagesService,
+    private cd: ChangeDetectorRef,
   ) {}
 
   public ngOnInit() {
@@ -42,6 +43,7 @@ export class UiAlertMessagesComponent implements OnInit {
         setTimeout(() => {
           this.alerts = this.alerts.filter((x) => x !== alert);
         }, 20000);
+        this.cd.detectChanges();
       });
 
     this.router.events.pipe(untilDestroyed(this)).subscribe((event) => {
@@ -55,6 +57,7 @@ export class UiAlertMessagesComponent implements OnInit {
   public removeAlert(alert: Alert) {
     setTimeout(() => {
       this.alerts = this.alerts.filter((x) => x !== alert);
+      this.cd.detectChanges();
     }, 250);
   }
 }
