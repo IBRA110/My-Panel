@@ -1,6 +1,5 @@
 using System.Reflection;
 using API.Extensions;
-using API.GraphQL;
 using API.SignalR;
 using Core.Entities;
 using Infrastracture.Data;
@@ -13,15 +12,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services
-    .AddGraphQLServer()
-    .AddProjections()
-    .AddAuthorization()
-    .AddFiltering()
-    .AddSorting()
-    .AddQueryType<UsersQueries>()
-    .AddMutationType<AccountMutations>();
-
+builder.Services.AddGraphQLServices(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 
