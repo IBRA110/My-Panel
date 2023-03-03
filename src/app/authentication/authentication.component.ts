@@ -3,7 +3,6 @@ import { UiButtonStyleEnum } from '../core/enums/ui-button-style.enum';
 import { Store } from '@ngrx/store';
 import { toKnowIsSignIn } from './data-access/store/authentication.selectors';
 import { Observable } from 'rxjs';
-import { toggleForms } from './data-access/store/authentication.actions';
 
 @Component({
   selector: 'app-authentication',

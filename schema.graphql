@@ -16,8 +16,9 @@ directive @specifiedBy(
 
 type AccountMutations {
   registration(userName: String, email: String, password: String): SuccessDTO
-  login(login: LoginDTOInput): LoginResponseDTO
-  refresh(refreshToken: RefreshTokenDTOInput): LoginResponseDTO
+  login(userName: String, password: String): LoginResponseDTO
+  refresh(refreshToken: String): LoginResponseDTO
+  logout(refreshToken: String): SuccessDTO
 }
 
 enum ApplyPolicy {
@@ -260,11 +261,6 @@ input ListFilterInputTypeOfMessageEntityFilterInput {
   any: Boolean
 }
 
-input LoginDTOInput {
-  userName: String
-  password: String
-}
-
 type LoginResponseDTO {
   accessToken: String
   refreshToken: String
@@ -300,10 +296,6 @@ input MessageEntityFilterInput {
   messageSent: DateTimeOperationFilterInput
   senderDeleted: BooleanOperationFilterInput
   recipientDeleted: BooleanOperationFilterInput
-}
-
-input RefreshTokenDTOInput {
-  refreshToken: String
 }
 
 enum SortEnumType {

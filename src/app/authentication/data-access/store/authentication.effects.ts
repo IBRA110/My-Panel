@@ -2,7 +2,13 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { signUp, signUpFailed, signUpSuccess } from './authentication.actions';
+import {
+  signIn,
+  signInSuccess,
+  signUp,
+  signUpFailed,
+  signUpSuccess,
+} from './authentication.actions';
 import { AuthenticationService } from '../services/authentication.service';
 import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 
@@ -31,8 +37,36 @@ export class BookingEffects {
               );
               return signUpSuccess();
             }),
-            catchError((err) => {
-              this.messageService.callErrorMessage(err.ApolloError);
+            catchError((error) => {
+              this.messageService.callErrorMessage(error);
+              return of(signUpFailed());
+            }),
+          );
+      }),
+    );
+  });
+
+  public signInEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(signIn),
+      switchMap((action) => {
+        return this.authService
+          .signIn({
+            userName: action.userName,
+            password: action.password,
+          })
+          .pipe(
+            map((data) => {
+              this.messageService.callSuccessMessage('Login Success!');
+              return signInSuccess({
+                authTokens: {
+                  accessToken: data.data.login.accessToken,
+                  refreshToken: data.data.login.refreshToken,
+                },
+              });
+            }),
+            catchError((error) => {
+              this.messageService.callErrorMessage(error);
               return of(signUpFailed());
             }),
           );

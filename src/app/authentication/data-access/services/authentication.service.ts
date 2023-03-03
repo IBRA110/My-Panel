@@ -1,38 +1,36 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { AuthTokens, SignIn } from '../interfaces/auth.interface';
 import {
-  AccountMutationsMutation,
-  AccountMutationsMutationVariables,
+  LoginMutation,
+  LoginMutationVariables,
+  RegistrationMutation,
+  RegistrationMutationVariables,
 } from 'src/generated/graphql';
 import { Apollo, MutationResult } from 'apollo-angular';
 import { REGISTRATION } from '../gql/registration.gql';
+import { LOGIN } from '../gql/login.gql';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  public constructor(private http: HttpClient, private apollo: Apollo) {}
+  public constructor(private apollo: Apollo) {}
 
   public signUp(
-    payload: AccountMutationsMutationVariables,
-  ): Observable<MutationResult<AccountMutationsMutation>> {
-    return this.apollo.mutate<AccountMutationsMutation>({
+    payload: RegistrationMutationVariables,
+  ): Observable<MutationResult<RegistrationMutation>> {
+    return this.apollo.mutate<RegistrationMutation>({
       mutation: REGISTRATION,
-      variables: {
-        email: payload.email,
-        userName: payload.userName,
-        password: payload.password,
-      },
+      variables: payload,
     });
   }
 
-  public signIn(account: SignIn): Observable<AuthTokens> {
-    return this.http.post<AuthTokens>(
-      environment.baseUrl + 'users/authenticate',
-      account,
-    );
+  public signIn(
+    payload: LoginMutationVariables,
+  ): Observable<MutationResult<LoginMutation>> {
+    return this.apollo.mutate<LoginMutation>({
+      mutation: LOGIN,
+      variables: payload,
+    });
   }
 }

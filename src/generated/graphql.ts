@@ -187,11 +187,6 @@ export interface ListFilterInputTypeOfMessageEntityFilterInput {
   some?: InputMaybe<MessageEntityFilterInput>;
 }
 
-export interface LoginDtoInput {
-  password?: InputMaybe<Scalars['String']>;
-  userName?: InputMaybe<Scalars['String']>;
-}
-
 export interface MessageEntityFilterInput {
   and?: InputMaybe<Array<MessageEntityFilterInput>>;
   content?: InputMaybe<StringOperationFilterInput>;
@@ -207,10 +202,6 @@ export interface MessageEntityFilterInput {
   senderDeleted?: InputMaybe<BooleanOperationFilterInput>;
   senderId?: InputMaybe<StringOperationFilterInput>;
   senderUserName?: InputMaybe<StringOperationFilterInput>;
-}
-
-export interface RefreshTokenDtoInput {
-  refreshToken?: InputMaybe<Scalars['String']>;
 }
 
 export enum SortEnumType {
@@ -240,11 +231,19 @@ export interface UserParamsInput {
   pageSize: Scalars['Int'];
 }
 
-export type AccountMutationsMutationVariables = Exact<{
+export type LoginMutationVariables = Exact<{
+  userName?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type LoginMutation = { login?: { accessToken?: string | null, refreshToken?: string | null } | null };
+
+export type RegistrationMutationVariables = Exact<{
   userName?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type AccountMutationsMutation = { registration?: { message?: string | null } | null };
+export type RegistrationMutation = { registration?: { message?: string | null } | null };
