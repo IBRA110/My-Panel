@@ -24,7 +24,7 @@ export class LocalStorageService {
   public getDecodeDataBase64Url<T>(key: string): T {
     const base64Url = key.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = this.b64DecodeUnicode(base64);
+    const jsonPayload = this._b64DecodeUnicode(base64);
     return JSON.parse(jsonPayload);
   }
 
@@ -34,7 +34,7 @@ export class LocalStorageService {
   }
 
   // Encoding UTF8 ⇢ base64
-  private b64EncodeUnicode(str: string): string {
+  private _b64EncodeUnicode(str: string): string {
     return btoa(
       encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function (match, p1) {
         return String.fromCharCode(parseInt(p1, 16));
@@ -43,7 +43,7 @@ export class LocalStorageService {
   }
 
   // Decoding base64 ⇢ UTF8
-  private b64DecodeUnicode(str: string): string {
+  private _b64DecodeUnicode(str: string): string {
     return decodeURIComponent(
       Array.prototype.map
         .call(atob(str), function (c) {

@@ -13,9 +13,10 @@
       "FORGOT_PASSWORD": "Forgot password?",
       "HAVE_ACCOUNT": "Have an account?",
       "ENTER_USERNAME": "Please Enter username",
-      "ENTER_PASSWORD": "Please Enter strong password",
+      "ENTER_EMAIL": "Please Enter email!",
+      "ENTER_PASSWORD": "Please Enter password",
+      "ENTER_PASSWORD_STRONG": "Please Enter strong password",
       "SAME_PASSWORDS": "Passwords must be same!",
-      "ENTER_EMAIL": "Please Enter a valid email!",
       "CREATE_A_NEW_ACCOUNT": "Create a new account"  
     }
 }

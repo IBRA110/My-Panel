@@ -18,13 +18,13 @@ export class UiAlertMessagesComponent implements OnInit {
   public alerts: Alert[] = [];
 
   public constructor(
-    private router: Router,
-    private alertService: UiAlertMessagesService,
-    private cd: ChangeDetectorRef,
+    private _router: Router,
+    private _alertService: UiAlertMessagesService,
+    private _changeDetectorRef: ChangeDetectorRef,
   ) {}
 
   public ngOnInit() {
-    this.alertService
+    this._alertService
       .onAlert(this.id)
       .pipe(untilDestroyed(this))
       .subscribe((alert: Alert) => {
@@ -43,12 +43,12 @@ export class UiAlertMessagesComponent implements OnInit {
         setTimeout(() => {
           this.alerts = this.alerts.filter((x) => x !== alert);
         }, 20000);
-        this.cd.detectChanges();
+        this._changeDetectorRef.detectChanges();
       });
 
-    this.router.events.pipe(untilDestroyed(this)).subscribe((event) => {
+    this._router.events.pipe(untilDestroyed(this)).subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.alertService.clear(this.id);
+        this._alertService.clear(this.id);
         this.alerts = [];
       }
     });
@@ -57,7 +57,7 @@ export class UiAlertMessagesComponent implements OnInit {
   public removeAlert(alert: Alert) {
     setTimeout(() => {
       this.alerts = this.alerts.filter((x) => x !== alert);
-      this.cd.detectChanges();
+      this._changeDetectorRef.detectChanges();
     }, 250);
   }
 }

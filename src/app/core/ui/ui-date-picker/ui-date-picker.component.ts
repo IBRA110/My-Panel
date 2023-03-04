@@ -22,11 +22,11 @@ export class UiDatePickerComponent implements OnInit {
 
   public ngOnInit() {
     this.dateService.Date$.pipe(untilDestroyed(this)).subscribe(
-      this.generate.bind(this),
+      this._generate.bind(this),
     );
   }
 
-  private generate(now: moment.Moment) {
+  private _generate(now: moment.Moment) {
     const startDay = now.clone().startOf('month').startOf('week');
     const endDay = now.clone().endOf('month').endOf('week');
 

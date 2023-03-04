@@ -12,29 +12,29 @@ import { UiAlertMessagesService } from './core/services/ui-alert-messages.servic
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  private currentTheme: string = ThemesEnum.LIGHT;
+  private _currentTheme: string = ThemesEnum.LIGHT;
 
   public constructor(
-    private translate: TranslateService,
-    private themeService: ThemeService,
-    private localStorageService: LocalStorageService,
+    private _translate: TranslateService,
+    private _themeService: ThemeService,
+    private _localStorageService: LocalStorageService,
   ) {
-    translate.addLangs(['english', 'russian']);
-    translate.setDefaultLang('english');
+    _translate.addLangs(['english', 'russian']);
+    _translate.setDefaultLang('english');
   }
 
   public ngOnInit() {
-    this.currentTheme = this.localStorageService.getData(
+    this._currentTheme = this._localStorageService.getData(
       LocalStorageKeysEnum.CURRENT_THEME,
     );
-    if (this.currentTheme) {
-      this.themeService.setTheme(this.currentTheme);
+    if (this._currentTheme) {
+      this._themeService.setTheme(this._currentTheme);
     } else {
-      this.localStorageService.saveData(
+      this._localStorageService.saveData(
         LocalStorageKeysEnum.CURRENT_THEME,
         ThemesEnum.LIGHT,
       );
-      this.themeService.setTheme(ThemesEnum.LIGHT);
+      this._themeService.setTheme(ThemesEnum.LIGHT);
     }
   }
 }

@@ -8,6 +8,7 @@ import {
   toggleForms,
 } from '../../data-access/store/authentication.actions';
 import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
+import { CustomValidators } from 'src/app/core/validators/custom.validator';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,8 +20,8 @@ export class SignUpComponent implements OnInit {
   public signUpForm: FormGroup<SignUpForm>;
 
   public constructor(
-    private store: Store,
-    private alertMessageService: UiAlertMessagesService,
+    private _store: Store,
+    private _alertMessageService: UiAlertMessagesService,
   ) {}
 
   public ngOnInit(): void {
@@ -30,25 +31,41 @@ export class SignUpComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
       ]),
-      passwords: new FormGroup({
-        password: new FormControl('', Validators.required),
-        confirmpassword: new FormControl('', Validators.required),
-      }),
+      password: new FormControl('', [
+        Validators.required,
+        CustomValidators.patternValidator(/\d/, {
+          hasNumber: true,
+        }),
+        CustomValidators.patternValidator(/[A-Z]/, {
+          hasCapitalCase: true,
+        }),
+        CustomValidators.patternValidator(/[a-z]/, {
+          hasSmallCase: true,
+        }),
+        CustomValidators.patternValidator(
+          /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,
+          {
+            hasSpecialCharacters: true,
+          },
+        ),
+        Validators.minLength(8),
+      ]),
+      confirmpassword: new FormControl('', Validators.required),
     });
   }
 
-  //TODO: https://codinglatte.com/posts/angular/cool-password-validation-angular/ password validation
-
   public onSignUp(): void {
     if (this.signUpForm.invalid) {
-      this.alertMessageService.callWarningMessage('All Fields Are Required!!!');
+      this._alertMessageService.callWarningMessage(
+        'All Fields Are Required!!!',
+      );
       return;
     }
-    this.store.dispatch(
+    this._store.dispatch(
       signUp({
         userName: this.signUpForm.get('userName').value,
         email: this.signUpForm.get('email').value,
-        password: this.signUpForm.get('passwords.password').value,
+        password: this.signUpForm.get('password').value,
       }),
     );
   }
@@ -67,6 +84,6 @@ export class SignUpComponent implements OnInit {
   }
 
   public toggleForm(): void {
-    this.store.dispatch(toggleForms({ payload: true }));
+    this._store.dispatch(toggleForms({ payload: true }));
   }
 }

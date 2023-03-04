@@ -48,84 +48,82 @@
       <small>{{ 'AUTHENTICATION.ENTER_EMAIL' | translate }}</small>
     </div>
   </div>
-  <div class="form-passwords" formGroupName="passwords">
-    <div class="form-control">
-      <label class="form-control_label" for="password">{{
-        'AUTHENTICATION.PASSWORD' | translate | titlecase
-      }}</label>
-      <input
-        class="form-control_input"
-        type="{{ typeOfInput[0] }}"
-        name="password"
-        formControlName="password"
-        [ngClass]="{
-          error:
-            signUpForm.get('passwords.password').touched &&
-            signUpForm.get('passwords.password').invalid
-        }"
-      />
-      <button (click)="toggleType(0)" type="button">
-        <svg
-          width="26"
-          height="20"
-          viewBox="0 0 26 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M25.6028 9.24414C22.8254 3.39356 18.6272 0.449219 12.9993 0.449219C7.36839 0.449219 3.17308 3.39355 0.395738 9.24707C0.284338 9.48296 0.226563 9.74059 0.226562 10.0015C0.226562 10.2623 0.284338 10.52 0.395738 10.7559C3.17308 16.6064 7.37132 19.5508 12.9993 19.5508C18.6301 19.5508 22.8254 16.6064 25.6028 10.7529C25.8284 10.2783 25.8284 9.72754 25.6028 9.24414ZM12.9993 17.4414C8.27367 17.4414 4.81371 15.0449 2.37328 10C4.81371 4.95508 8.27367 2.55859 12.9993 2.55859C17.7248 2.55859 21.1848 4.95508 23.6252 10C21.1877 15.0449 17.7278 17.4414 12.9993 17.4414ZM12.8821 4.84375C10.0344 4.84375 7.72582 7.15234 7.72582 10C7.72582 12.8477 10.0344 15.1562 12.8821 15.1562C15.7297 15.1562 18.0383 12.8477 18.0383 10C18.0383 7.15234 15.7297 4.84375 12.8821 4.84375ZM12.8821 13.2812C11.0686 13.2812 9.60082 11.8135 9.60082 10C9.60082 8.18652 11.0686 6.71875 12.8821 6.71875C14.6955 6.71875 16.1633 8.18652 16.1633 10C16.1633 11.8135 14.6955 13.2812 12.8821 13.2812Z"
-          />
-        </svg>
-        <span [ngClass]="{ visible: typeOfInput[0] === 'text' }"></span>
-      </button>
-      <div
-        [ngClass]="{
-          error:
-            signUpForm.get('passwords.password').invalid &&
-            signUpForm.get('passwords.password').touched
-        }"
+  <div class="form-control">
+    <label class="form-control_label" for="password">{{
+      'AUTHENTICATION.PASSWORD' | translate | titlecase
+    }}</label>
+    <input
+      class="form-control_input"
+      type="{{ typeOfInput[0] }}"
+      name="password"
+      formControlName="password"
+      [ngClass]="{
+        error:
+          signUpForm.get('password').touched &&
+          signUpForm.get('password').invalid
+      }"
+    />
+    <button (click)="toggleType(0)" type="button">
+      <svg
+        width="26"
+        height="20"
+        viewBox="0 0 26 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <span>{{ 'AUTHENTICATION.ENTER_PASSWORD' | translate }}</span>
-      </div>
+        <path
+          d="M25.6028 9.24414C22.8254 3.39356 18.6272 0.449219 12.9993 0.449219C7.36839 0.449219 3.17308 3.39355 0.395738 9.24707C0.284338 9.48296 0.226563 9.74059 0.226562 10.0015C0.226562 10.2623 0.284338 10.52 0.395738 10.7559C3.17308 16.6064 7.37132 19.5508 12.9993 19.5508C18.6301 19.5508 22.8254 16.6064 25.6028 10.7529C25.8284 10.2783 25.8284 9.72754 25.6028 9.24414ZM12.9993 17.4414C8.27367 17.4414 4.81371 15.0449 2.37328 10C4.81371 4.95508 8.27367 2.55859 12.9993 2.55859C17.7248 2.55859 21.1848 4.95508 23.6252 10C21.1877 15.0449 17.7278 17.4414 12.9993 17.4414ZM12.8821 4.84375C10.0344 4.84375 7.72582 7.15234 7.72582 10C7.72582 12.8477 10.0344 15.1562 12.8821 15.1562C15.7297 15.1562 18.0383 12.8477 18.0383 10C18.0383 7.15234 15.7297 4.84375 12.8821 4.84375ZM12.8821 13.2812C11.0686 13.2812 9.60082 11.8135 9.60082 10C9.60082 8.18652 11.0686 6.71875 12.8821 6.71875C14.6955 6.71875 16.1633 8.18652 16.1633 10C16.1633 11.8135 14.6955 13.2812 12.8821 13.2812Z"
+        />
+      </svg>
+      <span [ngClass]="{ visible: typeOfInput[0] === 'text' }"></span>
+    </button>
+    <div
+      [ngClass]="{
+        error:
+          signUpForm.get('password').invalid &&
+          signUpForm.get('password').touched
+      }"
+    >
+      <span>{{ 'AUTHENTICATION.ENTER_PASSWORD' | translate }}</span>
     </div>
-    <div class="form-control">
-      <label class="form-control_label" for="confirmpassword">{{
-        'AUTHENTICATION.CONFIRM_PASSWORD' | translate | titlecase
-      }}</label>
-      <input
-        class="form-control_input"
-        type="{{ typeOfInput[1] }}"
-        name="confirmpassword"
-        formControlName="confirmpassword"
-        [ngClass]="{
-          error:
-            signUpForm.get('passwords.confirmpassword').touched &&
-            signUpForm.get('passwords.confirmpassword').invalid
-        }"
-      />
-      <button (click)="toggleType(1)" type="button">
-        <svg
-          width="26"
-          height="20"
-          viewBox="0 0 26 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M25.6028 9.24414C22.8254 3.39356 18.6272 0.449219 12.9993 0.449219C7.36839 0.449219 3.17308 3.39355 0.395738 9.24707C0.284338 9.48296 0.226563 9.74059 0.226562 10.0015C0.226562 10.2623 0.284338 10.52 0.395738 10.7559C3.17308 16.6064 7.37132 19.5508 12.9993 19.5508C18.6301 19.5508 22.8254 16.6064 25.6028 10.7529C25.8284 10.2783 25.8284 9.72754 25.6028 9.24414ZM12.9993 17.4414C8.27367 17.4414 4.81371 15.0449 2.37328 10C4.81371 4.95508 8.27367 2.55859 12.9993 2.55859C17.7248 2.55859 21.1848 4.95508 23.6252 10C21.1877 15.0449 17.7278 17.4414 12.9993 17.4414ZM12.8821 4.84375C10.0344 4.84375 7.72582 7.15234 7.72582 10C7.72582 12.8477 10.0344 15.1562 12.8821 15.1562C15.7297 15.1562 18.0383 12.8477 18.0383 10C18.0383 7.15234 15.7297 4.84375 12.8821 4.84375ZM12.8821 13.2812C11.0686 13.2812 9.60082 11.8135 9.60082 10C9.60082 8.18652 11.0686 6.71875 12.8821 6.71875C14.6955 6.71875 16.1633 8.18652 16.1633 10C16.1633 11.8135 14.6955 13.2812 12.8821 13.2812Z"
-          />
-        </svg>
-        <span [ngClass]="{ visible: typeOfInput[1] === 'text' }"></span>
-      </button>
-      <div
-        [ngClass]="{
-          error:
-            signUpForm.get('passwords.confirmpassword').touched &&
-            signUpForm.get('passwords.confirmpassword').invalid
-        }"
+  </div>
+  <div class="form-control">
+    <label class="form-control_label" for="confirmpassword">{{
+      'AUTHENTICATION.CONFIRM_PASSWORD' | translate | titlecase
+    }}</label>
+    <input
+      class="form-control_input"
+      type="{{ typeOfInput[1] }}"
+      name="confirmpassword"
+      formControlName="confirmpassword"
+      [ngClass]="{
+        error:
+          signUpForm.get('confirmpassword').touched &&
+          signUpForm.get('confirmpassword').invalid
+      }"
+    />
+    <button (click)="toggleType(1)" type="button">
+      <svg
+        width="26"
+        height="20"
+        viewBox="0 0 26 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <span>{{ 'AUTHENTICATION.SAME_PASSWORDS' | translate }}</span>
-      </div>
+        <path
+          d="M25.6028 9.24414C22.8254 3.39356 18.6272 0.449219 12.9993 0.449219C7.36839 0.449219 3.17308 3.39355 0.395738 9.24707C0.284338 9.48296 0.226563 9.74059 0.226562 10.0015C0.226562 10.2623 0.284338 10.52 0.395738 10.7559C3.17308 16.6064 7.37132 19.5508 12.9993 19.5508C18.6301 19.5508 22.8254 16.6064 25.6028 10.7529C25.8284 10.2783 25.8284 9.72754 25.6028 9.24414ZM12.9993 17.4414C8.27367 17.4414 4.81371 15.0449 2.37328 10C4.81371 4.95508 8.27367 2.55859 12.9993 2.55859C17.7248 2.55859 21.1848 4.95508 23.6252 10C21.1877 15.0449 17.7278 17.4414 12.9993 17.4414ZM12.8821 4.84375C10.0344 4.84375 7.72582 7.15234 7.72582 10C7.72582 12.8477 10.0344 15.1562 12.8821 15.1562C15.7297 15.1562 18.0383 12.8477 18.0383 10C18.0383 7.15234 15.7297 4.84375 12.8821 4.84375ZM12.8821 13.2812C11.0686 13.2812 9.60082 11.8135 9.60082 10C9.60082 8.18652 11.0686 6.71875 12.8821 6.71875C14.6955 6.71875 16.1633 8.18652 16.1633 10C16.1633 11.8135 14.6955 13.2812 12.8821 13.2812Z"
+        />
+      </svg>
+      <span [ngClass]="{ visible: typeOfInput[1] === 'text' }"></span>
+    </button>
+    <div
+      [ngClass]="{
+        error:
+          signUpForm.get('confirmpassword').touched &&
+          signUpForm.get('confirmpassword').invalid
+      }"
+    >
+      <span>{{ 'AUTHENTICATION.SAME_PASSWORDS' | translate }}</span>
     </div>
   </div>
   <div class="form-links">

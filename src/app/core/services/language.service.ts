@@ -14,12 +14,12 @@ export class LanguageService {
   public readonly language = this._language.asObservable();
 
   public constructor(
-    public translateService: TranslateService,
-    public localStorageService: LocalStorageService,
+    private _translateService: TranslateService,
+    private _localStorageService: LocalStorageService,
   ) {}
 
   public setLanguage(language: Language): void {
-    this.localStorageService.saveData(
+    this._localStorageService.saveData(
       LocalStorageKeysEnum.CURRENT_LANGUAGE,
       JSON.stringify({
         id: language.id,
@@ -30,7 +30,7 @@ export class LanguageService {
       id: language.id,
       name: language.name,
     });
-    this.translateService.setDefaultLang(language.name.toLowerCase());
-    this.translateService.use(language.name.toLowerCase());
+    this._translateService.setDefaultLang(language.name.toLowerCase());
+    this._translateService.use(language.name.toLowerCase());
   }
 }

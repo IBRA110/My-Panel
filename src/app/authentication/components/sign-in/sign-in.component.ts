@@ -17,9 +17,10 @@ import {
 export class SignInComponent implements OnInit {
   public signInForm: FormGroup<SignInForm>;
   public typeOfInput: 'password' | 'text' = 'password';
+
   public constructor(
-    private alertMessage: UiAlertMessagesService,
-    public store: Store,
+    private _alertMessage: UiAlertMessagesService,
+    private _store: Store,
   ) {}
 
   public ngOnInit(): void {
@@ -31,10 +32,10 @@ export class SignInComponent implements OnInit {
 
   public onSignIn(): void {
     if (this.signInForm.invalid) {
-      this.alertMessage.callWarningMessage('All Fields Are Required!!!');
+      this._alertMessage.callWarningMessage('All Fields Are Required!!!');
       return;
     }
-    this.store.dispatch(
+    this._store.dispatch(
       signIn({
         userName: this.signInForm.value.userName,
         password: this.signInForm.value.password,
@@ -56,6 +57,6 @@ export class SignInComponent implements OnInit {
   }
 
   public toggleForm(): void {
-    this.store.dispatch(toggleForms({ payload: false }));
+    this._store.dispatch(toggleForms({ payload: false }));
   }
 }

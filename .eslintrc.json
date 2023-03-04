@@ -24,6 +24,7 @@
         "eslint-plugin-prettier"
       ],
       "rules": {
+        "prefer-const": [2],
         "prettier/prettier": [
           "error",
           {
@@ -61,14 +62,14 @@
         "@typescript-eslint/naming-convention": [
           "error",
           {
-            "selector": "property",
+            "selector": "default",
             "modifiers": [
-              "static"
+              "private"
             ],
             "format": [
-              "PascalCase"
+              "camelCase"
             ],
-            "leadingUnderscore": "forbid"
+            "leadingUnderscore": "require"
           }
         ],
         "@typescript-eslint/explicit-member-accessibility": [

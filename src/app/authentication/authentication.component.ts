@@ -12,9 +12,9 @@ import { fadeAnimation } from '../core/animations/fade.animation';
   animations: [fadeAnimation],
 })
 export class AuthenticationComponent {
-  public isToggleForm: Observable<boolean> = this.store.select(toKnowIsSignIn);
+  public isToggleForm: Observable<boolean> = this._store.select(toKnowIsSignIn);
 
-  public constructor(private store: Store) {}
+  public constructor(private _store: Store) {}
   public get scssClass(): typeof UiButtonStyleEnum {
     return UiButtonStyleEnum;
   }

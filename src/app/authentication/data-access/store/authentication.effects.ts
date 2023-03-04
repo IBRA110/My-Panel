@@ -26,25 +26,25 @@ import { getAccessToken } from './authentication.selectors';
 @Injectable()
 export class BookingEffects {
   public constructor(
-    private actions$: Actions,
-    private authService: AuthenticationService,
-    private messageService: UiAlertMessagesService,
-    private localStorageService: LocalStorageService,
+    private _actions$: Actions,
+    private _authService: AuthenticationService,
+    private _messageService: UiAlertMessagesService,
+    private _localStorageService: LocalStorageService,
   ) {}
 
-  private signUpEffect$ = createEffect(() => {
-    return this.actions$.pipe(
+  private _signUpEffect$ = createEffect(() => {
+    return this._actions$.pipe(
       ofType(signUp),
       switchMap((action) => {
-        return this.authService.signUp(action).pipe(
+        return this._authService.signUp(action).pipe(
           map((data) => {
-            this.messageService.callSuccessMessage(
+            this._messageService.callSuccessMessage(
               data.data.registration.message,
             );
             return signUpSuccess();
           }),
           catchError((error: ErrorResponse) => {
-            this.messageService.callErrorMessage(error.message);
+            this._messageService.callErrorMessage(error.message);
             return of(signUpFailed());
           }),
         );
@@ -52,14 +52,14 @@ export class BookingEffects {
     );
   });
 
-  private signInEffect$ = createEffect(() => {
-    return this.actions$.pipe(
+  private _signInEffect$ = createEffect(() => {
+    return this._actions$.pipe(
       ofType(signIn),
       switchMap((action) => {
-        return this.authService.signIn(action).pipe(
+        return this._authService.signIn(action).pipe(
           mergeMap((data) => {
-            this.messageService.callSuccessMessage('Login Success!');
-            this.localStorageService.setTokens({
+            this._messageService.callSuccessMessage('Login Success!');
+            this._localStorageService.setTokens({
               accessToken: data.data.login.accessToken,
               refreshToken: data.data.login.refreshToken,
             });
@@ -73,7 +73,7 @@ export class BookingEffects {
             ];
           }),
           catchError((error: ErrorResponse) => {
-            this.messageService.callErrorMessage(error.message);
+            this._messageService.callErrorMessage(error.message);
             return of(signUpFailed());
           }),
         );
