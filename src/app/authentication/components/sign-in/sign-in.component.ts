@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SignInForm } from '../../data-access/interfaces/form.interface';
 import { UiButtonStyleEnum } from './../../../core/enums/ui-button-style.enum';
