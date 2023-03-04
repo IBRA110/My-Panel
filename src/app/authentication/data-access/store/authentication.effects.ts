@@ -1,8 +1,16 @@
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
 import {
+  catchError,
+  delayWhen,
+  map,
+  mergeMap,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs/operators';
+import { of, timer } from 'rxjs';
+import {
+  refreshToken,
   signIn,
   signInSuccess,
   signUp,
@@ -13,6 +21,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 import { ErrorResponse } from 'src/app/core/interfaces/error.interface';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { getAccessToken } from './authentication.selectors';
 
 @Injectable()
 export class BookingEffects {
@@ -23,7 +32,7 @@ export class BookingEffects {
     private localStorageService: LocalStorageService,
   ) {}
 
-  public signUpEffect$ = createEffect(() => {
+  private signUpEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(signUp),
       switchMap((action) => {
@@ -43,7 +52,7 @@ export class BookingEffects {
     );
   });
 
-  public signInEffect$ = createEffect(() => {
+  private signInEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(signIn),
       switchMap((action) => {
@@ -71,4 +80,40 @@ export class BookingEffects {
       }),
     );
   });
+
+  // public refreshTokenEffect$ = createEffect(() =>
+  // this.actions$.pipe(
+  //   ofType(refreshToken),
+  //    withLatestFrom(this.store.select(getAccessToken)),
+  //    delayWhen(([, token]) => {
+  //     const expiration = this.localStorageService.getExpiration(
+  //       token.accessToken,
+  //     );
+  //     return timer(
+  //       expiration ? expiration * 1000 - 60 * 1000 - Date.now() : 0,
+  //     );
+  //   }),
+  //   switchMap(([, token]) => {
+  //     if (!token) return of(authActions.doNothing());
+  //     return this.userService
+  //       .refreshTokenUser({ token: token.refreshToken })
+  //       .pipe(
+  //         switchMap((refreshTokenResponse) => {
+  //           this.localStorageService.updateLocalStorageData(
+  //             refreshTokenResponse.data.refreshTokenUser,
+  //           );
+  //           return [
+  //             authActions.refreshTokenSuccess({
+  //               authToken: refreshTokenResponse.data.refreshTokenUser,
+  //             }),
+  //             authActions.refreshToken(),
+  //           ];
+  //         }),
+  //         catchError(() => {
+  //           return of(authActions.refreshTokenFailed());
+  //         }),
+  //       );
+  //   }),
+  // ),
+  // );
 }

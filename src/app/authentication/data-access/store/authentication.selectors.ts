@@ -7,3 +7,8 @@ export const toKnowIsSignIn = createSelector(
   authState,
   (state) => state.isToggleForm,
 );
+
+export const getAccessToken = createSelector(
+  authState,
+  (state) => state.authTokens.accessToken,
+);

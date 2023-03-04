@@ -27,3 +27,5 @@ export const toggleForms = createAction(
   AuthActions.TOGGLE_FORMS,
   props<{ payload: boolean }>(),
 );
+
+export const refreshToken = createAction(AuthActions.REFRESH_TOKEN);
