@@ -2,8 +2,14 @@
   <div class="auth-background">
     <img src="/assets/images/background/1.jpg" alt="back" />
   </div>
-  <div class="auth-forms">
-    <app-sign-up *ngIf="(isToggleForm | async) === false"></app-sign-up>
-    <app-sign-in *ngIf="(isToggleForm | async) === true"></app-sign-in>
+  <div class="auth-form">
+    <app-sign-up
+      @fadeAnimation
+      *ngIf="(isToggleForm | async) === false"
+    ></app-sign-up>
+    <app-sign-in
+      @fadeAnimation
+      *ngIf="(isToggleForm | async) === true"
+    ></app-sign-in>
   </div>
 </div>
