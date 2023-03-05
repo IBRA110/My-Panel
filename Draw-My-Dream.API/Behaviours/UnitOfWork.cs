@@ -1,7 +1,7 @@
 using API.Interfaces;
 using AutoMapper;
 using Core.Entities;
-using Infrastracture.Data;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

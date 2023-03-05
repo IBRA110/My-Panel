@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace infrastructure.Data
+namespace Infrastructure.Data
 {
     public class DataContext : IdentityDbContext<AppUserEntity, AppRoleEntity, string, 
         IdentityUserClaim<string>, AppUserRoleEntity, IdentityUserLogin<string>, 

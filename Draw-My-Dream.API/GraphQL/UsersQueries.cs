@@ -1,6 +1,6 @@
 using API.Helpers;
 using Core.Entities;
-using Infrastracture.Data;
+using Infrastructure.Data;
 
 namespace API.GraphQL
 {

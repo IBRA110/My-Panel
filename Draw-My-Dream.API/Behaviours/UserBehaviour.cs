@@ -4,7 +4,7 @@ using AutoMapper;
 using API.DTOs;
 using API.Helpers;
 using API.Interfaces;
-using Infrastracture.Data;
+using Infrastructure.Data;
 using Core.Entities;
 
 namespace API.Behaviours

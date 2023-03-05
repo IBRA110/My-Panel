@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using API.Helpers;
 using API.Interfaces;
-using Infrastracture.Data;
+using Infrastructure.Data;
 using API.Services;
 using API.Behaviours;
 using API.SignalR;

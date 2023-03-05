@@ -2,7 +2,7 @@ using Core.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace infrastructure.Data
+namespace Infrastructure.Data
 {
     public class Seed
     {

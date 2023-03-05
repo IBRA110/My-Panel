@@ -4,7 +4,7 @@ using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Core.Entities;
-using Infrastracture.Data;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Behaviours
