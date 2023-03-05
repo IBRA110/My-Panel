@@ -111,7 +111,7 @@ namespace API.GraphQL
 
             if (user == null || refreshToken != user.RefreshToken)
             {
-                throw new ArgumentException("Something went wrong!");
+                throw new GraphQLException("Something went wrong!");
             }
 
             user.RefreshToken = tokenService.CreateRefreshToken(user);
@@ -134,7 +134,7 @@ namespace API.GraphQL
 
             if (user == null || refreshToken != user.RefreshToken)
             {
-                throw new ArgumentException("Something went wrong!");
+                throw new GraphQLException("Something went wrong!");
             }
 
             user.RefreshToken = null;
