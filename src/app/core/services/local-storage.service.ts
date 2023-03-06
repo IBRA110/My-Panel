@@ -29,27 +29,21 @@ export class LocalStorageService {
   }
 
   public getExpiration(token: string): number {
-    const { expiration } = this.getDecodeDataBase64Url<any>(token);
-    return expiration;
+    return this._b64DecodeUnicode(token).exp;
   }
 
-  // Encoding UTF8 ⇢ base64
-  private _b64EncodeUnicode(str: string): string {
-    return btoa(
-      encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function (match, p1) {
-        return String.fromCharCode(parseInt(p1, 16));
-      }),
-    );
-  }
-
-  // Decoding base64 ⇢ UTF8
-  private _b64DecodeUnicode(str: string): string {
-    return decodeURIComponent(
-      Array.prototype.map
-        .call(atob(str), function (c) {
+  private _b64DecodeUnicode(str: string): any {
+    const base64Url = str.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+      window
+        .atob(base64)
+        .split('')
+        .map(function (c) {
           return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         })
         .join(''),
     );
+    return JSON.parse(jsonPayload);
   }
 }

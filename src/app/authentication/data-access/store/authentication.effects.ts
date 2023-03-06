@@ -75,6 +75,7 @@ export class BookingEffects {
                   refreshToken: data.data.login.refreshToken,
                 },
               }),
+              refreshToken(),
             ];
           }),
           catchError((error: ErrorResponse) => {
@@ -118,7 +119,7 @@ export class BookingEffects {
                 refreshToken(),
               ];
             }),
-            catchError(() => {
+            catchError((error: ErrorResponse) => {
               return of(refreshTokenFailed());
             }),
           );
