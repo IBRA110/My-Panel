@@ -1,5 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import {
+  refreshTokenSuccess,
   signInSuccess,
   signUpSuccess,
   toggleForms,
@@ -10,7 +11,7 @@ export const authenticationFeatureKey = 'auth';
 
 const authenticationReducer = createReducer(
   initialState,
-  on(signInSuccess, (state, { authTokens }) => ({
+  on(signInSuccess, refreshTokenSuccess, (state, { authTokens }) => ({
     ...state,
     authTokens,
   })),

@@ -10,7 +10,10 @@ import {
 } from 'rxjs/operators';
 import { of, timer } from 'rxjs';
 import {
+  doNothing,
   refreshToken,
+  refreshTokenFailed,
+  refreshTokenSuccess,
   signIn,
   signInSuccess,
   signUp,
@@ -22,6 +25,7 @@ import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.
 import { ErrorResponse } from 'src/app/core/interfaces/error.interface';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { getAccessToken } from './authentication.selectors';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class BookingEffects {
@@ -30,6 +34,7 @@ export class BookingEffects {
     private _authService: AuthenticationService,
     private _messageService: UiAlertMessagesService,
     private _localStorageService: LocalStorageService,
+    private _store: Store,
   ) {}
 
   private _signUpEffect$ = createEffect(() => {
@@ -81,39 +86,43 @@ export class BookingEffects {
     );
   });
 
-  // public refreshTokenEffect$ = createEffect(() =>
-  // this.actions$.pipe(
-  //   ofType(refreshToken),
-  //    withLatestFrom(this.store.select(getAccessToken)),
-  //    delayWhen(([, token]) => {
-  //     const expiration = this.localStorageService.getExpiration(
-  //       token.accessToken,
-  //     );
-  //     return timer(
-  //       expiration ? expiration * 1000 - 60 * 1000 - Date.now() : 0,
-  //     );
-  //   }),
-  //   switchMap(([, token]) => {
-  //     if (!token) return of(authActions.doNothing());
-  //     return this.userService
-  //       .refreshTokenUser({ token: token.refreshToken })
-  //       .pipe(
-  //         switchMap((refreshTokenResponse) => {
-  //           this.localStorageService.updateLocalStorageData(
-  //             refreshTokenResponse.data.refreshTokenUser,
-  //           );
-  //           return [
-  //             authActions.refreshTokenSuccess({
-  //               authToken: refreshTokenResponse.data.refreshTokenUser,
-  //             }),
-  //             authActions.refreshToken(),
-  //           ];
-  //         }),
-  //         catchError(() => {
-  //           return of(authActions.refreshTokenFailed());
-  //         }),
-  //       );
-  //   }),
-  // ),
-  // );
+  private _refreshTokenEffect$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(refreshToken),
+      withLatestFrom(this._store.select(getAccessToken)),
+      delayWhen(([, token]) => {
+        const expiration = this._localStorageService.getExpiration(
+          token.accessToken,
+        );
+        return timer(
+          expiration ? expiration * 1000 - 60 * 1000 - Date.now() : 0,
+        );
+      }),
+      switchMap(([, token]) => {
+        if (!token) return of(doNothing());
+        return this._authService
+          .refresh({ refreshToken: token.refreshToken })
+          .pipe(
+            switchMap((data) => {
+              this._localStorageService.setTokens({
+                accessToken: data.data.refresh.accessToken,
+                refreshToken: data.data.refresh.refreshToken,
+              });
+              return [
+                refreshTokenSuccess({
+                  authTokens: {
+                    accessToken: data.data.refresh.accessToken,
+                    refreshToken: data.data.refresh.refreshToken,
+                  },
+                }),
+                refreshToken(),
+              ];
+            }),
+            catchError(() => {
+              return of(refreshTokenFailed());
+            }),
+          );
+      }),
+    ),
+  );
 }

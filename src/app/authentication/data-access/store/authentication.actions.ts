@@ -1,31 +1,42 @@
 import { createAction, props } from '@ngrx/store';
 import { AuthTokens } from '../interfaces/auth.interface';
-import { AuthActions } from './authentication.enum';
+import { AuthActionsEnum } from './authentication.enum';
 
 export const signIn = createAction(
-  AuthActions.SIGN_IN,
+  AuthActionsEnum.SIGN_IN,
   props<{ userName: string; password: string }>(),
 );
 
 export const signInSuccess = createAction(
-  AuthActions.SIGN_IN_SUCCESS,
+  AuthActionsEnum.SIGN_IN_SUCCESS,
   props<{ authTokens: AuthTokens }>(),
 );
 
-export const signInFailed = createAction(AuthActions.SIGN_IN_FAILED);
+export const signInFailed = createAction(AuthActionsEnum.SIGN_IN_FAILED);
 
 export const signUp = createAction(
-  AuthActions.SIGN_UP,
+  AuthActionsEnum.SIGN_UP,
   props<{ userName: string; email: string; password: string }>(),
 );
 
-export const signUpSuccess = createAction(AuthActions.SIGN_UP_SUCCESS);
+export const signUpSuccess = createAction(AuthActionsEnum.SIGN_UP_SUCCESS);
 
-export const signUpFailed = createAction(AuthActions.SIGN_UP_FAILED);
+export const signUpFailed = createAction(AuthActionsEnum.SIGN_UP_FAILED);
 
 export const toggleForms = createAction(
-  AuthActions.TOGGLE_FORMS,
+  AuthActionsEnum.TOGGLE_FORMS,
   props<{ payload: boolean }>(),
 );
 
-export const refreshToken = createAction(AuthActions.REFRESH_TOKEN);
+export const refreshToken = createAction(AuthActionsEnum.REFRESH_TOKEN);
+
+export const refreshTokenSuccess = createAction(
+  AuthActionsEnum.REFRESH_TOKEN_SUCCESS,
+  props<{ authTokens: AuthTokens }>(),
+);
+
+export const refreshTokenFailed = createAction(
+  AuthActionsEnum.REFRESH_TOKEN_FAILED,
+);
+
+export const doNothing = createAction(AuthActionsEnum.DO_NOTHING);

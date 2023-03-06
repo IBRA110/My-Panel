@@ -10,5 +10,5 @@ export const toKnowIsSignIn = createSelector(
 
 export const getAccessToken = createSelector(
   authState,
-  (state) => state.authTokens.accessToken,
+  (state) => state.authTokens,
 );
