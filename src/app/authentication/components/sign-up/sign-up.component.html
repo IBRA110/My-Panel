@@ -45,7 +45,9 @@
           signUpForm.get('email').touched && signUpForm.get('email').invalid
       }"
     >
-      <small>{{ 'AUTHENTICATION.ENTER_EMAIL' | translate }}</small>
+      <small *ngIf="controlHasError('email', 'required')">{{
+        'AUTHENTICATION.ENTER_EMAIL' | translate
+      }}</small>
       <small *ngIf="controlHasError('email', 'pattern')">{{
         'AUTHENTICATION.ENTER_EMAIL_PATTERN' | translate
       }}</small>
@@ -87,22 +89,24 @@
           signUpForm.get('password').touched
       }"
     >
-      <span>{{ 'AUTHENTICATION.ENTER_PASSWORD' | translate }}</span>
-      <span *ngIf="controlHasError('password', 'hasNumber')">{{
+      <small *ngIf="controlHasError('password', 'required')">{{
+        'AUTHENTICATION.ENTER_PASSWORD' | translate
+      }}</small>
+      <small *ngIf="controlHasError('password', 'hasNumber')">{{
         'AUTHENTICATION.ENTER_PASSWORD_NUMBER' | translate
-      }}</span>
-      <span *ngIf="controlHasError('password', 'hasCapitalCase')">{{
+      }}</small>
+      <small *ngIf="controlHasError('password', 'hasCapitalCase')">{{
         'AUTHENTICATION.ENTER_PASSWORD_HAS_CAPITAL_CASE' | translate
-      }}</span>
-      <span *ngIf="controlHasError('password', 'hasSmallCase')">{{
+      }}</small>
+      <small *ngIf="controlHasError('password', 'hasSmallCase')">{{
         'AUTHENTICATION.ENTER_PASSWORD_HAS_SMALL_CASE' | translate
-      }}</span>
-      <span *ngIf="controlHasError('password', 'hasSpecialCharacters')">
+      }}</small>
+      <small *ngIf="controlHasError('password', 'hasSpecialCharacters')">
         {{ 'AUTHENTICATION.ENTER_PASSWORD_HAS_SPECIAL_CHARS' | translate }}
-      </span>
-      <span *ngIf="controlHasError('password', 'minlength')">
+      </small>
+      <small *ngIf="controlHasError('password', 'minlength')">
         {{ 'AUTHENTICATION.ENTER_PASSWORD_MINLENGTH' | translate }}
-      </span>
+      </small>
     </div>
   </div>
   <div class="form-control">
@@ -141,7 +145,7 @@
           signUpForm.get('confirmpassword').invalid
       }"
     >
-      <span>{{ 'AUTHENTICATION.SAME_PASSWORDS' | translate }}</span>
+      <small>{{ 'AUTHENTICATION.SAME_PASSWORDS' | translate }}</small>
     </div>
   </div>
   <div class="form-links">
@@ -149,7 +153,6 @@
       [type]="'submit'"
       [text]="'AUTHENTICATION.SIGN_UP' | translate | titlecase"
       [scssClass]="scssClass.DEFAULT"
-      [isDisabled]="signUpForm.invalid"
     ></app-ui-button>
     <p>
       {{ 'AUTHENTICATION.HAVE_ACCOUNT' | translate }}

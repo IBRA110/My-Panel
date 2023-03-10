@@ -36,15 +36,12 @@
       small{
         @include Link_Small;
         display: block;
+        margin-bottom: 3px;
       }
       
       &.error{
         opacity: 1;
         visibility: visible;
-      }
-
-      span {
-        display: block;
       }
     }
     
