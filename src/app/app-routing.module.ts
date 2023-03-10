@@ -9,6 +9,13 @@ const routes: Routes = [
         (m) => m.AuthenticationModule,
       ),
   },
+  {
+    path: '**',
+    loadChildren: () =>
+      import(`./pages/authentication/authentication.module`).then(
+        (m) => m.AuthenticationModule,
+      ),
+  },
 ];
 
 @NgModule({
