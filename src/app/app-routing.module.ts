@@ -10,6 +10,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'crm',
+    loadChildren: () =>
+      import(`./pages/crm/crm.module`).then((m) => m.CrmModule),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import(`./pages/authentication/authentication.module`).then(
