@@ -72,18 +72,12 @@ export class SignUpComponent implements OnInit {
   }
 
   public onSignUp(): void {
-    const fieldsRequired = this._translate.instant(
-      'AUTHENTICATION.SIGN_UP_FORM_FIELDS_REQUIRED',
-    );
-    const fieldsNotCorrect = this._translate.instant(
-      'AUTHENTICATION.SIGN_UP_FORM_FIELDS_NOT_CORRECT',
-    );
-    if (this.signUpForm.pristine) {
-      this._alertMessageService.callWarningMessage(fieldsRequired);
-      return;
-    }
     if (this.signUpForm.invalid) {
-      this._alertMessageService.callWarningMessage(fieldsNotCorrect);
+      this._alertMessageService.callWarningMessage(
+        this._translate.instant(
+          'AUTHENTICATION.SIGN_UP_FORM_FIELDS_NOT_CORRECT',
+        ),
+      );
       return;
     }
     this._store.dispatch(

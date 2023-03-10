@@ -23,8 +23,7 @@
       "ENTER_PASSWORD_HAS_SPECIAL_CHARS": "Password must contain at least 1 special character",
       "ENTER_PASSWORD_MINLENGTH": "Password length must be at least 8 characters",
       "SAME_PASSWORDS": "Passwords must be same!",
-      "SIGN_UP_FORM_FIELDS_REQUIRED": "All Fields Are Required!",
-      "SIGN_UP_FORM_FIELDS_NOT_CORRECT": "Some Fields Are Not Correct!",
+      "SIGN_UP_FORM_FIELDS_NOT_CORRECT": "Please provide all fields with correct values!",
       "CREATE_A_NEW_ACCOUNT": "Create a new account"  
     }
 }
