@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { UiButtonStyleEnum } from 'src/app/core/enums/ui-button-style.enum';
 import { SignUpForm } from '../../data-access/interfaces/form.interface';
@@ -16,42 +21,58 @@ import { CustomValidators } from 'src/app/core/validators/custom.validator';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
+  [x: string]: any;
   public typeOfInput: string[] = ['password', 'password'];
   public signUpForm: FormGroup<SignUpForm>;
 
   public constructor(
+    private _fb: FormBuilder,
     private _store: Store,
     private _alertMessageService: UiAlertMessagesService,
   ) {}
 
   public ngOnInit(): void {
-    this.signUpForm = new FormGroup<SignUpForm>({
-      userName: new FormControl('', Validators.required),
-      email: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-      ]),
-      password: new FormControl('', [
-        Validators.required,
-        CustomValidators.patternValidator(/\d/, {
-          hasNumber: true,
-        }),
-        CustomValidators.patternValidator(/[A-Z]/, {
-          hasCapitalCase: true,
-        }),
-        CustomValidators.patternValidator(/[a-z]/, {
-          hasSmallCase: true,
-        }),
-        CustomValidators.patternValidator(
-          /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,
-          {
-            hasSpecialCharacters: true,
-          },
+    this.signUpForm = this._fb.group(
+      {
+        userName: ['', Validators.required],
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+          ],
+        ],
+        password: [
+          '',
+          [
+            Validators.required,
+            CustomValidators.patternValidator(/\d/, {
+              hasNumber: true,
+            }),
+            CustomValidators.patternValidator(/[A-Z]/, {
+              hasCapitalCase: true,
+            }),
+            CustomValidators.patternValidator(/[a-z]/, {
+              hasSmallCase: true,
+            }),
+            CustomValidators.patternValidator(
+              /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,
+              {
+                hasSpecialCharacters: true,
+              },
+            ),
+            Validators.minLength(8),
+          ],
+        ],
+        confirmpassword: ['', [Validators.required]],
+      },
+      {
+        validator: CustomValidators.ConfirmPasswordValidator(
+          'password',
+          'confirmpassword',
         ),
-        Validators.minLength(8),
-      ]),
-      confirmpassword: new FormControl('', [Validators.required]),
-    });
+      },
+    );
   }
 
   public onSignUp(): void {

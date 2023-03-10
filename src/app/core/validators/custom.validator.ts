@@ -1,4 +1,9 @@
-import { ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
+import {
+  ValidationErrors,
+  ValidatorFn,
+  AbstractControl,
+  FormGroup,
+} from '@angular/forms';
 
 export class CustomValidators {
   public static patternValidator(
@@ -16,12 +21,38 @@ export class CustomValidators {
     };
   }
 
-  public static passwordMatchValidator(control: AbstractControl) {
-    const password: string = control.get('password').value;
-    const confirmPassword: string = control.get('confirmPassword').value;
+  // public static passwordMatchValidator(
+  //   control: AbstractControl,
+  // ): ValidationErrors | null {
+  //   const password: string = control.get('password').value;
+  //   const confirmPassword: string = control.get('confirmPassword').value;
 
-    if (password !== confirmPassword) {
-      control.get('confirmPassword').setErrors({ NoPassswordMatch: true });
-    }
+  //   if (password !== confirmPassword) {
+  //     // control.get('confirmPassword').setErrors({ NoPassswordMatch: true });
+  //     return { NoPasswordMatch: true };
+  //   }
+
+  //   return null;
+  // }
+
+  public static ConfirmPasswordValidator(
+    controlName: string,
+    matchingControlName: string,
+  ) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+      if (
+        matchingControl.errors &&
+        !matchingControl.errors['confirmPasswordValidator']
+      ) {
+        return;
+      }
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ confirmPasswordValidator: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
+    };
   }
 }
