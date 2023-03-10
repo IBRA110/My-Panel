@@ -9,6 +9,7 @@ import {
 } from '../../data-access/store/authentication.actions';
 import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 import { CustomValidators } from 'src/app/core/validators/custom.validator';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-up',
@@ -23,6 +24,7 @@ export class SignUpComponent implements OnInit {
     private _fb: FormBuilder,
     private _store: Store,
     private _alertMessageService: UiAlertMessagesService,
+    private _translate: TranslateService,
   ) {}
 
   public ngOnInit(): void {
@@ -70,16 +72,18 @@ export class SignUpComponent implements OnInit {
   }
 
   public onSignUp(): void {
+    const fieldsRequired = this._translate.instant(
+      'AUTHENTICATION.SIGN_UP_FORM_FIELDS_REQUIRED',
+    );
+    const fieldsNotCorrect = this._translate.instant(
+      'AUTHENTICATION.SIGN_UP_FORM_FIELDS_NOT_CORRECT',
+    );
     if (this.signUpForm.pristine) {
-      this._alertMessageService.callWarningMessage(
-        'All Fields Are Required!!!',
-      );
+      this._alertMessageService.callWarningMessage(fieldsRequired);
       return;
     }
     if (this.signUpForm.invalid) {
-      this._alertMessageService.callWarningMessage(
-        'Some Fields Are Not Correct!',
-      );
+      this._alertMessageService.callWarningMessage(fieldsNotCorrect);
       return;
     }
     this._store.dispatch(
