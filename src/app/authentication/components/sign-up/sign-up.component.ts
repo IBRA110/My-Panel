@@ -70,9 +70,15 @@ export class SignUpComponent implements OnInit {
   }
 
   public onSignUp(): void {
-    if (this.signUpForm.invalid) {
+    if (this.signUpForm.pristine) {
       this._alertMessageService.callWarningMessage(
         'All Fields Are Required!!!',
+      );
+      return;
+    }
+    if (this.signUpForm.invalid) {
+      this._alertMessageService.callWarningMessage(
+        'Some Fields Are Not Correct!',
       );
       return;
     }
