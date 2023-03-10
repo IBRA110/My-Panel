@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthTokens } from 'src/app/authentication/data-access/interfaces/auth.interface';
+import { AuthTokens } from 'src/app/pages/authentication/data-access/interfaces/auth.interface';
 import { AuthTokensEnum } from '../enums/local-storage-keys.enum';
 
 @Injectable({

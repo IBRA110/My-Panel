@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { UiButtonStyleEnum } from '../core/enums/ui-button-style.enum';
+import { UiButtonStyleEnum } from '../../core/enums/ui-button-style.enum';
 import { Store } from '@ngrx/store';
 import { toKnowIsSignIn } from './data-access/store/authentication.selectors';
 import { Observable } from 'rxjs';
-import { fadeAnimation } from '../core/animations/fade.animation';
+import { fadeAnimation } from '../../core/animations/fade.animation';
 
 @Component({
   selector: 'app-authentication',
