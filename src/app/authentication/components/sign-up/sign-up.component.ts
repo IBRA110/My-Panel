@@ -86,4 +86,11 @@ export class SignUpComponent implements OnInit {
   public toggleForm(): void {
     this._store.dispatch(toggleForms({ payload: true }));
   }
+
+  public controlHasError(control: string, error: string): boolean {
+    return (
+      this.signUpForm.get(control).hasError(error) &&
+      this.signUpForm.get(control).touched
+    );
+  }
 }

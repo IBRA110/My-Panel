@@ -16,6 +16,11 @@
       "ENTER_EMAIL": "Please Enter email!",
       "ENTER_PASSWORD": "Please Enter password",
       "ENTER_PASSWORD_STRONG": "Please Enter strong password",
+      "ENTER_PASSWORD_NUMBER": "Password must contain at least 1 number",
+      "ENTER_PASSWORD_HAS_CAPITAL_CASE": "Password must contain at least 1 capital case letter",
+      "ENTER_PASSWORD_HAS_SMALL_CASE": "Password must contain at least 1 small case letter",
+      "ENTER_PASSWORD_HAS_SPECIAL_CHARS": "Password must contain at least 1 special character",
+      "ENTER_PASSWORD_MINLENGTH": "Password length must be at least 8 characters",
       "SAME_PASSWORDS": "Passwords must be same!",
       "CREATE_A_NEW_ACCOUNT": "Create a new account"  
     }

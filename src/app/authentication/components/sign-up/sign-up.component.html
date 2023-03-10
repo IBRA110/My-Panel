@@ -85,6 +85,21 @@
       }"
     >
       <span>{{ 'AUTHENTICATION.ENTER_PASSWORD' | translate }}</span>
+      <span *ngIf="controlHasError('password', 'hasNumber')">{{
+        'AUTHENTICATION.ENTER_PASSWORD_NUMBER' | translate
+      }}</span>
+      <span *ngIf="controlHasError('password', 'hasCapitalCase')">{{
+        'AUTHENTICATION.ENTER_PASSWORD_HAS_CAPITAL_CASE' | translate
+      }}</span>
+      <span *ngIf="controlHasError('password', 'hasSmallCase')">{{
+        'AUTHENTICATION.ENTER_PASSWORD_HAS_SMALL_CASE' | translate
+      }}</span>
+      <span *ngIf="controlHasError('password', 'hasSpecialCharacters')">
+        {{ 'AUTHENTICATION.ENTER_PASSWORD_HAS_SPECIAL_CHARS' | translate }}
+      </span>
+      <span *ngIf="controlHasError('password', 'minlength')">
+        {{ 'AUTHENTICATION.ENTER_PASSWORD_MINLENGTH' | translate }}
+      </span>
     </div>
   </div>
   <div class="form-control">
