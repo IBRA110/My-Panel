@@ -149,6 +149,7 @@
       [type]="'submit'"
       [text]="'AUTHENTICATION.SIGN_UP' | translate | titlecase"
       [scssClass]="scssClass.DEFAULT"
+      [isDisabled]="signUpForm.invalid"
     ></app-ui-button>
     <p>
       {{ 'AUTHENTICATION.HAVE_ACCOUNT' | translate }}
