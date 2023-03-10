@@ -14,6 +14,7 @@
       "HAVE_ACCOUNT": "Have an account?",
       "ENTER_USERNAME": "Please Enter username",
       "ENTER_EMAIL": "Please Enter email!",
+      "ENTER_EMAIL_PATTERN": "Please enter a valid email address",
       "ENTER_PASSWORD": "Please Enter password",
       "ENTER_PASSWORD_STRONG": "Please Enter strong password",
       "ENTER_PASSWORD_NUMBER": "Password must contain at least 1 number",

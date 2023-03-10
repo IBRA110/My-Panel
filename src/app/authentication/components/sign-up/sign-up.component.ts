@@ -50,7 +50,7 @@ export class SignUpComponent implements OnInit {
         ),
         Validators.minLength(8),
       ]),
-      confirmpassword: new FormControl('', Validators.required),
+      confirmpassword: new FormControl('', [Validators.required]),
     });
   }
 

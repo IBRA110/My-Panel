@@ -46,6 +46,9 @@
       }"
     >
       <small>{{ 'AUTHENTICATION.ENTER_EMAIL' | translate }}</small>
+      <small *ngIf="controlHasError('email', 'pattern')">{{
+        'AUTHENTICATION.ENTER_EMAIL_PATTERN' | translate
+      }}</small>
     </div>
   </div>
   <div class="form-control">
