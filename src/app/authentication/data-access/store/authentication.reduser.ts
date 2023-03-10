@@ -1,4 +1,5 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { Action, on } from '@ngrx/store';
+import { createRehydrateReducer } from 'src/app/core/reducers/rehydrate-reducer';
 import {
   refreshTokenSuccess,
   signInSuccess,
@@ -9,7 +10,8 @@ import { AuthenticationState, initialState } from './authentication.state';
 
 export const authenticationFeatureKey = 'auth';
 
-const authenticationReducer = createReducer(
+const authenticationReducer = createRehydrateReducer(
+  authenticationFeatureKey,
   initialState,
   on(signInSuccess, refreshTokenSuccess, (state, { authTokens }) => ({
     ...state,

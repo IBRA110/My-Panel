@@ -21,7 +21,7 @@ export class CustomValidators {
     };
   }
 
-  public static сonfirmPasswordValidator(
+  public static confirmPasswordValidator(
     controlName: string,
     matchingControlName: string,
   ): ValidationErrors {
