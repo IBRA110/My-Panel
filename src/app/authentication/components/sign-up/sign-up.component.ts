@@ -16,7 +16,6 @@ import { CustomValidators } from 'src/app/core/validators/custom.validator';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-  [x: string]: any;
   public typeOfInput: string[] = ['password', 'password'];
   public signUpForm: FormGroup<SignUpForm>;
 
@@ -62,7 +61,7 @@ export class SignUpComponent implements OnInit {
         confirmpassword: ['', [Validators.required]],
       },
       {
-        validator: CustomValidators.ConfirmPasswordValidator(
+        validator: CustomValidators.сonfirmPasswordValidator(
           'password',
           'confirmpassword',
         ),

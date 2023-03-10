@@ -21,10 +21,10 @@ export class CustomValidators {
     };
   }
 
-  public static ConfirmPasswordValidator(
+  public static сonfirmPasswordValidator(
     controlName: string,
     matchingControlName: string,
-  ) {
+  ): ValidationErrors {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];
