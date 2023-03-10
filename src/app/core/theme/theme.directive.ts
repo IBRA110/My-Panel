@@ -17,14 +17,14 @@ export class ThemeDirective implements OnInit, OnDestroy {
   public ngOnInit() {
     const active = this._themeService.getActiveTheme();
     if (active) {
-      this.updateTheme(active);
+      this._updateTheme(active);
     }
     this._themeService.themeChange
       .pipe(takeUntil(this._unsubscribe$))
-      .subscribe((theme: Theme) => this.updateTheme(theme));
+      .subscribe((theme: Theme) => this._updateTheme(theme));
   }
 
-  private updateTheme(theme: Theme) {
+  private _updateTheme(theme: Theme) {
     for (const key in theme.properties) {
       this._elementRef.nativeElement.style.setProperty(
         key,
