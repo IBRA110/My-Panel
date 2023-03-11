@@ -5,10 +5,10 @@ export const authState = createFeatureSelector<AuthenticationState>('auth');
 
 export const toKnowIsSignIn = createSelector(
   authState,
-  (state) => state.isToggleForm,
+  (state: AuthenticationState) => state.isToggleForm,
 );
 
 export const getAccessToken = createSelector(
   authState,
-  (state) => state.authTokens,
+  (state: AuthenticationState) => state.authTokens,
 );

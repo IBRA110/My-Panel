@@ -13,14 +13,21 @@ export const authenticationFeatureKey = 'auth';
 const authenticationReducer = createRehydrateReducer(
   authenticationFeatureKey,
   initialState,
-  on(signInSuccess, refreshTokenSuccess, (state, { authTokens }) => ({
-    ...state,
-    authTokens,
-  })),
-  on(signUpSuccess, (state) => ({
-    ...state,
-    isToggleForm: true,
-  })),
+  on(
+    signInSuccess,
+    refreshTokenSuccess,
+    (state, { authTokens }): AuthenticationState => ({
+      ...state,
+      authTokens,
+    }),
+  ),
+  on(
+    signUpSuccess,
+    (state): AuthenticationState => ({
+      ...state,
+      isToggleForm: true,
+    }),
+  ),
   on(toggleForms, (state, { payload }) => ({
     ...state,
     isToggleForm: payload,
