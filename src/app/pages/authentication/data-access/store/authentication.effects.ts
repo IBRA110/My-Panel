@@ -1,4 +1,4 @@
-import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import {
   catchError,
@@ -6,7 +6,6 @@ import {
   map,
   mergeMap,
   switchMap,
-  withLatestFrom,
 } from 'rxjs/operators';
 import { of, timer } from 'rxjs';
 import {
@@ -90,7 +89,7 @@ export class BookingEffects {
   private _refreshTokenEffect$ = createEffect(() =>
     this._actions$.pipe(
       ofType(refreshToken),
-      withLatestFrom(this._store.select(getAccessToken)),
+      concatLatestFrom(() => this._store.select(getAccessToken)),
       delayWhen(([, token]) => {
         const expiration = this._localStorageService.getExpiration(
           token.accessToken,
