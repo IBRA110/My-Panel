@@ -16,11 +16,18 @@ namespace API.Extensions
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<LogUserActivity>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+            
+            services.AddDbContext<DataContext>(options =>
+            {
+                string connectionString = config.GetConnectionString("DefaultConnection");
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            });
+            /*
             services.AddDbContext<DataContext>(options => 
             {
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
-
+            */
             return services;
         }
     }
