@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   ) {
     _translate.addLangs(['english', 'russian']);
     _translate.setDefaultLang('english');
+    _translate.use('english');
   }
 
   public ngOnInit() {

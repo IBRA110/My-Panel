@@ -25,5 +25,9 @@
       "SAME_PASSWORDS": "Passwords must be same!",
       "SIGN_UP_FORM_FIELDS_NOT_CORRECT": "Please provide all fields with correct values!",
       "CREATE_A_NEW_ACCOUNT": "Create a new account"  
+    },
+    "CRM": {
+      "HOME": "Home",
+      "CHAT": "Chat"
     }
 }
