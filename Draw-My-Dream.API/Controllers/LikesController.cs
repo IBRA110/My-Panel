@@ -17,7 +17,7 @@ namespace API.Controllers
         [HttpPut]
         public async Task<ActionResult> ToggleLike(ToggleLikeDTO toggleLikeDTO)
         {
-            AppUserEntity likedUser = await _unitOfWork.userRepository.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity likedUser = await _unitOfWork.userRepository.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
             
             AppUserEntity imageOwner = await _unitOfWork.userRepository.GetUserByIdAsync(toggleLikeDTO.ImageOwnerId);
             

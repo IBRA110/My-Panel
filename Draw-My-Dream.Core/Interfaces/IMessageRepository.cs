@@ -8,13 +8,13 @@ namespace Core.Interfaces
     {
         void AddGroup(GroupEntity group);
         void RemoveConnection(ConnectionEntity connection);
-        Task<ConnectionEntity> GetConnection(string connectionId);
+        Task<ConnectionEntity> GetConnection(Ulid connectionId);
         Task<GroupEntity> GetMessageGroup(string groupName);
-        Task<GroupEntity> GetGroupForConnection(string connectionId);
+        Task<GroupEntity> GetGroupForConnection(Ulid connectionId);
         void AddMessage(MessageEntity message);
         void DeleteMessage(MessageEntity message);
-        Task<MessageEntity> GetMessage(string id);
+        Task<MessageEntity> GetMessage(Ulid id);
         Task<PagedList<MessageDTO>> GetMessagesForUser(MessageParams messageParams);
-        Task<IEnumerable<MessageDTO>> GetMessageThread(string currentUserName, string recipiendUserName);
+        Task<IEnumerable<MessageDTO>> GetMessageThread(string currentUserName, string recipientUserName);
     }
 }

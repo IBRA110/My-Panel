@@ -45,7 +45,7 @@ namespace API.Controllers
         public async Task<ActionResult> UpdateUser(MemberUpdateDTO memberUpdateDTO)
         {
    
-            AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
             _mapper.Map(memberUpdateDTO, user);
 
@@ -63,7 +63,7 @@ namespace API.Controllers
         public async Task<ActionResult> AddPhoto([FromForm]IFormFile file)
         {
    
-            AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
             string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
 
@@ -91,10 +91,10 @@ namespace API.Controllers
         }
         
         [HttpPut("set-main-photo/{imageId}")]
-        public async Task<ActionResult> SetMainPhoto(string imageId)
+        public async Task<ActionResult> SetMainPhoto(Ulid imageId)
         {
                
-            AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
             ImageEntity image = user.Images.FirstOrDefault(x => x.Id == imageId);
 
@@ -119,10 +119,10 @@ namespace API.Controllers
         }
         
         [HttpDelete("delete-photo/{imageId}")]
-        public async Task<ActionResult> DeletePhoto(string imageId)
+        public async Task<ActionResult> DeletePhoto(Ulid imageId)
         {
    
-            AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
             ImageEntity image = user.Images.FirstOrDefault(x => x.Id == imageId);
 

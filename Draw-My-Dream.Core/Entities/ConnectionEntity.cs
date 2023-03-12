@@ -7,13 +7,13 @@ namespace Core.Entities
         public ConnectionEntity()
         {         
         }
-        public ConnectionEntity(string connectionId, string userName)
+        public ConnectionEntity(Ulid connectionId, string userName)
         {
             ConnectionId = connectionId;
             UserName = userName;
         }
         [Key]
-        public string ConnectionId { get; set; }
+        public Ulid ConnectionId { get; set; }
         public string UserName { get; set; }
     }
 }

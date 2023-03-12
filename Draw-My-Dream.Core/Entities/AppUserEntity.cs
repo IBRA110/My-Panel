@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Entities
 {
-    public class AppUserEntity : IdentityUser<string>
+    
+    public class AppUserEntity : IdentityUser<Ulid>
     {
-        public override string Id { get; set; } = Ulid.NewUlid().ToString();
+        public override Ulid Id { get; set; } = Ulid.NewUlid();
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string RefreshToken { get; set; }
@@ -19,7 +21,7 @@ namespace Core.Entities
         public string Country { get; set; }
         public ICollection<ImageEntity> Images { get; set; }
         public ICollection<MessageEntity> MessagesSent { get; set; }
-        public ICollection<MessageEntity> MessagesRecevied { get; set; }
+        public ICollection<MessageEntity> MessagesReceived { get; set; }
         public ICollection<AppUserRoleEntity> UserRoles { get; set; }
     }
 }

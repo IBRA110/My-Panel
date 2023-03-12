@@ -5,12 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System;
 
 namespace Infrastructure.Data
 {
-    public class DataContext : IdentityDbContext<AppUserEntity, AppRoleEntity, string, 
-        IdentityUserClaim<string>, AppUserRoleEntity, IdentityUserLogin<string>, 
-        IdentityRoleClaim<string>, IdentityUserToken<string>>
+    public class DataContext : IdentityDbContext<AppUserEntity, AppRoleEntity, Ulid, 
+        IdentityUserClaim<Ulid>, AppUserRoleEntity, IdentityUserLogin<Ulid>, 
+        IdentityRoleClaim<Ulid>, IdentityUserToken<Ulid>>
     {
         public DataContext(DbContextOptions options) : base(options) 
         {
@@ -45,7 +46,7 @@ namespace Infrastructure.Data
             
             modelBuilder.Entity<MessageEntity>()
                 .HasOne(u => u.Recipient)
-                .WithMany(m => m.MessagesRecevied)
+                .WithMany(m => m.MessagesReceived)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<MessageEntity>()
@@ -54,6 +55,42 @@ namespace Infrastructure.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.ApplyUtcDateTimeConverter();
+
+
+            UlidToBytesConverter bytesConverter = new UlidToBytesConverter();
+
+            foreach (IMutableEntityType entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                if (typeof(ConnectionEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property<Ulid>(nameof(ConnectionEntity.ConnectionId)).ValueGeneratedNever();
+                }
+                if (typeof(ImageEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property<Ulid>(nameof(ImageEntity.AppUserId)).ValueGeneratedNever();
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property<Ulid>(nameof(ImageEntity.Id)).ValueGeneratedNever();
+                }
+                if (typeof(MessageEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property<Ulid>(nameof(MessageEntity.Id)).ValueGeneratedNever();
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property<Ulid>(nameof(MessageEntity.RecipientId)).ValueGeneratedNever();
+                    modelBuilder.Entity(entityType.ClrType)
+                        .Property<Ulid>(nameof(MessageEntity.SenderId)).ValueGeneratedNever();
+                }
+
+                foreach (IMutableProperty property in entityType.GetProperties())
+                {
+                    if (property.ClrType == typeof(Ulid) || property.ClrType == typeof(Ulid?))
+                    {
+                        property.SetValueConverter(bytesConverter);
+                    }
+                }
+            }
         }
     }
     
@@ -72,9 +109,6 @@ namespace Infrastructure.Data
         public static Boolean IsUtc(this IMutableProperty property) =>
             ((Boolean?)property.FindAnnotation(IsUtcAnnotation)?.Value) ?? true;
 
-        /// <summary>
-        /// Make sure this is called after configuring all your entities.
-        /// </summary>
         public static void ApplyUtcDateTimeConverter(this ModelBuilder builder)
         {
             foreach (var entityType in builder.Model.GetEntityTypes())
@@ -97,6 +131,19 @@ namespace Infrastructure.Data
                     }
                 }
             }
+        }
+    }
+
+    public class UlidToBytesConverter : ValueConverter<Ulid, byte[]>
+    {
+        private static readonly ConverterMappingHints DefaultHints = new ConverterMappingHints(size: 16);
+
+        public UlidToBytesConverter(ConverterMappingHints mappingHints = null)
+            : base(
+                    convertToProviderExpression: x => x.ToByteArray(),
+                    convertFromProviderExpression: x => new Ulid(x),
+                    mappingHints: DefaultHints.With(mappingHints))
+        {
         }
     }
 }

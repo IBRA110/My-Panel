@@ -104,7 +104,7 @@ namespace API.Controllers
         [Authorize]
         public async Task<ActionResult<LoginResponseDTO>> Refresh(RefreshTokenDTO refreshToken)
         {
-            AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(Ulid.Parse(User.FindFirst("Id").Value));
 
             if (user == null || refreshToken.RefreshToken != user.RefreshToken)
             {

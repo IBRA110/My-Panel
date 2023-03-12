@@ -22,7 +22,7 @@ namespace Infrastructure.Services
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(type: "Id", user.Id),
+                new Claim(type: "Id", user.Id.ToString()),
                 new Claim(type: "UserName", user.UserName)
             };
 
@@ -53,7 +53,7 @@ namespace Infrastructure.Services
                 { "id", user.Id.ToString() },
                 { "name", user.UserName },
                 { "date", DateTime.Now.ToString() },
-                { "Ulid", new Ulid().ToString() }
+                { "ulid", new Ulid().ToString() }
             };
             
             byte[] dataBytes = Encoding.UTF8.GetBytes(hashData.ToString() + new byte[64]);
