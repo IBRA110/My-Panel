@@ -18,6 +18,10 @@ import {
   authenticationFeatureKey,
   reducer,
 } from './pages/authentication/data-access/store/authentication.reduser';
+import {
+  crmFeatureKey,
+  crmReducer,
+} from './pages/crm/data-access/store/crm.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthenticationEffects } from './pages/authentication/data-access/store/authentication.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -44,6 +48,7 @@ import { GraphQLModule } from './graphql.module';
     }),
     StoreModule.forRoot({}),
     StoreModule.forFeature(authenticationFeatureKey, reducer),
+    StoreModule.forFeature(crmFeatureKey, crmReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

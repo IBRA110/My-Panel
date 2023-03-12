@@ -3,9 +3,9 @@ import { createRehydrateReducer } from 'src/app/core/reducers/rehydrate-reducer'
 import { toggleSidebar } from './crm.actions';
 import { CrmState, initialState } from './crm.state';
 
-const crmFeatureKey = 'crm';
+export const crmFeatureKey = 'crm';
 
-const crmReducer = createRehydrateReducer(
+export const crmReducer = createRehydrateReducer(
   crmFeatureKey,
   initialState,
   on(toggleSidebar, (state, { payload }) => ({
@@ -14,6 +14,6 @@ const crmReducer = createRehydrateReducer(
   })),
 );
 
-export function reducer(state: CrmState, action: Action) {
-  return crmReducer(state, action);
-}
+// export function reducer(state: CrmState | undefined, action: Action) {
+//   return crmReducer(state, action);
+// }
