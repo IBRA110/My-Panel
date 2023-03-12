@@ -6,5 +6,32 @@
       "SHOP": "SHOP",
       "OUR_CONTACTS": "OUR CONTACTS",
       "BOOKING": "BOOKING"
+    },
+    "AUTHENTICATION": {
+      "SIGN_IN_HERE": "Логин",
+      "SIGN_UP_HERE": "Регистрация",
+      "SIGN_IN" : "Войти",
+      "SIGN_UP" : "Зарегистрироваться",
+      "USER_NAME": "Имя пользователя",
+      "EMAIL": "Электронный адрес",
+      "PASSWORD": "Пароль",
+      "CONFIRM_PASSWORD": "Подтвердить пароль",
+      "FIRST_NAME": "Имя",
+      "LAST_NAME": "Фамилия",
+      "FORGOT_PASSWORD": "Забыли пароль?",
+      "HAVE_ACCOUNT": "Уже зарегистрированы?",
+      "ENTER_USERNAME": "Пожалуйста, введите имя пользователя",
+      "ENTER_EMAIL": "Пожалуйста, введите электронный адрес",
+      "ENTER_EMAIL_PATTERN": "Пожалуйста, введите правильный электронный адрес",
+      "ENTER_PASSWORD": "Пожалуйста, введите пароль",
+      "ENTER_PASSWORD_STRONG": "Пожалуйста, введите надежный пароль",
+      "ENTER_PASSWORD_NUMBER": "Пароль должен содержать хотя бы 1 цифру",
+      "ENTER_PASSWORD_HAS_CAPITAL_CASE": "Пароль должен содержать хотя бы 1 заглавную букву",
+      "ENTER_PASSWORD_HAS_SMALL_CASE": "Пароль должен содержать хотя бы 1 букву в нижнем регистре",
+      "ENTER_PASSWORD_HAS_SPECIAL_CHARS": "Пароль должен содержать хотя бы 1 специальный символ",
+      "ENTER_PASSWORD_MINLENGTH": "Пароль должен быть не менее 8 символов в длину",
+      "SAME_PASSWORDS": "Пароли должны быть одинаковы",
+      "SIGN_UP_FORM_FIELDS_NOT_CORRECT": "Пожалуйста, заполните все поля формы корректными значениями",
+      "CREATE_A_NEW_ACCOUNT": "Создать новый аккаунт"  
     }
 }
