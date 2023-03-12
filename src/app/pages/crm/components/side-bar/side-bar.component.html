@@ -1,1 +1,3 @@
-<p>side-bar works!</p>
+<div class="side-bar" [ngClass]="{ active: isSideBarActive }">
+  <div class="menu-toggle" (click)="toggleButtonActive()"></div>
+</div>

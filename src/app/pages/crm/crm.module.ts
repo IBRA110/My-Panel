@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { CrmRoutingModule } from './crm-routing.module';
 import { CrmComponent } from './crm.component';
 
 @NgModule({
-  declarations: [CrmComponent],
-  imports: [CrmRoutingModule],
+  declarations: [CrmComponent, SideBarComponent],
+  imports: [CommonModule, CrmRoutingModule],
 })
 export class CrmModule {}
