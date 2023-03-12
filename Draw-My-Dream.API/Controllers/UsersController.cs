@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using API.Interfaces;
-using API.DTOs;
+using Core.Interfaces;
+using Core.DTOs;
 using AutoMapper;
 using Core.Entities;
-using API.Helpers;
+using Core.Helpers;
 using API.Extensions;
 
 namespace API.Controllers
@@ -24,11 +24,11 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery]UserParams userParams)
         {   
 
-            AppUserEntity user = await _unitOfWork.userBehaviour.GetUserByUsernameAsync(User.FindFirst("UserName")?.Value);
+            AppUserEntity user = await _unitOfWork.userRepository.GetUserByUsernameAsync(User.FindFirst("UserName")?.Value);
 
             userParams.CurrentUsername = user.UserName;
             
-            PagedList<MemberDTO> users = await _unitOfWork.userBehaviour.GetMembersAsync(userParams);
+            PagedList<MemberDTO> users = await _unitOfWork.userRepository.GetMembersAsync(userParams);
             
             Response.AddPaginationHeader(users.CurrentPage, 
                 users.PageSize, users.TotalCount, users.TotalPages);
@@ -38,18 +38,18 @@ namespace API.Controllers
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDTO>> GetUserByUserName(string username)
         {
-            return await _unitOfWork.userBehaviour.GetMemberAsync(username);
+            return await _unitOfWork.userRepository.GetMemberAsync(username);
         }
 
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDTO memberUpdateDTO)
         {
    
-            AppUserEntity user = await _unitOfWork.userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(User.FindFirst("Id").Value);
 
             _mapper.Map(memberUpdateDTO, user);
 
-            _unitOfWork.userBehaviour.Update(user);
+            _unitOfWork.userRepository.Update(user);
 
             if (await _unitOfWork.Complete())
             {
@@ -63,7 +63,7 @@ namespace API.Controllers
         public async Task<ActionResult> AddPhoto([FromForm]IFormFile file)
         {
    
-            AppUserEntity user = await _unitOfWork.userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(User.FindFirst("Id").Value);
 
             string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
 
@@ -94,7 +94,7 @@ namespace API.Controllers
         public async Task<ActionResult> SetMainPhoto(string imageId)
         {
                
-            AppUserEntity user = await _unitOfWork.userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(User.FindFirst("Id").Value);
 
             ImageEntity image = user.Images.FirstOrDefault(x => x.Id == imageId);
 
@@ -122,7 +122,7 @@ namespace API.Controllers
         public async Task<ActionResult> DeletePhoto(string imageId)
         {
    
-            AppUserEntity user = await _unitOfWork.userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(User.FindFirst("Id").Value);
 
             ImageEntity image = user.Images.FirstOrDefault(x => x.Id == imageId);
 

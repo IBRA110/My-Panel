@@ -1,19 +1,18 @@
 using Microsoft.EntityFrameworkCore;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
-using API.DTOs;
-using API.Helpers;
-using API.Interfaces;
-using Infrastructure.Data;
+using Core.DTOs;
+using Core.Helpers;
+using Core.Interfaces;
 using Core.Entities;
 
-namespace API.Behaviours
+namespace Infrastructure.Data
 {
-    public class UserBehaviour : IUserBehaviour
+    public class UserRepository : IUserRepository
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-        public UserBehaviour(DataContext context, IMapper mapper)
+        public UserRepository(DataContext context, IMapper mapper)
         {
             _mapper = mapper;
             _context = context;

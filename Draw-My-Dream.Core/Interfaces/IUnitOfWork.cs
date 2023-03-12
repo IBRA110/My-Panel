@@ -1,9 +1,9 @@
-namespace API.Interfaces
+namespace Core.Interfaces
 {
     public interface IUnitOfWork
     {
-        IUserBehaviour userBehaviour { get; }
-        IMessageBehaviour messageBehaviour { get; }
+        IUserRepository userRepository { get; }
+        IMessageRepository messageRepository { get; }
         Task<bool> Complete();
         bool HasChanges();
         Task<bool> UserExists(string username);

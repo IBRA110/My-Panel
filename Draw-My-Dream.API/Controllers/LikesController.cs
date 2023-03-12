@@ -1,5 +1,5 @@
-using API.DTOs;
-using API.Interfaces;
+using Core.DTOs;
+using Core.Interfaces;
 using Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +17,9 @@ namespace API.Controllers
         [HttpPut]
         public async Task<ActionResult> ToggleLike(ToggleLikeDTO toggleLikeDTO)
         {
-            AppUserEntity likedUser = await _unitOfWork.userBehaviour.GetUserByIdAsync(User.FindFirst("Id").Value);
+            AppUserEntity likedUser = await _unitOfWork.userRepository.GetUserByIdAsync(User.FindFirst("Id").Value);
             
-            AppUserEntity imageOwner = await _unitOfWork.userBehaviour.GetUserByIdAsync(toggleLikeDTO.ImageOwnerId);
+            AppUserEntity imageOwner = await _unitOfWork.userRepository.GetUserByIdAsync(toggleLikeDTO.ImageOwnerId);
             
             ImageEntity image = imageOwner.Images.FirstOrDefault(x => x.Id == toggleLikeDTO.ImageId);
            

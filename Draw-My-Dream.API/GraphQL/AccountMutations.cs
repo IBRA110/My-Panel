@@ -1,6 +1,6 @@
 using System.Security.Claims;
-using API.DTOs;
-using API.Interfaces;
+using Core.DTOs;
+using Core.Interfaces;
 using AutoMapper;
 using Core.Entities;
 using HotChocolate.Authorization;
@@ -107,7 +107,7 @@ namespace API.GraphQL
             string refreshToken)
         {
             
-            AppUserEntity user = await unitOfWork.userBehaviour.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
+            AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
 
             if (user == null || refreshToken != user.RefreshToken)
             {
@@ -130,7 +130,7 @@ namespace API.GraphQL
             string refreshToken)
         {
             
-            AppUserEntity user = await unitOfWork.userBehaviour.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
+            AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
 
             if (user == null || refreshToken != user.RefreshToken)
             {

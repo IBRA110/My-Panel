@@ -1,4 +1,4 @@
-namespace API.Helpers
+namespace Core.Helpers
 {
     public class MessageParams : PaginationParams
     {

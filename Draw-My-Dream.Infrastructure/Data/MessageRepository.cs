@@ -1,19 +1,18 @@
-using API.DTOs;
-using API.Helpers;
-using API.Interfaces;
+using Core.DTOs;
+using Core.Helpers;
+using Core.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Core.Entities;
-using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Behaviours
+namespace Infrastructure.Data
 {
-    public class MessageBehaviour : IMessageBehaviour
+    public class MessageRepository : IMessageRepository
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-        public MessageBehaviour(DataContext context, IMapper mapper)
+        public MessageRepository(DataContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -98,7 +97,7 @@ namespace API.Behaviours
             {
                 foreach (var message in unreadMessages)
                 {
-                    message.DateRead = DateTime.UtcNow;
+                    message.DateRead = System.DateTime.UtcNow;
                 }
 
             }

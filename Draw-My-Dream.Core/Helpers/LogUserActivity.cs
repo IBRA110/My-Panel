@@ -1,8 +1,9 @@
-using API.Interfaces;
+using Core.Interfaces;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace API.Helpers
+namespace Core.Helpers
 {
     public class LogUserActivity : IAsyncActionFilter
     {
@@ -19,9 +20,9 @@ namespace API.Helpers
             
             IUnitOfWork uow = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();
 
-            AppUserEntity user = await uow.userBehaviour.GetUserByUsernameAsync(id);
+            AppUserEntity user = await uow.userRepository.GetUserByUsernameAsync(id);
 
-            user.LastActive = DateTime.UtcNow;
+            user.LastActive = System.DateTime.UtcNow;
             await uow.Complete();
 
         }

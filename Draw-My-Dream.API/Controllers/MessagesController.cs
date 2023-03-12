@@ -1,7 +1,7 @@
-using API.DTOs;
+using Core.DTOs;
 using API.Extensions;
-using API.Helpers;
-using API.Interfaces;
+using Core.Helpers;
+using Core.Interfaces;
 using Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +22,7 @@ namespace API.Controllers
         {
             messageParams.UserName = User.FindFirst("UserName").Value;
             
-            PagedList<MessageDTO> messages = await _unitOfWork.messageBehaviour.GetMessagesForUser(messageParams);
+            PagedList<MessageDTO> messages = await _unitOfWork.messageRepository.GetMessagesForUser(messageParams);
             
             Response.AddPaginationHeader(messages.CurrentPage, messages.PageSize, messages.TotalCount, messages.TotalPages);
 
@@ -33,7 +33,7 @@ namespace API.Controllers
         public async Task<ActionResult> DeleteMessage(string id)
         {
             string userName = User.FindFirst("UserName").Value;
-            MessageEntity message = await _unitOfWork.messageBehaviour.GetMessage(id);
+            MessageEntity message = await _unitOfWork.messageRepository.GetMessage(id);
 
             if (message.Sender.UserName != userName && message.Recipient.UserName != userName)
             {
@@ -52,7 +52,7 @@ namespace API.Controllers
             
             if (message.SenderDeleted && message.RecipientDeleted)
             {
-                _unitOfWork.messageBehaviour.DeleteMessage(message);
+                _unitOfWork.messageRepository.DeleteMessage(message);
             }
 
             if (await _unitOfWork.Complete())

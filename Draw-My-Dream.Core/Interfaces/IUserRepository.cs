@@ -1,10 +1,10 @@
-using API.DTOs;
+using Core.DTOs;
 using Core.Entities;
-using API.Helpers;
+using Core.Helpers;
 
-namespace API.Interfaces
+namespace Core.Interfaces
 {
-    public interface IUserBehaviour
+    public interface IUserRepository
     {
         void Update(AppUserEntity user);
         Task<AppUserEntity> GetUserByIdAsync(string id);

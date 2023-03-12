@@ -1,10 +1,10 @@
-using API.DTOs;
-using API.Helpers;
+using Core.DTOs;
+using Core.Helpers;
 using Core.Entities;
 
-namespace API.Interfaces
+namespace Core.Interfaces
 {
-    public interface IMessageBehaviour
+    public interface IMessageRepository
     {
         void AddGroup(GroupEntity group);
         void RemoveConnection(ConnectionEntity connection);

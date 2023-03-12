@@ -1,11 +1,10 @@
-using API.Interfaces;
+using Core.Interfaces;
 using AutoMapper;
 using Core.Entities;
-using Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Behaviours
+namespace Infrastructure.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -19,9 +18,9 @@ namespace API.Behaviours
             _userManager = userManager;
 
         }
-        public IUserBehaviour userBehaviour => new UserBehaviour(_context, _mapper);
+        public IUserRepository userRepository => new UserRepository(_context, _mapper);
 
-        public IMessageBehaviour messageBehaviour => new MessageBehaviour(_context, _mapper);
+        public IMessageRepository messageRepository => new MessageRepository(_context, _mapper);
 
         public async Task<bool> Complete()
         {
