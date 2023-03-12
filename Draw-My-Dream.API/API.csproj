@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Behaviours\**" />
+    <Content Remove="Behaviours\**" />
+    <EmbeddedResource Remove="Behaviours\**" />
+    <None Remove="Behaviours\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="HotChocolate.AspNetCore" Version="13.0.2" />
     <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="13.0.2" />
     <PackageReference Include="HotChocolate.Data" Version="13.0.2" />
@@ -23,9 +30,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Draw-My-Dream.Infrastructure\Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Behaviours\" />
   </ItemGroup>
 </Project>

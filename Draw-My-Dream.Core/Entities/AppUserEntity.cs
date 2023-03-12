@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
 
 namespace Core.Entities
 {
-    
     public class AppUserEntity : IdentityUser<Ulid>
     {
         public override Ulid Id { get; set; } = Ulid.NewUlid();

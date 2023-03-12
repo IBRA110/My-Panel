@@ -72,7 +72,6 @@ namespace API.GraphQL
             string password)
         {
             AppUserEntity user = await userManager.Users
-                    .Include(u => u.Images)
                     .SingleOrDefaultAsync(x => x.UserName.ToLower() == userName.ToLower());
 
             if (user == null)
