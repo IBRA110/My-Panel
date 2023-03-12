@@ -1,0 +1,56 @@
+@import '/src/app/core/mixins/fonts.scss';
+
+.drop-down-lang {
+  height: 60px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 23px;
+  cursor: pointer;
+
+  &:hover &_menu {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  p {
+    @include Link_Small;
+    color: var(--box-shadow-color);
+  }
+
+  &_menu {
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .5s ease-in-out;
+  }
+
+  &_item {
+    @include Button;
+    text-align: center;
+  }
+
+  &_btn {
+    width: 100%;
+    padding-bottom: 5px;
+    color: var(--box-shadow-color);
+    border-bottom: 1px solid transparent;
+    transition: all .5s ease-in-out;
+
+    &:hover {
+      color: var(--button-background-default-color);
+      border-bottom: 1px solid var(--button-background-default-color);
+    }
+  }
+}
