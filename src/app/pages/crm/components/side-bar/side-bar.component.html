@@ -1,5 +1,4 @@
-<div class="side-bar" [ngClass]="{ active: isSideBarActive }">
-  <div class="side-bar_btn" (click)="toggleButtonActive()"></div>
+<div class="side-bar" [ngClass]="{ active: isSidebarToggled$ | async }">
   <ul class="side-bar_menu">
     <li
       class="side-bar_item"
