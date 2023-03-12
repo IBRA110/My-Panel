@@ -7,7 +7,13 @@ import { Component } from '@angular/core';
 })
 export class SideBarComponent {
   public isSideBarActive: boolean = false;
+  public menuItemActive: string = 'home';
+
   public toggleButtonActive(): void {
     this.isSideBarActive = !this.isSideBarActive;
+  }
+
+  public toggleMenuItemActive(item: string): void {
+    this.menuItemActive = item;
   }
 }
