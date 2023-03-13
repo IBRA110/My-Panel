@@ -19,7 +19,7 @@ import {
   reducer,
 } from './pages/authentication/data-access/store/authentication.reduser';
 import { EffectsModule } from '@ngrx/effects';
-import { BookingEffects } from './pages/authentication/data-access/store/authentication.effects';
+import { AuthenticationEffects } from './pages/authentication/data-access/store/authentication.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GraphQLModule } from './graphql.module';
 
@@ -48,7 +48,7 @@ import { GraphQLModule } from './graphql.module';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([BookingEffects]),
+    EffectsModule.forRoot([AuthenticationEffects]),
     GraphQLModule,
   ],
   providers: [ThemeService],

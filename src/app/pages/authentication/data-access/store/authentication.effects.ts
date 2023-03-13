@@ -27,7 +27,7 @@ import { getAccessToken } from './authentication.selectors';
 import { Store } from '@ngrx/store';
 
 @Injectable()
-export class BookingEffects {
+export class AuthenticationEffects {
   public constructor(
     private _actions$: Actions,
     private _authService: AuthenticationService,
