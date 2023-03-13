@@ -2,6 +2,7 @@
 
 .drop-down-lang {
   height: 60px;
+  width: 75px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -23,7 +24,7 @@
     width: 100%;
     position: absolute;
     top: 60px;
-    left: 0;
+    left: 0px;
     display: flex;
     flex-direction: column;
     gap: 10px;
