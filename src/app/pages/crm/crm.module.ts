@@ -7,7 +7,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { CrmRoutingModule } from './crm-routing.module';
 import { CrmComponent } from './crm.component';
-import { crmFeatureKey, crmReducer } from './data-access/store/crm.reducer';
+import { crmFeatureKey, reducer } from './data-access/store/crm.reducer';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { crmFeatureKey, crmReducer } from './data-access/store/crm.reducer';
   imports: [
     CommonModule,
     CrmRoutingModule,
-    StoreModule.forFeature(crmFeatureKey, crmReducer),
+    StoreModule.forFeature(crmFeatureKey, reducer),
     TranslateModule,
   ],
 })

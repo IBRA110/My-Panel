@@ -18,10 +18,6 @@ import {
   authenticationFeatureKey,
   reducer,
 } from './pages/authentication/data-access/store/authentication.reduser';
-import {
-  crmFeatureKey,
-  crmReducer,
-} from './pages/crm/data-access/store/crm.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthenticationEffects } from './pages/authentication/data-access/store/authentication.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
