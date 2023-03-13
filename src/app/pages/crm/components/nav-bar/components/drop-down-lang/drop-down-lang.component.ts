@@ -14,11 +14,6 @@ export class DropdownLangComponent {
   public translateTo(lang: string): void {
     this._translate.use(lang);
 
-    const langDict = {
-      english: 'EN',
-      russian: 'RU',
-    };
-
-    this.selectedLang = langDict[lang];
+    this.selectedLang = lang.substring(0, 2).toUpperCase();
   }
 }

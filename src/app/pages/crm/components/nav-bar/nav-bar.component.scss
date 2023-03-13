@@ -11,14 +11,10 @@
   &_btn {
     width: 75px;
     height: 100%;
-    // position: absolute;
-    // top: 0;
-    // left: 0;
     padding: 0 23px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    // border-bottom: 1px solid var(--box-shadow-color);
     cursor: pointer;
 
     &::before,
