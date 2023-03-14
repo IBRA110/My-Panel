@@ -8,9 +8,9 @@ export const crmFeatureKey = 'crm';
 const crmReducer = createRehydrateReducer(
   crmFeatureKey,
   initialState,
-  on(toggleSidebar, (state, { payload }) => ({
+  on(toggleSidebar, (state) => ({
     ...state,
-    isSidebarToggled: payload,
+    isSidebarToggled: !state.isSidebarToggled,
   })),
 );
 
