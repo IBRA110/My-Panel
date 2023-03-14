@@ -10,9 +10,11 @@
   padding: 23px;
   cursor: pointer;
 
-  &:hover &_menu {
-    opacity: 1;
-    visibility: visible;
+  &.show {
+    .drop-down-lang_menu {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 
   p {
@@ -54,4 +56,5 @@
       border-bottom: 1px solid var(--button-background-default-color);
     }
   }
+
 }
