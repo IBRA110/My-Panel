@@ -23,14 +23,7 @@
 
   &.active {
     width: 250px;
-
-    .side-bar_btn::before {
-      transform: rotate(45deg);
-    }
-    .side-bar_btn::after {
-      transform: rotate(-45deg);
-      box-shadow: none;
-    }
+    
     .side-bar_text {
       opacity: 1;
       visibility: visible;
@@ -110,7 +103,7 @@
     padding: 0 12px;
     text-align: center;
     text-decoration: none;
-    z-index: 1000;
+    z-index: 1;
   }
 
   &_icon {

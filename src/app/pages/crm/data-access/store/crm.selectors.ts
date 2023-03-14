@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CrmState } from './crm.state';
 
-const crmFeatureSelector = createFeatureSelector<CrmState>('crm');
+const selectCrmState = createFeatureSelector<CrmState>('crm');
 
-export const isSidebarToggledSelector = createSelector(
-  crmFeatureSelector,
+export const selectIsSidebarToggled = createSelector(
+  selectCrmState,
   (crmState: CrmState) => crmState.isSidebarToggled,
 );

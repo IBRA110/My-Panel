@@ -1,4 +1,4 @@
-<div class="nav-bar">
+<div class="nav-bar" [ngClass]="{ active: isSidebarToggled$ | async }">
   <div class="nav-bar_btn" (click)="toggleButtonActive()"></div>
   <app-drop-down-lang></app-drop-down-lang>
 </div>

@@ -6,7 +6,17 @@
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  z-index: 9999;
+  z-index: 1;
+
+  &.active {
+    .nav-bar_btn::before {
+      transform: rotate(45deg);
+    }
+    .nav-bar_btn::after {
+      transform: rotate(-45deg);
+      box-shadow: none;
+    }
+  }
 
   &_btn {
     width: 75px;

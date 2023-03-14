@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { isSidebarToggledSelector } from '../../data-access/store/crm.selectors';
+import { selectIsSidebarToggled } from '../../data-access/store/crm.selectors';
 
 @Component({
   selector: 'app-side-bar',
@@ -15,6 +14,6 @@ export class SideBarComponent implements OnInit {
   public constructor(private _store: Store) {}
 
   public ngOnInit(): void {
-    this.isSidebarToggled$ = this._store.select(isSidebarToggledSelector);
+    this.isSidebarToggled$ = this._store.select(selectIsSidebarToggled);
   }
 }
