@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 import { Component, ElementRef } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { filter, fromEvent, take } from 'rxjs';
+import { filter, fromEvent, Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'app-drop-down-lang',
@@ -10,6 +11,7 @@ import { filter, fromEvent, take } from 'rxjs';
 export class DropdownLangComponent {
   public selectedLang: string = 'EN';
   public isDropdownShown: boolean = false;
+  private _dropdownSubscription: Subscription | null = null;
 
   public constructor(
     private _translate: TranslateService,
@@ -22,8 +24,8 @@ export class DropdownLangComponent {
   }
 
   public toggleDropdown(): void {
-    if (!this.isDropdownShown) {
-      fromEvent(document, 'click')
+    if (!this._dropdownSubscription) {
+      this._dropdownSubscription = fromEvent(document, 'click')
         .pipe(
           filter((event) => {
             return (
@@ -35,6 +37,7 @@ export class DropdownLangComponent {
         )
         .subscribe(() => {
           this.isDropdownShown = false;
+          this._dropdownSubscription = null;
         });
     }
 
