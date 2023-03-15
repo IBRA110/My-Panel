@@ -4,6 +4,7 @@ export const lightTheme: Theme = {
   name: 'light',
   properties: {
     '--background-color': 'rgba(237, 245, 247)',
+    '--background-color-darker': 'rgba(174, 181, 197)',
     '--backgorund-transparent-color': 'rgba(233, 238, 240, 0.8)',
     '--border-color': 'rgba(235, 237, 240, 0.1)',
     '--box-shadow-color': 'rgba(0, 0, 0, 0.6)',

@@ -33,7 +33,7 @@
       width: 30px;
       height: 2px;
       position: absolute;
-      background-color: var(--box-shadow-color);
+      background-color: var(--button-background-default-color);
       transition: .5s;
     }
 
@@ -43,7 +43,7 @@
 
     &::after {
       transform: translateY(8px);
-      box-shadow: 0 -8px 0 var(--box-shadow-color);
+      box-shadow: 0 -8px 0 var(--button-background-default-color);
     }
   }
 }
