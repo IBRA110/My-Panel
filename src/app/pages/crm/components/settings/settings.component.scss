@@ -1,3 +1,5 @@
+@import "src/app/core/mixins/fonts";
+
 .settings {
   width: 250px;
   height: 100%;
@@ -19,6 +21,42 @@
     top: 60px;
     right: 0;
     background-color: var(--button-background-default-color);
+  }
+
+  &-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+
+    &_side-bar {
+      p {
+        @include Paragraph;
+        margin-bottom: 8px;
+      }
+
+      div {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      button svg {
+        width: 60px;
+        height: 60px;
+  
+        path {
+          fill: #fff;
+        }
+      }
+    }
+    
+    button svg:hover {
+      path {
+        stroke: var(--button-background-default-color);
+      }
+    }
+
   }
 
   &-btn_toggle {
