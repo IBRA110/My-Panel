@@ -1,0 +1,79 @@
+.settings {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  transform: translateX(100%);
+  background-color: #fff;
+  transition: all .5s;
+
+  &.active {
+      transform: translateX(0);
+  }
+
+  &::before {
+    content: '';
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: var(--button-background-default-color);
+  }
+
+  &-btn_toggle {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    top: 450px;
+    right: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0 1px 3px var(--box-shadow-color);
+    transition: all .5s;
+
+    &.active {
+      transform: translateX(100%);
+      background-color: var(--button-background-default-color);
+      color: #fff;
+      border-radius: 0;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      box-shadow: none;
+
+      svg {
+        transform: rotate(360deg);
+
+        path {
+          fill: #fff;
+        }
+      }
+    }
+
+    &:hover {
+      background-color: var(--button-background-default-color);
+      color: #fff;
+
+      svg {
+        path {
+          fill: #fff;
+        }
+      }
+    }
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    transform: rotate(0);
+    transition: all .5s;
+
+    path {
+      fill: var(--background-color-darker);
+    }
+  }
+}
