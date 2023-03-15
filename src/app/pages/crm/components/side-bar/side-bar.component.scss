@@ -10,16 +10,6 @@
   background-color: #fff;
   transition: .5s;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 60px;
-    left: 0;
-    height: 1px;
-    width: 100%;
-    background-color: var(--button-background-default-color);
-  }
-
   &.active {
     width: 250px;
 
@@ -41,6 +31,16 @@
     top: 100px;
     left: 0;
     transition: all .5s;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: 0;
+      height: 1px;
+      width: 100%;
+      background-color: var(--button-background-default-color);
+    }
   }
 
   &_item {
