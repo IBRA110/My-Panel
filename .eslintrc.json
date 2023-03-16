@@ -93,7 +93,7 @@
           {
             "@angular-eslint/template/no-negated-async": "off",
             "trailingComma": "all",
-            "printWidth": 80,
+            "printWidth": 120,
             "useTabs": false,
             "tabWidth": 2,
             "singleQuote": true,

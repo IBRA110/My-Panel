@@ -1,19 +1,11 @@
-<div
-  class="drop-down-lang"
-  [ngClass]="{ show: isDropdownShown }"
-  (click)="toggleDropdown()"
->
+<div class="drop-down-lang" [ngClass]="{ show: isDropdownShown }" (click)="toggleDropdown()">
   <p class="drop-down-lang_select">{{ selectedLang }}</p>
   <ul class="drop-down-lang_menu">
     <li class="drop-down-lang_item">
-      <button class="drop-down-lang_btn" (click)="translateTo('english')">
-        EN
-      </button>
+      <button class="drop-down-lang_btn" (click)="translateTo('english')">EN</button>
     </li>
     <li class="drop-down-lang_item">
-      <button class="drop-down-lang_btn" (click)="translateTo('russian')">
-        RU
-      </button>
+      <button class="drop-down-lang_btn" (click)="translateTo('russian')">RU</button>
     </li>
   </ul>
 </div>
