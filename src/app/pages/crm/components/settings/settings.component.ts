@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { sidebarToRtl } from '../../data-access/store/crm.actions';
 import { selectIsSidebarRtl } from '../../data-access/store/crm.selectors';
 
 @Component({
@@ -16,5 +17,9 @@ export class SettingsComponent implements OnInit {
 
   public ngOnInit(): void {
     this.isSidebarRtl$ = this._store.select(selectIsSidebarRtl);
+  }
+
+  public changeSidebarDirection(payload: boolean): void {
+    this._store.dispatch(sidebarToRtl({ payload }));
   }
 }

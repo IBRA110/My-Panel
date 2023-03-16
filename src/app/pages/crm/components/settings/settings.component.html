@@ -6,7 +6,10 @@
     <div class="settings-container_side-bar">
       <p>Sidebar</p>
       <div>
-        <button class="settings-btn_to-left">
+        <button
+          class="settings-btn_to-left"
+          (click)="changeSidebarDirection(false)"
+        >
           <svg
             width="24"
             height="24"
@@ -24,7 +27,10 @@
             <path d="M9 3V21" stroke="black" stroke-width="1" />
           </svg>
         </button>
-        <button class="settings-btn_to-right">
+        <button
+          class="settings-btn_to-right"
+          (click)="changeSidebarDirection(true)"
+        >
           <svg
             width="24"
             height="24"
