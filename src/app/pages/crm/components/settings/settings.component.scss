@@ -9,6 +9,27 @@
   background-color: #fff;
   transition: all .5s;
 
+  &.side-bar_rtl {
+    left: 0;
+    transform: translateX(-100%);
+
+    .settings-btn_toggle {
+      left: 250px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+
+      &.active {
+        transform: translateX(-100%);
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+  }
+
   &.active {
       transform: translateX(0);
   }
@@ -32,6 +53,7 @@
     &_side-bar {
       p {
         @include Paragraph;
+        color: var(--box-shadow-color);
         margin-bottom: 8px;
       }
 
@@ -47,6 +69,7 @@
   
         path {
           fill: #fff;
+          stroke: var(--background-color-darker);
         }
       }
     }

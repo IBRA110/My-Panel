@@ -1,6 +1,10 @@
 <div class="side-bar" [ngClass]="{ active: isSidebarToggled$ | async }">
-  <ul class="side-bar_menu">
-    <li class="side-bar_item" routerLink="/crm/dashboard" routerLinkActive="active">
+  <ul class="side-bar_menu side-bar_rtl">
+    <li
+      class="side-bar_item"
+      routerLink="/crm/dashboard"
+      routerLinkActive="active"
+    >
       <a class="side-bar_link">
         <span class="side-bar_icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
