@@ -7,3 +7,8 @@ export const selectIsSidebarToggled = createSelector(
   selectCrmState,
   (crmState: CrmState) => crmState.isSidebarToggled,
 );
+
+export const selectIsSidebarRtl = createSelector(
+  selectCrmState,
+  (crmState: CrmState) => crmState.isSidebarRtl,
+);

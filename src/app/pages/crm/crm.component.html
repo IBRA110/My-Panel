@@ -1,6 +1,6 @@
 <div class="crm">
   <app-nav-bar></app-nav-bar>
-  <div class="wrapper side-bar_rtl">
+  <div class="wrapper" [ngClass]="{ 'side-bar_rtl': isSidebarRtl$ | async }">
     <app-side-bar></app-side-bar>
     <router-outlet></router-outlet>
     <app-settings></app-settings>

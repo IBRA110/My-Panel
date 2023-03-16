@@ -1,5 +1,13 @@
-<div class="side-bar" [ngClass]="{ active: isSidebarToggled$ | async }">
-  <ul class="side-bar_menu side-bar_rtl">
+<div
+  class="side-bar"
+  [ngClass]="{
+    active: isSidebarToggled$ | async
+  }"
+>
+  <ul
+    class="side-bar_menu"
+    [ngClass]="{ 'side-bar_rtl': isSidebarRtl$ | async }"
+  >
     <li
       class="side-bar_item"
       routerLink="/crm/dashboard"
