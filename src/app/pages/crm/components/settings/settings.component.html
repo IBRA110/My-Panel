@@ -8,6 +8,7 @@
       <div>
         <button
           class="settings-btn_to-left"
+          [ngClass]="{ active: !(isSidebarRtl$ | async) }"
           (click)="changeSidebarDirection(false)"
         >
           <svg
@@ -29,6 +30,7 @@
         </button>
         <button
           class="settings-btn_to-right"
+          [ngClass]="{ active: isSidebarRtl$ | async }"
           (click)="changeSidebarDirection(true)"
         >
           <svg

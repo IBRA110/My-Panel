@@ -63,6 +63,14 @@
         align-items: center;
       }
 
+      button.active {
+        svg {
+          path {
+            stroke: var(--button-background-default-color);
+          }
+        }
+      }
+
       button svg {
         width: 60px;
         height: 60px;
