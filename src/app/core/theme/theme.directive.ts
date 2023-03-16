@@ -1,14 +1,13 @@
 import { Directive, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { ThemeService } from './theme.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { Theme } from './theme.interface';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Directive({
   selector: '[app-theme]',
 })
-export class ThemeDirective implements OnInit, OnDestroy {
-  private _unsubscribe$: Subject<boolean> = new Subject();
+export class ThemeDirective implements OnInit {
   public constructor(
     private _elementRef: ElementRef,
     private _themeService: ThemeService,
@@ -20,7 +19,7 @@ export class ThemeDirective implements OnInit, OnDestroy {
       this._updateTheme(active);
     }
     this._themeService.themeChange
-      .pipe(takeUntil(this._unsubscribe$))
+      .pipe(untilDestroyed(this))
       .subscribe((theme: Theme) => this._updateTheme(theme));
   }
 
@@ -31,10 +30,5 @@ export class ThemeDirective implements OnInit, OnDestroy {
         theme.properties[key],
       );
     }
-  }
-
-  public ngOnDestroy(): void {
-    this._unsubscribe$.next(true);
-    this._unsubscribe$.complete();
   }
 }

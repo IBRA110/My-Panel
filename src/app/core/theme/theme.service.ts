@@ -10,7 +10,7 @@ export class ThemeService {
   public constructor(
     @Inject(THEMES) public themes: Theme[],
     @Inject(ACTIVE_THEME) public theme: string,
-    private localStorageService: LocalStorageService,
+    private _localStorageService: LocalStorageService,
   ) {}
 
   public getActiveTheme() {
@@ -20,6 +20,9 @@ export class ThemeService {
   public setTheme(name: string): void {
     this.theme = name;
     this.themeChange.emit(this.getActiveTheme());
-    this.localStorageService.saveData(LocalStorageKeysEnum.CURRENT_THEME, name);
+    this._localStorageService.saveData(
+      LocalStorageKeysEnum.CURRENT_THEME,
+      name,
+    );
   }
 }
