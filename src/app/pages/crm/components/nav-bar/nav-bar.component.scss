@@ -5,7 +5,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
+  background-color: var(--nav-bar-bg-color);
+  box-shadow: 0 8px 16px 0 var(--box-shadow-color);
   z-index: 1;
 
   &.active {

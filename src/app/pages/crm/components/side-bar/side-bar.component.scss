@@ -152,7 +152,7 @@
 
     svg {
       path {
-        fill: var(--background-color-darker);
+        fill: var(--button-outline-basic-background-color);
       }
     }
   }
@@ -164,7 +164,6 @@
     justify-content: center;
     align-items: center;
     padding: 0 15px;
-    color: var(--box-shadow-color);
     opacity: 0;
     visibility: hidden;
     transition: .5s;

@@ -6,7 +6,8 @@
   position: fixed;
   right: 0;
   transform: translateX(100%);
-  background-color: #fff;
+  background-color: var(--settings-bg-color);
+  box-shadow: 0 8px 16px 0 var(--box-shadow-color);
   transition: all .5s;
 
   &.side-bar_rtl {
@@ -53,7 +54,6 @@
     &_side-bar {
       p {
         @include Paragraph;
-        color: var(--box-shadow-color);
         margin-bottom: 8px;
       }
 
@@ -76,8 +76,8 @@
         height: 60px;
   
         path {
-          fill: #fff;
-          stroke: var(--background-color-darker);
+          fill: var(--settings-bg-color);
+          stroke: var(--button-outline-basic-background-color);
         }
       }
     }
@@ -99,7 +99,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
+    background-color: var(--settings-bg-color);
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     box-shadow: 0 1px 3px var(--box-shadow-color);
@@ -118,18 +118,18 @@
         transform: rotate(360deg);
 
         path {
-          fill: #fff;
+          fill: var(--settings-bg-color);
         }
       }
     }
 
     &:hover {
       background-color: var(--button-background-default-color);
-      color: #fff;
+      color: var(--settings-bg-color);
 
       svg {
         path {
-          fill: #fff;
+          fill: var(--settings-bg-color);
         }
       }
     }
@@ -142,7 +142,7 @@
     transition: all .5s;
 
     path {
-      fill: var(--background-color-darker);
+      fill: var(--button-outline-basic-background-color);
     }
   }
 }

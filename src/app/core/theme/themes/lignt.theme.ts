@@ -3,13 +3,16 @@ import { Theme } from '../theme.interface';
 export const lightTheme: Theme = {
   name: 'light',
   properties: {
-    '--background-color': 'rgba(237, 245, 247)',
-    '--background-color-darker': 'rgba(174, 181, 197)',
-    '--backgorund-transparent-color': 'rgba(233, 238, 240, 0.8)',
+    '--background-color': 'rgb(237, 241, 247)',
+    '--background-transparent-color': 'rgba(233, 238, 240, 0.8)',
     '--border-color': 'rgba(235, 237, 240, 0.1)',
-    '--box-shadow-color': 'rgba(0, 0, 0, 0.6)',
+    '--box-shadow-color': 'rgba(44, 51, 73, 0.1)',
 
-    '--base-text-color': 'rgb(255, 255, 255)',
+    '--nav-bar-bg-color': 'rgb(255,255,255)',
+    '--side-bar-bg-color': 'rgb(255,255,255)',
+    '--settings-bg-color': 'rgb(255,255,255)',
+
+    '--base-text-color': 'rgb(34, 43, 69)',
     '--light-text-color': 'rgb(255,255,255)',
 
     '--input-backgound-color': 'rgba(255,255,255, 0.3)',
@@ -19,6 +22,7 @@ export const lightTheme: Theme = {
     '--button-active-background-default-color': 'rgba(33, 101, 194)',
     '--button-disabled-background-default-color': 'rgb(156, 156, 156)',
     '--button-text-default-color': 'rgb(255, 255, 255, 0.9)',
+    '--button-outline-basic-background-color': 'rgba(143,155,179,0.8)',
 
     '--button-background-transparent-color': 'transparent',
     '--button-hover-background-transparent-color': 'rgba(255, 255, 255)',
