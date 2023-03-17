@@ -49,14 +49,15 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 32px;
     padding-top: 100px;
 
-    &_side-bar {
-      p {
-        @include Paragraph;
-        margin-bottom: 8px;
-      }
+    p {
+      @include Paragraph;
+      margin-bottom: 8px;
+    }
 
+    &_side-bar {
       div {
         display: flex;
         justify-content: space-around;
@@ -72,13 +73,38 @@
       }
 
       button svg {
-        width: 60px;
-        height: 60px;
+        width: 40px;
+        height: 40px;
   
         path {
           fill: var(--settings-bg-color);
           stroke: var(--button-outline-basic-background-color);
         }
+      }
+    }
+
+    &_themes {
+      div {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      button {
+        width: 40px;
+        height: 40px;
+        border: 2px solid transparent;
+        border-radius: 50%;
+
+        &.active {
+          border: 2px solid var(--button-background-default-color);
+        }
+      }
+      button.theme-light {
+        background-color: rgb(237, 241, 247);
+      }
+      button.theme-dark {
+        background-color: rgb(21, 26, 48);
       }
     }
     

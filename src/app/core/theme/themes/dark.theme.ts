@@ -10,9 +10,9 @@ export const darkTheme: Theme = {
     '--side-bar-bg-color': 'rgb(34, 43, 69)',
     '--settings-bg-color': 'rgb(34, 43, 69)',
 
-    '--base-text-color': 'rgb(255, 255, 255)',
+    '--base-text-color': 'rgb(227, 228, 230)',
 
     '--button-background-default-color': 'rgb(51, 102, 255)',
-    '--button-outline-basic-background-color': 'rgba(143, 155, 179, 0.16)',
+    '--button-outline-basic-background-color': 'rgb(143, 155, 179)',
   },
 };

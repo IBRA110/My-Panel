@@ -52,6 +52,21 @@
         </button>
       </div>
     </div>
+    <div class="settings-container_themes">
+      <p>Themes</p>
+      <div>
+        <button
+          class="theme-light"
+          [ngClass]="{ active: themeService.theme === 'light' }"
+          (click)="themeService.setTheme('light')"
+        ></button>
+        <button
+          class="theme-dark"
+          [ngClass]="{ active: themeService.theme === 'dark' }"
+          (click)="themeService.setTheme('dark')"
+        ></button>
+      </div>
+    </div>
   </div>
   <button
     class="settings-btn_toggle"

@@ -22,7 +22,7 @@ export const lightTheme: Theme = {
     '--button-active-background-default-color': 'rgba(33, 101, 194)',
     '--button-disabled-background-default-color': 'rgb(156, 156, 156)',
     '--button-text-default-color': 'rgb(255, 255, 255, 0.9)',
-    '--button-outline-basic-background-color': 'rgba(143,155,179,0.8)',
+    '--button-outline-basic-background-color': 'rgb(143,155,179)',
 
     '--button-background-transparent-color': 'transparent',
     '--button-hover-background-transparent-color': 'rgba(255, 255, 255)',
