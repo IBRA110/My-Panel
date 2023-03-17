@@ -67,6 +67,23 @@
         ></button>
       </div>
     </div>
+    <div class="settings-container_languages">
+      <p>Languages</p>
+      <div>
+        <button
+          [ngClass]="{ active: currentLang === 'english' }"
+          (click)="translateTo('english')"
+        >
+          En
+        </button>
+        <button
+          [ngClass]="{ active: currentLang === 'russian' }"
+          (click)="translateTo('russian')"
+        >
+          Ru
+        </button>
+      </div>
+    </div>
   </div>
   <button
     class="settings-btn_toggle"

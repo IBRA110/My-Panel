@@ -81,6 +81,12 @@
           stroke: var(--button-outline-basic-background-color);
         }
       }
+
+      button svg:hover {
+        path {
+          stroke: var(--button-background-default-color);
+        }
+      }
     }
 
     &_themes {
@@ -99,6 +105,10 @@
         &.active {
           border: 2px solid var(--button-background-default-color);
         }
+
+        &:hover {
+          border: 2px solid var(--button-background-default-color);
+        }
       }
       button.theme-light {
         background-color: rgb(237, 241, 247);
@@ -107,10 +117,25 @@
         background-color: rgb(21, 26, 48);
       }
     }
-    
-    button svg:hover {
-      path {
-        stroke: var(--button-background-default-color);
+
+    &_languages {
+      div {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      button {
+        @include Paragraph;
+        text-transform: uppercase;
+
+        &.active {
+          color: var(--button-background-default-color);
+        }
+
+        &:hover {
+          color: var(--button-background-default-color);
+        }
       }
     }
 
