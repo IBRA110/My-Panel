@@ -3,8 +3,6 @@ using Core.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Data
 {
@@ -54,42 +52,6 @@ namespace Infrastructure.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.ApplyUtcDateTimeConverter();
-
-
-            UlidToBytesConverter bytesConverter = new UlidToBytesConverter();
-
-            foreach (IMutableEntityType entityType in modelBuilder.Model.GetEntityTypes())
-            {
-                if (typeof(ConnectionEntity).IsAssignableFrom(entityType.ClrType))
-                {
-                    modelBuilder.Entity(entityType.ClrType)
-                        .Property<Ulid>(nameof(ConnectionEntity.ConnectionId)).ValueGeneratedNever();
-                }
-                if (typeof(ImageEntity).IsAssignableFrom(entityType.ClrType))
-                {
-                    modelBuilder.Entity(entityType.ClrType)
-                        .Property<Ulid>(nameof(ImageEntity.AppUserId)).ValueGeneratedNever();
-                    modelBuilder.Entity(entityType.ClrType)
-                        .Property<Ulid>(nameof(ImageEntity.Id)).ValueGeneratedNever();
-                }
-                if (typeof(MessageEntity).IsAssignableFrom(entityType.ClrType))
-                {
-                    modelBuilder.Entity(entityType.ClrType)
-                        .Property<Ulid>(nameof(MessageEntity.Id)).ValueGeneratedNever();
-                    modelBuilder.Entity(entityType.ClrType)
-                        .Property<Ulid>(nameof(MessageEntity.RecipientId)).ValueGeneratedNever();
-                    modelBuilder.Entity(entityType.ClrType)
-                        .Property<Ulid>(nameof(MessageEntity.SenderId)).ValueGeneratedNever();
-                }
-
-                foreach (IMutableProperty property in entityType.GetProperties())
-                {
-                    if (property.ClrType == typeof(Ulid) || property.ClrType == typeof(Ulid?))
-                    {
-                        property.SetValueConverter(bytesConverter);
-                    }
-                }
-            }
         }
     }
 }
