@@ -30,7 +30,7 @@ namespace API.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult> DeleteMessage(Ulid id)
+        public async Task<ActionResult> DeleteMessage(string id)
         {
             string userName = User.FindFirst("UserName").Value;
             MessageEntity message = await _unitOfWork.messageRepository.GetMessage(id);

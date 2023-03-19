@@ -5,7 +5,6 @@ using Core.DTOs;
 using Core.Helpers;
 using Core.Interfaces;
 using Core.Entities;
-using System;
 
 namespace Infrastructure.Data
 {
@@ -44,7 +43,7 @@ namespace Infrastructure.Data
                     userParams.PageNumber, userParams.PageSize);
         }
 
-        public async Task<AppUserEntity> GetUserByIdAsync(Ulid id)
+        public async Task<AppUserEntity> GetUserByIdAsync(string id)
         {
             return await _context.Users
                 .Include(p => p.Images).ThenInclude(subItem => subItem.Likes)

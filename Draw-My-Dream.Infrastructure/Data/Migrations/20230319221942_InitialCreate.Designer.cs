@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230313153607_initialMigration")]
-    partial class initialMigration
+    [Migration("20230319221942_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.AppRoleEntity", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -51,7 +51,7 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.AppUserEntity", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -151,10 +151,10 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.AppUserRoleEntity", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -166,7 +166,7 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.ConnectionEntity", b =>
                 {
                     b.Property<string>("ConnectionId")
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("GroupEntityName")
                         .HasColumnType("varchar(255)");
@@ -194,11 +194,10 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.ImageEntity", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("AppUserId")
-                        .IsRequired()
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<bool>("IsMain")
                         .HasColumnType("tinyint(1)");
@@ -216,11 +215,10 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.ImageLikeEntity", b =>
                 {
                     b.Property<string>("LikedUserId")
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("LikedImageId")
-                        .IsRequired()
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("LikedUserId");
 
@@ -232,7 +230,7 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.MessageEntity", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Content")
                         .HasColumnType("longtext");
@@ -247,8 +245,7 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("RecipientId")
-                        .IsRequired()
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("RecipientUserName")
                         .HasColumnType("longtext");
@@ -257,8 +254,7 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("SenderId")
-                        .IsRequired()
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("SenderUserName")
                         .HasColumnType("longtext");
@@ -272,7 +268,7 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Ulid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -286,7 +282,7 @@ namespace Infrastructure.Data.Migrations
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -295,7 +291,7 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Ulid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -309,7 +305,7 @@ namespace Infrastructure.Data.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -318,7 +314,7 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Ulid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("varchar(255)");
@@ -331,7 +327,7 @@ namespace Infrastructure.Data.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -340,10 +336,10 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Ulid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("varchar(26)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("varchar(255)");
@@ -389,9 +385,7 @@ namespace Infrastructure.Data.Migrations
                 {
                     b.HasOne("Core.Entities.AppUserEntity", "AppUser")
                         .WithMany("Images")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AppUserId");
 
                     b.Navigation("AppUser");
                 });
@@ -401,8 +395,7 @@ namespace Infrastructure.Data.Migrations
                     b.HasOne("Core.Entities.ImageEntity", "Image")
                         .WithMany("Likes")
                         .HasForeignKey("LikedImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Image");
                 });
@@ -412,21 +405,19 @@ namespace Infrastructure.Data.Migrations
                     b.HasOne("Core.Entities.AppUserEntity", "Recipient")
                         .WithMany("MessagesReceived")
                         .HasForeignKey("RecipientId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Core.Entities.AppUserEntity", "Sender")
                         .WithMany("MessagesSent")
                         .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Recipient");
 
                     b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Ulid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Core.Entities.AppRoleEntity", null)
                         .WithMany()
@@ -435,7 +426,7 @@ namespace Infrastructure.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Ulid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.HasOne("Core.Entities.AppUserEntity", null)
                         .WithMany()
@@ -444,7 +435,7 @@ namespace Infrastructure.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Ulid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.HasOne("Core.Entities.AppUserEntity", null)
                         .WithMany()
@@ -453,7 +444,7 @@ namespace Infrastructure.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Ulid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.HasOne("Core.Entities.AppUserEntity", null)
                         .WithMany()

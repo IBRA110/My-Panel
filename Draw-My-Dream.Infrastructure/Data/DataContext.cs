@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
 {
-    public class DataContext : IdentityDbContext<AppUserEntity, AppRoleEntity, Ulid, 
-        IdentityUserClaim<Ulid>, AppUserRoleEntity, IdentityUserLogin<Ulid>, 
-        IdentityRoleClaim<Ulid>, IdentityUserToken<Ulid>>
+    public class DataContext : IdentityDbContext<AppUserEntity, AppRoleEntity, string, 
+        IdentityUserClaim<string>, AppUserRoleEntity, IdentityUserLogin<string>, 
+        IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
         public DataContext(DbContextOptions options) : base(options) 
         {

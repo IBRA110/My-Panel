@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Core.Entities
 {
-    public class AppRoleEntity : IdentityRole<Ulid>
+    public class AppRoleEntity : IdentityRole<string>
     {
-        public override Ulid Id { get; set; } = Ulid.NewUlid();
+        public override string Id { get; set; } = Ulid.NewUlid().ToString();
         public ICollection<AppUserRoleEntity> UserRoles { get; set; }
     }
 }

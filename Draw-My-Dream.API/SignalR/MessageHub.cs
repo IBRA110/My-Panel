@@ -56,7 +56,7 @@ namespace API.SignalR
 
         public async Task SendMessage(CreateMessageDTO createMessageDTO)
         {
-            AppUserEntity sender = await _unitOfWork.userRepository.GetUserByIdAsync(Ulid.Parse(Context.User.FindFirst("Id").Value));
+            AppUserEntity sender = await _unitOfWork.userRepository.GetUserByIdAsync(Context.User.FindFirst("Id").Value);
             
             if (sender.FirstName == createMessageDTO.RecipientUserName.ToLower())
             {
@@ -108,7 +108,7 @@ namespace API.SignalR
         private async Task<GroupEntity> AddToGroup(string groupName)
         {
             GroupEntity group = await _unitOfWork.messageRepository.GetMessageGroup(groupName);
-            ConnectionEntity connection = new ConnectionEntity(Ulid.Parse(Context.ConnectionId), Context.User.FindFirst("UserName").Value);
+            ConnectionEntity connection = new ConnectionEntity(Context.ConnectionId, Context.User.FindFirst("UserName").Value);
 
             if (group == null)
             {
@@ -128,8 +128,8 @@ namespace API.SignalR
 
         private async Task<GroupEntity> RemoveFromMessageGroup()
         {
-            GroupEntity group = await _unitOfWork.messageRepository.GetGroupForConnection(Ulid.Parse(Context.ConnectionId));
-            ConnectionEntity connection = group.Connections.FirstOrDefault(x => x.ConnectionId == Ulid.Parse(Context.ConnectionId));
+            GroupEntity group = await _unitOfWork.messageRepository.GetGroupForConnection(Context.ConnectionId);
+            ConnectionEntity connection = group.Connections.FirstOrDefault(x => x.ConnectionId == Context.ConnectionId);
             _unitOfWork.messageRepository.RemoveConnection(connection);
             if (await _unitOfWork.Complete())
             {

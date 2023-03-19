@@ -2,7 +2,7 @@ namespace Core.DTOs
 {
     public class ToggleLikeDTO
     {
-        public Ulid ImageOwnerId { get; set; }
-        public Ulid ImageId { get; set; }
+        public string ImageOwnerId { get; set; }
+        public string ImageId { get; set; }
     }
 }
