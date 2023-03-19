@@ -1,6 +1,6 @@
 namespace Core.Helpers
 {
-    public static class DateTime
+    public static class CalculatingTime
     {
         public static int CalculateAge(this System.DateTime dob)
         {
