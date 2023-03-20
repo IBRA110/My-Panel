@@ -13,9 +13,9 @@
 https://docs.docker.com/engine/install/debian/
 
 ```console
-sudo docker build -t draw .
-sudo docker run -d -p 8000:80 -e "ASPNETCORE_ENVIRONMENT=Development" --name draw_my_dream draw
-sudo docker stop draw_my_dream
+docker build -t draw .
+docker run -d -p 8000:80 -e "ASPNETCORE_ENVIRONMENT=Development" --name draw_my_dream draw
+docker stop draw_my_dream
 ```
 
 ## .NET Samples
