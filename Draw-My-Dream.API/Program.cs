@@ -55,10 +55,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseCors(x => x.AllowAnyHeader()
-    .SetIsOriginAllowed(isOriginalAllowed)
-    .AllowAnyMethod()
-    .AllowCredentials());
+app.UseCors("AllowedCorsOrigins");
 
 
 app.MapControllers();
