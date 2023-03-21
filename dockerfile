@@ -20,4 +20,5 @@ WORKDIR /app
 COPY --from=build-env /app/Draw-My-Dream.API/drawmydream.db .
 COPY --from=build-env app/Draw-My-Dream.API/out .
 
+
 ENTRYPOINT ["dotnet", "API.dll"]
