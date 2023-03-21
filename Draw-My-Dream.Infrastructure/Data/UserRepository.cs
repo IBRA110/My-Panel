@@ -26,6 +26,15 @@ namespace Infrastructure.Data
                 .SingleOrDefaultAsync();
         }
 
+        public async Task<MemberDTO> GetMemberByIdAsync(string id)
+        {
+            return await _context.Users
+                 .Where(x => x.Id == id)
+                 .Include(p => p.Images).ThenInclude(subItem => subItem.Likes)
+                 .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider)
+                 .SingleOrDefaultAsync();
+        }
+
         public async Task<PagedList<MemberDTO>> GetMembersAsync(UserParams userParams)
         {
             IQueryable<AppUserEntity> query = _context.Users.AsQueryable();
@@ -49,6 +58,7 @@ namespace Infrastructure.Data
                 .Include(p => p.Images).ThenInclude(subItem => subItem.Likes)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
+
         public async Task<AppUserEntity> GetUserByUsernameAsync(string username)
         {
             return await _context.Users

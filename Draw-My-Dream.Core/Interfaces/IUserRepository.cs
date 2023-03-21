@@ -11,5 +11,6 @@ namespace Core.Interfaces
         Task<AppUserEntity> GetUserByUsernameAsync(string username);
         Task<PagedList<MemberDTO>> GetMembersAsync(UserParams userParams);
         Task<MemberDTO> GetMemberAsync(string username);
+        Task<MemberDTO> GetMemberByIdAsync(string id);
     }
 }

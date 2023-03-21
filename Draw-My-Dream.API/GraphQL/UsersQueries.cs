@@ -1,5 +1,4 @@
-using Core.Helpers;
-using Core.Entities;
+
 using Infrastructure.Data;
 using Core.DTOs;
 using Core.Interfaces;
@@ -11,17 +10,10 @@ namespace API.GraphQL
     public class UsersQueries
     {
         [UseProjection]
-        [UseFiltering()]
-        [UseSorting()]
-        public IQueryable<AppUserEntity> Users([Service] DataContext context, UserParams userParams)
-        {
-            return context.Users;
-        }
-
         [Authorize]
-        public async Task<AppUserEntity> GetUser([Service] DataContext context, [Service] IUnitOfWork unitOfWork, ClaimsPrincipal claimsPrincipal)
+        public async Task<MemberDTO> GetUser([Service] DataContext context, [Service] IUnitOfWork unitOfWork, ClaimsPrincipal claimsPrincipal)
         {
-            AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
+            MemberDTO user = await unitOfWork.userRepository.GetMemberByIdAsync(claimsPrincipal.FindFirst("Id").Value);
             return user;
         }
     }
