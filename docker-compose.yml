@@ -14,14 +14,14 @@ services:
       
     volumes:
       - datafiles:/var/lib/mysql
-      - "~/sql-scripts/setup.sql:/docker-entrypoint-initdb.d/1.sql"
+ 
     restart: always
     
     environment: 
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE} 
+      MYSQL_ROOT_PASSWORD: 9i3KsZ0jR2mA1* #${MYSQL_ROOT_PASSWORD} 
+      MYSQL_USER: root  #${MYSQL_USER}
+      MYSQL_PASSWORD: 9i3KsZ0jR2mA1*  #${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: draw #${MYSQL_DATABASE} 
       
   backend:
     build:
@@ -38,4 +38,4 @@ services:
     
     environment: 
       - DBHOST=database
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development

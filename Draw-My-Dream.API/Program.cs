@@ -56,9 +56,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseCors(x => x.AllowAnyHeader()
+    .SetIsOriginAllowed(isOriginalAllowed)
     .AllowAnyMethod()
-    .AllowCredentials()
-    .WithOrigins("http://localhost:4200"));
+    .AllowCredentials());
 
 
 app.MapControllers();
