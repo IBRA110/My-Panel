@@ -13,15 +13,16 @@ services:
       - "3306:3306"
       
     volumes:
-      - datafiles:/var/lib/mysql
+      - ./~mysql:/var/lib/mysql
+      - ./mysql.cnf:/etc/mysql/conf.d/my.cnf
  
     restart: always
     
     environment: 
-      MYSQL_ROOT_PASSWORD: 9i3KsZ0jR2mA1* #${MYSQL_ROOT_PASSWORD} 
-      MYSQL_USER: root  #${MYSQL_USER}
-      MYSQL_PASSWORD: 9i3KsZ0jR2mA1*  #${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: draw #${MYSQL_DATABASE} 
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE} 
       
   backend:
     build:
