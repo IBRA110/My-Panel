@@ -28,7 +28,14 @@ builder.Services.AddApplicationServices(builder.Configuration);
 
 builder.Services.AddIdentityServices(builder.Configuration);
 
-builder.Services.AddCors();
+
+builder.Services.AddCors(options =>
+ {
+     options.AddPolicy("AllowAll", builder => builder
+        .AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod());
+ });
 
 builder.Services.AddSignalR();
 
@@ -55,7 +62,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseCors("AllowedCorsOrigins");
+app.UseCors("AllowAll");
 
 
 app.MapControllers();
