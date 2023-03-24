@@ -8,7 +8,12 @@
   justify-content: space-between;
   align-items: center;
   background-color: var(--nav-bar-background-color);
-  box-shadow: 0 8px 16px 0 var(--box-shadow-color);
+  box-shadow: 	0px 3px 3px 0px var(--box-shadow-color),
+		0px 3px 6px 0px var(--box-shadow-color),
+		0px 5px 10px 0px var(--box-shadow-color),
+		0px 8px 12px 1px var(--box-shadow-color);
+  border:	1px solid var(--box-shadow-color);
+  border-radius:	5px;
   z-index: 1;
 
   &.active {
@@ -36,7 +41,7 @@
       width: 30px;
       height: 2px;
       position: absolute;
-      background-color: var(--button-background-default-color);
+      background-color: var(--base-text-color);
       transition: .5s;
     }
 
@@ -46,7 +51,7 @@
 
     &::after {
       transform: translateY(8px);
-      box-shadow: 0 -8px 0 var(--button-background-default-color);
+      box-shadow: 0 -8px 0 var(--base-text-color);
     }
   }
 

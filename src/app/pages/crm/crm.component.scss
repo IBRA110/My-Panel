@@ -9,13 +9,14 @@
   background-color: var(--background-color);
   color: var(--base-text-color);
 
-  .wrapper {
+  &-wrapper {
     width: 100%;
     min-height: 100%;
     display: flex;
-  }
   
-  .side-bar_rtl {
-    flex-direction: row-reverse;
+    &_router{
+      padding: 100px 0px 0px 50px;
+    }
+
   }
 }
