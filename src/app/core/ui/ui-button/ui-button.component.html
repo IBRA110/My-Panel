@@ -1,9 +1,4 @@
-<button
-  class="{{ scssClass }}"
-  type="{{ type }}"
-  [disabled]="isDisabled"
-  (click)="onClick.emit()"
->
+<button class="{{ scssClass }}" type="{{ type }}" [disabled]="isDisabled" (click)="onClick.emit()">
   <i class="{{ icon }}"></i>
   {{ text }}
 </button>

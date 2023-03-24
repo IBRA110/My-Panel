@@ -11,15 +11,15 @@ import {
   providedIn: 'root',
 })
 export class UiAlertMessagesService {
-  private _subject = new Subject<Alert>();
-  private _defaultId = 'default-alert';
+  private subject = new Subject<Alert>();
+  private defaultId = 'default-alert';
 
-  public onAlert(id = this._defaultId): Observable<Alert> {
-    return this._subject.asObservable().pipe(filter((x) => x && x.id === id));
+  public onAlert(id = this.defaultId): Observable<Alert> {
+    return this.subject.asObservable().pipe(filter((x) => x && x.id === id));
   }
 
   public callSuccessMessage(message: string) {
-    this._alert(
+    this.alert(
       new Alert({
         type: AlertType.SUCCESS,
         message,
@@ -29,7 +29,7 @@ export class UiAlertMessagesService {
   }
 
   public callErrorMessage(message: string) {
-    this._alert(
+    this.alert(
       new Alert({
         type: AlertType.ERROR,
         message,
@@ -39,7 +39,7 @@ export class UiAlertMessagesService {
   }
 
   public callInfoMessage(message: string) {
-    this._alert(
+    this.alert(
       new Alert({
         type: AlertType.INFO,
         message,
@@ -49,7 +49,7 @@ export class UiAlertMessagesService {
   }
 
   public callWarningMessage(message: string) {
-    this._alert(
+    this.alert(
       new Alert({
         type: AlertType.WARNING,
         message,
@@ -58,12 +58,12 @@ export class UiAlertMessagesService {
     );
   }
 
-  private _alert(alert: Alert) {
-    alert.id = alert.id || this._defaultId;
-    this._subject.next(alert);
+  private alert(alert: Alert) {
+    alert.id = alert.id || this.defaultId;
+    this.subject.next(alert);
   }
 
-  public clear(id = this._defaultId) {
-    this._subject.next(new Alert({ id }));
+  public clear(id = this.defaultId) {
+    this.subject.next(new Alert({ id }));
   }
 }
