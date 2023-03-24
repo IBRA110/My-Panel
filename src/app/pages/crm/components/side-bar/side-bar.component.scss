@@ -65,8 +65,10 @@
 
       &::before,
       &::after {
+        position: absolute;
         right: 25px;
         transform: scale(1);
+        transition: 500ms;
       }
     }
 
@@ -76,9 +78,9 @@
       position: absolute;
       width: 10px;
       height: 10px;
+      right: 0px;
       background-color: transparent;
       transform: scale(0);
-      transition: .5s;
     }
 
     &::before {
