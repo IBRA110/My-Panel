@@ -148,7 +148,7 @@
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
       box-shadow: none;
-
+      
       svg {
         transform: rotate(360deg);
 
@@ -157,16 +157,8 @@
         }
       }
     }
-
-    &:hover {
-      background-color: var(--button-background-default-color);
-      color: var(--settings-bg-color);
-
-      svg {
-        path {
-          fill: var(--settings-bg-color);
-        }
-      }
+    &:active{
+      border:	1px solid var(--box-shadow-color);
     }
   }
 

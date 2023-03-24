@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { ThemeService } from 'src/app/core/theme/theme.service';
-import { sidebarToRtl } from '../../data/store/crm.actions';
+import { reverseSideBar } from '../../data/store/crm.actions';
 import { selectIsSidebarReverse } from '../../data/store/crm.selectors';
 
 @Component({
@@ -25,7 +25,7 @@ export class SettingsBarComponent {
   ) {}
 
   public changeSidebarDirection(payload: boolean): void {
-    this.store.dispatch(sidebarToRtl({ payload }));
+    this.store.dispatch(reverseSideBar({ payload }));
   }
 
   public translateTo(lang: string): void {

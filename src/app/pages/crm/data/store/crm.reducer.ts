@@ -1,6 +1,6 @@
 import { Action, on } from '@ngrx/store';
 import { createRehydrateReducer } from 'src/app/core/reducers/rehydrate-reducer';
-import { sidebarToRtl, toggleSidebar } from './crm.actions';
+import { reverseSideBar, toggleSidebar } from './crm.actions';
 import { CrmState, initialState } from './crm.state';
 
 export const crmFeatureKey = 'crm';
@@ -12,9 +12,9 @@ const crmReducer = createRehydrateReducer(
     ...state,
     isSidebarToggled: !state.isSidebarToggled,
   })),
-  on(sidebarToRtl, (state, { payload }) => ({
+  on(reverseSideBar, (state, { payload }) => ({
     ...state,
-    isSidebarRtl: payload,
+    isSidebarReverse: payload,
   })),
 );
 
