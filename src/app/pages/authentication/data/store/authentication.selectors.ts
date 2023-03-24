@@ -1,14 +1,15 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AuthenticationState } from './authentication.state';
 
-export const authState = createFeatureSelector<AuthenticationState>('auth');
+export const selectAuthState =
+  createFeatureSelector<AuthenticationState>('auth');
 
-export const toKnowIsSignIn = createSelector(
-  authState,
+export const selectToKnowIsSignIn = createSelector(
+  selectAuthState,
   (state: AuthenticationState) => state.isToggleForm,
 );
 
-export const getAccessToken = createSelector(
-  authState,
+export const selectAccessToken = createSelector(
+  selectAuthState,
   (state: AuthenticationState) => state.authTokens,
 );

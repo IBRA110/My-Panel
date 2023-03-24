@@ -4,7 +4,7 @@ import { CrmRoutingModule } from './crm-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { crmFeatureKey, reducer } from './data-access/store/crm.reducer';
+import { crmFeatureKey, reducer } from './data/store/crm.reducer';
 
 import { CrmComponent } from './crm.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';

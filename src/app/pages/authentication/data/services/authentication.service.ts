@@ -17,12 +17,12 @@ import { REFRESH } from '../gql/refresh.gql';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  public constructor(private _apollo: Apollo) {}
+  public constructor(private apollo: Apollo) {}
 
   public signUp(
     payload: RegistrationMutationVariables,
   ): Observable<MutationResult<RegistrationMutation>> {
-    return this._apollo.mutate<RegistrationMutation>({
+    return this.apollo.mutate<RegistrationMutation>({
       mutation: REGISTRATION,
       variables: payload,
     });
@@ -31,7 +31,7 @@ export class AuthenticationService {
   public signIn(
     payload: LoginMutationVariables,
   ): Observable<MutationResult<LoginMutation>> {
-    return this._apollo.mutate<LoginMutation>({
+    return this.apollo.mutate<LoginMutation>({
       mutation: LOGIN,
       variables: payload,
     });
@@ -40,7 +40,7 @@ export class AuthenticationService {
   public refresh(
     payload: RefreshMutationVariables,
   ): Observable<MutationResult<RefreshMutation>> {
-    return this._apollo.mutate<RefreshMutation>({
+    return this.apollo.mutate<RefreshMutation>({
       mutation: REFRESH,
       variables: payload,
     });

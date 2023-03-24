@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { ThemeService } from 'src/app/core/theme/theme.service';
-import { sidebarToRtl } from '../../data-access/store/crm.actions';
-import { selectIsSidebarRtl } from '../../data-access/store/crm.selectors';
+import { sidebarToRtl } from '../../data/store/crm.actions';
+import { selectIsSidebarRtl } from '../../data/store/crm.selectors';
 
 @Component({
   selector: 'app-settings',
@@ -13,25 +13,26 @@ import { selectIsSidebarRtl } from '../../data-access/store/crm.selectors';
 })
 export class SettingsComponent implements OnInit {
   public settingsToggled: boolean = false;
-  public isSidebarRtl$: Observable<boolean>;
+  public isSidebarRtl$: Observable<boolean> =
+    this.store.select(selectIsSidebarRtl);
   public currentLang: string = 'english';
 
   public constructor(
-    private _store: Store,
+    private store: Store,
     public themeService: ThemeService,
-    private _translate: TranslateService,
+    private translate: TranslateService,
   ) {}
 
   public ngOnInit(): void {
-    this.isSidebarRtl$ = this._store.select(selectIsSidebarRtl);
+    this.isSidebarRtl$ = this.store.select(selectIsSidebarRtl);
   }
 
   public changeSidebarDirection(payload: boolean): void {
-    this._store.dispatch(sidebarToRtl({ payload }));
+    this.store.dispatch(sidebarToRtl({ payload }));
   }
 
   public translateTo(lang: string): void {
-    this._translate.use(lang);
+    this.translate.use(lang);
     this.currentLang = lang;
   }
 }

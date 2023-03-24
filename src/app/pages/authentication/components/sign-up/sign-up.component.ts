@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { UiButtonStyleEnum } from 'src/app/core/enums/ui-button-style.enum';
-import { SignUpForm } from '../../data-access/interfaces/form.interface';
-import {
-  signUp,
-  toggleForms,
-} from '../../data-access/store/authentication.actions';
+import { SignUpForm } from '../../data/interfaces/form.interface';
+import { signUp, toggleForms } from '../../data/store/authentication.actions';
 import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 import { CustomValidators } from 'src/app/core/validators/custom.validator';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,14 +18,14 @@ export class SignUpComponent implements OnInit {
   public signUpForm: FormGroup<SignUpForm>;
 
   public constructor(
-    private _fb: FormBuilder,
-    private _store: Store,
-    private _alertMessageService: UiAlertMessagesService,
-    private _translate: TranslateService,
+    private formGroup: FormBuilder,
+    private store: Store,
+    private alertMessageService: UiAlertMessagesService,
+    private translate: TranslateService,
   ) {}
 
   public ngOnInit(): void {
-    this.signUpForm = this._fb.group(
+    this.signUpForm = this.formGroup.group(
       {
         userName: ['', Validators.required],
         email: [
@@ -73,14 +70,14 @@ export class SignUpComponent implements OnInit {
 
   public onSignUp(): void {
     if (this.signUpForm.invalid) {
-      this._alertMessageService.callWarningMessage(
-        this._translate.instant(
+      this.alertMessageService.callWarningMessage(
+        this.translate.instant(
           'AUTHENTICATION.SIGN_UP_FORM_FIELDS_NOT_CORRECT',
         ),
       );
       return;
     }
-    this._store.dispatch(
+    this.store.dispatch(
       signUp({
         userName: this.signUpForm.get('userName').value,
         email: this.signUpForm.get('email').value,
@@ -103,7 +100,7 @@ export class SignUpComponent implements OnInit {
   }
 
   public toggleForm(): void {
-    this._store.dispatch(toggleForms({ payload: true }));
+    this.store.dispatch(toggleForms({ payload: true }));
   }
 
   public controlHasError(control: string, error: string): boolean {

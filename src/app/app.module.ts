@@ -17,9 +17,9 @@ import { environment } from 'src/environments/environment';
 import {
   authenticationFeatureKey,
   reducer,
-} from './pages/authentication/data-access/store/authentication.reduser';
+} from './pages/authentication/data/store/authentication.reduser';
 import { EffectsModule } from '@ngrx/effects';
-import { AuthenticationEffects } from './pages/authentication/data-access/store/authentication.effects';
+import { AuthenticationEffects } from './pages/authentication/data/store/authentication.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GraphQLModule } from './graphql.module';
 

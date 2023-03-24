@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthTokens } from 'src/app/pages/authentication/data-access/interfaces/auth.interface';
+import { AuthTokens } from 'src/app/pages/authentication/data/interfaces/auth.interface';
 import { AuthTokensEnum } from '../enums/local-storage-keys.enum';
 
 @Injectable({
@@ -24,15 +24,15 @@ export class LocalStorageService {
   public getDecodeDataBase64Url<T>(key: string): T {
     const base64Url = key.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = this._b64DecodeUnicode(base64);
+    const jsonPayload = this.b64DecodeUnicode(base64);
     return JSON.parse(jsonPayload);
   }
 
   public getExpiration(token: string): number {
-    return this._b64DecodeUnicode(token).exp;
+    return this.b64DecodeUnicode(token).exp;
   }
 
-  private _b64DecodeUnicode(str: string): any {
+  private b64DecodeUnicode(str: string): any {
     const base64Url = str.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     const jsonPayload = decodeURIComponent(

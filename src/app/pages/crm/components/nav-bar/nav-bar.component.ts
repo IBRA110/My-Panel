@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { toggleSidebar } from '../../data-access/store/crm.actions';
-import { selectIsSidebarToggled } from '../../data-access/store/crm.selectors';
+import { toggleSidebar } from '../../data/store/crm.actions';
+import { selectIsSidebarToggled } from '../../data/store/crm.selectors';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,13 +10,13 @@ import { selectIsSidebarToggled } from '../../data-access/store/crm.selectors';
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent {
-  public isSidebarToggled$: Observable<boolean> = this._store.select(
+  public isSidebarToggled$: Observable<boolean> = this.store.select(
     selectIsSidebarToggled,
   );
 
-  public constructor(private _store: Store) {}
+  public constructor(private store: Store) {}
 
   public toggleButtonActive(): void {
-    this._store.dispatch(toggleSidebar());
+    this.store.dispatch(toggleSidebar());
   }
 }

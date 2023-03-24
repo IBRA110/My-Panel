@@ -23,7 +23,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 import { ErrorResponse } from 'src/app/core/interfaces/error.interface';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
-import { getAccessToken } from './authentication.selectors';
+import { selectAccessToken } from './authentication.selectors';
 import { Store } from '@ngrx/store';
 
 @Injectable()
@@ -89,7 +89,7 @@ export class AuthenticationEffects {
   private refreshTokenEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(refreshToken),
-      concatLatestFrom(() => this.store.select(getAccessToken)),
+      concatLatestFrom(() => this.store.select(selectAccessToken)),
       delayWhen(([, token]) => {
         const expiration = this.localStorageService.getExpiration(
           token.accessToken,

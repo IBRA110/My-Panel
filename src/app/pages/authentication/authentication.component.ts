@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UiButtonStyleEnum } from '../../core/enums/ui-button-style.enum';
 import { Store } from '@ngrx/store';
-import { toKnowIsSignIn } from './data-access/store/authentication.selectors';
+import { selectToKnowIsSignIn } from './data/store/authentication.selectors';
 import { Observable } from 'rxjs';
 import { fadeAnimation } from '../../core/animations/fade.animation';
 
@@ -12,9 +12,10 @@ import { fadeAnimation } from '../../core/animations/fade.animation';
   animations: [fadeAnimation],
 })
 export class AuthenticationComponent {
-  public isToggleForm: Observable<boolean> = this._store.select(toKnowIsSignIn);
+  public isToggleForm: Observable<boolean> =
+    this.store.select(selectToKnowIsSignIn);
 
-  public constructor(private _store: Store) {}
+  public constructor(private store: Store) {}
   public get scssClass(): typeof UiButtonStyleEnum {
     return UiButtonStyleEnum;
   }

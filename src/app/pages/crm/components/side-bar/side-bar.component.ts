@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import {
   selectIsSidebarRtl,
   selectIsSidebarToggled,
-} from '../../data-access/store/crm.selectors';
+} from '../../data/store/crm.selectors';
 
 @Component({
   selector: 'app-side-bar',

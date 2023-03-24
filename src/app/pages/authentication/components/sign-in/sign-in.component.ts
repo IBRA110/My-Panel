@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SignInForm } from '../../data-access/interfaces/form.interface';
+import { SignInForm } from '../../data/interfaces/form.interface';
 import { UiButtonStyleEnum } from './../../../../core/enums/ui-button-style.enum';
 import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 import { Store } from '@ngrx/store';
-import {
-  signIn,
-  toggleForms,
-} from '../../data-access/store/authentication.actions';
+import { signIn, toggleForms } from '../../data/store/authentication.actions';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,8 +16,8 @@ export class SignInComponent implements OnInit {
   public typeOfInput: 'password' | 'text' = 'password';
 
   public constructor(
-    private _alertMessage: UiAlertMessagesService,
-    private _store: Store,
+    private alertMessage: UiAlertMessagesService,
+    private store: Store,
   ) {}
 
   public ngOnInit(): void {
@@ -32,10 +29,10 @@ export class SignInComponent implements OnInit {
 
   public onSignIn(): void {
     if (this.signInForm.invalid) {
-      this._alertMessage.callWarningMessage('All Fields Are Required!!!');
+      this.alertMessage.callWarningMessage('All Fields Are Required!!!');
       return;
     }
-    this._store.dispatch(
+    this.store.dispatch(
       signIn({
         userName: this.signInForm.value.userName,
         password: this.signInForm.value.password,
@@ -57,6 +54,6 @@ export class SignInComponent implements OnInit {
   }
 
   public toggleForm(): void {
-    this._store.dispatch(toggleForms({ payload: false }));
+    this.store.dispatch(toggleForms({ payload: false }));
   }
 }

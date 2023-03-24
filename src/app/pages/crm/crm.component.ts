@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectIsSidebarRtl } from './data-access/store/crm.selectors';
+import { selectIsSidebarRtl } from './data/store/crm.selectors';
 
 @Component({
   selector: 'app-crm',
@@ -11,9 +11,9 @@ import { selectIsSidebarRtl } from './data-access/store/crm.selectors';
 export class CrmComponent implements OnInit {
   public isSidebarRtl$: Observable<boolean>;
 
-  public constructor(private _store: Store) {}
+  public constructor(private store: Store) {}
 
   public ngOnInit(): void {
-    this.isSidebarRtl$ = this._store.select(selectIsSidebarRtl);
+    this.isSidebarRtl$ = this.store.select(selectIsSidebarRtl);
   }
 }
