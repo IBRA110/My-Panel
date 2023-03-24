@@ -7,11 +7,11 @@ import { sidebarToRtl } from '../../data/store/crm.actions';
 import { selectIsSidebarReverse } from '../../data/store/crm.selectors';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss'],
+  selector: 'app-settings-bar',
+  templateUrl: './settings-bar.component.html',
+  styleUrls: ['./settings-bar.component.scss'],
 })
-export class SettingsComponent {
+export class SettingsBarComponent {
   public isSettingsToggled: boolean = false;
   public isSidebarReverse$: Observable<boolean> = this.store.select(
     selectIsSidebarReverse,

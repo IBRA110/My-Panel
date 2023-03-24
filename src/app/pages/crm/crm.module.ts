@@ -8,17 +8,15 @@ import { crmFeatureKey, reducer } from './data/store/crm.reducer';
 
 import { CrmComponent } from './crm.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { DropdownLangComponent } from './components/nav-bar/components/drop-down-lang/drop-down-lang.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
-import { SettingsComponent } from './components/settings/settings.component';
+import { SettingsBarComponent } from './components/settings-bar/settings-bar.component';
 
 @NgModule({
   declarations: [
     CrmComponent,
     SideBarComponent,
     NavBarComponent,
-    DropdownLangComponent,
-    SettingsComponent,
+    SettingsBarComponent,
   ],
   imports: [
     CommonModule,

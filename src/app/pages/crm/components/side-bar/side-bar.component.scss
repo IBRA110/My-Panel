@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background-color: var(--side-bar-bg-color);
+  background-color: var(--side-bar-background-color);
   transition: .5s;
 
   &.active {
@@ -127,6 +127,7 @@
     padding: 0 12px;
     text-align: center;
     text-decoration: none;
+    color: var(--base-text-color);
     z-index: 1;
   }
 

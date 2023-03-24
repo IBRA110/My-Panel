@@ -6,9 +6,9 @@ export const darkTheme: Theme = {
     '--background-color': 'rgb(21, 26, 48)',
     '--box-shadow-color': 'rgb(26, 31, 51)',
 
-    '--nav-bar-bg-color': 'rgb(34, 43, 69)',
-    '--side-bar-bg-color': 'rgb(34, 43, 69)',
-    '--settings-bg-color': 'rgb(34, 43, 69)',
+    '--nav-bar-background-color': 'rgb(34, 43, 69)',
+    '--side-bar-background-color': 'rgb(34, 43, 69)',
+    '--settings-background-color': 'rgb(34, 43, 69)',
 
     '--base-text-color': 'rgb(227, 228, 230)',
 
