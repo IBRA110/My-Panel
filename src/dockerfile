@@ -1,0 +1,12 @@
+FROM node:19.7.0  as build
+WORKDIR /app
+
+RUN npm install -g @angular/cli
+
+COPY ./package.json .
+RUN npm install
+COPY . .
+RUN ng build
+
+FROM nginx as runtime
+COPY --from=build /app/dist/draw-my-dream-front-end  /usr/share/nginx/html
