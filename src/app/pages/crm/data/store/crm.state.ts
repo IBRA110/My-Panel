@@ -1,9 +1,9 @@
 export interface CrmState {
   isSidebarToggled: boolean;
-  isSidebarRtl: boolean;
+  isSidebarReverse: boolean;
 }
 
 export const initialState: CrmState = {
   isSidebarToggled: false,
-  isSidebarRtl: false,
+  isSidebarReverse: false,
 };

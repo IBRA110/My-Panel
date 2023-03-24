@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import {
-  selectIsSidebarRtl,
+  selectIsSidebarReverse,
   selectIsSidebarToggled,
 } from '../../data/store/crm.selectors';
 
@@ -15,8 +15,9 @@ export class SideBarComponent {
   public isSidebarToggled$: Observable<boolean> = this.store.select(
     selectIsSidebarToggled,
   );
-  public isSidebarRtl$: Observable<boolean> =
-    this.store.select(selectIsSidebarRtl);
+  public isSidebarReverse$: Observable<boolean> = this.store.select(
+    selectIsSidebarReverse,
+  );
 
   public constructor(private store: Store) {}
 }
