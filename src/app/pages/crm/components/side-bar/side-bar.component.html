@@ -4,16 +4,9 @@
     active: isSidebarToggled$ | async
   }"
 >
-  <ul
-    class="side-bar_menu"
-    [ngClass]="{ 'side-bar_rtl': isSidebarRtl$ | async }"
-  >
-    <li
-      class="side-bar_item"
-      routerLink="/crm/dashboard"
-      routerLinkActive="active"
-    >
-      <a class="side-bar_link">
+  <ul class="side-bar_menu" [ngClass]="{ 'side-bar_rtl': isSidebarRtl$ | async }">
+    <li class="side-bar_item">
+      <a class="side-bar_link" routerLink="/crm/dashboard" routerLinkActive="active">
         <span class="side-bar_icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
             <path
@@ -24,8 +17,8 @@
         <span class="side-bar_text">{{ 'CRM.HOME' | translate }}</span>
       </a>
     </li>
-    <li class="side-bar_item" routerLink="/crm/chat" routerLinkActive="active">
-      <a class="side-bar_link">
+    <li class="side-bar_item">
+      <a class="side-bar_link" routerLink="/crm/chat" routerLinkActive="active">
         <span class="side-bar_icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path

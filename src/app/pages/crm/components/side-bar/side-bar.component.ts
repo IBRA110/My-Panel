@@ -12,11 +12,11 @@ import {
   styleUrls: ['./side-bar.component.scss'],
 })
 export class SideBarComponent {
-  public isSidebarToggled$: Observable<boolean> = this._store.select(
+  public isSidebarToggled$: Observable<boolean> = this.store.select(
     selectIsSidebarToggled,
   );
+  public isSidebarRtl$: Observable<boolean> =
+    this.store.select(selectIsSidebarRtl);
 
-  public constructor(private _store: Store) {}
-
-
+  public constructor(private store: Store) {}
 }
