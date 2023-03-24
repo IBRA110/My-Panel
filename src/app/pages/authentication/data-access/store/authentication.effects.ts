@@ -29,26 +29,26 @@ import { Store } from '@ngrx/store';
 @Injectable()
 export class AuthenticationEffects {
   public constructor(
-    private _actions$: Actions,
-    private _authService: AuthenticationService,
-    private _messageService: UiAlertMessagesService,
-    private _localStorageService: LocalStorageService,
-    private _store: Store,
+    private actions$: Actions,
+    private authService: AuthenticationService,
+    private messageService: UiAlertMessagesService,
+    private localStorageService: LocalStorageService,
+    private store: Store,
   ) {}
 
-  private _signUpEffect$ = createEffect(() => {
-    return this._actions$.pipe(
+  private signUpEffect$ = createEffect(() => {
+    return this.actions$.pipe(
       ofType(signUp),
       switchMap((action) => {
-        return this._authService.signUp(action).pipe(
+        return this.authService.signUp(action).pipe(
           map((data) => {
-            this._messageService.callSuccessMessage(
+            this.messageService.callSuccessMessage(
               data.data.registration.message,
             );
             return signUpSuccess();
           }),
           catchError((error: ErrorResponse) => {
-            this._messageService.callErrorMessage(error.message);
+            this.messageService.callErrorMessage(error.message);
             return of(signUpFailed());
           }),
         );
@@ -56,14 +56,14 @@ export class AuthenticationEffects {
     );
   });
 
-  private _signInEffect$ = createEffect(() => {
-    return this._actions$.pipe(
+  private signInEffect$ = createEffect(() => {
+    return this.actions$.pipe(
       ofType(signIn),
       switchMap((action) => {
-        return this._authService.signIn(action).pipe(
+        return this.authService.signIn(action).pipe(
           mergeMap((data) => {
-            this._messageService.callSuccessMessage('Login Success!');
-            this._localStorageService.setTokens({
+            this.messageService.callSuccessMessage('Login Success!');
+            this.localStorageService.setTokens({
               accessToken: data.data.login.accessToken,
               refreshToken: data.data.login.refreshToken,
             });
@@ -78,7 +78,7 @@ export class AuthenticationEffects {
             ];
           }),
           catchError((error: ErrorResponse) => {
-            this._messageService.callErrorMessage(error.message);
+            this.messageService.callErrorMessage(error.message);
             return of(signUpFailed());
           }),
         );
@@ -86,12 +86,12 @@ export class AuthenticationEffects {
     );
   });
 
-  private _refreshTokenEffect$ = createEffect(() =>
-    this._actions$.pipe(
+  private refreshTokenEffect$ = createEffect(() => {
+    return this.actions$.pipe(
       ofType(refreshToken),
-      concatLatestFrom(() => this._store.select(getAccessToken)),
+      concatLatestFrom(() => this.store.select(getAccessToken)),
       delayWhen(([, token]) => {
-        const expiration = this._localStorageService.getExpiration(
+        const expiration = this.localStorageService.getExpiration(
           token.accessToken,
         );
         return timer(
@@ -100,11 +100,11 @@ export class AuthenticationEffects {
       }),
       switchMap(([, token]) => {
         if (!token) return of(doNothing());
-        return this._authService
+        return this.authService
           .refresh({ refreshToken: token.refreshToken })
           .pipe(
             switchMap((data) => {
-              this._localStorageService.setTokens({
+              this.localStorageService.setTokens({
                 accessToken: data.data.refresh.accessToken,
                 refreshToken: data.data.refresh.refreshToken,
               });
@@ -123,6 +123,6 @@ export class AuthenticationEffects {
             }),
           );
       }),
-    ),
-  );
+    );
+  });
 }
