@@ -9,15 +9,9 @@ import { crmFeatureKey, reducer } from './data/store/crm.reducer';
 import { CrmComponent } from './crm.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
-import { SettingsBarComponent } from './components/settings-bar/settings-bar.component';
 
 @NgModule({
-  declarations: [
-    CrmComponent,
-    SideBarComponent,
-    NavBarComponent,
-    SettingsBarComponent,
-  ],
+  declarations: [CrmComponent, SideBarComponent, NavBarComponent],
   imports: [
     CommonModule,
     CrmRoutingModule,
