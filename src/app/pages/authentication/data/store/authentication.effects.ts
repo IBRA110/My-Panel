@@ -14,6 +14,7 @@ import {
   refreshTokenFailed,
   refreshTokenSuccess,
   signIn,
+  signInFailed,
   signInSuccess,
   signUp,
   signUpFailed,
@@ -61,25 +62,22 @@ export class AuthenticationEffects {
       ofType(signIn),
       switchMap((action) => {
         return this.authService.signIn(action).pipe(
-          mergeMap((data) => {
+          map((data) => {
             this.messageService.callSuccessMessage('Login Success!');
             this.localStorageService.setTokens({
               accessToken: data.data.login.accessToken,
               refreshToken: data.data.login.refreshToken,
             });
-            return [
-              signInSuccess({
-                authTokens: {
-                  accessToken: data.data.login.accessToken,
-                  refreshToken: data.data.login.refreshToken,
-                },
-              }),
-              refreshToken(),
-            ];
+            return signInSuccess({
+              authTokens: {
+                accessToken: data.data.login.accessToken,
+                refreshToken: data.data.login.refreshToken,
+              },
+            });
           }),
           catchError((error: ErrorResponse) => {
             this.messageService.callErrorMessage(error.message);
-            return of(signUpFailed());
+            return of(signInFailed());
           }),
         );
       }),
@@ -88,7 +86,7 @@ export class AuthenticationEffects {
 
   private refreshTokenEffect$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(refreshToken),
+      ofType(refreshToken, signInSuccess),
       concatLatestFrom(() => this.store.select(selectAccessToken)),
       delayWhen(([, token]) => {
         const expiration = this.localStorageService.getExpiration(
