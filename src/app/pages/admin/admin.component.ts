@@ -3,11 +3,11 @@ import { Store } from '@ngrx/store';
 import { refreshToken } from '../authentication/data/store/authentication.actions';
 
 @Component({
-  selector: 'app-crm',
-  templateUrl: './crm.component.html',
-  styleUrls: ['./crm.component.scss'],
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.scss'],
 })
-export class CrmComponent implements OnInit {
+export class AdminComponent implements OnInit {
   public constructor(private store: Store) {}
 
   public ngOnInit(): void {

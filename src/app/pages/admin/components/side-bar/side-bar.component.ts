@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectIsSidebarToggled } from '../../data/store/crm.selectors';
+import { selectIsSideBarToggled } from '../../data/store/admin.selectors';
 
 @Component({
   selector: 'app-side-bar',
@@ -10,7 +10,7 @@ import { selectIsSidebarToggled } from '../../data/store/crm.selectors';
 })
 export class SideBarComponent {
   public isSidebarToggled$: Observable<boolean> = this.store.select(
-    selectIsSidebarToggled,
+    selectIsSideBarToggled,
   );
 
   public constructor(private store: Store) {}

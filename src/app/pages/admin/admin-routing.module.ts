@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CrmComponent } from './crm.component';
+import { AdminComponent } from './admin.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: CrmComponent,
+    component: AdminComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
@@ -28,4 +28,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CrmRoutingModule {}
+export class AdminRoutingModule {}

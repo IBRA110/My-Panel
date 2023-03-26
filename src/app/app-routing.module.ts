@@ -11,9 +11,9 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'crm',
+    path: 'admin',
     loadChildren: () =>
-      import(`./pages/crm/crm.module`).then((m) => m.CrmModule),
+      import(`./pages/admin/admin.module`).then((m) => m.AdminModule),
     canActivate: [AuthenticationGuard],
     canLoad: [AuthenticationGuard],
   },

@@ -68,7 +68,7 @@ export class AuthenticationEffects {
               this.translateService.instant('AUTHENTICATION.LOGIN_SUCCESS'),
             );
             setTimeout(() => {
-              this.router.navigate(['crm']);
+              this.router.navigate(['admin']);
             }, 3000);
             return signInSuccess({
               authTokens: {
