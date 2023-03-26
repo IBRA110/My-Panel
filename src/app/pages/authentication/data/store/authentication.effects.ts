@@ -64,10 +64,6 @@ export class AuthenticationEffects {
             this.messageService.callSuccessMessage(
               this.translateService.instant('AUTHENTICATION.LOGIN_SUCCESS'),
             );
-            this.localStorageService.setTokens({
-              accessToken: data.data.login.accessToken,
-              refreshToken: data.data.login.refreshToken,
-            });
             setTimeout(() => {
               this.router.navigate(['']);
             }, 3000);
@@ -105,10 +101,6 @@ export class AuthenticationEffects {
           .refresh({ refreshToken: token.refreshToken })
           .pipe(
             map((data) => {
-              this.localStorageService.setTokens({
-                accessToken: data.data.refresh.accessToken,
-                refreshToken: data.data.refresh.refreshToken,
-              });
               return refreshTokenSuccess({
                 authTokens: {
                   accessToken: data.data.refresh.accessToken,
