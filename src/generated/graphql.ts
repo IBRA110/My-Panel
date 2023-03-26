@@ -239,6 +239,13 @@ export type LoginMutationVariables = Exact<{
 
 export type LoginMutation = { login?: { accessToken?: string | null, refreshToken?: string | null } | null };
 
+export type LogoutMutationVariables = Exact<{
+  refreshToken?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type LogoutMutation = { logout?: { message?: string | null } | null };
+
 export type RefreshMutationVariables = Exact<{
   refreshToken?: InputMaybe<Scalars['String']>;
 }>;

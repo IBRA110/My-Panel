@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import {
   LoginMutation,
   LoginMutationVariables,
+  LogoutMutation,
+  LogoutMutationVariables,
   RefreshMutation,
   RefreshMutationVariables,
   RegistrationMutation,
@@ -12,6 +14,7 @@ import { Apollo, MutationResult } from 'apollo-angular';
 import { REGISTRATION } from '../gql/registration.gql';
 import { LOGIN } from '../gql/login.gql';
 import { REFRESH } from '../gql/refresh.gql';
+import { LOGOUT } from '../gql/logout.gql';
 
 @Injectable({
   providedIn: 'root',
@@ -42,6 +45,15 @@ export class AuthenticationService {
   ): Observable<MutationResult<RefreshMutation>> {
     return this.apollo.mutate<RefreshMutation>({
       mutation: REFRESH,
+      variables: payload,
+    });
+  }
+
+  public signOut(
+    payload: LogoutMutationVariables,
+  ): Observable<MutationResult<LogoutMutation>> {
+    return this.apollo.mutate<LogoutMutation>({
+      mutation: LOGOUT,
       variables: payload,
     });
   }

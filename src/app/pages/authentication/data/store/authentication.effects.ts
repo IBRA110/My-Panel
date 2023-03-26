@@ -10,6 +10,9 @@ import {
   signIn,
   signInFailed,
   signInSuccess,
+  signOutFailed,
+  signOut,
+  signOutSuccess,
   signUp,
   signUpFailed,
   signUpSuccess,
@@ -110,6 +113,30 @@ export class AuthenticationEffects {
             }),
             catchError((error: ErrorResponse) => {
               return of(refreshTokenFailed());
+            }),
+          );
+      }),
+    );
+  });
+
+  private logoutEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(signOut),
+      concatLatestFrom(() => this.store.select(selectAccessToken)),
+      switchMap(([, token]) => {
+        if (!token) return of(signOutSuccess());
+        return this.authService
+          .signOut({ refreshToken: token.refreshToken })
+          .pipe(
+            map((data) => {
+              this.messageService.callSuccessMessage(data.data.logout.message);
+              setTimeout(() => {
+                this.router.navigate(['authentication']);
+              }, 3000);
+              return signOutSuccess();
+            }),
+            catchError((error: ErrorResponse) => {
+              return of(signOutFailed());
             }),
           );
       }),

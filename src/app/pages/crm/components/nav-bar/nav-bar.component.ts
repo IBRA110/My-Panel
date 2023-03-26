@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { signOut } from 'src/app/pages/authentication/data/store/authentication.actions';
 import { toggleSidebar } from '../../data/store/crm.actions';
 import { selectIsSidebarToggled } from '../../data/store/crm.selectors';
 
@@ -18,5 +19,9 @@ export class NavBarComponent {
 
   public toggleButtonActive(): void {
     this.store.dispatch(toggleSidebar());
+  }
+
+  public signOut(): void {
+    this.store.dispatch(signOut());
   }
 }

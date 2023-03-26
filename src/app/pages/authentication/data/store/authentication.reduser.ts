@@ -4,6 +4,7 @@ import {
   refreshTokenFailed,
   refreshTokenSuccess,
   signInSuccess,
+  signOutSuccess,
   signUpSuccess,
   toggleForms,
 } from './authentication.actions';
@@ -34,10 +35,7 @@ const authenticationReducer = createRehydrateReducer(
     ...state,
     isFormToggled: !state.isFormToggled,
   })),
-  on(refreshTokenFailed, (state) => ({
-    ...state,
-    isAuthenticated: false,
-  })),
+  on(refreshTokenFailed, signOutSuccess, () => initialState),
 );
 
 export function reducer(
