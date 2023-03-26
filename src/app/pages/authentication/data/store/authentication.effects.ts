@@ -68,7 +68,7 @@ export class AuthenticationEffects {
               this.translateService.instant('AUTHENTICATION.LOGIN_SUCCESS'),
             );
             setTimeout(() => {
-              this.router.navigate(['']);
+              this.router.navigate(['crm']);
             }, 3000);
             return signInSuccess({
               authTokens: {
@@ -131,7 +131,7 @@ export class AuthenticationEffects {
             map((data) => {
               this.messageService.callSuccessMessage(data.data.logout.message);
               setTimeout(() => {
-                this.router.navigate(['authentication']);
+                this.router.navigate(['']);
               }, 3000);
               return signOutSuccess();
             }),
