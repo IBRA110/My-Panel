@@ -13,7 +13,7 @@ const uri = 'http://195.135.253.235/graphql/';
 const activityMiddleware = new ApolloLink((operation, forward) => {
   const token: string = JSON.parse(localStorage.getItem('auth'))?.authTokens
     ?.accessToken;
-  if (token && !!token.length && token !== 'null') {
+  if (!!token) {
     operation.setContext(({ headers = {} }) => ({
       headers: {
         ...headers,
