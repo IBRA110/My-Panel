@@ -1,12 +1,6 @@
 import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import {
-  catchError,
-  delayWhen,
-  map,
-  mergeMap,
-  switchMap,
-} from 'rxjs/operators';
+import { catchError, delayWhen, map, switchMap } from 'rxjs/operators';
 import { of, timer } from 'rxjs';
 import {
   doNothing,
@@ -26,6 +20,8 @@ import { ErrorResponse } from 'src/app/core/interfaces/error.interface';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { selectAccessToken } from './authentication.selectors';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class AuthenticationEffects {
@@ -34,7 +30,9 @@ export class AuthenticationEffects {
     private authService: AuthenticationService,
     private messageService: UiAlertMessagesService,
     private localStorageService: LocalStorageService,
+    private translateService: TranslateService,
     private store: Store,
+    private router: Router,
   ) {}
 
   private signUpEffect$ = createEffect(() => {
@@ -63,11 +61,16 @@ export class AuthenticationEffects {
       switchMap((action) => {
         return this.authService.signIn(action).pipe(
           map((data) => {
-            this.messageService.callSuccessMessage('Login Success!');
+            this.messageService.callSuccessMessage(
+              this.translateService.instant('AUTHENTICATION.LOGIN_SUCCESS'),
+            );
             this.localStorageService.setTokens({
               accessToken: data.data.login.accessToken,
               refreshToken: data.data.login.refreshToken,
             });
+            setTimeout(() => {
+              this.router.navigate(['']);
+            }, 3000);
             return signInSuccess({
               authTokens: {
                 accessToken: data.data.login.accessToken,
@@ -86,7 +89,7 @@ export class AuthenticationEffects {
 
   private refreshTokenEffect$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(refreshToken, signInSuccess),
+      ofType(refreshToken, refreshTokenSuccess),
       concatLatestFrom(() => this.store.select(selectAccessToken)),
       delayWhen(([, token]) => {
         const expiration = this.localStorageService.getExpiration(
@@ -101,20 +104,17 @@ export class AuthenticationEffects {
         return this.authService
           .refresh({ refreshToken: token.refreshToken })
           .pipe(
-            switchMap((data) => {
+            map((data) => {
               this.localStorageService.setTokens({
                 accessToken: data.data.refresh.accessToken,
                 refreshToken: data.data.refresh.refreshToken,
               });
-              return [
-                refreshTokenSuccess({
-                  authTokens: {
-                    accessToken: data.data.refresh.accessToken,
-                    refreshToken: data.data.refresh.refreshToken,
-                  },
-                }),
-                refreshToken(),
-              ];
+              return refreshTokenSuccess({
+                authTokens: {
+                  accessToken: data.data.refresh.accessToken,
+                  refreshToken: data.data.refresh.refreshToken,
+                },
+              });
             }),
             catchError((error: ErrorResponse) => {
               return of(refreshTokenFailed());

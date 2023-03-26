@@ -24,7 +24,8 @@
       "ENTER_PASSWORD_MINLENGTH": "Password length must be at least 8 characters",
       "SAME_PASSWORDS": "Passwords must be same!",
       "SIGN_UP_FORM_FIELDS_NOT_CORRECT": "Please provide all fields with correct values!",
-      "CREATE_A_NEW_ACCOUNT": "Create a new account"  
+      "CREATE_A_NEW_ACCOUNT": "Create a new account",
+      "LOGIN_SUCCESS": "Login Success!" 
     },
     "CRM": {
       "HOME": "Home",

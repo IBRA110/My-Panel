@@ -1,6 +1,7 @@
 import { Action, on } from '@ngrx/store';
 import { createRehydrateReducer } from 'src/app/core/reducers/rehydrate-reducer';
 import {
+  refreshTokenFailed,
   refreshTokenSuccess,
   signInSuccess,
   signUpSuccess,
@@ -18,19 +19,24 @@ const authenticationReducer = createRehydrateReducer(
     refreshTokenSuccess,
     (state, { authTokens }): AuthenticationState => ({
       ...state,
-      authTokens,
+      authTokens: authTokens,
+      isAuthenticated: true,
     }),
   ),
   on(
     signUpSuccess,
     (state): AuthenticationState => ({
       ...state,
-      isToggleForm: true,
+      isFormToggled: true,
     }),
   ),
-  on(toggleForms, (state, { payload }) => ({
+  on(toggleForms, (state) => ({
     ...state,
-    isToggleForm: payload,
+    isFormToggled: !state.isFormToggled,
+  })),
+  on(refreshTokenFailed, (state) => ({
+    ...state,
+    isAuthenticated: false,
   })),
 );
 

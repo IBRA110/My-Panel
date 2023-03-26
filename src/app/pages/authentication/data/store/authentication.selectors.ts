@@ -4,9 +4,9 @@ import { AuthenticationState } from './authentication.state';
 export const selectAuthState =
   createFeatureSelector<AuthenticationState>('auth');
 
-export const selectToKnowIsSignIn = createSelector(
+export const selectIsFormToggled = createSelector(
   selectAuthState,
-  (state: AuthenticationState) => state.isToggleForm,
+  (state: AuthenticationState) => state.isFormToggled,
 );
 
 export const selectAccessToken = createSelector(

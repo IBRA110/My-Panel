@@ -23,10 +23,7 @@ export const signUpSuccess = createAction(AuthActionsEnum.SIGN_UP_SUCCESS);
 
 export const signUpFailed = createAction(AuthActionsEnum.SIGN_UP_FAILED);
 
-export const toggleForms = createAction(
-  AuthActionsEnum.TOGGLE_FORMS,
-  props<{ payload: boolean }>(),
-);
+export const toggleForms = createAction(AuthActionsEnum.TOGGLE_FORMS);
 
 export const refreshToken = createAction(AuthActionsEnum.REFRESH_TOKEN);
 

@@ -100,7 +100,7 @@ export class SignUpComponent implements OnInit {
   }
 
   public toggleForm(): void {
-    this.store.dispatch(toggleForms({ payload: true }));
+    this.store.dispatch(toggleForms());
   }
 
   public controlHasError(control: string, error: string): boolean {

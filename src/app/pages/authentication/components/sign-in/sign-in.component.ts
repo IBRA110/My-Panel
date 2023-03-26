@@ -54,6 +54,6 @@ export class SignInComponent implements OnInit {
   }
 
   public toggleForm(): void {
-    this.store.dispatch(toggleForms({ payload: false }));
+    this.store.dispatch(toggleForms());
   }
 }

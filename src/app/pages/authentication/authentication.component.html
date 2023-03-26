@@ -3,7 +3,7 @@
     <img src="/assets/images/background/1.jpg" alt="back" />
   </div>
   <div class="auth-form">
-    <app-sign-up @fadeAnimation *ngIf="(isToggleForm | async) === false"></app-sign-up>
-    <app-sign-in @fadeAnimation *ngIf="(isToggleForm | async) === true"></app-sign-in>
+    <app-sign-up @fadeAnimation *ngIf="(isFormToggled | async) === false"></app-sign-up>
+    <app-sign-in @fadeAnimation *ngIf="(isFormToggled | async) === true"></app-sign-in>
   </div>
 </div>
