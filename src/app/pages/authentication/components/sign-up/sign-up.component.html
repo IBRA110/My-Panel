@@ -17,7 +17,7 @@
         error: signUpForm.get('userName').touched && signUpForm.get('userName').invalid
       }"
     >
-      <small>{{ 'AUTHENTICATION.ENTER_USERNAME' | translate }}</small>
+      <small *ngIf="controlHasError('userName', 'required')">{{ 'AUTHENTICATION.ENTER_USERNAME' | translate }}</small>
     </div>
   </div>
   <div class="form-control">
