@@ -33,7 +33,6 @@ export class AuthenticationEffects {
     private authService: AuthenticationService,
     private messageService: UiAlertMessagesService,
     private localStorageService: LocalStorageService,
-    private translateService: TranslateService,
     private store: Store,
     private router: Router,
   ) {}
@@ -64,12 +63,7 @@ export class AuthenticationEffects {
       switchMap((action) => {
         return this.authService.signIn(action).pipe(
           map((data) => {
-            this.messageService.callSuccessMessage(
-              this.translateService.instant('AUTHENTICATION.LOGIN_SUCCESS'),
-            );
-            setTimeout(() => {
-              this.router.navigate(['admin']);
-            }, 3000);
+            this.router.navigate(['admin']);
             return signInSuccess({
               authTokens: {
                 accessToken: data.data.login.accessToken,
