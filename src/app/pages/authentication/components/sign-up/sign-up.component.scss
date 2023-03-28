@@ -9,6 +9,10 @@
   padding: 30px;
   height: 100%;  
   background-color: var(--background-color);
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0px 0px 10px 2px rgba(0,0,0,0.45);
+  -moz-box-shadow: inset 0px 0px 10px 2px rgba(0,0,0,0.45);
+  box-shadow: inset 0px 0px 10px 2px rgba(0,0,0,0.45);
   
   &-title{
     @include Heading_3;
@@ -140,7 +144,7 @@
     }
     a:last-child{
       @include Link;
-      color: var(--input-error-color);
+      color: var(--button-background-default-color);
     }
   }
 }
