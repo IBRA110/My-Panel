@@ -10,6 +10,7 @@ using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace API.GraphQL
 {
+    [ExtendObjectType("Mutation")]
     public class AccountMutations
     {
         public async Task<SuccessDTO> Registration(

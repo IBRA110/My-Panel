@@ -12,8 +12,11 @@ namespace API.Extensions
                 .AddAuthorization()
                 .AddFiltering()
                 .AddSorting()
-                .AddQueryType<UsersQueries>()
-                .AddMutationType<AccountMutations>()
+                .AddMutationType(m => m.Name("Mutation")) 
+                .AddType<AccountMutations>()
+                .AddType<UsersMutations>()
+                .AddQueryType(q => q.Name("Query"))
+                .AddType<UsersQueries>()
                 .AddErrorFilter(er =>
                 {
                     switch (er.Exception)
