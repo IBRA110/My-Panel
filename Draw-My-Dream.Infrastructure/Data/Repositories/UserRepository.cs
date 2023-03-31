@@ -6,7 +6,7 @@ using Core.Helpers;
 using Core.Interfaces;
 using Core.Entities;
 
-namespace Infrastructure.Data
+namespace Infrastructure.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
@@ -48,7 +48,7 @@ namespace Infrastructure.Data
             };
 
             return await PagedList<MemberDTO>.CreateAsync(query.ProjectTo<MemberDTO>(_mapper
-                .ConfigurationProvider).AsNoTracking(), 
+                .ConfigurationProvider).AsNoTracking(),
                     userParams.PageNumber, userParams.PageSize);
         }
 

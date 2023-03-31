@@ -3,6 +3,7 @@ using AutoMapper;
 using Core.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Infrastructure.Data.Repositories;
 
 namespace Infrastructure.Data
 {

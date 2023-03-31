@@ -1,3 +1,5 @@
+using Core.Helpers.Paginations;
+
 namespace Core.Helpers
 {
     public class MessageParams : PaginationParams

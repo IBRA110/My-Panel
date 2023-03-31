@@ -1,5 +1,5 @@
 using System.Text.Json;
-using Core.Helpers;
+using Core.Helpers.Paginations;
 
 namespace API.Extensions
 {

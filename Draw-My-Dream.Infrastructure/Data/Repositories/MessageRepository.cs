@@ -6,7 +6,7 @@ using AutoMapper.QueryableExtensions;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Data
+namespace Infrastructure.Data.Repositories
 {
     public class MessageRepository : IMessageRepository
     {
@@ -67,11 +67,11 @@ namespace Infrastructure.Data
 
             query = messageParams.Container switch
             {
-                "Inbox" => query.Where(u => u.RecipientUserName == messageParams.UserName && 
+                "Inbox" => query.Where(u => u.RecipientUserName == messageParams.UserName &&
                     u.RecipientDeleted == false),
                 "Outbox" => query.Where(u => u.SenderUserName == messageParams.UserName &&
                     u.SenderDeleted == false),
-                _ => query.Where(u => u.RecipientUserName == 
+                _ => query.Where(u => u.RecipientUserName ==
                     messageParams.UserName && u.RecipientDeleted == false && u.DateRead == null)
             };
 
@@ -89,15 +89,15 @@ namespace Infrastructure.Data
                 .OrderBy(m => m.MessageSent)
                 .ProjectTo<MessageDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync();
-            
-            List<MessageDTO> unreadMessages = messages.Where(m => m.DateRead == null 
+
+            List<MessageDTO> unreadMessages = messages.Where(m => m.DateRead == null
                 && m.RecipientUserName == currentUserName).ToList();
-            
+
             if (unreadMessages.Any())
             {
                 foreach (var message in unreadMessages)
                 {
-                    message.DateRead = System.DateTime.UtcNow;
+                    message.DateRead = DateTime.UtcNow;
                 }
 
             }
