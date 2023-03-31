@@ -12,10 +12,26 @@
 
 https://docs.docker.com/engine/install/debian/
 
+### Run Project
 ```console
-docker build -t draw .
-docker run -d -p 8000:80 -e "ASPNETCORE_ENVIRONMENT=Development" --name draw_my_dream draw
-docker stop draw_my_dream
+cp .env.example .env
+```
+```console
+cd Draw-My-Dream.API/
+```
+```console
+cp appsettings.Development.json appsettings.json
+```
+```console
+cd ../
+```
+```console
+docker compose up -d
+```
+
+### Stop Project
+```console
+docker compose down
 ```
 
 ## .NET Samples
