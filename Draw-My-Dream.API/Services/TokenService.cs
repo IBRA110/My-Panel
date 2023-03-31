@@ -22,8 +22,8 @@ namespace Infrastructure.Services
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(type: "Id", user.Id.ToString()),
-                new Claim(type: "UserName", user.UserName)
+                new Claim(type: "id", user.Id.ToString()),
+                new Claim(type: "userName", user.UserName)
             };
 
             IList<string> roles = await _userManager.GetRolesAsync(user);
