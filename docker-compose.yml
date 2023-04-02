@@ -25,6 +25,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE} 
       
   backend:
+    
     build:
       context: .
 
@@ -35,8 +36,30 @@ services:
       
     ports:
       - "5000:80"
+    
     restart: always
     
     environment: 
       - DBHOST=database
       - ASPNETCORE_ENVIRONMENT=Production
+  
+  frontend:
+    
+    build:
+      context: ../Draw-My-Dream-Front-End
+      dockerfile: dockerfile
+
+    ports:
+      - "4200:80"
+    
+    restart: always
+
+  proxy:
+    build:
+      context: ./Proxy
+      dockerfile: dockerfile
+
+    ports:
+      - "80:80"
+    
+    restart: always
