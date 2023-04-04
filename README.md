@@ -1,10 +1,11 @@
 # My Panel
+
 <p>
 <a href="https://dotnet.microsoft.com/en-us/" target='_blank'>
-	<img src='images/netCore.png' style="width: 100px; height: 100px;">
+	<img src='https://github.com/IBRA110/IBRA110/blob/main/images/netCore.png' style="width: 100px; height: 100px;">
 </a>
 <a href="https://angular.io/" target='_blank'>
-	<img src='images/angular.png' style="width: 100px; height: 100px;">
+	<img src='https://github.com/IBRA110/IBRA110/blob/main/images/angular.png' style="width: 100px; height: 100px;">
 </a>
 </p>
 
@@ -143,7 +144,8 @@ To build and run your sample:
 
    This should include a brief description of the code, and refer people to the article that references the sample.
 
-   # DrawMyDreamFrontEnd
+
+# frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.2.
 
