@@ -85,7 +85,7 @@ esac
 
 # Enable staging mode if needed
 if [ $IS_STAGING != "0" ]; then 
-    staging_arg="--staging"; 
+    staging_arg="--staging";
 fi
 
 docker-compose run --rm --entrypoint "\
