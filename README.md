@@ -1,9 +1,11 @@
-# Draw My Dream
+# My Panel
 <p>
-<img src='https://github.com/IBRA110/IBRA110/blob/main/images/csharp.png' style="width: 100px; height: 100px;">
-<img src='https://github.com/IBRA110/IBRA110/blob/main/images/netCore.png' style="width: 100px; height: 100px;">
-<img src='https://github.com/IBRA110/IBRA110/blob/main/images/entityFramework.png' style="width: 100px; height: 100px;">
-<img src='https://github.com/IBRA110/IBRA110/blob/main/images/docker.png' style="width: 120px; height: 110px;">
+<a href="https://dotnet.microsoft.com/en-us/" target='_blank'>
+	<img src='images/netCore.png' style="width: 100px; height: 100px;">
+</a>
+<a href="https://angular.io/" target='_blank'>
+	<img src='images/angular.png' style="width: 100px; height: 100px;">
+</a>
 </p>
 
 ### For certificates see https://aka.ms/aspnet/https-trust-dev-cert.
