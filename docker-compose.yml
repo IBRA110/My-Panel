@@ -1,65 +1,62 @@
-version: '3.7'
-
-volumes:
-  datafiles:
+version: '3.9'
 
 services:
-
   database:
-  
     image: mysql:8.0.22
-    
     ports:
       - "3306:3306"
-      
     volumes:
       - ./~mysql:/var/lib/mysql
       - ./mysql.cnf:/etc/mysql/conf.d/my.cnf
- 
-    restart: always
-    
     environment: 
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE} 
-      
-  backend:
-    
-    build:
-      context: .
-
-      dockerfile: dockerfile
-      
-    depends_on: 
-      - database
-      
-    ports:
-      - "5000:80"
-    
     restart: always
-    
-    environment: 
-      - DBHOST=database
-      - ASPNETCORE_ENVIRONMENT=Production
   
-  frontend:
-    
-    build:
-      context: ../Draw-My-Dream-Front-End
-      dockerfile: dockerfile
-
+  nginx:
+    container_name: nginx
+    image: nginx:stable-alpine
+    volumes:
+      - ./server:/etc/nginx/templates
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     ports:
-      - "4200:80"
-    
-    restart: always
-
-  proxy:
+      - 80:80
+      - 443:443
+    environment:
+      - NGINX_HOST=${DOMAIN_NAME}
+    depends_on:
+      - backend
+    networks:
+      - nginx-network
+    restart: unless-stopped
+  
+  backend:
+    container_name: backend
     build:
-      context: ./Proxy
-      dockerfile: dockerfile
+      context: ./backend
+      dockerfile: Dockerfile
+    expose:
+      - 5000
+    networks:
+      - nginx-network
+    restart: unless-stopped
+  
+  dotnet-certbot:
+    image: certbot/certbot
+    container_name: dotnet-certbot
+    restart: unless-stopped
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h &
+      wait $${!}; done;'"
 
-    ports:
-      - "80:80"
-    
-    restart: always
+networks:
+  nginx-network:
+    driver: bridge
+
+volumes:
+  datafiles:
