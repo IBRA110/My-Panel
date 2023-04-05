@@ -9,7 +9,7 @@ export const lightTheme: Theme = {
     '--nav-bar-background-color': 'rgb(255, 255, 255)',
     '--side-bar-background-color': 'rgb(255, 255, 255)',
 
-    '--base-text-color': 'rgb(74, 73, 73)',
+    '--base-text-color': 'rgb(0, 48, 93)',
     '--button-text-color': 'rgb(237, 245, 252)',
 
     '--button-background-default-color': 'rgb(51, 102, 255)',

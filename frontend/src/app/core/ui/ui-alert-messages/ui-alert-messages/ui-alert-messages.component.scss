@@ -11,7 +11,8 @@
   .success, .error, .warning, .information{
     width: 300px;
     min-height: 50px;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--background-color);
+    color: var(--base-text-color);
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -38,7 +39,7 @@
       font-weight: 700;
       font-size: 20px;
       line-height: 24px;
-      color: rgb(0, 0, 0);
+      color: var(--base-text-color);
     }
 
     .close{
@@ -61,7 +62,7 @@
     p{
       width: 200px;
       margin: 0;
-      color: rgb(0, 0, 0);
+      color: var(--base-text-color);
       font-family: 'Roboto', 'sans-serif';
       font-style: normal;
       font-weight: 400;
@@ -71,18 +72,14 @@
   }
   .success{
       border-left: 4px solid var(--success);
-      color: rgba(0, 0, 0, 0.8);
   }
   .error{
       border-left: 4px solid var(--error);
-      color: rgba(0, 0, 0, 0.8);
   }
   .warning{
       border-left: 4px solid var(--warning);
-      color: rgba(0, 0, 0, 0.8);
   }
   .information{
       border-left: 4px solid var(--info);
-      color: rgba(0, 0, 0, 0.8);
   }
 }
