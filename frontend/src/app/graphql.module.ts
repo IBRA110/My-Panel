@@ -8,7 +8,7 @@ import {
 } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
 
-const uri = 'http://195.135.253.235/graphql/';
+const uri = 'https://localhost:5000/graphql';
 
 const activityMiddleware = new ApolloLink((operation, forward) => {
   const token: string = JSON.parse(localStorage.getItem('auth'))?.authTokens
