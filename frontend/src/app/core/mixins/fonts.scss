@@ -3,7 +3,6 @@
   font-size: 48px;
   font-weight: 800;
   line-height: 42px;
-  text-align: center;
 }
 
 @mixin Heading_3 {
@@ -11,7 +10,6 @@
   font-size: 32px;
   font-weight: 500;
   line-height: 42px;
-  text-align: center;
 }
 
 @mixin Paragraph {
@@ -19,7 +17,6 @@
   font-size: 18px;
   font-weight: 500;
   line-height: 28px;
-  text-align: center;
 }
 
 @mixin Input_Label {

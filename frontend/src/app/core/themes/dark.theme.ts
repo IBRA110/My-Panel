@@ -10,8 +10,10 @@ export const darkTheme: Theme = {
     '--base-text-color': 'rgb(227, 228, 230)',
     '--button-text-color': 'rgb(237, 245, 252)',
 
-    '--button-background-default-color': 'rgb(51, 102, 255)',
+    '--button-background-default-color': 'rgb(1, 30, 86)',
     '--button-outline-basic-background-color': 'rgb(143, 155, 179)',
+
+    '--select-tab-line': 'rgb(8, 203, 57)',
 
     '--success': 'rgb(46, 178, 59)',
     '--error': 'rgb(255, 0, 0)',

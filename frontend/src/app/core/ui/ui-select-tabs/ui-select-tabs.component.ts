@@ -18,7 +18,7 @@ export class UiSelectTabsComponent {
       }
     }
     return (
-      (indexOfSelectedTab * 400 + 2 * indexOfSelectedTab).toString() + 'px'
+      (indexOfSelectedTab * 200 + 2 * indexOfSelectedTab).toString() + 'px'
     );
   }
 
