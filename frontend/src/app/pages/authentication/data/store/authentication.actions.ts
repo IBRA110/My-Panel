@@ -39,5 +39,3 @@ export const refreshTokenFailed = createAction(
 export const signOut = createAction(AuthActionsEnum.SIGN_OUT);
 export const signOutSuccess = createAction(AuthActionsEnum.SIGN_OUT_SUCCESS);
 export const signOutFailed = createAction(AuthActionsEnum.SIGN_OUT_FAILED);
-
-export const doNothing = createAction(AuthActionsEnum.DO_NOTHING);

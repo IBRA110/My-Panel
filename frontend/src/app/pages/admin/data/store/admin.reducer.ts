@@ -1,6 +1,6 @@
 import { Action, on } from '@ngrx/store';
 import { createRehydrateReducer } from 'src/app/core/reducers/rehydrate-reducer';
-import { toggleSidebar } from './admin.actions';
+import { loadUserSuccess, toggleSidebar } from './admin.actions';
 import { AdminState, initialState } from './admin.state';
 
 export const adminFeatureKey = 'admin';
@@ -11,6 +11,10 @@ const adminReducer = createRehydrateReducer(
   on(toggleSidebar, (state) => ({
     ...state,
     isSideBarToggled: !state.isSideBarToggled,
+  })),
+  on(loadUserSuccess, (state, { user }) => ({
+    ...state,
+    user: user,
   })),
 );
 

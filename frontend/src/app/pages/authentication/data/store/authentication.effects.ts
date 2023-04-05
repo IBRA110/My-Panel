@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { catchError, delayWhen, map, switchMap } from 'rxjs/operators';
 import { of, timer } from 'rxjs';
 import {
-  doNothing,
   refreshToken,
   refreshTokenFailed,
   refreshTokenSuccess,
@@ -24,7 +23,7 @@ import { LocalStorageService } from 'src/app/core/services/local-storage.service
 import { selectAccessToken } from './authentication.selectors';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { initAdminPanel } from 'src/app/pages/admin/data/store/admin.actions';
 
 @Injectable()
 export class AuthenticationEffects {
@@ -82,7 +81,7 @@ export class AuthenticationEffects {
 
   private refreshTokenEffect$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(refreshToken, refreshTokenSuccess),
+      ofType(refreshToken, refreshTokenSuccess, initAdminPanel),
       concatLatestFrom(() => this.store.select(selectAccessToken)),
       delayWhen(([, token]) => {
         const expiration = this.localStorageService.getExpiration(
@@ -93,7 +92,7 @@ export class AuthenticationEffects {
         );
       }),
       switchMap(([, token]) => {
-        if (!token) return of(doNothing());
+        if (!token) return of(refreshTokenFailed());
         return this.authService
           .refresh({ refreshToken: token.refreshToken })
           .pipe(

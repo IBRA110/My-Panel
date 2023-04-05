@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { refreshToken } from '../authentication/data/store/authentication.actions';
+import { initAdminPanel } from './data/store/admin.actions';
 
 @Component({
   selector: 'app-admin',
@@ -11,6 +11,6 @@ export class AdminComponent implements OnInit {
   public constructor(private store: Store) {}
 
   public ngOnInit(): void {
-    this.store.dispatch(refreshToken());
+    this.store.dispatch(initAdminPanel());
   }
 }

@@ -9,6 +9,8 @@ import { adminFeatureKey, reducer } from './data/store/admin.reducer';
 import { AdminComponent } from './admin.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { AdminEffects } from './data/store/admin.effects';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AdminComponent, SideBarComponent, NavBarComponent],
@@ -16,6 +18,7 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
     CommonModule,
     AdminRoutingModule,
     StoreModule.forFeature(adminFeatureKey, reducer),
+    EffectsModule.forFeature([AdminEffects]),
     TranslateModule,
   ],
 })
