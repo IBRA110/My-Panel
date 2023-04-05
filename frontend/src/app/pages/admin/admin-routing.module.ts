@@ -20,6 +20,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/chat/chat.module').then((m) => m.ChatModule),
       },
+      {
+        path: 'calendar',
+        loadChildren: () =>
+          import('./pages/calendar/calendar.module').then(
+            (m) => m.CalendarModule,
+          ),
+      },
     ],
   },
 ];
