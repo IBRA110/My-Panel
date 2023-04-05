@@ -4,10 +4,8 @@ export const lightTheme: Theme = {
   name: 'light',
   properties: {
     '--background-color': 'rgb(237, 245, 252)',
+    '--base-backgound-color': 'rgb(255, 255, 255)',
     '--box-shadow-color': 'rgb(199, 207, 214)',
-
-    '--nav-bar-background-color': 'rgb(255, 255, 255)',
-    '--side-bar-background-color': 'rgb(255, 255, 255)',
 
     '--base-text-color': 'rgb(0, 48, 93)',
     '--button-text-color': 'rgb(237, 245, 252)',

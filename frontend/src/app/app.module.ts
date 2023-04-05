@@ -22,6 +22,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthenticationEffects } from './pages/authentication/data/store/authentication.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GraphQLModule } from './graphql.module';
+import { UiPopupModule } from './core/ui/ui-popup/ui-popup.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +32,7 @@ import { GraphQLModule } from './graphql.module';
     UiAlertMessagesModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    UiPopupModule,
     ThemeModule.forRoot({
       themes: [lightTheme, darkTheme],
       active: 'light',

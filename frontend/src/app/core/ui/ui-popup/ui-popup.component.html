@@ -1,0 +1,11 @@
+<div app-theme class="popup-container popup-background" @transitionAnimation @backgroundAnimation>
+  <div class="bg background popup-background">
+    <div *ngIf="dataLoaded" class="popup-wrapper popup-anim">
+      <div *ngIf="useCloseArea" class="close-area" (click)="close()"></div>
+      <div class="popup">
+        <button class="popup-close" (click)="close()"></button>
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>
