@@ -1,4 +1,4 @@
-import { Theme } from '../theme.interface';
+import { Theme } from '../interfaces/theme.interface';
 
 export const lightTheme: Theme = {
   name: 'light',

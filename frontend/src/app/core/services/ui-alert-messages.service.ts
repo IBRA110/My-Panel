@@ -5,7 +5,7 @@ import { filter } from 'rxjs/operators';
 import {
   Alert,
   AlertType,
-} from '../ui/ui-alert-messages/ui-alert-messages.interfaces';
+} from '../interfaces/ui-alert-messages.interfaces';
 
 @Injectable({
   providedIn: 'root',

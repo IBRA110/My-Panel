@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UiPopupComponent } from './ui-popup.component';
-import { ThemeModule } from '../../theme/theme.module';
-import { darkTheme } from '../../theme/themes/dark.theme';
-import { lightTheme } from '../../theme/themes/lignt.theme';
+import { ThemeModule } from '../../themes/theme.module';
+import { darkTheme } from '../../themes/dark.theme';
+import { lightTheme } from '../../themes/lignt.theme';
 
 @NgModule({
   declarations: [UiPopupComponent],

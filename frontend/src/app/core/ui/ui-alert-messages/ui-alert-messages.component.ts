@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { UiAlertMessagesService } from '../../../services/ui-alert-messages.service';
-import { Alert } from '../ui-alert-messages.interfaces';
-import { alertAnimation } from '../ui-alert-messages.animation';
+import { UiAlertMessagesService } from '../../services/ui-alert-messages.service';
+import { Alert } from '../../interfaces/ui-alert-messages.interfaces';
+import { alertAnimation } from '../../animations/ui-alert-messages.animation';
 
 @UntilDestroy()
 @Component({
@@ -18,13 +18,13 @@ export class UiAlertMessagesComponent implements OnInit {
   public alerts: Alert[] = [];
 
   public constructor(
-    private _router: Router,
-    private _alertService: UiAlertMessagesService,
-    private _changeDetectorRef: ChangeDetectorRef,
+    private router: Router,
+    private alertService: UiAlertMessagesService,
+    private changeDetectorRef: ChangeDetectorRef,
   ) {}
 
   public ngOnInit() {
-    this._alertService
+    this.alertService
       .onAlert(this.id)
       .pipe(untilDestroyed(this))
       .subscribe((alert: Alert) => {
@@ -43,12 +43,12 @@ export class UiAlertMessagesComponent implements OnInit {
         setTimeout(() => {
           this.alerts = this.alerts.filter((x) => x !== alert);
         }, 20000);
-        this._changeDetectorRef.detectChanges();
+        this.changeDetectorRef.detectChanges();
       });
 
-    this._router.events.pipe(untilDestroyed(this)).subscribe((event) => {
+    this.router.events.pipe(untilDestroyed(this)).subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this._alertService.clear(this.id);
+        this.alertService.clear(this.id);
         this.alerts = [];
       }
     });
@@ -57,7 +57,7 @@ export class UiAlertMessagesComponent implements OnInit {
   public removeAlert(alert: Alert) {
     setTimeout(() => {
       this.alerts = this.alerts.filter((x) => x !== alert);
-      this._changeDetectorRef.detectChanges();
+      this.changeDetectorRef.detectChanges();
     }, 250);
   }
 }

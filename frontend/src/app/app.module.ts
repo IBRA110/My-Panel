@@ -6,11 +6,11 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ThemeModule } from './core/theme/theme.module';
-import { lightTheme } from './core/theme/themes/lignt.theme';
-import { darkTheme } from './core/theme/themes/dark.theme';
+import { ThemeModule } from './core/themes/theme.module';
+import { lightTheme } from './core/themes/lignt.theme';
+import { darkTheme } from './core/themes/dark.theme';
 import { UiAlertMessagesModule } from './core/ui/ui-alert-messages/ui-alert-messages.module';
-import { ThemeService } from './core/theme/theme.service';
+import { ThemeService } from './core/services/theme.service';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';

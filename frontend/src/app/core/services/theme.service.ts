@@ -1,6 +1,6 @@
 import { EventEmitter, Inject, Injectable } from '@angular/core';
-import { ACTIVE_THEME, Theme, THEMES } from './theme.interface';
-import { LocalStorageService } from '../services/local-storage.service';
+import { ACTIVE_THEME, Theme, THEMES } from '../interfaces/theme.interface';
+import { LocalStorageService } from './local-storage.service';
 import { LocalStorageKeysEnum } from '../enums/local-storage-keys.enum';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class ThemeService {
   public constructor(
     @Inject(THEMES) public themes: Theme[],
     @Inject(ACTIVE_THEME) public theme: string,
-    private _localStorageService: LocalStorageService,
+    private localStorageService: LocalStorageService,
   ) {}
 
   public getActiveTheme() {
@@ -20,9 +20,6 @@ export class ThemeService {
   public setTheme(name: string): void {
     this.theme = name;
     this.themeChange.emit(this.getActiveTheme());
-    this._localStorageService.saveData(
-      LocalStorageKeysEnum.CURRENT_THEME,
-      name,
-    );
+    this.localStorageService.saveData(LocalStorageKeysEnum.CURRENT_THEME, name);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemesEnum } from './core/enums/themes.enum';
 import { LocalStorageService } from './core/services/local-storage.service';
-import { ThemeService } from './core/theme/theme.service';
+import { ThemeService } from './core/services/theme.service';
 import { LocalStorageKeysEnum } from './core/enums/local-storage-keys.enum';
 import { TranslateService } from '@ngx-translate/core';
 
