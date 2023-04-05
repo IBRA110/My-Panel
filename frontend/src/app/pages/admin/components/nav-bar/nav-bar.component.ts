@@ -9,6 +9,8 @@ import {
   selectUserForNavBar,
 } from '../../data/store/admin.selectors';
 import { UserForNavBar, UserImage } from '../../data/interfaces/user.interfase';
+import { PopupService } from 'src/app/core/services/popup.service';
+import { MySettingsComponent } from 'src/app/core/components/my-settings/my-settings.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -28,7 +30,9 @@ export class NavBarComponent {
   public userAvatar$: Observable<UserImage> =
     this.store.select(selectUserAvatar);
 
-  public constructor(private store: Store) {}
+  public constructor(private store: Store, private popupService: PopupService) {
+    this.popupService.open('my-settings', MySettingsComponent);
+  }
 
   public toggleButtonActive(): void {
     this.store.dispatch(toggleSidebar());

@@ -1,6 +1,6 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 
-export type PopupCode = 'logout-form' | string;
+export type PopupCode = 'my-settings' | string;
 
 export interface PopupItem {
   code: PopupCode;
