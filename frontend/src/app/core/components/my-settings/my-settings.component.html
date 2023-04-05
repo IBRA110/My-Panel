@@ -1,3 +1,6 @@
 <app-ui-popup [dataLoaded]="true" [popupCode]="'my-settings'">
-  <div>Settings</div>
+  <div class="my-settings">
+    <h1>{{ 'MY_SETTINGS.MY_SETTINGS' | translate }}</h1>
+    <app-ui-select-tabs [selectedTab]="selectedTab" [tabs]="tabs" (onClick)="selectedTab = $event"></app-ui-select-tabs>
+  </div>
 </app-ui-popup>

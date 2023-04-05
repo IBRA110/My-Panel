@@ -1,12 +1,4 @@
 {
-    "HEADER": {
-      "LOCATIONS": "LOCATIONS",
-      "ABOUT_US": "ABOUT US",
-      "EVENTS": "EVENTS",
-      "SHOP": "SHOP",
-      "OUR_CONTACTS": "OUR CONTACTS",
-      "BOOKING": "BOOKING"
-    },
     "AUTHENTICATION": {
       "SIGN_IN_HERE": "Логин",
       "SIGN_UP_HERE": "Регистрация",

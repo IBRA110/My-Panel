@@ -1,33 +1,37 @@
 {
-    "AUTHENTICATION": {
-      "SIGN_IN_HERE": "Login form",
-      "SIGN_UP_HERE": "Registration form",
-      "SIGN_IN" : "sign in",
-      "SIGN_UP" : "sign up",
-      "USER_NAME": "username",
-      "EMAIL": "email",
-      "PASSWORD": "password",
-      "CONFIRM_PASSWORD": "confirm password",
-      "FIRST_NAME": "first name",
-      "LAST_NAME": "last name",
-      "FORGOT_PASSWORD": "Forgot password?",
-      "HAVE_ACCOUNT": "Have an account?",
-      "ENTER_USERNAME": "Please Enter username",
-      "ENTER_EMAIL": "Please Enter email!",
-      "ENTER_EMAIL_PATTERN": "Please enter a valid email address",
-      "ENTER_PASSWORD": "Please Enter password",
-      "ENTER_PASSWORD_STRONG": "Please Enter strong password",
-      "ENTER_PASSWORD_NUMBER": "Password must contain at least 1 number",
-      "ENTER_PASSWORD_HAS_CAPITAL_CASE": "Password must contain at least 1 capital case letter",
-      "ENTER_PASSWORD_HAS_SMALL_CASE": "Password must contain at least 1 small case letter",
-      "ENTER_PASSWORD_HAS_SPECIAL_CHARS": "Password must contain at least 1 special character",
-      "ENTER_PASSWORD_MINLENGTH": "Password length must be at least 8 characters",
-      "SAME_PASSWORDS": "Passwords must be same!",
-      "SIGN_UP_FORM_FIELDS_NOT_CORRECT": "Please provide all fields with correct values!",
-      "CREATE_A_NEW_ACCOUNT": "Create a new account" 
-    },
-    "CRM": {
-      "HOME": "Home",
-      "CHAT": "Chat"
-    }
+  "AUTHENTICATION": {
+    "SIGN_IN_HERE": "Login form",
+    "SIGN_UP_HERE": "Registration form",
+    "SIGN_IN" : "sign in",
+    "SIGN_UP" : "sign up",
+    "USER_NAME": "username",
+    "EMAIL": "email",
+    "PASSWORD": "password",
+    "CONFIRM_PASSWORD": "confirm password",
+    "FIRST_NAME": "first name",
+    "LAST_NAME": "last name",
+    "FORGOT_PASSWORD": "Forgot password?",
+    "HAVE_ACCOUNT": "Have an account?",
+    "ENTER_USERNAME": "Please Enter username",
+    "ENTER_EMAIL": "Please Enter email!",
+    "ENTER_EMAIL_PATTERN": "Please enter a valid email address",
+    "ENTER_PASSWORD": "Please Enter password",
+    "ENTER_PASSWORD_STRONG": "Please Enter strong password",
+    "ENTER_PASSWORD_NUMBER": "Password must contain at least 1 number",
+    "ENTER_PASSWORD_HAS_CAPITAL_CASE": "Password must contain at least 1 capital case letter",
+    "ENTER_PASSWORD_HAS_SMALL_CASE": "Password must contain at least 1 small case letter",
+    "ENTER_PASSWORD_HAS_SPECIAL_CHARS": "Password must contain at least 1 special character",
+    "ENTER_PASSWORD_MINLENGTH": "Password length must be at least 8 characters",
+    "SAME_PASSWORDS": "Passwords must be same!",
+    "SIGN_UP_FORM_FIELDS_NOT_CORRECT": "Please provide all fields with correct values!",
+    "CREATE_A_NEW_ACCOUNT": "Create a new account" 
+  },
+  "ADMIN": {
+    "HOME": "Home"
+  },
+  "MY_SETTINGS": {
+    "MY_SETTINGS": "My Settings",
+    "PROFILE": "Profile",
+    "DISPLAY": "Display"
+  }
 }

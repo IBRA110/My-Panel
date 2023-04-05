@@ -1,4 +1,8 @@
-div{
-  width: 300px;
-  height: 300px;
+@import "src/app/core/mixins/fonts";
+
+.my-settings{
+  h1{
+    @include Heading_3;
+    color: var(--base-text-color);
+  }
 }

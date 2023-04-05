@@ -1,0 +1,8 @@
+<div class="select">
+  <div class="select-tabs">
+    <button *ngFor="let tab of tabs; let i = index" (click)="onClick.emit(tab)" [ngClass]="checkClass('button', tab)">
+      {{ 'MY_SETTINGS.' + tab | translate }}
+    </button>
+  </div>
+  <div class="select-line" [ngStyle]="{ 'margin-left': getMarginBySelectedTab() }"></div>
+</div>
