@@ -37,11 +37,11 @@
         </svg>
       </a>
     </li>
-    <li class="menu-item">
+    <li class="menu-item" *ngIf="user$ | async as user">
       <div class="user-img">
         <img src="/assets/images/nav-bar/man.png" alt="User image" />
       </div>
-      <p class="user-name">John Doe</p>
+      <p class="user-name">{{ user.firstName }} {{ user.lastName }}</p>
     </li>
     <li class="menu-item">
       <button (click)="signOut()">
