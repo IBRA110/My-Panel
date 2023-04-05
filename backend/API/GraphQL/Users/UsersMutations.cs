@@ -3,12 +3,9 @@ using Core.DTOs;
 using Core.Entities;
 using Core.Interfaces;
 using HotChocolate.Authorization;
-using Mysqlx.Crud;
-using System.Diagnostics.Metrics;
 using System.Security.Claims;
-using System.Security.Policy;
 
-namespace API.GraphQL
+namespace API.GraphQL.Users
 {
     [ExtendObjectType("Mutation")]
     public class UsersMutations
@@ -16,7 +13,8 @@ namespace API.GraphQL
         [UseProjection]
         [Authorize]
         public async Task<MemberUpdateDTO> UpdateUser(
-            [Service] IUnitOfWork unitOfWork, ClaimsPrincipal claimsPrincipal,
+            [Service] IUnitOfWork unitOfWork,
+            ClaimsPrincipal claimsPrincipal,
             [Service] IMapper mapper,
             string city,
             string country,
@@ -59,7 +57,46 @@ namespace API.GraphQL
                 Interests = user.Interests,
                 Introduction = user.Introduction
             };
+
+        }
+        
+        [UseProjection]
+        [Authorize]
+        public async Task<ImageUpdateDTO> UploadUserImage(
+            [Service] IUnitOfWork unitOfWork,
+            ClaimsPrincipal claimsPrincipal,
+            IFile file)
+        {
+            AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
             
+            string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.Name;
+
+            ImageEntity photo = new ImageEntity
+            {
+                Url = "images/" + uniqueFileName
+            };
+
+            if (user.Images.Count == 0)
+            {
+                photo.IsMain = true;
+            }
+
+            user.Images.Add(photo);
+            
+            if (!await unitOfWork.Complete())
+            {
+                throw new GraphQLException("Failed to update user");
+            }
+
+            string imagePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", uniqueFileName);
+            await file.CopyToAsync(new FileStream(imagePath, FileMode.Create));
+
+
+            return new ImageUpdateDTO
+            {
+                Url = photo.Url
+            };
+
         }
 
     }

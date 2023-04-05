@@ -3,7 +3,7 @@ using Core.Interfaces;
 using HotChocolate.Authorization;
 using System.Security.Claims;
 
-namespace API.GraphQL
+namespace API.GraphQL.Users
 {
     [ExtendObjectType("Query")]
     public class UsersQueries

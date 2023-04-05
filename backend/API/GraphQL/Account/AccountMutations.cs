@@ -8,29 +8,29 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
-namespace API.GraphQL
+namespace API.GraphQL.Account
 {
     [ExtendObjectType("Mutation")]
     public class AccountMutations
     {
         public async Task<SuccessDTO> Registration(
-            [Service]IUnitOfWork unitOfWork, 
-            [Service]IMapper mapper,
-            [Service]UserManager<AppUserEntity> userManager,
+            [Service] IUnitOfWork unitOfWork,
+            [Service] IMapper mapper,
+            [Service] UserManager<AppUserEntity> userManager,
             string userName,
             string email,
             string password)
         {
-            
+
             if (await unitOfWork.UserExists(userName))
             {
-                 throw new GraphQLException("Username is already taken");
+                throw new GraphQLException("Username is already taken");
             }
             if (await unitOfWork.EmailExists(email))
             {
                 throw new GraphQLException("Email is already taken");
             }
-            
+
             RegisterDTO register = new RegisterDTO
             {
                 UserName = userName,
@@ -39,14 +39,14 @@ namespace API.GraphQL
             };
 
             AppUserEntity user = mapper.Map<AppUserEntity>(register);
-            
+
             user.UserName = register.UserName;
 
             IdentityResult result = await userManager.CreateAsync(user, register.Password);
 
             if (!result.Succeeded)
             {
-                string message =  string.Join(", ", result.Errors.Select(x => "Code " + x.Code + " Description" + x.Description));
+                string message = string.Join(", ", result.Errors.Select(x => "Code " + x.Code + " Description" + x.Description));
                 throw new GraphQLException(message);
             }
 
@@ -54,21 +54,21 @@ namespace API.GraphQL
 
             if (!roleResult.Succeeded)
             {
-                string message =  string.Join(", ", result.Errors.Select(x => "Code " + x.Code + " Description" + x.Description));
+                string message = string.Join(", ", result.Errors.Select(x => "Code " + x.Code + " Description" + x.Description));
                 throw new GraphQLException(message);
             }
-             
+
             return new SuccessDTO
             {
                 Message = "Registration Successful"
             };
         }
-        
+
         public async Task<LoginResponseDTO> Login(
-            [Service]IUnitOfWork unitOfWork,
-            [Service]UserManager<AppUserEntity> userManager,
-            [Service]SignInManager<AppUserEntity> signInManager,
-            [Service]ITokenService tokenService,
+            [Service] IUnitOfWork unitOfWork,
+            [Service] UserManager<AppUserEntity> userManager,
+            [Service] SignInManager<AppUserEntity> signInManager,
+            [Service] ITokenService tokenService,
             string userName,
             string password)
         {
@@ -88,7 +88,7 @@ namespace API.GraphQL
             }
 
             string refreshToken = tokenService.CreateRefreshToken(user);
-            
+
             user.RefreshToken = refreshToken;
             await unitOfWork.Complete();
 
@@ -101,12 +101,12 @@ namespace API.GraphQL
 
         [Authorize]
         public async Task<LoginResponseDTO> Refresh(
-            [Service]IUnitOfWork unitOfWork,
-            [Service]ITokenService tokenService,
+            [Service] IUnitOfWork unitOfWork,
+            [Service] ITokenService tokenService,
             ClaimsPrincipal claimsPrincipal,
             string refreshToken)
         {
-            
+
             AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
 
             if (user == null || refreshToken != user.RefreshToken)
@@ -117,19 +117,19 @@ namespace API.GraphQL
             user.RefreshToken = tokenService.CreateRefreshToken(user);
 
             await unitOfWork.Complete();
-            
+
             return new LoginResponseDTO
             {
                 AccessToken = await tokenService.CreateAccessToken(user),
                 RefreshToken = user.RefreshToken
             };
         }
-        
+
         [Authorize]
-        public async Task<SuccessDTO> Logout([Service]IUnitOfWork unitOfWork, ClaimsPrincipal claimsPrincipal,
+        public async Task<SuccessDTO> Logout([Service] IUnitOfWork unitOfWork, ClaimsPrincipal claimsPrincipal,
             string refreshToken)
         {
-            
+
             AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
 
             if (user == null || refreshToken != user.RefreshToken)
@@ -140,7 +140,7 @@ namespace API.GraphQL
             user.RefreshToken = null;
 
             await unitOfWork.Complete();
-            
+
             return new SuccessDTO
             {
                 Message = "Logout Successful"

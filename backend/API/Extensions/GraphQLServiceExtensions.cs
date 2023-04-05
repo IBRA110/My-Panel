@@ -1,4 +1,5 @@
-﻿using API.GraphQL;
+﻿using API.GraphQL.Account;
+using API.GraphQL.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions
@@ -15,6 +16,7 @@ namespace API.Extensions
                 .AddMutationType(m => m.Name("Mutation")) 
                 .AddType<AccountMutations>()
                 .AddType<UsersMutations>()
+                .AddType<UploadType>()
                 .AddQueryType(q => q.Name("Query"))
                 .AddType<UsersQueries>()
                 .AddErrorFilter(er =>
