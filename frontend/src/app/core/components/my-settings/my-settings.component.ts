@@ -9,4 +9,8 @@ import { MySettingsTabsEnum } from '../../enums/my-settings-tabs.enum';
 export class MySettingsComponent {
   public selectedTab: string = MySettingsTabsEnum.PROFILE;
   public tabs: string[] = Object.keys(MySettingsTabsEnum);
+
+  public get getMySettingsEnum(): typeof MySettingsTabsEnum {
+    return MySettingsTabsEnum;
+  }
 }
