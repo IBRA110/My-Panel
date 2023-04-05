@@ -23,7 +23,7 @@ export enum ApplyPolicy {
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserQuery = { user?: { id?: string | null, userName?: string | null, firstName?: string | null, lastName?: string | null, images?: Array<{ id?: string | null, isMain: boolean } | null> | null } | null };
+export type GetUserQuery = { user?: { id?: string | null, userName?: string | null, firstName?: string | null, lastName?: string | null, images?: Array<{ id?: string | null, isMain: boolean, url?: string | null } | null> | null } | null };
 
 export type LoginMutationVariables = Exact<{
   userName?: InputMaybe<Scalars['String']>;

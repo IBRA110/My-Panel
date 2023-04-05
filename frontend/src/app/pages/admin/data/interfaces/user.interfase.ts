@@ -3,8 +3,11 @@ export interface UserForNavBar {
   userName?: string;
   firstName?: string;
   lastName?: string;
-  images?: {
-    id?: string;
-    isMain: boolean;
-  }[];
+  images?: UserImage[];
+}
+
+export interface UserImage {
+  id?: string;
+  isMain: boolean;
+  url?: string;
 }

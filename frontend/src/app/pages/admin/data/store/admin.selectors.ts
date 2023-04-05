@@ -12,3 +12,8 @@ export const selectUserForNavBar = createSelector(
   selectAdminState,
   (adminState: AdminState) => adminState.user,
 );
+
+export const selectUserAvatar = createSelector(
+  selectAdminState,
+  (adminState: AdminState) => adminState.user.images.find((x) => x.isMain),
+);
