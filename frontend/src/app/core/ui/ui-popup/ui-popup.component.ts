@@ -12,6 +12,7 @@ import { transitionAnimation } from '../../animations/transition.animation';
 import { backgroundAnimation } from '../../animations/background.animation';
 import { PopupService } from '../../services/popup.service';
 import { PopupCode, PopupItem } from '../../interfaces/popup.interface';
+import { NavigationEnd, Router } from '@angular/router';
 
 @UntilDestroy()
 @Component({
@@ -27,7 +28,7 @@ export class UiPopupComponent implements OnInit {
   @Input() public useCloseArea = true;
   @Output() public afterInit = new EventEmitter<PopupItem>();
 
-  public constructor(private popupService: PopupService) {}
+  public constructor(private popupService: PopupService, private router: Router) {}
 
   public ngOnInit(): void {
     this.popupService
@@ -38,6 +39,12 @@ export class UiPopupComponent implements OnInit {
         untilDestroyed(this),
       )
       .subscribe((popup) => this.afterInit.emit(popup));
+
+    this.router.events.pipe(untilDestroyed(this)).subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.popupService.close(this.popupCode);
+      }
+    });
   }
 
   public close(): void {
