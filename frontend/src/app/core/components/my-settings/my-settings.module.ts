@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { UiSelectTabComponentModule } from '../../ui/ui-select-tabs/ui-select-tabs.module';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DisplayComponent } from './components/display/display.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [MySettingsComponent, ProfileComponent, DisplayComponent],
@@ -14,6 +15,7 @@ import { DisplayComponent } from './components/display/display.component';
     UiPopupModule,
     TranslateModule,
     UiSelectTabComponentModule,
+    ReactiveFormsModule,
   ],
   exports: [MySettingsComponent],
 })

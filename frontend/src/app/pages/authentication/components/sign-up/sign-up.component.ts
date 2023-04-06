@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { UiButtonStyleEnum } from 'src/app/core/enums/ui-button-style.enum';
-import { SignUpForm } from '../../data/interfaces/form.interface';
+import { SignUpForm } from '../../data/interfaces/sign-form.interface';
 import { signUp, toggleForms } from '../../data/store/authentication.actions';
 import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 import { CustomValidators } from 'src/app/core/validators/custom.validator';

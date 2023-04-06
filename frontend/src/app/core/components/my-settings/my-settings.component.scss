@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 20px;
-  
+
   h1{
     @include Heading_3;
     color: var(--base-text-color);

@@ -1,4 +1,4 @@
 export enum MySettingsTabsEnum {
-  'PROFILE' = 'PROFILE',
-  'DISPLAY' = 'DISPLAY',
+  'PROFILE' = 'PROFILE.PROFILE',
+  'DISPLAY' = 'DISPLAY.DISPLAY',
 }

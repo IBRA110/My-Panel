@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SignInForm } from '../../data/interfaces/form.interface';
+import { SignInForm } from '../../data/interfaces/sign-form.interface';
 import { UiButtonStyleEnum } from './../../../../core/enums/ui-button-style.enum';
 import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 import { Store } from '@ngrx/store';

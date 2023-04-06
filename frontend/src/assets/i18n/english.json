@@ -30,8 +30,19 @@
     "HOME": "Home"
   },
   "MY_SETTINGS": {
-    "MY_SETTINGS": "My Settings",
+    "MY_SETTINGS": "My Settings"
+  },
+  "PROFILE": {
     "PROFILE": "Profile",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "CITY": "City",
+    "COUNTRY": "Country",
+    "DATEOFBIRTH": "Date of birth",
+    "INTERESTS": "Interests",
+    "INTRODUCTION": "Introduction"
+  },
+  "DISPLAY":{
     "DISPLAY": "Display"
   }
 }

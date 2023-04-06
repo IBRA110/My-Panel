@@ -3,8 +3,8 @@
     <h1>{{ 'MY_SETTINGS.MY_SETTINGS' | translate }}</h1>
     <app-ui-select-tabs [selectedTab]="selectedTab" [tabs]="tabs" (onClick)="selectedTab = $event"></app-ui-select-tabs>
     <div class="my-settings-container">
-      <app-profile *ngIf="selectedTab === getMySettingsEnum.PROFILE"></app-profile>
-      <app-display *ngIf="selectedTab === getMySettingsEnum.DISPLAY"></app-display>
+      <app-profile *ngIf="selectedTab === translateService.instant(getMySettingsEnum.PROFILE)"></app-profile>
+      <app-display *ngIf="selectedTab === translateService.instant(getMySettingsEnum.DISPLAY)"></app-display>
     </div>
   </div>
 </app-ui-popup>

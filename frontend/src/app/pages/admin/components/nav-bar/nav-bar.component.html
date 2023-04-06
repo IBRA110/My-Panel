@@ -39,7 +39,7 @@
     </li>
     <li class="menu-user" *ngIf="user$ | async as user">
       <div class="user-img" *ngIf="userAvatar$">
-        <img [src]="getUserAvatar(userAvatar$ | async)" src="" alt="User image" />
+        <img [src]="getUserAvatar(userAvatar$ | async)" alt="User image" />
       </div>
       <p class="user-name">{{ user.firstName }} {{ user.lastName }}</p>
     </li>
