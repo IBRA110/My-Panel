@@ -19,23 +19,23 @@
         <label class="form-control_label" for="username">{{ 'PROFILE.LAST_NAME' | translate }}</label>
         <input class="form-control_input" formControlName="firstName" type="text" />
       </div>
+      <div class="form-control">
+        <label class="form-control_label" for="date">{{ 'PROFILE.DATEOFBIRTH' | translate }}</label>
+        <input type="date" formControlName="dateOfBirth" name="date" />
+      </div>
     </div>
     <div class="profile-header_fields">
       <div class="form-control">
         <label class="form-control_label" for="city">{{ 'PROFILE.CITY' | translate }}</label>
-        <input class="form-control_input" formControlName="City" type="text" />
+        <input class="form-control_input" formControlName="city" type="text" />
       </div>
       <div class="form-control">
         <label class="form-control_label" for="country">{{ 'PROFILE.COUNTRY' | translate }}</label>
-        <input class="form-control_input" formControlName="Country" type="text" />
+        <input class="form-control_input" formControlName="country" type="text" />
       </div>
     </div>
   </div>
   <div class="profile-body">
-    <div class="form-control">
-      <label class="form-control_label" for="date">{{ 'PROFILE.DATEOFBIRTH' | translate }}</label>
-      <input type="date" formControlName="date" name="date" />
-    </div>
     <div class="profile-body_fields">
       <div class="form-control">
         <label class="form-control_label" for="username">{{ 'PROFILE.INTERESTS' | translate }}</label>
