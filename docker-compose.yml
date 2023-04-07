@@ -25,7 +25,8 @@ services:
       - angular
     environment:
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__DefaultConnection=mysql://user:password@db:3306/myapp
+      - DBHOST=database
+      - ASPNETCORE_ENVIRONMENT=Production
     networks:
       - frontend
       - backend
