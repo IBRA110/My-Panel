@@ -1,15 +1,12 @@
-FROM node:latest
-
+FROM node:19.7.0  as build
 WORKDIR /app
 
-COPY package*.json ./
+RUN npm install -g @angular/cli
 
+COPY ./package.json .
 RUN npm install
+COPY . .
+RUN ng build
 
-COPY . /app
-
-RUN npm run build -- --prod
-
-EXPOSE 4200
-
-CMD ["npm", "run", "start"]
+FROM nginx as runtime
+COPY --from=build /app/dist/draw-my-dream-front-end  /usr/share/nginx/html
