@@ -11,10 +11,12 @@ import { UiButtonStyleEnum } from 'src/app/core/enums/ui-button-style.enum';
 })
 export class ProfileComponent implements OnInit {
   public updateUserForm: FormGroup<UpdateUser>;
-  public defaultAvatarUrl: string = '/assets/images/nav-bar/man.png/';
+  public defaultAvatarUrl: string | ArrayBuffer =
+    '/assets/images/nav-bar/man.png/';
 
   public ngOnInit(): void {
     this.updateUserForm = new FormGroup<UpdateUser>({
+      avatar: new FormControl<File>(null),
       firstName: new FormControl<string>(''),
       lastName: new FormControl<string>(''),
       city: new FormControl<string>(''),
@@ -25,7 +27,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  public getUserAvatar(image: UserImage): string {
+  public getUserAvatar(image: UserImage): string | ArrayBuffer {
     return !!image ? image.url : this.defaultAvatarUrl;
   }
 
@@ -33,5 +35,18 @@ export class ProfileComponent implements OnInit {
 
   public get buttonStyle(): typeof UiButtonStyleEnum {
     return UiButtonStyleEnum;
+  }
+
+  public uploadImage(event): void {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]);
+
+      reader.onload = (event) => {
+        this.defaultAvatarUrl = event.target.result;
+      };
+      this.updateUserForm.get('avatar').setValue(event.target.files[0]);
+    }
   }
 }
