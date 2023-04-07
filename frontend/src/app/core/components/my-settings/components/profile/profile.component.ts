@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UpdateUser } from '../../interfaces/update-user.interface';
 import { UserImage } from 'src/app/pages/admin/data/interfaces/user.interfase';
+import { UiButtonStyleEnum } from 'src/app/core/enums/ui-button-style.enum';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +12,6 @@ import { UserImage } from 'src/app/pages/admin/data/interfaces/user.interfase';
 export class ProfileComponent implements OnInit {
   public updateUserForm: FormGroup<UpdateUser>;
   public defaultAvatarUrl: string = '/assets/images/nav-bar/man.png/';
-  public save(): void {}
 
   public ngOnInit(): void {
     this.updateUserForm = new FormGroup<UpdateUser>({
@@ -27,5 +27,11 @@ export class ProfileComponent implements OnInit {
 
   public getUserAvatar(image: UserImage): string {
     return !!image ? image.url : this.defaultAvatarUrl;
+  }
+
+  public save(): void {}
+
+  public get buttonStyle(): typeof UiButtonStyleEnum {
+    return UiButtonStyleEnum;
   }
 }

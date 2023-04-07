@@ -27,6 +27,9 @@ button{
 .default{
   padding: 15px 60px;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .transparent{
   padding: 15px 60px;
