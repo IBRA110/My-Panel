@@ -27,6 +27,13 @@ export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetUserQuery = { user?: { id?: string | null, userName?: string | null, firstName?: string | null, introduction?: string | null, interests?: string | null, city?: string | null, lastName?: string | null, photoUrl?: string | null, dateOfBirth: any, age: number, images?: Array<{ url?: string | null, isMain: boolean } | null> | null } | null };
 
+export type UploadUserImageMutationVariables = Exact<{
+  file?: InputMaybe<Scalars['Upload']>;
+}>;
+
+
+export type UploadUserImageMutation = { uploadUserImage?: { url?: string | null } | null };
+
 export type LoginMutationVariables = Exact<{
   userName?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
