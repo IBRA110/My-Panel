@@ -1,6 +1,22 @@
-**/bin/
-**/obj/
-**/global.json
-**/Dockerfile*
-**/.dockerignore*
-**/*.user
+# .NET build artifacts
+bin/
+obj/
+*.exe
+*.dll
+
+# Node.js build artifacts
+node_modules/
+npm-debug.log
+
+# Visual Studio Code artifacts
+.vscode/
+launch.json
+tasks.json
+settings.json
+
+# Other build artifacts
+packages/
+*.log
+*.lock
+*.user
+*.vs
