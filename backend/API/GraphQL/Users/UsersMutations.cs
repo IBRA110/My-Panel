@@ -80,6 +80,16 @@ namespace API.GraphQL.Users
             {
                 photo.IsMain = true;
             }
+            else 
+            {
+                ImageEntity currentMain = user.Images.FirstOrDefault(x => x.IsMain);
+
+                if (currentMain != null)
+                {
+                    currentMain.IsMain = false;
+                }
+                photo.IsMain = true;
+            }
 
             user.Images.Add(photo);
             
