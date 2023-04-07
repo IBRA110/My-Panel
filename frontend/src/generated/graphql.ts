@@ -12,6 +12,8 @@ export interface Scalars {
   Float: number;
   /** The `DateTime` scalar represents an ISO-8601 compliant date time type. */
   DateTime: any;
+  /** The `Upload` scalar type represents a file upload. */
+  Upload: any;
 }
 
 export enum ApplyPolicy {
@@ -23,7 +25,7 @@ export enum ApplyPolicy {
 export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserQuery = { user?: { id?: string | null, userName?: string | null, firstName?: string | null, lastName?: string | null, images?: Array<{ id?: string | null, isMain: boolean, url?: string | null } | null> | null } | null };
+export type GetUserQuery = { user?: { id?: string | null, userName?: string | null, firstName?: string | null, introduction?: string | null, interests?: string | null, city?: string | null, lastName?: string | null, photoUrl?: string | null, dateOfBirth: any, age: number, images?: Array<{ url?: string | null, isMain: boolean } | null> | null } | null };
 
 export type LoginMutationVariables = Exact<{
   userName?: InputMaybe<Scalars['String']>;
