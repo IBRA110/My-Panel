@@ -6,9 +6,9 @@ import { toggleSidebar } from '../../data/store/admin.actions';
 import {
   selectIsSideBarToggled,
   selectUserAvatar,
-  selectUserForNavBar,
+  selectUser,
 } from '../../data/store/admin.selectors';
-import { UserForNavBar, UserImage } from '../../data/interfaces/user.interfase';
+import { User, UserImage } from '../../data/interfaces/user.interfase';
 import { PopupService } from 'src/app/core/services/popup.service';
 import { MySettingsComponent } from 'src/app/core/components/my-settings/my-settings.component';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -26,8 +26,7 @@ export class NavBarComponent implements OnInit {
     selectIsSideBarToggled,
   );
 
-  public user$: Observable<UserForNavBar> =
-    this.store.select(selectUserForNavBar);
+  public user$: Observable<User> = this.store.select(selectUser);
 
   public userAvatar$: Observable<UserImage> =
     this.store.select(selectUserAvatar);

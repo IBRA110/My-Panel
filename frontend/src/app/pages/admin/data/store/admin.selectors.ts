@@ -8,7 +8,7 @@ export const selectIsSideBarToggled = createSelector(
   (adminState: AdminState) => adminState.isSideBarToggled,
 );
 
-export const selectUserForNavBar = createSelector(
+export const selectUser = createSelector(
   selectAdminState,
   (adminState: AdminState) => adminState.user,
 );

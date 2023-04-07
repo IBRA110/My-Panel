@@ -1,8 +1,8 @@
-import { UserForNavBar } from '../interfaces/user.interfase';
+import { User } from '../interfaces/user.interfase';
 
 export interface AdminState {
   isSideBarToggled: boolean;
-  user: UserForNavBar;
+  user: User;
 }
 
 export const initialState: AdminState = {
