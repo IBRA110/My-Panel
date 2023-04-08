@@ -9,6 +9,8 @@ services:
     volumes:
       - ./database/~mysql:/var/lib/mysql
       - ./database/mysql.cnf:/etc/mysql/conf.d/my.cnf
+    env_file:
+      - .env
     environment: 
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
       MYSQL_USER: ${MYSQL_USER}
