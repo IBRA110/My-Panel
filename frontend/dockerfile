@@ -1,4 +1,4 @@
-FROM node:19.7.0  as build
+FROM node:19.7.0 as build
 WORKDIR /app
 
 RUN npm install -g @angular/cli
@@ -9,4 +9,4 @@ COPY . .
 RUN ng build
 
 FROM nginx as runtime
-COPY --from=build /app/dist/my-panel  /usr/share/nginx/html
+COPY --from=build /app/dist/my-panel /usr/share/nginx/html
