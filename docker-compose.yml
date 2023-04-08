@@ -20,7 +20,7 @@ services:
     restart: always
 
   backend:
-    container_name: frontend
+    container_name: backend
     build:
       context: ./backend
       dockerfile: dockerfile
