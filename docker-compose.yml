@@ -7,8 +7,8 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./database/~mysql:/var/lib/mysql
-      - ./database/mysql.cnf:/etc/mysql/conf.d/my.cnf
+      - ./database:/var/lib/mysql
+      - ./database:/etc/mysql/conf.d/my.cnf
     env_file:
       - .env
     environment: 
