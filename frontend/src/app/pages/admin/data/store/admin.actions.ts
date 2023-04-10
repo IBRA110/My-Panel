@@ -25,3 +25,15 @@ export const updateUserSuccess = createAction(
 export const updateUserFailed = createAction(
   AdminActionsEnum.UPDATE_USER_FAILED,
 );
+
+export const uploadAvatar = createAction(
+  AdminActionsEnum.UPLOAD_AVATAR,
+  props<{ file: File }>(),
+);
+export const uploadAvatarSuccess = createAction(
+  AdminActionsEnum.UPLOAD_AVATAR_SUCCESS,
+  props<{ url: string }>(),
+);
+export const uploadAvatarFailed = createAction(
+  AdminActionsEnum.UPLOAD_AVATAR_FAILED,
+);

@@ -7,7 +7,10 @@ import {
 } from 'src/app/pages/admin/data/interfaces/user.interfase';
 import { UiButtonStyleEnum } from 'src/app/core/enums/ui-button-style.enum';
 import { Store } from '@ngrx/store';
-import { updateUser } from 'src/app/pages/admin/data/store/admin.actions';
+import {
+  updateUser,
+  uploadAvatar,
+} from 'src/app/pages/admin/data/store/admin.actions';
 import { Observable } from 'rxjs';
 import { selectUser } from 'src/app/pages/admin/data/store/admin.selectors';
 
@@ -45,11 +48,6 @@ export class ProfileComponent implements OnInit {
   }
 
   public save(): void {
-    const avatar = new FormData();
-    if (!!this.updateUserForm.value) {
-    }
-    avatar.append('file', this.updateUserForm.value.avatar);
-
     this.store.dispatch(
       updateUser({
         updateUser: {
@@ -78,7 +76,12 @@ export class ProfileComponent implements OnInit {
       reader.onload = (event) => {
         this.defaultAvatarUrl = event.target.result;
       };
-      this.updateUserForm.get('avatar').setValue(event.target.files[0]);
+
+      this.store.dispatch(
+        uploadAvatar({
+          file: event.target.files[0],
+        }),
+      );
     }
   }
 }

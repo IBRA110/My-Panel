@@ -7,4 +7,7 @@ export enum AdminActionsEnum {
   UPDATE_USER = '[Admin] update user',
   UPDATE_USER_SUCCESS = '[Admin] update user success',
   UPDATE_USER_FAILED = '[Admin] update user failed',
+  UPLOAD_AVATAR = '[Admin] upload avatar user',
+  UPLOAD_AVATAR_SUCCESS = '[Admin] upload avatar success',
+  UPLOAD_AVATAR_FAILED = '[Admin] upload avatar failed',
 }

@@ -9,6 +9,9 @@ import {
   updateUser,
   updateUserFailed,
   updateUserSuccess,
+  uploadAvatar,
+  uploadAvatarFailed,
+  uploadAvatarSuccess,
 } from './admin.actions';
 
 @Injectable()
@@ -47,6 +50,20 @@ export class AdminEffects {
           catchError(() => {
             return of(updateUserFailed());
           }),
+        );
+      }),
+    );
+  });
+
+  private uploadAvatar$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(uploadAvatar),
+      switchMap((payload) => {
+        return this.adminService.loadAvatar(payload.file).pipe(
+          map((url) => {
+            return uploadAvatarSuccess({ url: url.url });
+          }),
+          catchError(() => of(uploadAvatarFailed())),
         );
       }),
     );

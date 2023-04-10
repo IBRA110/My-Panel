@@ -38,3 +38,6 @@ export interface UpdatedUser {
   city?: string;
   country?: string;
 }
+export interface AvatarUrl {
+  url: string;
+}

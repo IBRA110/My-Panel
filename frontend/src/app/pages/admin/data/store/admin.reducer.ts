@@ -4,6 +4,7 @@ import {
   loadUserSuccess,
   toggleSidebar,
   updateUserSuccess,
+  uploadAvatarSuccess,
 } from './admin.actions';
 import { AdminState, initialState } from './admin.state';
 
@@ -31,6 +32,13 @@ const adminReducer = createRehydrateReducer(
       interests: updateUser.interests,
       city: updateUser.city,
       country: updateUser.country,
+    },
+  })),
+  on(uploadAvatarSuccess, (state, { url }) => ({
+    ...state,
+    user: {
+      ...state.user,
+      photoUrl: url,
     },
   })),
 );
