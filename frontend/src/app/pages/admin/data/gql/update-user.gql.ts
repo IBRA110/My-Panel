@@ -9,7 +9,6 @@ export const UPDATE_USER = gql`
     $interests: String
     $city: String
     $country: String
-    $file: Upload
   ) {
     updateUser(
       firstName: $firstName
@@ -19,7 +18,6 @@ export const UPDATE_USER = gql`
       interests: $interests
       city: $city
       country: $country
-      file: $file
     ) {
       firstName
       lastName
@@ -28,7 +26,6 @@ export const UPDATE_USER = gql`
       interests
       city
       country
-      photoUrl
     }
   }
 `;

@@ -23,6 +23,7 @@ const adminReducer = createRehydrateReducer(
   on(updateUserSuccess, (state, { updateUser }) => ({
     ...state,
     user: {
+      ...state.user,
       firstName: updateUser.firstName,
       lastName: updateUser.lastName,
       dateOfBirth: updateUser.dateOfBirth,
@@ -30,8 +31,6 @@ const adminReducer = createRehydrateReducer(
       interests: updateUser.interests,
       city: updateUser.city,
       country: updateUser.country,
-      photoUrl: updateUser.photoUrl,
-      age: state.user.age,
     },
   })),
 );

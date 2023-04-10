@@ -22,44 +22,10 @@ namespace API.GraphQL.Users
             string firstName,
             string lastName,
             string interests,
-            string introduction,
-            IFile file
+            string introduction
             )
         {
             AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
-            
-            string imagePath = "";
-
-            if (file != null)
-            {
-                string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.Name;
-
-                ImageEntity photo = new ImageEntity
-                {
-                    Url = "images/" + uniqueFileName
-                };
-
-                if (user.Images.Count == 0)
-                {
-                    photo.IsMain = true;
-                }
-                else
-                {
-                    ImageEntity currentMain = user.Images.FirstOrDefault(x => x.IsMain);
-
-                    if (currentMain != null)
-                    {
-                        currentMain.IsMain = false;
-                    }
-                    photo.IsMain = true;
-                }
-
-                user.Images.Add(photo);
-                
-                imagePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", uniqueFileName);
-                
-                await file.CopyToAsync(new FileStream(imagePath, FileMode.Create));
-            }
             
             MemberUpdateDTO memberUpdateDTO = new MemberUpdateDTO
             {
@@ -83,7 +49,6 @@ namespace API.GraphQL.Users
 
             return new MemberUpdateDTO
             {
-                PhotoUrl = imagePath,
                 City = user.City,
                 Country = user.Country,
                 DateOfBirth = user.DateOfBirth,

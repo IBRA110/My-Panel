@@ -49,12 +49,10 @@ export class ProfileComponent implements OnInit {
     if (!!this.updateUserForm.value) {
     }
     avatar.append('file', this.updateUserForm.value.avatar);
-    avatar.append('name', this.updateUserForm.value.avatar.name);
 
     this.store.dispatch(
       updateUser({
         updateUser: {
-          file: avatar,
           firstName: this.updateUserForm.value.firstName,
           lastName: this.updateUserForm.value.lastName,
           city: this.updateUserForm.value.city,

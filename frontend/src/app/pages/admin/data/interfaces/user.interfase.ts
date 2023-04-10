@@ -27,7 +27,6 @@ export interface UpdateUser {
   city?: string;
   country?: string;
   dateOfBirth: Date;
-  file?: File;
 }
 
 export interface UpdatedUser {
@@ -38,5 +37,4 @@ export interface UpdatedUser {
   interests?: string;
   city?: string;
   country?: string;
-  photoUrl?: string;
 }
