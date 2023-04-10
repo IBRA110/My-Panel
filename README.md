@@ -12,7 +12,11 @@
 ### For certificates see https://aka.ms/aspnet/https-trust-dev-cert.
 
 ### Docker must be installed!
-
+### Install docker
+```
+chmod u+x install-docker.sh
+./install-docker.sh
+```
 https://docs.docker.com/engine/install/debian/
 
 ### Run Project
@@ -20,7 +24,7 @@ https://docs.docker.com/engine/install/debian/
 cp .env.example .env
 ```
 ```console
-cd Draw-My-Dream.API/
+cd backend/API/
 ```
 ```console
 cp appsettings.Development.json appsettings.json
