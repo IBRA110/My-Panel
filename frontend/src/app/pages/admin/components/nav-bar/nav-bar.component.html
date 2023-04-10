@@ -37,7 +37,7 @@
         </svg>
       </a>
     </li>
-    <li class="menu-user" *ngIf="user$ | async as user">
+    <li class="menu-user" *ngIf="user$ | async as user" (click)="openSettings()">
       <div class="user-img" *ngIf="userAvatar$">
         <img [src]="getUserAvatar(userAvatar$ | async)" alt="User image" />
       </div>

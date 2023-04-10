@@ -15,5 +15,5 @@ export const selectUser = createSelector(
 
 export const selectUserAvatar = createSelector(
   selectAdminState,
-  (adminState: AdminState) => adminState.user.images.find((x) => x.isMain),
+  (adminState: AdminState) => adminState.user.photoUrl,
 );

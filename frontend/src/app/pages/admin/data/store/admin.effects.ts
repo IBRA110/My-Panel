@@ -6,6 +6,9 @@ import {
   initAdminPanel,
   loadUserFailed,
   loadUserSuccess,
+  updateUser,
+  updateUserFailed,
+  updateUserSuccess,
 } from './admin.actions';
 
 @Injectable()
@@ -25,6 +28,24 @@ export class AdminEffects {
           }),
           catchError(() => {
             return of(loadUserFailed());
+          }),
+        );
+      }),
+    );
+  });
+
+  private updateUserEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(updateUser),
+      switchMap((action) => {
+        return this.adminService.updateUser(action.updateUser).pipe(
+          map((data) => {
+            return updateUserSuccess({
+              updateUser: data.data.updateUser,
+            });
+          }),
+          catchError(() => {
+            return of(updateUserFailed());
           }),
         );
       }),

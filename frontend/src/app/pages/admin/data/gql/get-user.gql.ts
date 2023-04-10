@@ -9,6 +9,7 @@ export const GET_USER = gql`
       introduction
       interests
       city
+      country
       lastName
       photoUrl
       dateOfBirth

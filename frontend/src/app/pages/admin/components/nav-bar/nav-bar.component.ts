@@ -28,8 +28,7 @@ export class NavBarComponent implements OnInit {
 
   public user$: Observable<User> = this.store.select(selectUser);
 
-  public userAvatar$: Observable<UserImage> =
-    this.store.select(selectUserAvatar);
+  public userAvatar$: Observable<string> = this.store.select(selectUserAvatar);
 
   public constructor(
     private store: Store,
@@ -44,6 +43,10 @@ export class NavBarComponent implements OnInit {
     });
   }
 
+  public openSettings(): void {
+    this.popupService.open('my-settings', MySettingsComponent);
+  }
+
   public toggleButtonActive(): void {
     this.store.dispatch(toggleSidebar());
   }
@@ -52,7 +55,7 @@ export class NavBarComponent implements OnInit {
     this.store.dispatch(signOut());
   }
 
-  public getUserAvatar(image: UserImage): string {
-    return !!image ? image.url : this.defaultAvatarUrl;
+  public getUserAvatar(image: string): string {
+    return !!image ? image : this.defaultAvatarUrl;
   }
 }
