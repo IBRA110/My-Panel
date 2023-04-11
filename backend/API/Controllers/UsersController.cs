@@ -62,7 +62,7 @@ namespace API.Controllers
         [HttpPost("add-photo")]
         public async Task<ActionResult<ImageUpdateDTO>> AddPhoto([FromForm]IFormFile file)
         {
-   
+            Console.Write("1");
             AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(User.FindFirst("Id").Value);
 
             string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
@@ -86,7 +86,7 @@ namespace API.Controllers
 
                 return new ImageUpdateDTO
                 {
-                    Url = imagePath
+                    Url = "/images/" + uniqueFileName
                 };
             }
                 

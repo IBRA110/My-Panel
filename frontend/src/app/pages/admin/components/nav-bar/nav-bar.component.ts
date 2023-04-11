@@ -12,6 +12,7 @@ import { User, UserImage } from '../../data/interfaces/user.interfase';
 import { PopupService } from 'src/app/core/services/popup.service';
 import { MySettingsComponent } from 'src/app/core/components/my-settings/my-settings.component';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { environment } from 'src/environments/environment';
 
 @UntilDestroy()
 @Component({
@@ -56,6 +57,6 @@ export class NavBarComponent implements OnInit {
   }
 
   public getUserAvatar(image: string): string {
-    return !!image ? image : this.defaultAvatarUrl;
+    return !!image ? environment.baseUrl + image : this.defaultAvatarUrl;
   }
 }

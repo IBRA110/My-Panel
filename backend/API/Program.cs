@@ -56,15 +56,12 @@ app.UseSwaggerUI(opt =>
 
 app.UseAuthentication();
 
-app.UseAuthorization();
-
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseCors("AllowAll");
-
-
+app.UseAuthorization();
 app.MapControllers();
 app.MapHub<PresenceHub>("hubs/presence");
 app.MapHub<MessageHub>("hubs/message");

@@ -36,7 +36,7 @@ export class AdminService {
     const token: string = JSON.parse(localStorage.getItem('auth'))?.authTokens
       ?.accessToken;
     const header = {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${token}`),
+      headers: new HttpHeaders().set('authorization', `bearer ${token}`),
     };
 
     const formData = new FormData();
