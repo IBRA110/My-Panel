@@ -40,7 +40,9 @@
     "COUNTRY": "Country",
     "DATEOFBIRTH": "Date of birth",
     "INTERESTS": "Interests",
-    "INTRODUCTION": "Introduction"
+    "INTRODUCTION": "Introduction",
+    "AVATAR_UPLOAD": "Avatar upload successfully!",
+    "PROFILE_UPDATE": "Profile updated successfully!"
   },
   "DISPLAY":{
     "DISPLAY": "Display"
