@@ -38,8 +38,11 @@
       </a>
     </li>
     <li class="menu-user" *ngIf="user$ | async as user" (click)="openSettings()">
-      <div class="user-img" *ngIf="userAvatar$">
-        <img [src]="getUserAvatar(userAvatar$ | async)" alt="User image" />
+      <div class="user-img" *ngIf="!!(userAvatar$ | async) === true">
+        <img [src]="baseUrl + (userAvatar$ | async)" alt="User image" />
+      </div>
+      <div class="user-img" *ngIf="!!(userAvatar$ | async) === false">
+        <img [src]="defaultAvatarUrl" alt="User image" />
       </div>
       <p class="user-name">{{ user.firstName }} {{ user.lastName }}</p>
     </li>

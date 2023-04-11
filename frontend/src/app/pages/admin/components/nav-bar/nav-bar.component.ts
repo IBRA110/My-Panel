@@ -22,7 +22,7 @@ import { environment } from 'src/environments/environment';
 })
 export class NavBarComponent implements OnInit {
   public defaultAvatarUrl: string = '/assets/images/nav-bar/man.png/';
-
+  public baseUrl: string = environment.baseUrl + '/';
   public isSideBarToggled$: Observable<boolean> = this.store.select(
     selectIsSideBarToggled,
   );
@@ -54,9 +54,5 @@ export class NavBarComponent implements OnInit {
 
   public signOut(): void {
     this.store.dispatch(signOut());
-  }
-
-  public getUserAvatar(image: string): string {
-    return !!image ? environment.baseUrl + image : this.defaultAvatarUrl;
   }
 }
