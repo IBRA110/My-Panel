@@ -17,6 +17,8 @@ import {
   selectUserAvatar,
 } from 'src/app/pages/admin/data/store/admin.selectors';
 import { environment } from 'src/environments/environment';
+import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -31,7 +33,11 @@ export class ProfileComponent implements OnInit {
   public user$: Observable<User> = this.store.select(selectUser);
   public userAvatar$: Observable<string> = this.store.select(selectUserAvatar);
 
-  public constructor(private store: Store) {}
+  public constructor(
+    private store: Store,
+    private alertMessagesService: UiAlertMessagesService,
+    private translateService: TranslateService,
+  ) {}
 
   public ngOnInit(): void {
     this.user$.subscribe((u) => {
@@ -53,6 +59,12 @@ export class ProfileComponent implements OnInit {
   }
 
   public save(): void {
+    if (this.updateUserForm.pristine) {
+      this.alertMessagesService.callWarningMessage(
+        this.translateService.instant('NOTHING_CHANGED'),
+      );
+      return;
+    }
     this.store.dispatch(
       updateUser({
         updateUser: {

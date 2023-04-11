@@ -5,6 +5,7 @@ import { UiButtonStyleEnum } from './../../../../core/enums/ui-button-style.enum
 import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 import { Store } from '@ngrx/store';
 import { signIn, toggleForms } from '../../data/store/authentication.actions';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-in',
@@ -18,6 +19,7 @@ export class SignInComponent implements OnInit {
   public constructor(
     private alertMessage: UiAlertMessagesService,
     private store: Store,
+    private translateService: TranslateService,
   ) {}
 
   public ngOnInit(): void {
@@ -29,7 +31,9 @@ export class SignInComponent implements OnInit {
 
   public onSignIn(): void {
     if (this.signInForm.invalid) {
-      this.alertMessage.callWarningMessage('All Fields Are Required!!!');
+      this.alertMessage.callWarningMessage(
+        this.translateService.instant('AUTHENTICATION.ALL_FIELDS_ARE_REQUIRED'),
+      );
       return;
     }
     this.store.dispatch(

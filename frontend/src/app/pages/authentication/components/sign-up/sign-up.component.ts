@@ -21,7 +21,7 @@ export class SignUpComponent implements OnInit {
     private formGroup: FormBuilder,
     private store: Store,
     private alertMessageService: UiAlertMessagesService,
-    private translate: TranslateService,
+    private translateService: TranslateService,
   ) {}
 
   public ngOnInit(): void {
@@ -71,7 +71,7 @@ export class SignUpComponent implements OnInit {
   public onSignUp(): void {
     if (this.signUpForm.invalid) {
       this.alertMessageService.callWarningMessage(
-        this.translate.instant(
+        this.translateService.instant(
           'AUTHENTICATION.SIGN_UP_FORM_FIELDS_NOT_CORRECT',
         ),
       );
