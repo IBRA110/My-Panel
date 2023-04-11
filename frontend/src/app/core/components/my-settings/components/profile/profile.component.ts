@@ -12,7 +12,11 @@ import {
   uploadAvatar,
 } from 'src/app/pages/admin/data/store/admin.actions';
 import { Observable } from 'rxjs';
-import { selectUser } from 'src/app/pages/admin/data/store/admin.selectors';
+import {
+  selectUser,
+  selectUserAvatar,
+} from 'src/app/pages/admin/data/store/admin.selectors';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -23,8 +27,9 @@ export class ProfileComponent implements OnInit {
   public updateUserForm: FormGroup<UpdateUser>;
   public defaultAvatarUrl: string | ArrayBuffer =
     '/assets/images/nav-bar/man.png/';
-
+  public baseUrl = environment.baseUrl + '/';
   public user$: Observable<User> = this.store.select(selectUser);
+  public userAvatar$: Observable<string> = this.store.select(selectUserAvatar);
 
   public constructor(private store: Store) {}
 
