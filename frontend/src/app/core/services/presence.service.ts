@@ -5,7 +5,9 @@ import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UiAlertMessagesService } from './ui-alert-messages.service';
 import { TranslateService } from '@ngx-translate/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Injectable({
   providedIn: 'root',
 })
@@ -33,17 +35,21 @@ export class PresenceService {
     this.hubConnection.start().catch((error) => console.log(error));
 
     this.hubConnection.on('UserIsOnline', (username) => {
-      this.onlineUsers$.pipe(take(1)).subscribe((usernames) => {
-        this.onlineUsersSource.next([...usernames, username]);
-      });
+      this.onlineUsers$
+        .pipe(take(1), untilDestroyed(this))
+        .subscribe((usernames) => {
+          this.onlineUsersSource.next([...usernames, username]);
+        });
     });
 
-    this.hubConnection.on('UserIsOffline', (username) => {
-      this.onlineUsers$.pipe(take(1)).subscribe((usernames) => {
-        this.onlineUsersSource.next([
-          ...usernames.filter((x) => x !== username),
-        ]);
-      });
+    this.hubConnection.on('UserIsOffline', (username: string) => {
+      this.onlineUsers$
+        .pipe(take(1), untilDestroyed(this))
+        .subscribe((usernames) => {
+          this.onlineUsersSource.next([
+            ...usernames.filter((x) => x !== username),
+          ]);
+        });
     });
 
     this.hubConnection.on('GetOnlineUsers', (usernames: string[]) => {
