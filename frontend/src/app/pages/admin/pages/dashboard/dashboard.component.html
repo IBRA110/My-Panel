@@ -1,6 +1,6 @@
-<div class="dashboard">
-  <p>
-    Dashboard works!Dashboard works!Dashboard works!Dashboard works!Dashboard works!Dashboard works!Dashboard
-    works!Dashboard works!Dashboard works!Dashboard works!Dashboard works!Dashboard works!
-  </p>
+<div class="dashboard" *ngIf="user | async as user">
+  <div class="dashboard-header">
+    <h3>{{ getTimeOfTheDay() + ' ' + user.firstName }}</h3>
+    <p>{{ today }}</p>
+  </div>
 </div>

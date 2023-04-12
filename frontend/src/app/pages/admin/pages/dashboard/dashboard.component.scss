@@ -1,4 +1,20 @@
+@import "src/app/core/mixins/fonts";
+
 .dashboard {
-  width: 100%;
   height: 100%;
+
+  &-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    h3{
+      @include Heading_3;
+    }
+    p{
+      @include Paragraph;
+    }
+  }
 }

@@ -65,7 +65,7 @@ export class AdminEffects {
     );
   });
 
-  private uploadAvatar$ = createEffect(() => {
+  private uploadAvatarEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(uploadAvatar),
       switchMap((payload) => {
