@@ -30,12 +30,19 @@ builder.Services.AddIdentityServices(builder.Configuration);
 
 
 builder.Services.AddCors(options =>
- {
-     options.AddPolicy("AllowAll", builder => builder
+{
+    options.AddPolicy("AllowAll", builder => builder
         .AllowAnyOrigin()
         .AllowAnyHeader()
-        .AllowAnyMethod());
- });
+        .AllowAnyMethod()
+        .SetIsOriginAllowed(hostName => true));
+
+    options.AddPolicy("signalr", builder => builder
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials()
+        .SetIsOriginAllowed(hostName => true));
+});
 
 builder.Services.AddSignalR();
 
@@ -60,12 +67,14 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseCors("AllowAll");
+app.UseCors("SignalR");
 app.UseAuthorization();
+
 app.MapControllers();
 app.MapHub<PresenceHub>("hubs/presence");
 app.MapHub<MessageHub>("hubs/message");
 app.MapGraphQL("/graphql");
+
 
 
 IServiceScope scope = app.Services.CreateScope();

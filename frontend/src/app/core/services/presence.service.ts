@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -22,9 +21,11 @@ export class PresenceService {
   ) {}
 
   public createHubConnection() {
+    const token: string = JSON.parse(localStorage.getItem('auth'))?.authTokens
+      ?.accessToken;
     this.hubConnection = new HubConnectionBuilder()
       .withUrl(this.hubUrl + 'presence', {
-        accessTokenFactory: () => user.token,
+        accessTokenFactory: () => token,
       })
       .withAutomaticReconnect()
       .build();
