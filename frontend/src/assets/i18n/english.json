@@ -48,6 +48,12 @@
   "DISPLAY":{
     "DISPLAY": "Display"
   },
+  "DASHBOARD": {
+    "GOOD_MORNING": "Good Morning!",
+    "GOOD_AFTERNOON": "Good Afternoon!",
+    "GOOD_EVENING": "Good Evening!"
+  },
+  "PRESENCE_SERVISE": " has sent you a new message!",
   "SAVE": "Save",
   "NOTHING_CHANGED": "Nothing changed!"
 }
