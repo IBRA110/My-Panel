@@ -11,6 +11,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { AdminEffects } from './data/store/admin.effects';
 import { EffectsModule } from '@ngrx/effects';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthenticationInterceptor } from 'src/app/core/interceptors/authentication.interceptor';
 
 @NgModule({
   declarations: [AdminComponent, SideBarComponent, NavBarComponent],
@@ -20,6 +22,13 @@ import { EffectsModule } from '@ngrx/effects';
     StoreModule.forFeature(adminFeatureKey, reducer),
     EffectsModule.forFeature([AdminEffects]),
     TranslateModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi: true,
+    },
   ],
 })
 export class AdminModule {}
