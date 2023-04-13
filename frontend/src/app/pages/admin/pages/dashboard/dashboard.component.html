@@ -1,6 +1,6 @@
 <div class="dashboard" *ngIf="user | async as user">
   <div class="dashboard-header">
-    <h3>{{ getTimeOfTheDay() + ' ' + user.firstName }}</h3>
+    <h3 *ngIf="user.firstName !== null">{{ getTimeOfTheDay() + ' ' + user.firstName }}</h3>
     <p>{{ today }}</p>
   </div>
 </div>

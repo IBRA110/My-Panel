@@ -11,7 +11,7 @@ import {
   updateUser,
   uploadAvatar,
 } from 'src/app/pages/admin/data/store/admin.actions';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import {
   selectUser,
   selectUserAvatar,
@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.user$.subscribe((u) => {
+    this.user$.pipe(take(1)).subscribe((u) => {
       this.updateUserForm = new FormGroup<UpdateUser>({
         avatar: new FormControl<File>(null),
         firstName: new FormControl<string>(u?.firstName),
