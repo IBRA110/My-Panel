@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AdminService } from '../services/admin.service';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, concatMap, map, of, switchMap } from 'rxjs';
 import {
   initAdminPanel,
   loadUserFailed,
@@ -30,7 +30,7 @@ export class AdminEffects {
   private loadUserEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(initAdminPanel),
-      switchMap(() => {
+      concatMap(() => {
         return this.adminService.getUser().pipe(
           map((data) => {
             return loadUserSuccess({ user: data.data.user });

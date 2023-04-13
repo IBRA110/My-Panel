@@ -43,13 +43,13 @@ export class ProfileComponent implements OnInit {
     this.user$.subscribe((u) => {
       this.updateUserForm = new FormGroup<UpdateUser>({
         avatar: new FormControl<File>(null),
-        firstName: new FormControl<string>(u.firstName),
-        lastName: new FormControl<string>(u.lastName),
-        city: new FormControl<string>(u.city),
-        country: new FormControl<string>(u.country),
-        dateOfBirth: new FormControl<Date>(u.dateOfBirth),
-        interests: new FormControl<string>(u.interests),
-        introduction: new FormControl<string>(u.introduction),
+        firstName: new FormControl<string>(u?.firstName),
+        lastName: new FormControl<string>(u?.lastName),
+        city: new FormControl<string>(u?.city),
+        country: new FormControl<string>(u?.country),
+        dateOfBirth: new FormControl<Date>(u?.dateOfBirth),
+        interests: new FormControl<string>(u?.interests),
+        introduction: new FormControl<string>(u?.introduction),
       });
     });
   }

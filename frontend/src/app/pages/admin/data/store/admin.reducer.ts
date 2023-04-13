@@ -7,6 +7,10 @@ import {
   uploadAvatarSuccess,
 } from './admin.actions';
 import { AdminState, initialState } from './admin.state';
+import {
+  refreshTokenFailed,
+  signOutSuccess,
+} from 'src/app/pages/authentication/data/store/authentication.actions';
 
 export const adminFeatureKey = 'admin';
 
@@ -41,6 +45,7 @@ const adminReducer = createRehydrateReducer(
       photoUrl: url,
     },
   })),
+  on(refreshTokenFailed, signOutSuccess, () => initialState),
 );
 
 export function reducer(state: AdminState | undefined, action: Action) {

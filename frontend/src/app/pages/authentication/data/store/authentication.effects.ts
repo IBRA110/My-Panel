@@ -62,7 +62,9 @@ export class AuthenticationEffects {
       switchMap((action) => {
         return this.authService.signIn(action).pipe(
           map((data) => {
-            this.router.navigate(['admin']);
+            setTimeout(() => {
+              this.router.navigate(['admin']);
+            }, 300);
             return signInSuccess({
               authTokens: {
                 accessToken: data.data.login.accessToken,
@@ -121,11 +123,8 @@ export class AuthenticationEffects {
         return this.authService
           .signOut({ refreshToken: token.refreshToken })
           .pipe(
-            map((data) => {
-              this.messageService.callSuccessMessage(data.data.logout.message);
-              setTimeout(() => {
-                this.router.navigate(['']);
-              }, 3000);
+            map(() => {
+              this.router.navigate(['']);
               return signOutSuccess();
             }),
             catchError((error: ErrorResponse) => {

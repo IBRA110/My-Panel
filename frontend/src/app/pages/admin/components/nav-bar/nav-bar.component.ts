@@ -38,7 +38,7 @@ export class NavBarComponent implements OnInit {
 
   public ngOnInit(): void {
     this.user$.pipe(take(1), untilDestroyed(this)).subscribe((u) => {
-      if (u.firstName === null) {
+      if (!!!u?.firstName) {
         this.popupService.open('my-settings', MySettingsComponent);
       }
     });

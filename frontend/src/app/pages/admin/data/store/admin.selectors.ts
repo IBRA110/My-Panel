@@ -10,10 +10,10 @@ export const selectIsSideBarToggled = createSelector(
 
 export const selectUser = createSelector(
   selectAdminState,
-  (adminState: AdminState) => adminState.user,
+  (adminState: AdminState) => adminState?.user,
 );
 
 export const selectUserAvatar = createSelector(
   selectAdminState,
-  (adminState: AdminState) => adminState.user.photoUrl,
+  (adminState: AdminState) => adminState?.user?.photoUrl,
 );
