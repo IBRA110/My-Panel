@@ -59,30 +59,40 @@ namespace API.Controllers
             return BadRequest("Failed to update user");
         }
 
-        [HttpPost("add-photo")]
+        [HttpPost("upload-avatar")]
         public async Task<ActionResult<ImageUpdateDTO>> AddPhoto([FromForm]IFormFile file)
         {
-            Console.Write("1");
             AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(User.FindFirst("Id").Value);
 
             string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-
+            
             ImageEntity photo = new ImageEntity
             {
                 Url = "images/" + uniqueFileName
             };
 
-            if (user.Images.Count == 0)
+            if (user.Images.Count > 0)
             {
-                photo.IsMain = true;
-            }
+                ImageEntity avatar = user.Images.FirstOrDefault(x => x.IsMain);
+                
+                if (avatar != null)
+                {
+                    System.IO.File.Delete(Directory.GetCurrentDirectory() + "/wwwroot/" + avatar.Url);
+                    user.Images.Remove(avatar);
+                }
+            } 
 
+            photo.IsMain = true;
             user.Images.Add(photo);
+
 
             if (await _unitOfWork.Complete())
             {
                 string imagePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", uniqueFileName);
-                file.CopyTo(new FileStream(imagePath, FileMode.Create));
+                
+                FileStream fileStream = new FileStream(imagePath, FileMode.Create);
+                file.CopyTo(fileStream);
+                fileStream.Close();
 
                 return new ImageUpdateDTO
                 {
@@ -150,6 +160,5 @@ namespace API.Controllers
 
             return BadRequest("Failed to delete the photo");
         }
-
     }
 }

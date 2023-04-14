@@ -43,7 +43,7 @@ export class AdminService {
     formData.append('file', file);
 
     return this.http.post<AvatarUrl>(
-      environment.baseUrl + '/api/v1/Users/add-photo',
+      environment.baseUrl + '/api/v1/Users/upload-avatar',
       formData,
       header,
     );
