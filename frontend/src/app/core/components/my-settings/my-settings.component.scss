@@ -5,6 +5,8 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 20px;
+  width: 800px;
+  height: 500px;
 
   h1{
     @include Heading_3;

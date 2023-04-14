@@ -19,7 +19,9 @@ import {
 import { environment } from 'src/environments/environment';
 import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 import { TranslateService } from '@ngx-translate/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -40,7 +42,7 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.user$.pipe(take(1)).subscribe((u) => {
+    this.user$.pipe(take(1), untilDestroyed(this)).subscribe((u) => {
       this.updateUserForm = new FormGroup<UpdateUser>({
         avatar: new FormControl<File>(null),
         firstName: new FormControl<string>(u?.firstName),
