@@ -35,9 +35,12 @@ export class PopupService {
     const currentModals = this.event.getValue();
     const existModalIndex = currentModals.findIndex((x) => x.code === code);
 
+    if (existModalIndex >= 0) {
+      return;
+    }
+
     const overlayRef = this.overlay.create({ height: '100%', width: '100%' });
     const portal = new ComponentPortal(component);
-
     const popupElementRef = overlayRef.attach(portal);
 
     const newModal: PopupItem = { code, overlayRef, data };
@@ -45,14 +48,7 @@ export class PopupService {
       popupElementRef.instance;
     componentInstance.modalItem = newModal;
 
-    if (existModalIndex >= 0) {
-      this.close(code);
-
-      currentModals[existModalIndex] = newModal;
-      this.event.next(currentModals);
-    } else {
-      this.event.next([...this.event.getValue(), newModal]);
-    }
+    this.event.next([...this.event.getValue(), newModal]);
   }
 
   /**

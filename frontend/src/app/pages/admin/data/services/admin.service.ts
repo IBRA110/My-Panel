@@ -48,6 +48,4 @@ export class AdminService {
       header,
     );
   }
-
-  public uploadAvatar() {}
 }
