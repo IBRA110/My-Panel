@@ -40,13 +40,6 @@ export type UpdateUserMutationVariables = Exact<{
 
 export type UpdateUserMutation = { updateUser?: { firstName?: string | null, lastName?: string | null, dateOfBirth: any, introduction?: string | null, interests?: string | null, city?: string | null, country?: string | null } | null };
 
-export type UploadUserAvatarMutationVariables = Exact<{
-  file?: InputMaybe<Scalars['Upload']>;
-}>;
-
-
-export type UploadUserAvatarMutation = { uploadUserAvatar?: { url?: string | null } | null };
-
 export type LoginMutationVariables = Exact<{
   userName?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
