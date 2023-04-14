@@ -16,6 +16,7 @@ namespace API.Extensions
                 .AddMutationType(m => m.Name("Mutation")) 
                 .AddType<AccountMutations>()
                 .AddType<UsersMutations>()
+                .AddType<UploadType>()
                 .AddQueryType(q => q.Name("Query"))
                 .AddType<UsersQueries>()
                 .AddErrorFilter(er =>

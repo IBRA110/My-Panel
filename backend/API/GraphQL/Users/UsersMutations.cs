@@ -26,7 +26,7 @@ namespace API.GraphQL.Users
             )
         {
             AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
-            
+
             MemberUpdateDTO memberUpdateDTO = new MemberUpdateDTO
             {
                 City = city,
@@ -56,6 +56,41 @@ namespace API.GraphQL.Users
                 LastName = user.LastName,
                 Interests = user.Interests,
                 Introduction = user.Introduction
+            };
+        }
+
+        [UseProjection]
+        [Authorize]
+        public async Task<ImageUpdateDTO> UploadUserAvatar([Service] IUnitOfWork unitOfWork, ClaimsPrincipal claimsPrincipal, IFile file)
+        {
+            AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
+
+            string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.Name;
+
+            ImageEntity photo = new ImageEntity
+            {
+                Url = "images/" + uniqueFileName
+            };
+
+            if (user.Images.Count == 0)
+            {
+                photo.IsMain = true;
+            }
+
+            user.Images.Add(photo);
+
+            if (!await unitOfWork.Complete())
+            {
+                throw new GraphQLException("Failed to update user");
+            }
+
+            string imagePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/", uniqueFileName);
+            await file.CopyToAsync(new FileStream(imagePath, FileMode.Create));
+
+
+            return new ImageUpdateDTO
+            {
+                Url = photo.Url
             };
         }
     }
