@@ -1,4 +1,6 @@
 <div app-theme>
-  <router-outlet></router-outlet>
+  <div [@routerAnimation]="getRouterOutletState(o)">
+    <router-outlet #o="outlet"></router-outlet>
+  </div>
   <app-ui-alert-message></app-ui-alert-message>
 </div>

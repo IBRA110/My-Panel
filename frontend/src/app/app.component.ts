@@ -4,11 +4,14 @@ import { LocalStorageService } from './core/services/local-storage.service';
 import { ThemeService } from './core/services/theme.service';
 import { LocalStorageKeysEnum } from './core/enums/local-storage-keys.enum';
 import { TranslateService } from '@ngx-translate/core';
+import { RouterOutlet } from '@angular/router';
+import { rootRouterAnimation } from './core/animations/root-router.animation';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  animations: [rootRouterAnimation],
 })
 export class AppComponent implements OnInit {
   private currentTheme: string = ThemesEnum.LIGHT;
@@ -35,5 +38,9 @@ export class AppComponent implements OnInit {
       );
       this.themeService.setTheme(ThemesEnum.LIGHT);
     }
+  }
+
+  public getRouterOutletState(outlet: RouterOutlet) {
+    return outlet.isActivated ? outlet.activatedRoute : '';
   }
 }
