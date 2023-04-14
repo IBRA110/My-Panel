@@ -29,15 +29,6 @@ export interface UpdateUser {
   dateOfBirth: Date;
 }
 
-export interface UpdatedUser {
-  firstName?: string;
-  lastName?: string;
-  dateOfBirth: any;
-  introduction?: string;
-  interests?: string;
-  city?: string;
-  country?: string;
-}
 export interface AvatarUrl {
   url: string;
 }

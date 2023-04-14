@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { AdminActionsEnum } from './admin.enum';
-import { UpdateUser, UpdatedUser, User } from '../interfaces/user.interfase';
+import { UpdateUser, User } from '../interfaces/user.interfase';
 
 export const toggleSidebar = createAction(AdminActionsEnum.TOGGLE_SIDEBAR);
 
@@ -20,7 +20,7 @@ export const updateUser = createAction(
 
 export const updateUserSuccess = createAction(
   AdminActionsEnum.UPDATE_USER_SUCCESS,
-  props<{ updateUser: UpdatedUser }>(),
+  props<{ updateUser: UpdateUser }>(),
 );
 export const updateUserFailed = createAction(
   AdminActionsEnum.UPDATE_USER_FAILED,

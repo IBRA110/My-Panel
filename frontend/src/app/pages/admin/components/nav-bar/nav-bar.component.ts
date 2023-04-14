@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, take } from 'rxjs';
+import { Observable, debounceTime, take } from 'rxjs';
 import { signOut } from 'src/app/pages/authentication/data/store/authentication.actions';
 import { toggleSidebar } from '../../data/store/admin.actions';
 import {
@@ -8,7 +8,7 @@ import {
   selectUserAvatar,
   selectUser,
 } from '../../data/store/admin.selectors';
-import { User, UserImage } from '../../data/interfaces/user.interfase';
+import { User } from '../../data/interfaces/user.interfase';
 import { PopupService } from 'src/app/core/services/popup.service';
 import { MySettingsComponent } from 'src/app/core/components/my-settings/my-settings.component';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -37,11 +37,13 @@ export class NavBarComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.user$.pipe(take(1), untilDestroyed(this)).subscribe((u) => {
-      if (!!!u?.firstName) {
-        this.popupService.open('my-settings', MySettingsComponent);
-      }
-    });
+    setTimeout(() => {
+      this.user$.pipe(take(1), untilDestroyed(this)).subscribe((u) => {
+        if (!!!u?.firstName) {
+          this.popupService.open('my-settings', MySettingsComponent);
+        }
+      });
+    }, 3000);
   }
 
   public openSettings(): void {
