@@ -1,7 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-export interface UpdateUser {
-  avatar: FormControl<File | null>;
+export interface UpdateUserForm {
   city: FormControl<string | null>;
   country: FormControl<string | null>;
   dateOfBirth: FormControl<Date | null>;

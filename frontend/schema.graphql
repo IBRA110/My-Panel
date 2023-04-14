@@ -12,7 +12,13 @@ type Mutation {
     interests: String
     introduction: String
   ): MemberUpdateDTO
+  uploadUserAvatar(file: Upload): ImageUpdateDTO
 }
+
+"""
+The `Upload` scalar type represents a file upload.
+"""
+scalar Upload
 
 type Query {
   user: MemberDTO
@@ -47,6 +53,10 @@ type SuccessDTO {
 The `DateTime` scalar represents an ISO-8601 compliant date time type.
 """
 scalar DateTime
+
+type ImageUpdateDTO {
+  url: String
+}
 
 type MemberDTO {
   id: String

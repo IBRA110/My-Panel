@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { UpdateUser } from '../../interfaces/update-user.interface';
+import { UpdateUserForm } from '../../interfaces/update-user.interface';
 import {
   User,
   UserImage,
@@ -28,7 +28,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  public updateUserForm: FormGroup<UpdateUser>;
+  public updateUserForm: FormGroup<UpdateUserForm>;
   public defaultAvatarUrl: string | ArrayBuffer =
     '/assets/images/nav-bar/man.png/';
   public baseUrl = environment.baseUrl + '/';
@@ -43,8 +43,7 @@ export class ProfileComponent implements OnInit {
 
   public ngOnInit(): void {
     this.user$.pipe(take(1), untilDestroyed(this)).subscribe((u) => {
-      this.updateUserForm = new FormGroup<UpdateUser>({
-        avatar: new FormControl<File>(null),
+      this.updateUserForm = new FormGroup<UpdateUserForm>({
         firstName: new FormControl<string>(u?.firstName),
         lastName: new FormControl<string>(u?.lastName),
         city: new FormControl<string>(u?.city),
