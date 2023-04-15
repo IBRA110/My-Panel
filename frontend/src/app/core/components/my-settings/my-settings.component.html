@@ -1,10 +1,23 @@
 <app-ui-popup [dataLoaded]="true" [popupCode]="'my-settings'">
   <div class="my-settings">
     <h1>{{ 'MY_SETTINGS.MY_SETTINGS' | translate }}</h1>
-    <app-ui-select-tabs [selectedTab]="selectedTab" [tabs]="tabs" (onClick)="selectedTab = $event"></app-ui-select-tabs>
-    <div class="my-settings-container">
-      <app-profile *ngIf="selectedTab === translateService.instant(getMySettingsEnum.PROFILE)"></app-profile>
-      <app-display *ngIf="selectedTab === translateService.instant(getMySettingsEnum.DISPLAY)"></app-display>
+    <div class="my-settings_select">
+      <app-ui-select-tabs
+        [selectedTab]="selectedTab"
+        [tabs]="tabs"
+        (onClick)="selectedTab = $event"
+      ></app-ui-select-tabs>
+      <div class="my-settings_select-line"></div>
+    </div>
+    <div class="my-settings_container">
+      <app-profile
+        @fadeAnimationMySettings
+        *ngIf="selectedTab === translateService.instant(getMySettingsEnum.PROFILE)"
+      ></app-profile>
+      <app-display
+        @fadeAnimationMySettings
+        *ngIf="selectedTab === translateService.instant(getMySettingsEnum.DISPLAY)"
+      ></app-display>
     </div>
   </div>
 </app-ui-popup>

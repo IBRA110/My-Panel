@@ -9,7 +9,7 @@
       <img src="{{ alert.icon }}" alt="svg" />
     </div>
     <div *ngIf="!!alert.type">
-      <p class="message-type">{{ alert.type.toUpperCase() }}</p>
+      <p class="message-type">{{ alert.type.toUpperCase() }}!</p>
       <p>{{ alert.message }}</p>
     </div>
     <button class="close" (click)="removeAlert(alert)">

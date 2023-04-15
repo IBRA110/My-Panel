@@ -12,4 +12,13 @@
     @include Heading_3;
     color: var(--base-text-color);
   }
+  &_select{
+    &-line{
+      position: relative;
+      top: -3px;
+      width: 100%;
+      height: 2px;
+      background-color: var(--box-shadow-color);
+    }
+  }
 }

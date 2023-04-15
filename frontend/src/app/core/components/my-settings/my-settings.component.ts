@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { MySettingsTabsEnum } from '../../enums/my-settings-tabs.enum';
 import { TranslateService } from '@ngx-translate/core';
+import { fadeAnimationMySettings } from '../../animations/fade.animation';
 
 @Component({
   selector: 'app-my-settings',
   templateUrl: './my-settings.component.html',
   styleUrls: ['./my-settings.component.scss'],
+  animations: [fadeAnimationMySettings],
 })
 export class MySettingsComponent {
   public selectedTab: string = this.translateService.instant(

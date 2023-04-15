@@ -1,6 +1,7 @@
 @import "src/app/core/mixins/fonts";
 
 .profile{
+
   &-header{
     display: flex;
     justify-content: space-between;
@@ -83,7 +84,7 @@
 
     &_button{
       height: 50px;
-      width: 150px;
+      width: 120px;
     }
   }
 }
