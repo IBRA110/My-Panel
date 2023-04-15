@@ -5,6 +5,7 @@ using Core.DTOs;
 using Core.Helpers;
 using Core.Interfaces;
 using Core.Entities;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Infrastructure.Data.Repositories
 {
@@ -52,14 +53,6 @@ namespace Infrastructure.Data.Repositories
                     userParams.PageNumber, userParams.PageSize);
         }
 
-        public async Task<IQueryable<MemberDTO>> GetMembersAsyncGraphQL(string id)
-        {
-            return _context.Users
-                .AsQueryable()
-                .Where(x => x.Id != id)
-                .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider);
-        }
-
         public async Task<AppUserEntity> GetUserByIdAsync(string id)
         {
             return await _context.Users
@@ -72,6 +65,23 @@ namespace Infrastructure.Data.Repositories
             return await _context.Users
                 .Include(p => p.Images)
                 .SingleOrDefaultAsync(x => x.UserName == username);
+        }
+
+        public async Task<IQueryable<MemberDTO>> GetMembersAsyncGraphQL(string userName, string id)
+        {
+            IQueryable<MemberDTO> users = _context.Users
+                    .AsQueryable()
+                    .Where(x => x.Id != id)
+                    .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider);
+
+            if (!string.IsNullOrEmpty(userName))
+            {
+                users = users.Where(e => e.UserName.Contains(userName) 
+                    || e.FirstName.Contains(userName) 
+                    || e.LastName.Contains(userName));
+            }
+
+            return users;
         }
 
         public void Update(AppUserEntity user)

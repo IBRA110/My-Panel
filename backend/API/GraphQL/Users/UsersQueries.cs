@@ -18,11 +18,14 @@ namespace API.GraphQL.Users
 
         [UseProjection]
         [Authorize]
-        public async Task<IQueryable<MemberDTO>> GetUsers([Service] IUnitOfWork unitOfWork, ClaimsPrincipal claimsPrincipal)
+        public async Task<IQueryable<MemberDTO>> GetUsers(
+            [Service] IUnitOfWork unitOfWork, 
+            ClaimsPrincipal claimsPrincipal, 
+            string? userName)
         {
             string id = claimsPrincipal.FindFirst("Id").Value;
 
-            IQueryable<MemberDTO> users = await unitOfWork.userRepository.GetMembersAsyncGraphQL(id);
+            IQueryable<MemberDTO> users = await unitOfWork.userRepository.GetMembersAsyncGraphQL(userName, id);
 
             return users;
         }

@@ -8,12 +8,6 @@
     <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Behaviours\**" />
-    <Content Remove="Behaviours\**" />
-    <EmbeddedResource Remove="Behaviours\**" />
-    <None Remove="Behaviours\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="HotChocolate.AspNetCore" Version="13.0.2" />
@@ -34,9 +28,5 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 </Project>
