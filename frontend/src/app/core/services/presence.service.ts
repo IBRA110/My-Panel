@@ -22,7 +22,7 @@ export class PresenceService {
     private translateService: TranslateService,
   ) {}
 
-  public createHubConnection() {
+  public createHubConnection(): void {
     const token: string = JSON.parse(localStorage.getItem('auth'))?.authTokens
       ?.accessToken;
     this.hubConnection = new HubConnectionBuilder()
@@ -32,28 +32,31 @@ export class PresenceService {
       .withAutomaticReconnect()
       .build();
 
-    this.hubConnection.start().catch((error) => console.log(error));
+    this.hubConnection
+      .start()
+      .catch((error) => this.alertMessageService.callErrorMessage(error));
 
-    this.hubConnection.on('UserIsOnline', (username) => {
+    this.hubConnection.on('UserIsOnline', (userId: string) => {
+      console.log(userId, 'connect');
       this.onlineUsers$
         .pipe(take(1), untilDestroyed(this))
-        .subscribe((usernames) => {
-          this.onlineUsersSource.next([...usernames, username]);
+        .subscribe((userIds: string[]) => {
+          this.onlineUsersSource.next([...userIds, userId]);
         });
     });
 
-    this.hubConnection.on('UserIsOffline', (username: string) => {
+    this.hubConnection.on('UserIsOffline', (userId: string) => {
+      console.log(userId, 'disconnect');
       this.onlineUsers$
         .pipe(take(1), untilDestroyed(this))
-        .subscribe((usernames) => {
-          this.onlineUsersSource.next([
-            ...usernames.filter((x) => x !== username),
-          ]);
+        .subscribe((userIds: string[]) => {
+          this.onlineUsersSource.next([...userIds.filter((x) => x !== userId)]);
         });
     });
 
-    this.hubConnection.on('GetOnlineUsers', (usernames: string[]) => {
-      this.onlineUsersSource.next(usernames);
+    this.hubConnection.on('GetOnlineUsers', (userIds: string[]) => {
+      console.log(userIds, 'get');
+      this.onlineUsersSource.next(userIds);
     });
 
     this.hubConnection.on('NewMessageReceived', ({ username, knownAs }) => {
@@ -64,6 +67,8 @@ export class PresenceService {
   }
 
   public stopHubConnection() {
-    this.hubConnection.stop().catch((error) => console.log(error));
+    this.hubConnection
+      .stop()
+      .catch((error) => this.alertMessageService.callErrorMessage(error));
   }
 }
