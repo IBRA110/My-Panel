@@ -17,7 +17,6 @@ export class AdminComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.store.dispatch(initAdminPanel());
     this.presenceService.createHubConnection();
-    this.presenceService.onlineUsers$.subscribe((u) => console.log(u));
   }
   public ngOnDestroy(): void {
     this.presenceService.stopHubConnection();

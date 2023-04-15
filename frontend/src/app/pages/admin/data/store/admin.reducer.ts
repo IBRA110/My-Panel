@@ -1,8 +1,11 @@
 import { Action, on } from '@ngrx/store';
 import { createRehydrateReducer } from 'src/app/core/reducers/rehydrate-reducer';
 import {
+  getOnlineUser,
+  getOnlineUsers,
   loadUserFailed,
   loadUserSuccess,
+  removeOfflineUser,
   toggleSidebar,
   updateUserSuccess,
   uploadAvatarSuccess,
@@ -45,6 +48,18 @@ const adminReducer = createRehydrateReducer(
       ...state.user,
       photoUrl: url,
     },
+  })),
+  on(getOnlineUsers, (state, { users }) => ({
+    ...state,
+    onlineUsers: users,
+  })),
+  on(getOnlineUser, (state, { user }) => ({
+    ...state,
+    onlineUsers: [...state.onlineUsers, user],
+  })),
+  on(removeOfflineUser, (state, { user }) => ({
+    ...state,
+    onlineUsers: [...state.onlineUsers.filter((x) => x !== user)],
   })),
   on(refreshTokenFailed, signOutSuccess, loadUserFailed, () => initialState),
 );

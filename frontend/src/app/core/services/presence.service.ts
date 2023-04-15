@@ -6,6 +6,12 @@ import { environment } from 'src/environments/environment';
 import { UiAlertMessagesService } from './ui-alert-messages.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Store } from '@ngrx/store';
+import {
+  getOnlineUser,
+  getOnlineUsers,
+  removeOfflineUser,
+} from 'src/app/pages/admin/data/store/admin.actions';
 
 @UntilDestroy()
 @Injectable({
@@ -14,12 +20,11 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class PresenceService {
   private hubUrl = environment.hubUrl;
   private hubConnection: HubConnection;
-  private onlineUsersSource = new BehaviorSubject<string[]>([]);
-  public onlineUsers$ = this.onlineUsersSource.asObservable();
 
   public constructor(
     private alertMessageService: UiAlertMessagesService,
     private translateService: TranslateService,
+    private store: Store,
   ) {}
 
   public createHubConnection(): void {
@@ -37,26 +42,15 @@ export class PresenceService {
       .catch((error) => this.alertMessageService.callErrorMessage(error));
 
     this.hubConnection.on('UserIsOnline', (userId: string) => {
-      console.log(userId, 'connect');
-      this.onlineUsers$
-        .pipe(take(1), untilDestroyed(this))
-        .subscribe((userIds: string[]) => {
-          this.onlineUsersSource.next([...userIds, userId]);
-        });
+      this.store.dispatch(getOnlineUser({ user: userId }));
     });
 
     this.hubConnection.on('UserIsOffline', (userId: string) => {
-      console.log(userId, 'disconnect');
-      this.onlineUsers$
-        .pipe(take(1), untilDestroyed(this))
-        .subscribe((userIds: string[]) => {
-          this.onlineUsersSource.next([...userIds.filter((x) => x !== userId)]);
-        });
+      this.store.dispatch(removeOfflineUser({ user: userId }));
     });
 
     this.hubConnection.on('GetOnlineUsers', (userIds: string[]) => {
-      console.log(userIds, 'get');
-      this.onlineUsersSource.next(userIds);
+      this.store.dispatch(getOnlineUsers({ users: userIds }));
     });
 
     this.hubConnection.on('NewMessageReceived', ({ username, knownAs }) => {

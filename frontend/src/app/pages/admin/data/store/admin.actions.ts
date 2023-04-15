@@ -37,3 +37,18 @@ export const uploadAvatarSuccess = createAction(
 export const uploadAvatarFailed = createAction(
   AdminActionsEnum.UPLOAD_AVATAR_FAILED,
 );
+
+export const getOnlineUsers = createAction(
+  AdminActionsEnum.GET_ONLINE_USERS,
+  props<{ users: string[] }>(),
+);
+
+export const getOnlineUser = createAction(
+  AdminActionsEnum.USER_IS_ONLINE,
+  props<{ user: string }>(),
+);
+
+export const removeOfflineUser = createAction(
+  AdminActionsEnum.USER_IS_OFFLINE,
+  props<{ user: string }>(),
+);

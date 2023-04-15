@@ -17,3 +17,8 @@ export const selectUserAvatar = createSelector(
   selectAdminState,
   (adminState: AdminState) => adminState?.user?.photoUrl,
 );
+
+export const selectOnlineUsers = createSelector(
+  selectAdminState,
+  (adminState: AdminState) => adminState?.onlineUsers,
+);
