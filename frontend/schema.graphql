@@ -22,6 +22,7 @@ scalar Upload
 
 type Query {
   user: MemberDTO
+  users(userName: String): [MemberDTO]
 }
 
 enum ApplyPolicy {
