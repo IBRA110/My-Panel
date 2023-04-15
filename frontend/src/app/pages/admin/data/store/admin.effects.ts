@@ -16,6 +16,7 @@ import {
 import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 import { PopupService } from 'src/app/core/services/popup.service';
 import { TranslateService } from '@ngx-translate/core';
+import { MySettingsComponent } from 'src/app/core/components/my-settings/my-settings.component';
 
 @Injectable()
 export class AdminEffects {
@@ -33,6 +34,9 @@ export class AdminEffects {
       concatMap(() => {
         return this.adminService.getUser().pipe(
           map((data) => {
+            if (!!!data.data.user.firstName) {
+              this.popupService.open('my-settings', MySettingsComponent);
+            }
             return loadUserSuccess({ user: data.data.user });
           }),
           catchError(() => {
