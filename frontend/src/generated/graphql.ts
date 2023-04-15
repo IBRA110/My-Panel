@@ -40,7 +40,9 @@ export type UpdateUserMutationVariables = Exact<{
 
 export type UpdateUserMutation = { updateUser?: { firstName?: string | null, lastName?: string | null, dateOfBirth: any, introduction?: string | null, interests?: string | null, city?: string | null, country?: string | null } | null };
 
-export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetUsersQueryVariables = Exact<{
+  userName?: InputMaybe<Scalars['String']>;
+}>;
 
 
 export type GetUsersQuery = { users?: Array<{ id?: string | null, userName?: string | null, firstName?: string | null, lastName?: string | null, lastActive: any, photoUrl?: string | null } | null> | null };

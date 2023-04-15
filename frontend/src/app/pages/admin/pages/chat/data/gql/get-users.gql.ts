@@ -1,8 +1,8 @@
 import { gql } from 'apollo-angular';
 
 export const GET_USERS = gql`
-  query GetUsers {
-    users(userName: null) {
+  query GetUsers($userName: String) {
+    users(userName: $userName) {
       id
       userName
       firstName
