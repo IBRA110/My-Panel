@@ -1,6 +1,7 @@
 import { Action, on } from '@ngrx/store';
 import { createRehydrateReducer } from 'src/app/core/reducers/rehydrate-reducer';
 import {
+  loadUserFailed,
   loadUserSuccess,
   toggleSidebar,
   updateUserSuccess,
@@ -45,7 +46,7 @@ const adminReducer = createRehydrateReducer(
       photoUrl: url,
     },
   })),
-  on(refreshTokenFailed, signOutSuccess, () => initialState),
+  on(refreshTokenFailed, signOutSuccess, loadUserFailed, () => initialState),
 );
 
 export function reducer(state: AdminState | undefined, action: Action) {

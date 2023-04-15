@@ -9,6 +9,7 @@ import {
   toggleForms,
 } from './authentication.actions';
 import { AuthenticationState, initialState } from './authentication.state';
+import { loadUserFailed } from 'src/app/pages/admin/data/store/admin.actions';
 
 export const authenticationFeatureKey = 'auth';
 
@@ -35,7 +36,7 @@ const authenticationReducer = createRehydrateReducer(
     ...state,
     isFormToggled: !state.isFormToggled,
   })),
-  on(refreshTokenFailed, signOutSuccess, () => initialState),
+  on(refreshTokenFailed, signOutSuccess, loadUserFailed, () => initialState),
 );
 
 export function reducer(
