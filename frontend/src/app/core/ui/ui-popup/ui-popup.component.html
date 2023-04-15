@@ -1,8 +1,8 @@
 <div app-theme class="popup-container popup-background" @transitionAnimation @backgroundAnimation>
   <div class="bg background popup-background" (click)="close()">
-    <div *ngIf="dataLoaded" class="popup-wrapper popup-anim" (click)="$event.stopPropagation()">
+    <div *ngIf="dataLoaded" class="popup-wrapper popup-anim">
       <div *ngIf="useCloseArea" class="close-area"></div>
-      <div class="popup">
+      <div class="popup" (click)="$event.stopPropagation()">
         <button class="popup-close" (click)="close()">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
             <path
