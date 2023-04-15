@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { loadUsers } from './data/store/chat.actions';
 
 @Component({
   selector: 'app-chat',
@@ -9,5 +10,7 @@ import { Store } from '@ngrx/store';
 export class ChatComponent implements OnInit {
   public constructor(private store: Store) {}
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void {
+    this.store.dispatch(loadUsers({}));
+  }
 }
