@@ -31,17 +31,19 @@ export class ChatEffects {
       switchMap(([action, onlineUsers]) => {
         return this.chatService.getUsers(action).pipe(
           map((data) => {
-            const users: ChatUsers[] = data.data.users.map((u) => {
-              return {
-                firstName: u.firstName ? u.firstName : '',
-                id: u.id,
-                userName: u.userName,
-                lastActive: u.lastActive,
-                photoUrl: u.photoUrl,
-                lastName: !!u.lastName ? u.lastName : '',
-                isOnline: onlineUsers.some((id) => id === u.id),
-              };
-            });
+            const users: ChatUsers[] = data.data.users
+              .map((u) => {
+                return {
+                  firstName: u.firstName ? u.firstName : '',
+                  id: u.id,
+                  userName: u.userName,
+                  lastActive: u.lastActive,
+                  photoUrl: u.photoUrl,
+                  lastName: !!u.lastName ? u.lastName : '',
+                  isOnline: onlineUsers.some((id) => id === u.id),
+                };
+              })
+              .sort((x) => (x.isOnline ? -1 : 1));
             return loadUsersSuccess({ users: users });
           }),
           catchError(() => {

@@ -33,7 +33,7 @@ const chatReducer = createRehydrateReducer(
         }
         return element;
       }),
-    ],
+    ].sort((x) => (x.isOnline ? -1 : 1)),
   })),
   on(removeOfflineUser, (state, { user }) => ({
     ...state,
@@ -52,7 +52,7 @@ const chatReducer = createRehydrateReducer(
         }
         return element;
       }),
-    ],
+    ].sort((x) => (x.isOnline ? -1 : 1)),
   })),
 );
 
