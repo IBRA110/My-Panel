@@ -55,5 +55,8 @@
   },
   "PRESENCE_SERVISE": " has sent you a new message!",
   "SAVE": "Save",
-  "NOTHING_CHANGED": "Nothing changed!"
+  "NOTHING_CHANGED": "Nothing changed!",
+  "CHAT": {
+    "SEARCH": "Search"
+  }
 }
