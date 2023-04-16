@@ -2,6 +2,7 @@
 
 .chat{
   display: flex;
+  height: calc(100vh - 210px);
   
   &-users{
     display: flex;
@@ -9,7 +10,6 @@
     overflow-y: scroll;
     padding: 5px 10px 5px 5px;
     gap: 20px;
-    height: 70vh;
     width: 300px;
     border-radius: 10px;
 

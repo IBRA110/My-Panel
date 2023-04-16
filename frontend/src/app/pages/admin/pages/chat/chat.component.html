@@ -2,7 +2,7 @@
   <div class="chat-users_wrapper">
     <div class="form-control">
       <label class="form-control_label" for="firstName">{{ 'CHAT.SEARCH' | translate }}</label>
-      <input class="form-control_input" formControlName="firstName" type="text" />
+      <input class="form-control_input" [formControl]="search$" type="text" />
     </div>
     <div class="chat-users">
       <div class="chat-users_user" *ngFor="let user of users$ | async">
