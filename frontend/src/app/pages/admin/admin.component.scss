@@ -1,22 +1,18 @@
-:host, :host-context, ::ng-deep {
-  width: 100%;
-  height: 100%;
-}
 
 .admin {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   background-color: var(--background-color);
   color: var(--base-text-color);
 
   &-wrapper {
     width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
     display: flex;
   
     &_router{
       width: 100%;
-      padding: 100px 110px 0px 50px;
+      padding: 100px 110px 50px 50px;
     }
   }
 }

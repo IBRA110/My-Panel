@@ -24,12 +24,12 @@ export class ChatEffects {
           map((data) => {
             const users: ChatUsers[] = data.data.users.map((u) => {
               return {
-                firstName: u.firstName,
+                firstName: u.firstName ? u.firstName : '',
                 id: u.id,
                 userName: u.userName,
                 lastActive: u.lastActive,
                 photoUrl: u.photoUrl,
-                lastName: u.lastActive,
+                lastName: !!u.lastName ? u.lastName : '',
                 isOnline: onlineUsers.some((id) => id === u.id),
               };
             });

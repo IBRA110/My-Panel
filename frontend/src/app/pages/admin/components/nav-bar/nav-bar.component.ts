@@ -20,7 +20,7 @@ import { environment } from 'src/environments/environment';
 })
 export class NavBarComponent {
   public defaultAvatarUrl: string = '/assets/images/nav-bar/man.png/';
-  public baseUrl: string = environment.baseUrl + '/';
+  public baseUrl: string = environment.baseUrl;
   public isSideBarToggled$: Observable<boolean> = this.store.select(
     selectIsSideBarToggled,
   );

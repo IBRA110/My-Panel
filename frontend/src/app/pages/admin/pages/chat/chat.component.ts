@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { loadUsers } from './data/store/chat.actions';
+import { selectOnlineUsers } from './data/store/chat.selectors';
+import { Observable } from 'rxjs';
+import { ChatUsers } from './data/interfaces/users.interface';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-chat',
@@ -8,6 +12,10 @@ import { loadUsers } from './data/store/chat.actions';
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit {
+  public defaultAvatarUrl: string = '/assets/images/nav-bar/man.png/';
+  public baseUrl: string = environment.baseUrl;
+  public users$: Observable<ChatUsers[]> = this.store.select(selectOnlineUsers);
+
   public constructor(private store: Store) {}
 
   public ngOnInit(): void {

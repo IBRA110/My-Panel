@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
   public updateUserForm: FormGroup<UpdateUserForm>;
   public defaultAvatarUrl: string | ArrayBuffer =
     '/assets/images/nav-bar/man.png/';
-  public baseUrl = environment.baseUrl + '/';
+  public baseUrl = environment.baseUrl;
   public user$: Observable<User> = this.store.select(selectUser);
   public userAvatar$: Observable<string> = this.store.select(selectUserAvatar);
 

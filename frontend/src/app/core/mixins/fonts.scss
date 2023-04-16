@@ -12,11 +12,24 @@
   line-height: 42px;
 }
 
+@mixin Heading_4 {
+  font-family: 'Poppins',sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
 @mixin Paragraph {
   font-family: 'Poppins',sans-serif;
   font-size: 18px;
   font-weight: 500;
-  line-height: 28px;
+  line-height: 24px;
+}
+
+@mixin Paragraph_2 {
+  font-family: 'Poppins',sans-serif;
+  font-size: 14px;
+  line-height: 16px;
 }
 
 @mixin Input_Label {
