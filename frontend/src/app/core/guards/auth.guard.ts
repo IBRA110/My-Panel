@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
-import { CanLoad, UrlTree } from '@angular/router';
+import { UrlTree, Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectIsAuthenticated } from 'src/app/pages/authentication/data/store/authentication.selectors';
@@ -8,10 +7,14 @@ import { selectIsAuthenticated } from 'src/app/pages/authentication/data/store/a
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticationGuard implements CanLoad, CanActivate {
+export class AuthenticationGuard {
   private isAuthenticated$ = this.store.select(selectIsAuthenticated);
 
   public constructor(private router: Router, private store: Store) {}
+
+  public canActivateChild(): Observable<boolean | UrlTree> {
+    return this.verify();
+  }
 
   public canActivate(): Observable<boolean | UrlTree> {
     return this.verify();
