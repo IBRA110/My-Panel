@@ -60,7 +60,7 @@ export class PresenceService {
     });
   }
 
-  public stopHubConnection() {
+  public stopHubConnection(): void {
     this.hubConnection
       .stop()
       .catch((error) => this.alertMessageService.callErrorMessage(error));

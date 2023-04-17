@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { loadUsers } from './data/store/chat.actions';
 import { selectOnlineUsers } from './data/store/chat.selectors';
