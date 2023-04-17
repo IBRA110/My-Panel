@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import { BehaviorSubject } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UiAlertMessagesService } from './ui-alert-messages.service';
 import { TranslateService } from '@ngx-translate/core';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
 import {
   getOnlineUser,
@@ -13,7 +10,6 @@ import {
   removeOfflineUser,
 } from 'src/app/pages/admin/data/store/admin.actions';
 
-@UntilDestroy()
 @Injectable({
   providedIn: 'root',
 })

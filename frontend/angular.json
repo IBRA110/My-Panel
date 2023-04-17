@@ -6,7 +6,8 @@
     "My-Panel": {
       "projectType": "application",
       "schematics": { 
-        "@schematics/angular:component": { 
+        "@schematics/angular:component": {
+          "skipTests": true,
           "style": "scss" 
           }
         },

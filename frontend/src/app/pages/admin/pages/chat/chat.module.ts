@@ -9,9 +9,10 @@ import { ChatEffects } from './data/store/chat.effects';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsersListComponent } from './components/users-list/users-list.component';
+import { MessagesComponent } from './components/messages/messages.component';
 
 @NgModule({
-  declarations: [ChatComponent, UsersListComponent],
+  declarations: [ChatComponent, UsersListComponent, MessagesComponent],
   imports: [
     CommonModule,
     TranslateModule,
