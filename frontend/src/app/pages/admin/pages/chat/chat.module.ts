@@ -10,9 +10,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { RecipientComponent } from './components/recipient/recipient.component';
 
 @NgModule({
-  declarations: [ChatComponent, UsersListComponent, MessagesComponent],
+  declarations: [ChatComponent, UsersListComponent, MessagesComponent, RecipientComponent],
   imports: [
     CommonModule,
     TranslateModule,

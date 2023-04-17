@@ -1,4 +1,7 @@
 <div class="chat">
-  <app-messages></app-messages>
+  <app-recipient></app-recipient>
+  <div class="chat-messages">
+    <app-messages></app-messages>
+  </div>
   <app-users-list [users]="users$ | async"></app-users-list>
 </div>
