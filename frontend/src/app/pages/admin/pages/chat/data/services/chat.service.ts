@@ -70,7 +70,10 @@ export class ChatService {
     }
   }
 
-  public async sendMessage(username: string, content: string): Promise<any> {
+  public async sendMessage(
+    username: string,
+    content: string,
+  ): Promise<HubConnection> {
     return this.hubConnection
       .invoke('SendMessage', { recipientUsername: username, content })
       .catch((error) => console.log(error));
