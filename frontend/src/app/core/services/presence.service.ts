@@ -39,7 +39,9 @@ export class PresenceService {
 
     this.hubConnection
       .start()
-      .catch((error) => this.alertMessageService.callErrorMessage(error));
+      .catch((error: string) =>
+        this.alertMessageService.callErrorMessage(error),
+      );
 
     this.hubConnection.on('UserIsOnline', (userId: string) => {
       this.store.dispatch(getOnlineUser({ user: userId }));

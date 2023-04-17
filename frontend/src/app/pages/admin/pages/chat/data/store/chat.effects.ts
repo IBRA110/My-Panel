@@ -1,14 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { loadUsers, loadUsersFaled, loadUsersSuccess } from './chat.actions';
-import {
-  catchError,
-  debounceTime,
-  distinctUntilChanged,
-  map,
-  of,
-  switchMap,
-} from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 import { ChatService } from '../services/chat.service';
 import { ChatUsers } from '../interfaces/users.interface';
 import { Store } from '@ngrx/store';
@@ -26,8 +19,6 @@ export class ChatEffects {
     return this.actions$.pipe(
       ofType(loadUsers),
       concatLatestFrom(() => [this.store.select(selectOnlineUsers)]),
-      debounceTime(500),
-      distinctUntilChanged(),
       switchMap(([action, onlineUsers]) => {
         return this.chatService.getUsers(action).pipe(
           map((data) => {

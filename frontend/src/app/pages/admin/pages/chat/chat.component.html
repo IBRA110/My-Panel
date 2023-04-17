@@ -1,31 +1,3 @@
 <div class="chat">
-  <div class="chat-users_wrapper">
-    <div class="form-control">
-      <label class="form-control_label" for="firstName">{{ 'CHAT.SEARCH' | translate }}</label>
-      <input class="form-control_input" [formControl]="search$" type="text" />
-    </div>
-    <div class="chat-users">
-      <div class="chat-users_user" *ngFor="let user of users$ | async">
-        <div class="chat-users_user-info">
-          <div class="chat-users_user-avatar">
-            <img *ngIf="!!user.photoUrl" [src]="baseUrl + user.photoUrl" alt="avatar" />
-            <img *ngIf="!!!user.photoUrl" [src]="defaultAvatarUrl" alt="avatar" />
-          </div>
-          <div class="chat-users_user-body">
-            <h4>{{ user.userName }}</h4>
-            <p>{{ user.firstName + ' ' + user.lastName }}</p>
-            <p *ngIf="user.isOnline" class="chat-users_user-body_online">online</p>
-            <p *ngIf="!user.isOnline" class="chat-users_user-body_offline">offline</p>
-          </div>
-        </div>
-        <button class="chat-users_user-button">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path
-              d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"
-            />
-          </svg>
-        </button>
-      </div>
-    </div>
-  </div>
+  <app-users-list [users]="users$ | async"></app-users-list>
 </div>
