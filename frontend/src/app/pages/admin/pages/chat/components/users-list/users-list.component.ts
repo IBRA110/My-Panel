@@ -11,21 +11,22 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-users-list[users]',
   templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.scss']
+  styleUrls: ['./users-list.component.scss'],
 })
 export class UsersListComponent implements OnInit {
   public defaultAvatarUrl: string = '/assets/images/nav-bar/man.png/';
   public baseUrl: string = environment.baseUrl;
   public search$: FormControl = new FormControl();
-  @Input() users: ChatUsers[] = [];
- 
+
+  @Input() public users: ChatUsers[] = [];
+
   public constructor(private store: Store) {}
 
   public ngOnInit(): void {
     this.search$.valueChanges
-    .pipe(untilDestroyed(this), debounceTime(500), distinctUntilChanged())
-    .subscribe((value) => {
-      this.store.dispatch(loadUsers({ userName: value }));
-    });
+      .pipe(untilDestroyed(this), debounceTime(500), distinctUntilChanged())
+      .subscribe((value) => {
+        this.store.dispatch(loadUsers({ userName: value }));
+      });
   }
 }
