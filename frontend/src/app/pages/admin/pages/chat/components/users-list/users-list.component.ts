@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ChatUsers } from '../../data/interfaces/users.interface';
 import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
@@ -19,6 +19,7 @@ export class UsersListComponent implements OnInit {
   public search$: FormControl = new FormControl();
 
   @Input() public users: ChatUsers[] = [];
+  @Output() public recipient: EventEmitter<string> = new EventEmitter<string>();
 
   public constructor(private store: Store) {}
 

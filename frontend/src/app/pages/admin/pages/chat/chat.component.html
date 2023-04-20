@@ -3,5 +3,5 @@
   <div class="chat-messages">
     <app-messages></app-messages>
   </div>
-  <app-users-list [users]="users$ | async"></app-users-list>
+  <app-users-list (recipient)="createChatConnection($event)" [users]="users$ | async"></app-users-list>
 </div>

@@ -14,5 +14,5 @@ export class UiButtonComponent {
   @Input() public icon: string;
   @Input() public isDisabled: boolean = false;
   @Input() public scssClass: string;
-  @Output() public onClick = new EventEmitter();
+  @Output() public onClick: EventEmitter<string> = new EventEmitter<string>();
 }
