@@ -28,7 +28,10 @@ export class UiPopupComponent implements OnInit {
   @Input() public useCloseArea = true;
   @Output() public afterInit = new EventEmitter<PopupItem>();
 
-  public constructor(private popupService: PopupService, private router: Router) {}
+  public constructor(
+    private popupService: PopupService,
+    private router: Router,
+  ) {}
 
   public ngOnInit(): void {
     this.popupService

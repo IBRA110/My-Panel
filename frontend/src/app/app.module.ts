@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './core/themes/theme.module';
 import { lightTheme } from './core/themes/lignt.theme';
 import { darkTheme } from './core/themes/dark.theme';
-import { UiAlertMessagesModule } from './core/ui/ui-alert-messages/ui-alert-messages.module';
 import { ThemeService } from './core/services/theme.service';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -22,15 +21,16 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthenticationEffects } from './pages/authentication/data/store/authentication.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GraphQLModule } from './graphql.module';
-import { UiPopupModule } from './core/ui/ui-popup/ui-popup.module';
 import { CoreModule } from './core/modules/core.module';
+import { UiAlertMessagesComponent } from './core/ui/ui-alert-messages/ui-alert-messages.component';
+import { UiPopupModule } from './core/ui/ui-popup/ui-popup.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    UiAlertMessagesModule,
+    UiAlertMessagesComponent,
     HttpClientModule,
     BrowserAnimationsModule,
     UiPopupModule,

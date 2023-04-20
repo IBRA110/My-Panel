@@ -1,9 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-ui-select-tabs',
   templateUrl: './ui-select-tabs.component.html',
   styleUrls: ['./ui-select-tabs.component.scss'],
+  standalone: true,
+  imports: [CommonModule],
 })
 export class UiSelectTabsComponent {
   @Input() public selectedTab: string = '';

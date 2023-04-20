@@ -4,12 +4,15 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { UiAlertMessagesService } from '../../services/ui-alert-messages.service';
 import { Alert } from '../../interfaces/ui-alert-messages.interfaces';
 import { alertAnimation } from '../../animations/ui-alert-messages.animation';
+import { CommonModule } from '@angular/common';
 
 @UntilDestroy()
 @Component({
   selector: 'app-ui-alert-message',
   templateUrl: 'ui-alert-messages.component.html',
   styleUrls: ['./ui-alert-messages.component.scss'],
+  standalone: true,
+  imports: [CommonModule],
   animations: [alertAnimation],
 })
 export class UiAlertMessagesComponent implements OnInit {

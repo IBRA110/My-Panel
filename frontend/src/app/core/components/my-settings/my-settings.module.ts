@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MySettingsComponent } from './my-settings.component';
-import { UiPopupModule } from '../../ui/ui-popup/ui-popup.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { UiSelectTabComponentModule } from '../../ui/ui-select-tabs/ui-select-tabs.module';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DisplayComponent } from './components/display/display.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UiButtonModule } from '../../ui/ui-button/ui-button.module';
+import { UiButtonComponent } from '../../ui/ui-button/ui-button.component';
+import { UiPopupModule } from '../../ui/ui-popup/ui-popup.module';
+import { UiSelectTabsComponent } from '../../ui/ui-select-tabs/ui-select-tabs.component';
 
 @NgModule({
   declarations: [MySettingsComponent, ProfileComponent, DisplayComponent],
   imports: [
     CommonModule,
-    UiPopupModule,
     TranslateModule,
-    UiSelectTabComponentModule,
+    UiPopupModule,
+    UiSelectTabsComponent,
     ReactiveFormsModule,
-    UiButtonModule,
+    UiButtonComponent,
   ],
   exports: [MySettingsComponent],
 })
