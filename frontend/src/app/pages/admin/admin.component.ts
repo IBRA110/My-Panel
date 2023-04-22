@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { initAdminPanel } from './data/store/admin.actions';
+import { destroyAdminPanel, initAdminPanel } from './data/store/admin.actions';
 import { PresenceService } from 'src/app/core/services/presence.service';
 
 @Component({
@@ -9,16 +9,12 @@ import { PresenceService } from 'src/app/core/services/presence.service';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit, OnDestroy {
-  public constructor(
-    private store: Store,
-    private presenceService: PresenceService,
-  ) {}
+  public constructor(private store: Store) {}
 
   public ngOnInit(): void {
     this.store.dispatch(initAdminPanel());
-    this.presenceService.createHubConnection();
   }
   public ngOnDestroy(): void {
-    this.presenceService.stopHubConnection();
+    this.store.dispatch(destroyAdminPanel());
   }
 }

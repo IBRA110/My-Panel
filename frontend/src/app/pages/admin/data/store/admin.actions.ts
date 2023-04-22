@@ -6,6 +6,8 @@ export const toggleSidebar = createAction(AdminActionsEnum.TOGGLE_SIDEBAR);
 
 export const initAdminPanel = createAction(AdminActionsEnum.INIT_ADMIN);
 
+export const destroyAdminPanel = createAction(AdminActionsEnum.DESTROY_ADMIN);
+
 export const loadUserSuccess = createAction(
   AdminActionsEnum.LOAD_USER_SUCCESS,
   props<{ user: User }>(),

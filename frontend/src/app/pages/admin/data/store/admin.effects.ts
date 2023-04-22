@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AdminService } from '../services/admin.service';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import {
+  destroyAdminPanel,
   initAdminPanel,
   loadUserFailed,
   loadUserSuccess,
@@ -17,6 +18,7 @@ import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.
 import { PopupService } from 'src/app/core/services/popup.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MySettingsComponent } from 'src/app/core/components/my-settings/my-settings.component';
+import { PresenceService } from 'src/app/core/services/presence.service';
 
 @Injectable()
 export class AdminEffects {
@@ -26,6 +28,7 @@ export class AdminEffects {
     private alertMessagesService: UiAlertMessagesService,
     private popupService: PopupService,
     private translateService: TranslateService,
+    private presenceService: PresenceService,
   ) {}
 
   private loadUserEffect$ = createEffect(() => {
@@ -85,4 +88,24 @@ export class AdminEffects {
       }),
     );
   });
+
+  private createPresentsHubConnectionEffect$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(initAdminPanel),
+        tap(() => this.presenceService.createHubConnection()),
+      );
+    },
+    { dispatch: false },
+  );
+
+  private stopPresentsHubConnectionEffect$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(destroyAdminPanel),
+        tap(() => this.presenceService.stopHubConnection()),
+      );
+    },
+    { dispatch: false },
+  );
 }
