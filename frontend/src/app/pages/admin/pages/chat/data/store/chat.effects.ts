@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { loadUsers, loadUsersFaled, loadUsersSuccess } from './chat.actions';
-import { catchError, map, of, switchMap } from 'rxjs';
+import {
+  createChat,
+  destroyChat,
+  loadUsers,
+  loadUsersFaled,
+  loadUsersSuccess,
+} from './chat.actions';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { ChatService } from '../services/chat.service';
 import { ChatUsers } from '../interfaces/users.interface';
 import { Store } from '@ngrx/store';
@@ -44,4 +50,29 @@ export class ChatEffects {
       }),
     );
   });
+
+  private createChatHubConnectionEffect$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(createChat),
+        tap((action) => {
+          this.chatService.stopChatHubConnection();
+          this.chatService.createChatHubConnection(action.otherUsername);
+        }),
+      );
+    },
+    { dispatch: false },
+  );
+
+  private stopChatHubConnectionEffect$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(destroyChat),
+        tap(() => {
+          this.chatService.stopChatHubConnection();
+        }),
+      );
+    },
+    { dispatch: false },
+  );
 }

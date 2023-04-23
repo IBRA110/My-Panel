@@ -7,6 +7,14 @@ import { BehaviorSubject, Observable, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Group } from '../interfaces/group.interface';
+import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
+import { Message } from '../interfaces/messages.interface';
+import { Store } from '@ngrx/store';
+import {
+  newMessage,
+  receiveMessageThread,
+  updatedGroup,
+} from '../store/chat.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +22,12 @@ import { Group } from '../interfaces/group.interface';
 export class ChatService {
   private hubUrl = environment.hubUrl;
   private hubConnection: HubConnection;
-  private messageThreadSource = new BehaviorSubject<any[]>([]);
-  private messageThread$ = this.messageThreadSource.asObservable();
-  public constructor(private apollo: Apollo) {}
+
+  public constructor(
+    private apollo: Apollo,
+    private alertMessageService: UiAlertMessagesService,
+    private store: Store,
+  ) {}
 
   public getUsers(
     variables: GetUsersQueryVariables,
@@ -27,7 +38,7 @@ export class ChatService {
     });
   }
 
-  public createHubConnection(otherUsername: string): void {
+  public createChatHubConnection(otherUsername: string): void {
     const token: string = JSON.parse(localStorage.getItem('auth'))?.authTokens
       ?.accessToken;
     this.hubConnection = new HubConnectionBuilder()
@@ -37,35 +48,27 @@ export class ChatService {
       .withAutomaticReconnect()
       .build();
 
-    this.hubConnection.start().catch((error) => console.log(error));
+    this.hubConnection
+      .start()
+      .catch((error) => this.alertMessageService.callErrorMessage(error));
 
-    this.hubConnection.on('ReceiveMessageThread', (messages) => {
-      this.messageThreadSource.next(messages);
+    this.hubConnection.on('ReceiveMessageThread', (messages: Message[]) => {
+      this.store.dispatch(receiveMessageThread({ messages: messages }));
     });
 
-    this.hubConnection.on('NewMessage', (message) => {
-      this.messageThread$.pipe(take(1)).subscribe((messages) => {
-        this.messageThreadSource.next([...messages, message]);
-      });
+    this.hubConnection.on('NewMessage', (message: Message) => {
+      this.store.dispatch(newMessage({ message: message }));
     });
 
     this.hubConnection.on('UpdatedGroup', (group: Group) => {
-      if (group.connections.some((x) => x.username === otherUsername)) {
-        this.messageThread$.pipe(take(1)).subscribe((messages) => {
-          messages.forEach((message) => {
-            if (!message.dateRead) {
-              message.dateRead = new Date(Date.now());
-            }
-          });
-          this.messageThreadSource.next([...messages]);
-        });
-      }
+      this.store.dispatch(
+        updatedGroup({ group: group, otherUsername: otherUsername }),
+      );
     });
   }
 
-  public stopHubConnection(): void {
+  public stopChatHubConnection(): void {
     if (this.hubConnection) {
-      this.messageThreadSource.next([]);
       this.hubConnection.stop();
     }
   }
@@ -76,10 +79,8 @@ export class ChatService {
   ): Promise<HubConnection> {
     return this.hubConnection
       .invoke('SendMessage', { recipientUsername: username, content })
-      .catch((error) => console.log(error));
+      .catch((error) => this.alertMessageService.callErrorMessage(error));
   }
 
-  public deleteMessage(id: number): void {
-    console.log(1);
-  }
+  public deleteMessage(id: number): void {}
 }

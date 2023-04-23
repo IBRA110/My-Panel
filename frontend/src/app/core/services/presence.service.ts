@@ -23,7 +23,7 @@ export class PresenceService {
     private store: Store,
   ) {}
 
-  public createHubConnection(): HubConnection {
+  public createHubConnection(): void {
     const token: string = JSON.parse(localStorage.getItem('auth'))?.authTokens
       ?.accessToken;
     this.hubConnection = new HubConnectionBuilder()
@@ -56,7 +56,6 @@ export class PresenceService {
         knownAs + this.translateService.instant('PRESENCE_SERVISE'),
       );
     });
-    return this.hubConnection;
   }
 
   public stopHubConnection(): void {
