@@ -27,4 +27,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   public createChatConnection(recipient: string): void {
     this.store.dispatch(createChat({ otherUsername: recipient }));
   }
+
+  public sendMessage(message: string): void {
+    console.log(message);
+  }
 }

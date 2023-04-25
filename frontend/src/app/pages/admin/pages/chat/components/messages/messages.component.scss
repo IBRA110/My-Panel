@@ -8,27 +8,35 @@
   background-color: var(--base-backgound-color);
   border-radius: 10px;
   border: 1px solid var(--selected-tab-color);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   box-shadow: var(--box-shadow-color) 0px 0.0625em 0.0625em,
               var(--box-shadow-color) 0px 0.125em 0.5em,
               rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 
 
   &-thread {
-
+    border: 1px solid var(--selected-tab-color);
+    border-radius: 10px;
+    height: 100%;
+    box-shadow: var(--box-shadow-color) 3px 3px 6px 0px inset, var(--box-shadow-color) -3px -3px 6px 0px inset;
   }
   &-form {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
+    gap: 10px;
     width: 100%;
 
     .form-control {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      justify-content: center;
       gap: 10px;
       position: relative;
-      padding: 5px 15px 5px 5px;
+      width: 100%;
       
       &_label{
         display: block;
@@ -38,7 +46,7 @@
       &_input{
         display: block;
         resize: none;
-        height: 50px;
+        height: 45px;
         width: 100%;
         background-color: var(--input-backgound-color);
         box-shadow: var(--box-shadow-color) 0px 0px 0px 1px;
@@ -49,7 +57,22 @@
               
         &:focus{
           box-shadow: var(--box-shadow-color) 0px 0px 0px 2px;
-        }      
+        }
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+        
+        &::-webkit-scrollbar-track {
+          background: var(--selected-tab-color);
+          box-shadow: var(--box-shadow-color) 0px 0.0625em 0.0625em,
+                      var(--box-shadow-color) 0px 0.125em 0.5em,
+                      rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+          background-color: var(--button-background-default-color);
+          border-radius: 20px;
+        }  
       }
 
 

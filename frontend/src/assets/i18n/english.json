@@ -57,6 +57,7 @@
   "SAVE": "Save",
   "NOTHING_CHANGED": "Nothing changed!",
   "CHAT": {
-    "SEARCH": "Search"
+    "SEARCH": "Search",
+    "MESSAGE": "Message"
   }
 }
