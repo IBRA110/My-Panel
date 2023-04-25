@@ -70,7 +70,7 @@ const chatReducer = createRehydrateReducer(
             };
           }),
         ]
-      : [...state.messages],
+      : state.messages,
   })),
 );
 
