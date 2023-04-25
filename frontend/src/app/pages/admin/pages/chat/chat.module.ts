@@ -11,13 +11,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { RecipientComponent } from './components/recipient/recipient.component';
+import { UiButtonComponent } from 'src/app/core/ui/ui-button/ui-button.component';
 
 @NgModule({
-  declarations: [ChatComponent, UsersListComponent, MessagesComponent, RecipientComponent],
+  declarations: [
+    ChatComponent,
+    UsersListComponent,
+    MessagesComponent,
+    RecipientComponent,
+  ],
   imports: [
     CommonModule,
     TranslateModule,
     ReactiveFormsModule,
+    UiButtonComponent,
     RouterModule.forChild([{ path: '', component: ChatComponent }]),
     StoreModule.forFeature(chatFeatureKey, reducer),
     EffectsModule.forFeature([ChatEffects]),

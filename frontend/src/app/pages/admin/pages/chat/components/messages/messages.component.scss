@@ -1,11 +1,67 @@
-.messages{
+@import "src/app/core/mixins/fonts";
+
+.messages {
   height: 100%;
   width: 100%;
   position: relative;
+  padding: 20px;
   background-color: var(--base-backgound-color);
   border-radius: 10px;
   border: 1px solid var(--selected-tab-color);
   box-shadow: var(--box-shadow-color) 0px 0.0625em 0.0625em,
               var(--box-shadow-color) 0px 0.125em 0.5em,
               rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+
+
+  &-thread {
+
+  }
+  &-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .form-control {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      position: relative;
+      padding: 5px 15px 5px 5px;
+      
+      &_label{
+        display: block;
+        @include Input_Label;
+      }
+      
+      &_input{
+        display: block;
+        resize: none;
+        height: 50px;
+        width: 100%;
+        background-color: var(--input-backgound-color);
+        box-shadow: var(--box-shadow-color) 0px 0px 0px 1px;
+        border-radius: 3px;
+        padding: 10px 10px;
+        @include Input;
+        color: var(--light-text-color);
+              
+        &:focus{
+          box-shadow: var(--box-shadow-color) 0px 0px 0px 2px;
+        }      
+      }
+
+
+    }
+    &_button {
+      width: 75px;
+
+      svg {
+        path{
+          fill: var(--button-text-color);
+        }
+      } 
+    }
+  }
 }

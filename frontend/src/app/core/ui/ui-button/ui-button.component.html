@@ -1,4 +1,6 @@
 <button class="{{ scssClass }}" type="{{ type }}" [disabled]="isDisabled" (click)="onClick.emit()">
-  <i class="{{ icon }}"></i>
   {{ text }}
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
 </button>
