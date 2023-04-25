@@ -1,10 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { createChat, destroyChat, loadUsers } from './data/store/chat.actions';
-import { selectOnlineUsers } from './data/store/chat.selectors';
+import {
+  selectMessageThread,
+  selectOnlineUsers,
+} from './data/store/chat.selectors';
 import { Observable } from 'rxjs';
 import { ChatUsers } from './data/interfaces/users.interface';
 import { ChatService } from './data/services/chat.service';
+import { Message } from './data/interfaces/messages.interface';
 
 @Component({
   selector: 'app-chat',
@@ -13,6 +17,8 @@ import { ChatService } from './data/services/chat.service';
 })
 export class ChatComponent implements OnInit, OnDestroy {
   public users$: Observable<ChatUsers[]> = this.store.select(selectOnlineUsers);
+  public messagesThread$: Observable<Message[]> =
+    this.store.select(selectMessageThread);
 
   public constructor(private store: Store, private chatService: ChatService) {}
 

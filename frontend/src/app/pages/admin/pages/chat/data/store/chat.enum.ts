@@ -6,5 +6,8 @@ export enum ChatActionsEnum {
   DESTROY_CHAT = '[Chat] destroy chat',
   RECEIVE_MESSAGE_THREAD = '[Chat] Receive Message Thread',
   NEW_MESSAGE = '[Chat] new message',
-  UPDATED_GROUP = '[Chat] Update dGroup',
+  UPDATED_GROUP = '[Chat] Update Group',
+  SEND_MESSAGE = '[Chat] Send Message',
+  SEND_MESSAGE_SUCCESS = '[Chat] Send Message Success',
+  SEND_MESSAGE_FAILED = '[Chat] Send Message Failed',
 }

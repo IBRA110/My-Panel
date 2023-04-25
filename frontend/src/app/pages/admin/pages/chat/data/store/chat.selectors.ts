@@ -7,3 +7,8 @@ export const selectOnlineUsers = createSelector(
   selectChatState,
   (chatState: ChatState) => chatState?.users,
 );
+
+export const selectMessageThread = createSelector(
+  selectChatState,
+  (chatState: ChatState) => chatState?.messages,
+);

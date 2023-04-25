@@ -6,12 +6,16 @@ import {
   loadUsers,
   loadUsersFaled,
   loadUsersSuccess,
+  sendMessage,
+  sendMessageFailed,
+  sendMessageSuccess,
 } from './chat.actions';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { ChatService } from '../services/chat.service';
 import { ChatUsers } from '../interfaces/users.interface';
 import { Store } from '@ngrx/store';
 import { selectOnlineUsers } from 'src/app/pages/admin/data/store/admin.selectors';
+import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 
 @Injectable()
 export class ChatEffects {
@@ -19,6 +23,7 @@ export class ChatEffects {
     private actions$: Actions,
     private chatService: ChatService,
     private store: Store,
+    private alertMessageService: UiAlertMessagesService,
   ) {}
 
   private loadUserEffect$ = createEffect(() => {
@@ -75,4 +80,19 @@ export class ChatEffects {
     },
     { dispatch: false },
   );
+
+  private sendMessageEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(sendMessage),
+      switchMap((action) => {
+        return this.chatService
+          .sendMessage(action.username, action.content)
+          .then((r) => sendMessageSuccess())
+          .catch((e) => {
+            this.alertMessageService.callErrorMessage(e);
+            return sendMessageFailed();
+          });
+      }),
+    );
+  });
 }

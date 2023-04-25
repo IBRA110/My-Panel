@@ -37,3 +37,16 @@ export const updatedGroup = createAction(
   ChatActionsEnum.UPDATED_GROUP,
   props<{ group: Group; otherUsername: string }>(),
 );
+
+export const sendMessage = createAction(
+  ChatActionsEnum.SEND_MESSAGE,
+  props<{ username: string; content: string }>(),
+);
+
+export const sendMessageSuccess = createAction(
+  ChatActionsEnum.SEND_MESSAGE_SUCCESS,
+);
+
+export const sendMessageFailed = createAction(
+  ChatActionsEnum.SEND_MESSAGE_FAILED,
+);

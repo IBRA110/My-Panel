@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Message } from '../../data/interfaces/messages.interface';
 
 @Component({
   selector: 'app-messages',
@@ -9,6 +10,7 @@ import { FormControl } from '@angular/forms';
 export class MessagesComponent {
   public message$: FormControl = new FormControl('');
   @Output() public onSend: EventEmitter<string> = new EventEmitter<string>();
+  @Input() public messagesThread: Message[];
 
   public checkClickedButton(e: KeyboardEvent) {
     if (e.keyCode === 13) {
