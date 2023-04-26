@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { GET_USERS } from '../gql/get-users.gql';
 import { ApolloQueryResult } from '@apollo/client';
 import { GetUsersQuery, GetUsersQueryVariables } from 'src/generated/graphql';
-import { BehaviorSubject, Observable, take } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Group } from '../interfaces/group.interface';
@@ -59,7 +59,6 @@ export class ChatService {
     this.hubConnection.on('NewMessage', (message: Message) => {
       this.store.dispatch(newMessage({ message: message }));
     });
-
     this.hubConnection.on('UpdatedGroup', (group: Group) => {
       this.store.dispatch(
         updatedGroup({ group: group, otherUsername: otherUsername }),
@@ -74,11 +73,14 @@ export class ChatService {
   }
 
   public async sendMessage(
-    username: string,
+    recipientUsername: string,
     content: string,
   ): Promise<HubConnection> {
     return this.hubConnection
-      .invoke('SendMessage', { recipientUsername: username, content })
+      .invoke('SendMessage', {
+        recipientUsername: recipientUsername,
+        content: content,
+      })
       .catch((error) => this.alertMessageService.callErrorMessage(error));
   }
 

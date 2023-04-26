@@ -40,7 +40,7 @@ export const updatedGroup = createAction(
 
 export const sendMessage = createAction(
   ChatActionsEnum.SEND_MESSAGE,
-  props<{ username: string; content: string }>(),
+  props<{ recipientUsername: string; content: string }>(),
 );
 
 export const sendMessageSuccess = createAction(

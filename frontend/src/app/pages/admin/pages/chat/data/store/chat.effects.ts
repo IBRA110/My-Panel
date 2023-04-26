@@ -86,8 +86,8 @@ export class ChatEffects {
       ofType(sendMessage),
       switchMap((action) => {
         return this.chatService
-          .sendMessage(action.username, action.content)
-          .then((r) => sendMessageSuccess())
+          .sendMessage(action.recipientUsername, action.content)
+          .then(() => sendMessageSuccess())
           .catch((e) => {
             this.alertMessageService.callErrorMessage(e);
             return sendMessageFailed();

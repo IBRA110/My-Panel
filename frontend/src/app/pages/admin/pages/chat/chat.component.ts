@@ -1,6 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { createChat, destroyChat, loadUsers } from './data/store/chat.actions';
+import {
+  createChat,
+  destroyChat,
+  loadUsers,
+  sendMessage,
+} from './data/store/chat.actions';
 import {
   selectMessageThread,
   selectOnlineUsers,
@@ -20,6 +25,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   public messagesThread$: Observable<Message[]> =
     this.store.select(selectMessageThread);
 
+  private recipientUsername: string = '';
   public constructor(private store: Store, private chatService: ChatService) {}
 
   public ngOnInit(): void {
@@ -32,9 +38,15 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   public createChatConnection(recipient: string): void {
     this.store.dispatch(createChat({ otherUsername: recipient }));
+    this.recipientUsername = recipient;
   }
 
   public sendMessage(message: string): void {
-    console.log(message);
+    this.store.dispatch(
+      sendMessage({
+        recipientUsername: this.recipientUsername,
+        content: message,
+      }),
+    );
   }
 }
