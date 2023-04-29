@@ -50,3 +50,8 @@ export const sendMessageSuccess = createAction(
 export const sendMessageFailed = createAction(
   ChatActionsEnum.SEND_MESSAGE_FAILED,
 );
+
+export const setRecipient = createAction(
+  ChatActionsEnum.SET_RECIPIENT,
+  props<{ recipientUsername: string }>(),
+);

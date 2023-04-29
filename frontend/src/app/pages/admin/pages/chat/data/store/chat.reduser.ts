@@ -5,6 +5,7 @@ import {
   loadUsersSuccess,
   newMessage,
   receiveMessageThread,
+  setRecipient,
   updatedGroup,
 } from './chat.actions';
 import {
@@ -71,6 +72,10 @@ const chatReducer = createRehydrateReducer(
           }),
         ]
       : state.messages,
+  })),
+  on(setRecipient, (state, action) => ({
+    ...state,
+    recipientUserName: action.recipientUsername,
   })),
 );
 

@@ -9,10 +9,10 @@ import {
 import {
   selectMessageThread,
   selectOnlineUsers,
+  selectRecipient,
 } from './data/store/chat.selectors';
 import { Observable } from 'rxjs';
 import { ChatUsers } from './data/interfaces/users.interface';
-import { ChatService } from './data/services/chat.service';
 import { Message } from './data/interfaces/messages.interface';
 
 @Component({
@@ -25,11 +25,15 @@ export class ChatComponent implements OnInit, OnDestroy {
   public messagesThread$: Observable<Message[]> =
     this.store.select(selectMessageThread);
 
-  private recipientUsername: string = '';
-  public constructor(private store: Store, private chatService: ChatService) {}
+  private recipientUsername$: Observable<string> =
+    this.store.select(selectRecipient);
+  private recipientUsername: string;
+
+  public constructor(private store: Store) {}
 
   public ngOnInit(): void {
     this.store.dispatch(loadUsers({}));
+    this.recipientUsername$.subscribe((n) => (this.recipientUsername = n));
   }
 
   public ngOnDestroy(): void {
@@ -38,7 +42,6 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   public createChatConnection(recipient: string): void {
     this.store.dispatch(createChat({ otherUsername: recipient }));
-    this.recipientUsername = recipient;
   }
 
   public sendMessage(message: string): void {

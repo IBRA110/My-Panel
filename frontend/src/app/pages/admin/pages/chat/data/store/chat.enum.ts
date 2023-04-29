@@ -10,4 +10,5 @@ export enum ChatActionsEnum {
   SEND_MESSAGE = '[Chat] Send Message',
   SEND_MESSAGE_SUCCESS = '[Chat] Send Message Success',
   SEND_MESSAGE_FAILED = '[Chat] Send Message Failed',
+  SET_RECIPIENT = '[Chat] Set recipient',
 }

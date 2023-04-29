@@ -13,6 +13,7 @@ import { Store } from '@ngrx/store';
 import {
   newMessage,
   receiveMessageThread,
+  setRecipient,
   updatedGroup,
 } from '../store/chat.actions';
 
@@ -50,6 +51,9 @@ export class ChatService {
 
     this.hubConnection
       .start()
+      .then(() =>
+        this.store.dispatch(setRecipient({ recipientUsername: otherUsername })),
+      )
       .catch((error) => this.alertMessageService.callErrorMessage(error));
 
     this.hubConnection.on('ReceiveMessageThread', (messages: Message[]) => {

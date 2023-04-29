@@ -12,3 +12,8 @@ export const selectMessageThread = createSelector(
   selectChatState,
   (chatState: ChatState) => chatState?.messages,
 );
+
+export const selectRecipient = createSelector(
+  selectChatState,
+  (chatState: ChatState) => chatState?.recipientUserName,
+);
