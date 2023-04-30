@@ -88,6 +88,10 @@
       align-items: center;
       gap: 5px;
     }
+
+    &.online {
+      background-color: var(--background-color);
+    }
     &-avatar{
       width: 50px;
       height: 50px;
@@ -110,13 +114,12 @@
       }
       &_online{
         @include Paragraph_2;
-        color: var(--success);
+        color: var(--button-background-default-color);
         font-weight: 700;
       }
       &_offline{
         @include Paragraph_2;
         font-weight: 700;
-        color: var(--error);
       }
     }
     &-button{
@@ -132,7 +135,15 @@
       &:active{
         box-shadow: var(--box-shadow-color) 0px 0px 6px 3px inset, var(--box-shadow-color) 0px 0px 6px 3px inset;
       }
-
+      &.online{
+        svg {
+          width: 20px;
+          height: 20px;
+          path{
+            fill: var(--button-background-default-color);
+          }
+        }
+      }
       svg {
         width: 20px;
         height: 20px;
