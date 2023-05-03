@@ -2,9 +2,9 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   Inject,
+  DoCheck,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Message } from '../../data/interfaces/messages.interface';
@@ -16,7 +16,7 @@ import { DOCUMENT } from '@angular/common';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss'],
 })
-export class MessagesComponent implements OnInit {
+export class MessagesComponent implements DoCheck {
   public message$: FormControl = new FormControl('');
   public defaultAvatarUrl: string = '/assets/images/nav-bar/man.png/';
   public baseUrl: string = environment.baseUrl;
@@ -39,9 +39,8 @@ export class MessagesComponent implements OnInit {
     }
   }
 
-  public ngOnInit(): void {
+  public ngDoCheck(): void {
     this.container = this.document.querySelector('#scrollBottom');
-    this.container.scrollTop = this.container.scrollHeight;
     this.container.scrollTo({
       top: this.container.scrollHeight,
       behavior: 'smooth',
