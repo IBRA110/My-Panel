@@ -14,6 +14,7 @@ import {
 import { Observable } from 'rxjs';
 import { ChatUsers } from './data/interfaces/users.interface';
 import { Message } from './data/interfaces/messages.interface';
+import { selectUserId } from '../../data/store/admin.selectors';
 
 @Component({
   selector: 'app-chat',
@@ -22,6 +23,7 @@ import { Message } from './data/interfaces/messages.interface';
 })
 export class ChatComponent implements OnInit, OnDestroy {
   public users$: Observable<ChatUsers[]> = this.store.select(selectOnlineUsers);
+  public userId$: Observable<string> = this.store.select(selectUserId);
   public messagesThread$: Observable<Message[]> =
     this.store.select(selectMessageThread);
 

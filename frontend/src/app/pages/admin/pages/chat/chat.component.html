@@ -1,7 +1,11 @@
 <div class="chat">
   <app-recipient></app-recipient>
   <div class="chat-messages">
-    <app-messages (onSend)="sendMessage($event)" [messagesThread]="messagesThread$ | async"></app-messages>
+    <app-messages
+      (onSend)="sendMessage($event)"
+      [messageThread]="messagesThread$ | async"
+      [userId]="userId$ | async"
+    ></app-messages>
   </div>
   <app-users-list (recipient)="createChatConnection($event)" [users]="users$ | async"></app-users-list>
 </div>

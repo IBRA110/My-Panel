@@ -13,6 +13,11 @@ export const selectUser = createSelector(
   (adminState: AdminState) => adminState?.user,
 );
 
+export const selectUserId = createSelector(
+  selectAdminState,
+  (adminState: AdminState) => adminState?.user?.id,
+);
+
 export const selectUserAvatar = createSelector(
   selectAdminState,
   (adminState: AdminState) => adminState?.user?.photoUrl,
