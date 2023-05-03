@@ -11,7 +11,7 @@
             <img *ngIf="!!message.recipientPhotoUrl" [src]="baseUrl + message.senderPhotoUrl" alt="User image" />
             <img *ngIf="!!!message.recipientPhotoUrl" [src]="defaultAvatarUrl" alt="User image" />
           </div>
-          <div class="mmessages-thread_message-content">
+          <div class="messages-thread_message-content">
             <p>
               {{ message.content }}
             </p>
