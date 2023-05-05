@@ -102,9 +102,33 @@
           }
         }
         &__text{
-          padding: 10px;
-          background-color: var(--background-color);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: row-reverse;
+          gap: 5px;
+
+          button {
+            cursor: pointer;
+            opacity: 0;
+            transition: 300ms ease-in-out;
+            &:hover{
+              opacity: 1;
+            }
+            svg {
+              height: 20px;
+              width: 20px;
+              
+              path{
+                fill: var(--error);
+              }
+            }
+          }
           p{
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--box-shadow-color);
+            background-color: var(--background-color);
             white-space: pre-wrap;
             line-height: 20px;
             @include Input_Label;

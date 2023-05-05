@@ -52,8 +52,5 @@ export class MessagesComponent implements AfterViewInit {
       this.message$.setValue('');
     }
   }
-
-  public scrollDown(): void {
-    this.container.scrollTop = this.container.scrollHeight;
-  }
+  public delete(id: string): void {}
 }
