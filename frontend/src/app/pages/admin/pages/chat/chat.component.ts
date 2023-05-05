@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   createChat,
@@ -21,7 +21,7 @@ import { selectUserId } from '../../data/store/admin.selectors';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   public users$: Observable<ChatUsers[]> = this.store.select(selectOnlineUsers);
   public userId$: Observable<string> = this.store.select(selectUserId);
   public messagesThread$: Observable<Message[]> =
@@ -35,7 +35,17 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.store.dispatch(loadUsers({}));
-    this.recipientUsername$.subscribe((n) => (this.recipientUsername = n));
+    this.recipientUsername$.subscribe((n) => {
+      this.recipientUsername = n;
+    });
+  }
+
+  public ngAfterViewInit(): void {
+    if (!!this.recipientUsername) {
+      this.store.dispatch(
+        createChat({ otherUsername: this.recipientUsername }),
+      );
+    }
   }
 
   public ngOnDestroy(): void {

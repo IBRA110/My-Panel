@@ -20,17 +20,15 @@ import { ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./messages.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MessagesComponent implements DoCheck, OnInit {
+export class MessagesComponent {
   public message$: FormControl = new FormControl('');
   public defaultAvatarUrl: string = '/assets/images/nav-bar/man.png/';
   public baseUrl: string = environment.baseUrl;
   private container: Element;
 
   @Output() public onSend: EventEmitter<string> = new EventEmitter<string>();
-  @Input() public messageThread: Message[];
+  @Input() public messageThread: Message[] = [];
   @Input() public userId: string;
-
-  private oldMessageThread: Message[];
 
   public constructor(@Inject(DOCUMENT) private document: Document) {}
 
@@ -43,18 +41,6 @@ export class MessagesComponent implements DoCheck, OnInit {
         this.send();
       }
     }
-  }
-  public ngOnInit(): void {
-    this.oldMessageThread = [...this.messageThread];
-  }
-
-  public ngDoCheck(): void {
-    if (this.messageThread === this.oldMessageThread) {
-      return;
-    }
-    this.oldMessageThread = [...this.messageThread];
-    this.container = this.document.querySelector('#scrollBottom');
-    this.container.scrollTop = this.container.scrollHeight;
   }
 
   public send(): void {
