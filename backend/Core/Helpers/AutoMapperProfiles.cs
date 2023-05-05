@@ -19,7 +19,7 @@ namespace Core.Helpers
             CreateMap<MessageEntity, MessageDTO>()
                 .ForMember(dest => dest.SenderPhotoUrl, opt => opt.MapFrom(src => 
                     src.Sender.Images.FirstOrDefault(x => x.IsMain).Url))
-                .ForMember(dest => dest.SenderPhotoUrl, opt => opt.MapFrom(src => 
+                .ForMember(dest => dest.RecipientPhotoUrl, opt => opt.MapFrom(src => 
                     src.Recipient.Images.FirstOrDefault(x => x.IsMain).Url));
         }
     }

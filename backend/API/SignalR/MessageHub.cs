@@ -72,11 +72,13 @@ namespace API.SignalR
             
             MessageEntity message = new MessageEntity
             {
-                Sender = sender,
-                Recipient = recipient,
+                SenderId = sender.Id,
                 SenderUserName = sender.UserName,
+                Sender = sender,
+                RecipientId = recipient.Id,
                 RecipientUserName = recipient.UserName,
-                Content = createMessageDTO.Content
+                Recipient = recipient,
+                Content = createMessageDTO.Content,
             };
 
             string groupName = GetGroupName(sender.UserName, recipient.UserName);
