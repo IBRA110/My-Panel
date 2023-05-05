@@ -99,7 +99,6 @@ namespace Infrastructure.Data.Repositories
                 {
                     message.DateRead = DateTime.UtcNow;
                 }
-
             }
 
             return messages;
