@@ -11,10 +11,16 @@
             <img *ngIf="!!message.recipientPhotoUrl" [src]="baseUrl + message.senderPhotoUrl" alt="User image" />
             <img *ngIf="!!!message.recipientPhotoUrl" [src]="defaultAvatarUrl" alt="User image" />
           </div>
-          <div class="messages-thread_message-content">
-            <p>
-              {{ message.content }}
-            </p>
+          <div class="messages-thread_message-content" [ngClass]="{ right: userId === message.senderId }">
+            <div class="messages-thread_message-content__header" [ngClass]="{ right: userId === message.senderId }">
+              <h5>{{ message.senderUserName }}</h5>
+              <p>{{ message.messageSent | date : 'dd/MM/yyyy HH:mm' }}</p>
+            </div>
+            <div class="messages-thread_message-content__text">
+              <p>
+                {{ message.content }}
+              </p>
+            </div>
           </div>
         </div>
       </ng-container>

@@ -8,6 +8,7 @@ export const lightTheme: Theme = {
     '--box-shadow-color': 'rgb(199, 207, 214)',
 
     '--base-text-color': 'rgb(0, 48, 93)',
+    '--transparent-text-color': 'rgba(0, 48, 93, 0.5)',
     '--button-text-color': 'rgb(237, 245, 252)',
 
     '--button-background-default-color': 'rgba(69, 115, 210)',
