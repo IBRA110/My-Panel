@@ -29,7 +29,7 @@ namespace API.SignalR
         {
             string userId = Context.User.FindFirst("Id")?.Value;
             
-            bool isOffline = await _tracker.UserDisconected(userId, Context.ConnectionId);
+            bool isOffline = await _tracker.UserDisconnected(userId, Context.ConnectionId);
             
             if (isOffline)
             {

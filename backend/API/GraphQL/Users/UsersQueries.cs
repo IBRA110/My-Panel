@@ -15,6 +15,14 @@ namespace API.GraphQL.Users
             MemberDTO user = await unitOfWork.userRepository.GetMemberByIdAsync(claimsPrincipal.FindFirst("Id").Value);
             return user;
         }
+        
+        [UseProjection]
+        [Authorize]
+        public async Task<MemberDTO> GetMember([Service] IUnitOfWork unitOfWork, string userName)
+        {
+            MemberDTO user = await unitOfWork.userRepository.GetMemberAsync(userName);
+            return user;
+        }
 
         [UseProjection]
         [Authorize]
