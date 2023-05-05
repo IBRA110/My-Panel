@@ -4,9 +4,7 @@ import {
   Input,
   Output,
   Inject,
-  AfterViewChecked,
-  DoCheck,
-  OnInit,
+  AfterViewInit,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Message } from '../../data/interfaces/messages.interface';
@@ -20,14 +18,14 @@ import { ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./messages.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MessagesComponent {
+export class MessagesComponent implements AfterViewInit {
   public message$: FormControl = new FormControl('');
   public defaultAvatarUrl: string = '/assets/images/nav-bar/man.png/';
   public baseUrl: string = environment.baseUrl;
   private container: Element;
 
   @Output() public onSend: EventEmitter<string> = new EventEmitter<string>();
-  @Input() public messageThread: Message[] = [];
+  @Input() public messageThread: Message[];
   @Input() public userId: string;
 
   public constructor(@Inject(DOCUMENT) private document: Document) {}
@@ -41,6 +39,11 @@ export class MessagesComponent {
         this.send();
       }
     }
+  }
+
+  public ngAfterViewInit(): void {
+    this.container = this.document.querySelector('#scrollBottom');
+    this.container.scrollTop = this.container.scrollHeight;
   }
 
   public send(): void {

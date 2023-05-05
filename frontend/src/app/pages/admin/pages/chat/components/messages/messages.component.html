@@ -1,7 +1,7 @@
 <div class="messages">
   <div class="messages-thread">
     <div class="messages-thread_scroll" id="scrollBottom">
-      <ng-container *ngFor="let message of messageThread">
+      <ng-container *ngFor="let message of messageThread.slice().reverse()">
         <div class="messages-thread_message" [ngClass]="{ right: userId === message.senderId }">
           <div class="messages-thread_message-avatar" *ngIf="userId === message.senderId">
             <img *ngIf="!!message.senderPhotoUrl" [src]="baseUrl + message.senderPhotoUrl" alt="User image" />

@@ -29,7 +29,7 @@
       overflow-x: hidden;
       padding-right: 15px;
       display: flex;
-      flex-direction: column;
+      flex-direction: column-reverse;
       gap: 25px;
 
       &::-webkit-scrollbar {
