@@ -121,20 +121,13 @@ namespace API.SignalR
                 throw new HubException("Failed to delete message");
             }
 
-            if (message.Sender.UserName == userName)
-            {
-                message.SenderDeleted = true;
-            }
+            // we can delete message only for one user
+            // here we deleted message for recipient and sender
+            message.RecipientDeleted = true;
+            message.SenderDeleted = true;
 
-            if (message.Recipient.UserName == userName)
-            {
-                message.RecipientDeleted = true;
-            }
+            _unitOfWork.messageRepository.DeleteMessage(message);
 
-            if (message.SenderDeleted && message.RecipientDeleted)
-            {
-                _unitOfWork.messageRepository.DeleteMessage(message);
-            }
 
             string groupName = GetGroupName(message.Sender.UserName, message.Recipient.UserName);
 

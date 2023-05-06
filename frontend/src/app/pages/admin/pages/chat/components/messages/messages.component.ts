@@ -26,7 +26,7 @@ export class MessagesComponent implements AfterViewInit {
 
   @Output() public onSend: EventEmitter<string> = new EventEmitter<string>();
   @Output() public onDelete: EventEmitter<string> = new EventEmitter<string>();
-  @Input() public messageThread: Message[];
+  @Input() public messageThread: Message[] = [];
   @Input() public userId: string;
 
   public constructor(@Inject(DOCUMENT) private document: Document) {}
