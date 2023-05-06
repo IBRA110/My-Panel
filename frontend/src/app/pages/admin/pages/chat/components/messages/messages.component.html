@@ -3,14 +3,6 @@
     <div class="messages-thread_scroll" id="scrollBottom">
       <ng-container *ngFor="let message of messageThread?.slice().reverse()">
         <div class="messages-thread_message" [ngClass]="{ right: userId === message.senderId }">
-          <div class="messages-thread_message-avatar" *ngIf="userId === message.senderId">
-            <img *ngIf="!!message.senderPhotoUrl" [src]="baseUrl + message.senderPhotoUrl" alt="User image" />
-            <img *ngIf="!!!message.senderPhotoUrl" [src]="defaultAvatarUrl" alt="User image" />
-          </div>
-          <div class="messages-thread_message-avatar" *ngIf="userId !== message.senderId">
-            <img *ngIf="!!message.recipientPhotoUrl" [src]="baseUrl + message.senderPhotoUrl" alt="User image" />
-            <img *ngIf="!!!message.recipientPhotoUrl" [src]="defaultAvatarUrl" alt="User image" />
-          </div>
           <div class="messages-thread_message-content" [ngClass]="{ right: userId === message.senderId }">
             <div class="messages-thread_message-content__header" [ngClass]="{ right: userId === message.senderId }">
               <h5>{{ message.senderUserName }}</h5>

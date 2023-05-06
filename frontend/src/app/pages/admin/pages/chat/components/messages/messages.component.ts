@@ -20,8 +20,6 @@ import { ChangeDetectionStrategy } from '@angular/core';
 })
 export class MessagesComponent implements AfterViewInit {
   public message$: FormControl = new FormControl('');
-  public defaultAvatarUrl: string = '/assets/images/nav-bar/man.png/';
-  public baseUrl: string = environment.baseUrl;
   private container: Element;
 
   @Output() public onSend: EventEmitter<string> = new EventEmitter<string>();
