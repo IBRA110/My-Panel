@@ -1,5 +1,4 @@
 ﻿using API.GraphQL.Account;
-using API.GraphQL.Messages;
 using API.GraphQL.Users;
 using Microsoft.EntityFrameworkCore;
 
