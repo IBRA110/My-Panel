@@ -1,6 +1,6 @@
 import { gql } from 'apollo-angular';
 
-export const GET_USERS = gql`
+export const GET_MEMBER = gql`
   query GetMember($userName: String) {
     member(userName: $userName) {
       id

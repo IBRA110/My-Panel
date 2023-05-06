@@ -2,6 +2,7 @@ import { Action, on } from '@ngrx/store';
 import { ChatState, initialState } from './chat.state';
 import { createRehydrateReducer } from 'src/app/core/reducers/rehydrate-reducer';
 import {
+  loadRecipientSuccess,
   loadUsersSuccess,
   messageDeleted,
   newMessage,
@@ -81,6 +82,10 @@ const chatReducer = createRehydrateReducer(
   on(messageDeleted, (state, action) => ({
     ...state,
     messages: [...state.messages.filter((m) => m.id !== action.id)],
+  })),
+  on(loadRecipientSuccess, (state, action) => ({
+    ...state,
+    recipient: action.recipient,
   })),
 );
 

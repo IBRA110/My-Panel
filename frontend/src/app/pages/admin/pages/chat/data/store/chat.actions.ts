@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { ChatActionsEnum } from './chat.enum';
-import { ChatUsers } from '../interfaces/users.interface';
+import { ChatUsers, Recipient } from '../interfaces/users.interface';
 import { Message } from '../interfaces/messages.interface';
 import { Group } from '../interfaces/group.interface';
 
@@ -15,6 +15,15 @@ export const loadUsersSuccess = createAction(
 );
 
 export const loadUsersFaled = createAction(ChatActionsEnum.LOAD_USERS_SUCCESS);
+
+export const loadRecipientSuccess = createAction(
+  ChatActionsEnum.LOAD_RECIPIENT_SUCCESS,
+  props<{ recipient: Recipient }>(),
+);
+
+export const loadRecipientFaled = createAction(
+  ChatActionsEnum.LOAD_RECIPIENT_FAILED,
+);
 
 export const createChat = createAction(
   ChatActionsEnum.CREATE_CHAT,

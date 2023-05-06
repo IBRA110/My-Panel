@@ -6,6 +6,8 @@ import {
   deleteMessageFailed,
   deleteMessageSuccess,
   destroyChat,
+  loadRecipientFaled,
+  loadRecipientSuccess,
   loadUsers,
   loadUsersFaled,
   loadUsersSuccess,
@@ -29,7 +31,7 @@ export class ChatEffects {
     private alertMessageService: UiAlertMessagesService,
   ) {}
 
-  private loadUserEffect$ = createEffect(() => {
+  private loadUsersEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadUsers),
       concatLatestFrom(() => [this.store.select(selectOnlineUsers)]),
@@ -55,6 +57,24 @@ export class ChatEffects {
             return of(loadUsersFaled());
           }),
         );
+      }),
+    );
+  });
+
+  private loadRecipientEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(createChat),
+      switchMap((action) => {
+        return this.chatService
+          .getRecipient({ userName: action.otherUsername })
+          .pipe(
+            map((data) => {
+              return loadRecipientSuccess({ recipient: data.data.member });
+            }),
+            catchError(() => {
+              return of(loadRecipientFaled());
+            }),
+          );
       }),
     );
   });

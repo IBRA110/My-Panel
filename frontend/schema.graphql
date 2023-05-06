@@ -22,6 +22,7 @@ scalar Upload
 
 type Query {
   user: MemberDTO
+  member(userName: String): MemberDTO
   users(userName: String): [MemberDTO]
 }
 

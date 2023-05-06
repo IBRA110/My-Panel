@@ -2,6 +2,8 @@ export enum ChatActionsEnum {
   LOAD_USERS = '[Chat] loads user',
   LOAD_USERS_SUCCESS = '[Chat] load users success',
   LOAD_USERS_FAILED = '[Chat] load users failed',
+  LOAD_RECIPIENT_SUCCESS = '[Chat] load recipient success',
+  LOAD_RECIPIENT_FAILED = '[Chat] load recipient failed',
   CREATE_CHAT = '[Chat] create chat',
   DESTROY_CHAT = '[Chat] destroy chat',
   RECEIVE_MESSAGE_THREAD = '[Chat] Receive Message Thread',

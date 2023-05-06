@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { GET_USERS } from '../gql/get-users.gql';
 import { ApolloQueryResult } from '@apollo/client';
-import { GetUsersQuery, GetUsersQueryVariables } from 'src/generated/graphql';
+import {
+  GetMemberQuery,
+  GetMemberQueryVariables,
+  GetUsersQuery,
+  GetUsersQueryVariables,
+} from 'src/generated/graphql';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
@@ -17,6 +22,7 @@ import {
   setRecipient,
   updatedGroup,
 } from '../store/chat.actions';
+import { GET_MEMBER } from '../gql/get-member.gql';
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +42,15 @@ export class ChatService {
   ): Observable<ApolloQueryResult<GetUsersQuery>> {
     return this.apollo.query<GetUsersQuery>({
       query: GET_USERS,
+      variables,
+    });
+  }
+
+  public getRecipient(
+    variables: GetMemberQueryVariables,
+  ): Observable<ApolloQueryResult<GetMemberQuery>> {
+    return this.apollo.query<GetMemberQuery>({
+      query: GET_MEMBER,
       variables,
     });
   }
