@@ -3,6 +3,7 @@ import { ChatState, initialState } from './chat.state';
 import { createRehydrateReducer } from 'src/app/core/reducers/rehydrate-reducer';
 import {
   loadUsersSuccess,
+  messageDeleted,
   newMessage,
   receiveMessageThread,
   setRecipient,
@@ -76,6 +77,10 @@ const chatReducer = createRehydrateReducer(
   on(setRecipient, (state, action) => ({
     ...state,
     recipientUserName: action.recipientUsername,
+  })),
+  on(messageDeleted, (state, action) => ({
+    ...state,
+    messages: [...state.messages.filter((m) => m.id !== action.id)],
   })),
 );
 

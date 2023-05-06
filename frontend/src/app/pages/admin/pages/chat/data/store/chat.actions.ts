@@ -51,6 +51,24 @@ export const sendMessageFailed = createAction(
   ChatActionsEnum.SEND_MESSAGE_FAILED,
 );
 
+export const deleteMessage = createAction(
+  ChatActionsEnum.DELETE_MESSAGE,
+  props<{ id: string }>(),
+);
+
+export const deleteMessageSuccess = createAction(
+  ChatActionsEnum.DELETE_MESSAGE_SUCCESS,
+);
+
+export const deleteMessageFailed = createAction(
+  ChatActionsEnum.DELETE_MESSAGE_FAILED,
+);
+
+export const messageDeleted = createAction(
+  ChatActionsEnum.MESSAGE_DELETED,
+  props<{ id: string }>(),
+);
+
 export const setRecipient = createAction(
   ChatActionsEnum.SET_RECIPIENT,
   props<{ recipientUsername: string }>(),

@@ -11,6 +11,7 @@ import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.
 import { Message } from '../interfaces/messages.interface';
 import { Store } from '@ngrx/store';
 import {
+  messageDeleted,
   newMessage,
   receiveMessageThread,
   setRecipient,
@@ -63,6 +64,11 @@ export class ChatService {
     this.hubConnection.on('NewMessage', (message: Message) => {
       this.store.dispatch(newMessage({ message: message }));
     });
+
+    this.hubConnection.on('DeletedMessage', (id: string) => {
+      this.store.dispatch(messageDeleted({ id: id }));
+    });
+
     this.hubConnection.on('UpdatedGroup', (group: Group) => {
       this.store.dispatch(
         updatedGroup({ group: group, otherUsername: otherUsername }),
@@ -88,5 +94,9 @@ export class ChatService {
       .catch((error) => this.alertMessageService.callErrorMessage(error));
   }
 
-  public deleteMessage(id: number): void {}
+  public deleteMessage(id: string): Promise<HubConnection> {
+    return this.hubConnection
+      .invoke('DeleteMessage', id)
+      .catch((error) => this.alertMessageService.callErrorMessage(error));
+  }
 }

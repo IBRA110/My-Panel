@@ -25,6 +25,7 @@ export class MessagesComponent implements AfterViewInit {
   private container: Element;
 
   @Output() public onSend: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public onDelete: EventEmitter<string> = new EventEmitter<string>();
   @Input() public messageThread: Message[];
   @Input() public userId: string;
 
@@ -52,5 +53,7 @@ export class MessagesComponent implements AfterViewInit {
       this.message$.setValue('');
     }
   }
-  public delete(id: string): void {}
+  public delete(id: string): void {
+    this.onDelete.emit(id);
+  }
 }

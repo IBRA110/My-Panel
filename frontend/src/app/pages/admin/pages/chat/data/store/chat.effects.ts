@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import {
   createChat,
+  deleteMessage,
+  deleteMessageFailed,
+  deleteMessageSuccess,
   destroyChat,
   loadUsers,
   loadUsersFaled,
@@ -91,6 +94,21 @@ export class ChatEffects {
           .catch((e) => {
             this.alertMessageService.callErrorMessage(e);
             return sendMessageFailed();
+          });
+      }),
+    );
+  });
+
+  private deleteMessageEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(deleteMessage),
+      switchMap((action) => {
+        return this.chatService
+          .deleteMessage(action.id)
+          .then(() => deleteMessageSuccess())
+          .catch((e) => {
+            this.alertMessageService.callErrorMessage(e);
+            return deleteMessageFailed();
           });
       }),
     );

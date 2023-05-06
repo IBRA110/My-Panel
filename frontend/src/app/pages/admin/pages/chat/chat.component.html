@@ -3,6 +3,7 @@
   <div class="chat-messages">
     <app-messages
       (onSend)="sendMessage($event)"
+      (onDelete)="deleteMessage($event)"
       [messageThread]="messagesThread$ | async"
       [userId]="userId$ | async"
     ></app-messages>

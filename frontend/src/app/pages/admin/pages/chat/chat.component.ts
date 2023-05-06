@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   createChat,
+  deleteMessage,
   destroyChat,
   loadUsers,
   sendMessage,
@@ -63,5 +64,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
         content: message,
       }),
     );
+  }
+
+  public deleteMessage(id: string): void {
+    this.store.dispatch(deleteMessage({ id: id }));
   }
 }
