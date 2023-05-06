@@ -4,6 +4,7 @@ namespace Core.DTOs
 {
     public class MessageDTO
     {
+        public string Id { get; set; }
         public string SenderId { get; set; }
         public string SenderUserName { get; set; }
         public string SenderPhotoUrl { get; set; }

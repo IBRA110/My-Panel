@@ -16,7 +16,6 @@ namespace API.Extensions
                 .AddSorting()
                 .AddMutationType(m => m.Name("Mutation")) 
                 .AddType<AccountMutations>()
-                .AddType<MessagesMutations>()
                 .AddType<UsersMutations>()
                 .AddType<UploadType>()
                 .AddQueryType(q => q.Name("Query"))

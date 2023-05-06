@@ -3,6 +3,9 @@ using Core.Interfaces;
 using AutoMapper;
 using Core.Entities;
 using Microsoft.AspNetCore.SignalR;
+using Infrastructure.Data;
+using System.Security.Claims;
+using Org.BouncyCastle.Cms;
 
 namespace API.SignalR
 {
@@ -104,6 +107,40 @@ namespace API.SignalR
             if (await _unitOfWork.Complete()) 
             {                
                 await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageDTO>(message));
+            }
+        }
+
+        public async Task DeleteMessage(string id)
+        {
+            string userName = Context.User.FindFirst("UserName")?.Value;
+
+            MessageEntity message = await _unitOfWork.messageRepository.GetMessage(id);
+
+            if (message.Sender.UserName != userName && message.Recipient.UserName != userName)
+            {
+                throw new HubException("Failed to delete message");
+            }
+
+            if (message.Sender.UserName == userName)
+            {
+                message.SenderDeleted = true;
+            }
+
+            if (message.Recipient.UserName == userName)
+            {
+                message.RecipientDeleted = true;
+            }
+
+            if (message.SenderDeleted && message.RecipientDeleted)
+            {
+                _unitOfWork.messageRepository.DeleteMessage(message);
+            }
+
+            string groupName = GetGroupName(message.Sender.UserName, message.Recipient.UserName);
+
+            if (await _unitOfWork.Complete())
+            {
+                await Clients.Group(groupName).SendAsync("DeletedMessage", id);
             }
         }
 
