@@ -1,5 +1,5 @@
 <div class="chat">
-  <app-recipient></app-recipient>
+  <app-recipient [recipient]="recipient | async"></app-recipient>
   <div class="chat-messages">
     <app-messages
       (onSend)="sendMessage($event)"

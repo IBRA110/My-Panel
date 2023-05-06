@@ -13,7 +13,12 @@ export const selectMessageThread = createSelector(
   (chatState: ChatState) => chatState?.messages,
 );
 
-export const selectRecipient = createSelector(
+export const selectRecipientUserName = createSelector(
   selectChatState,
   (chatState: ChatState) => chatState?.recipientUserName,
+);
+
+export const selectRecipient = createSelector(
+  selectChatState,
+  (chatState: ChatState) => chatState?.recipient,
 );

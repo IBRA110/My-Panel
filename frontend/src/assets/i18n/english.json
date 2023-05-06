@@ -8,8 +8,8 @@
     "EMAIL": "email",
     "PASSWORD": "password",
     "CONFIRM_PASSWORD": "confirm password",
-    "FIRST_NAME": "first name",
-    "LAST_NAME": "last name",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
     "FORGOT_PASSWORD": "Forgot password?",
     "HAVE_ACCOUNT": "Have an account?",
     "ENTER_USERNAME": "Please Enter username",
@@ -58,6 +58,12 @@
   "NOTHING_CHANGED": "Nothing changed!",
   "CHAT": {
     "SEARCH": "Search",
-    "MESSAGE": "Message"
+    "MESSAGE": "Message",
+    "AGE": "Age",
+    "CITY": "City",
+    "COUNTRY": "Country",
+    "INTERESTS": "Interests",
+    "INTRODUCTION": "Introduction",
+    "LAST_ACTIVE": "Last active"
   }
 }

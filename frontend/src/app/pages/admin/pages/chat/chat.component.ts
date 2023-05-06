@@ -11,9 +11,10 @@ import {
   selectMessageThread,
   selectOnlineUsers,
   selectRecipient,
+  selectRecipientUserName,
 } from './data/store/chat.selectors';
 import { Observable } from 'rxjs';
-import { ChatUsers } from './data/interfaces/users.interface';
+import { ChatUsers, Recipient } from './data/interfaces/users.interface';
 import { Message } from './data/interfaces/messages.interface';
 import { selectUserId } from '../../data/store/admin.selectors';
 
@@ -27,9 +28,11 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   public userId$: Observable<string> = this.store.select(selectUserId);
   public messagesThread$: Observable<Message[]> =
     this.store.select(selectMessageThread);
+  public recipient: Observable<Recipient> = this.store.select(selectRecipient);
 
-  private recipientUsername$: Observable<string> =
-    this.store.select(selectRecipient);
+  private recipientUsername$: Observable<string> = this.store.select(
+    selectRecipientUserName,
+  );
   private recipientUsername: string;
 
   public constructor(private store: Store) {}
