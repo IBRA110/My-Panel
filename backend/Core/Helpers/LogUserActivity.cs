@@ -18,12 +18,13 @@ namespace Core.Helpers
 
             string id = resultContext.HttpContext.User.FindFirst("UserName")?.Value;
             
-            IUnitOfWork uow = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();
+            IUnitOfWork unitOfwWork = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();
 
-            AppUserEntity user = await uow.userRepository.GetUserByUsernameAsync(id);
+            AppUserEntity user = await unitOfwWork.userRepository.GetUserByUsernameAsync(id);
 
             user.LastActive = System.DateTime.UtcNow;
-            await uow.Complete();
+
+            await unitOfwWork.Complete();
 
         }
     }

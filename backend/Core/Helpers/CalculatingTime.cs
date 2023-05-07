@@ -2,11 +2,15 @@ namespace Core.Helpers
 {
     public static class CalculatingTime
     {
-        public static int CalculateAge(this System.DateTime dob)
+        public static int CalculateAge(this DateTime dob)
         {
-            var today = System.DateTime.Today;
-            var age = today.Year - dob.Year;
-            if (dob.Date > today.AddYears(-age)) age--;
+            DateTime today = DateTime.Today;
+            Int32 age = today.Year - dob.Year;
+
+            if (dob.Date > today.AddYears(-age))
+            {
+                age--;
+            }
             return age;
         }
     }

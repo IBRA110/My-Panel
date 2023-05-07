@@ -18,7 +18,7 @@ namespace API.Extensions
                 .AddType<UsersMutations>()
                 .AddType<UploadType>()
                 .AddQueryType(q => q.Name("Query"))
-                .AddType<UsersQueries>()
+                .AddType<UsersQueries>()                
                 .AddErrorFilter(er =>
                 {
                     switch (er.Exception)

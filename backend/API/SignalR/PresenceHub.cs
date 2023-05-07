@@ -1,3 +1,5 @@
+using Core.Entities;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
@@ -7,9 +9,11 @@ namespace API.SignalR
     public class PresenceHub : Hub
     {
         private readonly PresenceTracker _tracker;
-        public PresenceHub(PresenceTracker tracker)
+        private readonly IUnitOfWork _unitOfWork;
+        public PresenceHub(PresenceTracker tracker, IUnitOfWork unitOfwWork)
         {
             _tracker = tracker;
+            _unitOfWork = unitOfwWork;
 
         }
         public override async Task OnConnectedAsync()
@@ -29,8 +33,14 @@ namespace API.SignalR
         {
             string userId = Context.User.FindFirst("Id")?.Value;
             
+            AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(userId);
+
             bool isOffline = await _tracker.UserDisconnected(userId, Context.ConnectionId);
             
+            user.LastActive = DateTime.UtcNow;
+            
+            await _unitOfWork.Complete();
+
             if (isOffline)
             {
                 await Clients.Others.SendAsync("UserIsOffline", userId);
