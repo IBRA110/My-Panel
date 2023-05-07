@@ -1,42 +1,49 @@
-<div class="recipient">
-  <ng-container *ngIf="!!recipient">
-    <div class="recipient-avatar">
-      <img *ngIf="!!recipient.photoUrl" [src]="baseUrl + recipient.photoUrl" alt="avatar" />
-      <img *ngIf="!!!recipient.photoUrl" [src]="defaultAvatarUrl" alt="avatar" />
+<div class="wrapper">
+  <div class="recipient">
+    <div class="recipient-container" *ngIf="!!recipient">
+      <div class="recipient-info">
+        <div class="recipient-avatar">
+          <img *ngIf="!!recipient.photoUrl" [src]="baseUrl + recipient.photoUrl" alt="avatar" />
+          <img *ngIf="!!!recipient.photoUrl" [src]="defaultAvatarUrl" alt="avatar" />
+        </div>
+      </div>
+      <div class="recipient-info">
+        <p *ngIf="!!recipient.firstName">
+          <span>{{ 'AUTHENTICATION.FIRST_NAME' | translate }}:</span> {{ recipient.firstName }}
+        </p>
+        <p *ngIf="!!recipient.lastName">
+          <span>{{ 'AUTHENTICATION.LAST_NAME' | translate }}:</span> {{ recipient.lastName }}
+        </p>
+      </div>
+      <div class="recipient-info">
+        <p *ngIf="recipient.age < 150">
+          <span>{{ 'CHAT.AGE' | translate }}:</span> {{ recipient.age }}
+        </p>
+      </div>
+      <div class="recipient-info">
+        <p *ngIf="!!recipient.city">
+          <span>{{ 'CHAT.CITY' | translate }}:</span> {{ recipient.city }}
+        </p>
+        <p *ngIf="!!recipient.country">
+          <span>{{ 'CHAT.COUNTRY' | translate }}:</span> {{ recipient.country }}
+        </p>
+      </div>
+      <div class="recipient-info">
+        <p *ngIf="!!recipient.interests">
+          <span>{{ 'CHAT.INTERESTS' | translate }}:</span> {{ recipient.interests }}
+        </p>
+        <p *ngIf="!!recipient.introduction">
+          <span>{{ 'CHAT.INTRODUCTION' | translate }}:</span> {{ recipient.introduction }}
+        </p>
+      </div>
+      <div class="recipient-info">
+        <p *ngIf="!recipient.isOnline">
+          <span>{{ 'CHAT.LAST_ACTIVE' | translate }}:</span> {{ recipient.lastActive | date : 'dd/MM/yyyy HH:mm' }}
+        </p>
+        <p class="recipient-info_online" *ngIf="recipient.isOnline">
+          <span>{{ 'CHAT.LAST_ACTIVE' | translate }}:</span> Online
+        </p>
+      </div>
     </div>
-    <div class="recipient-info">
-      <p *ngIf="!!recipient.firstName">
-        <span>{{ 'AUTHENTICATION.FIRST_NAME' | translate }}:</span> {{ recipient.firstName }}
-      </p>
-      <p *ngIf="!!recipient.lastName">
-        <span>{{ 'AUTHENTICATION.LAST_NAME' | translate }}:</span> {{ recipient.lastName }}
-      </p>
-    </div>
-    <div class="recipient-info">
-      <p>
-        <span>{{ 'CHAT.AGE' | translate }}:</span> {{ recipient.age }}
-      </p>
-    </div>
-    <div class="recipient-info">
-      <p *ngIf="!!recipient.city">
-        <span>{{ 'CHAT.CITY' | translate }}:</span> {{ recipient.city }}
-      </p>
-      <p *ngIf="!!recipient.country">
-        <span>{{ 'CHAT.COUNTRY' | translate }}:</span> {{ recipient.country }}
-      </p>
-    </div>
-    <div class="recipient-info">
-      <p *ngIf="!!recipient.interests">
-        <span>{{ 'CHAT.INTERESTS' | translate }}:</span> {{ recipient.interests }}
-      </p>
-      <p *ngIf="!!recipient.introduction">
-        <span>{{ 'CHAT.INTRODUCTION' | translate }}:</span> {{ recipient.introduction }}
-      </p>
-    </div>
-    <div class="recipient-info">
-      <p>
-        <span>{{ 'CHAT.LAST_ACTIVE' | translate }}:</span> {{ recipient.lastActive | date : 'dd/MM/yyyy HH:mm' }}
-      </p>
-    </div>
-  </ng-container>
+  </div>
 </div>

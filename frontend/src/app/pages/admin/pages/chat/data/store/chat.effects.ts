@@ -64,12 +64,20 @@ export class ChatEffects {
   private loadRecipientEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(createChat),
-      switchMap((action) => {
+      concatLatestFrom(() => [this.store.select(selectOnlineUsers)]),
+      switchMap(([action, onlineUsers]) => {
         return this.chatService
           .getRecipient({ userName: action.otherUsername })
           .pipe(
             map((data) => {
-              return loadRecipientSuccess({ recipient: data.data.member });
+              return loadRecipientSuccess({
+                recipient: {
+                  ...data.data.member,
+                  isOnline: onlineUsers.some(
+                    (id) => id === data.data.member.id,
+                  ),
+                },
+              });
             }),
             catchError(() => {
               return of(loadRecipientFaled());

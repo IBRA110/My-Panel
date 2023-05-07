@@ -37,6 +37,7 @@ const chatReducer = createRehydrateReducer(
         return element;
       }),
     ].sort((x) => (x.isOnline ? -1 : 1)),
+    recipient: { ...state.recipient, isOnline: state.recipient.id === user },
   })),
   on(removeOfflineUser, (state, { user }) => ({
     ...state,
@@ -51,6 +52,7 @@ const chatReducer = createRehydrateReducer(
         return element;
       }),
     ].sort((x) => (x.isOnline ? -1 : 1)),
+    recipient: { ...state.recipient, isOnline: state.recipient.id !== user },
   })),
   on(receiveMessageThread, (state, action) => ({
     ...state,

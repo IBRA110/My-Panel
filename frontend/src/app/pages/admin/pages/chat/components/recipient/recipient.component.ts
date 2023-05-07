@@ -12,4 +12,8 @@ export class RecipientComponent {
 
   public defaultAvatarUrl: string = '/assets/images/nav-bar/man.png/';
   public baseUrl: string = environment.baseUrl;
+
+  public checkLastActive(lastActive: Date | string): boolean {
+    return typeof lastActive === 'string';
+  }
 }

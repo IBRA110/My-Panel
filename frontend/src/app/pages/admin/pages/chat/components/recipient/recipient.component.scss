@@ -1,28 +1,58 @@
 @import "src/app/core/mixins/fonts";
 
-.recipient{
+.wrapper {
+  overflow: hidden;
   height: 100%;
-  width: 350px;
-  padding: 50px;
-  @include Paragraph;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: flex-start;
-  gap: 20px;
+  width: 350px;  
+  padding: 20px 10px;
   position: relative;
   background-color: var(--base-backgound-color);
-  border-radius: 10px;
   border: 1px solid var(--selected-tab-color);
   box-shadow: var(--box-shadow-color) 0px 0.0625em 0.0625em,
               var(--box-shadow-color) 0px 0.125em 0.5em,
               rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+.recipient{
+  @include Paragraph;
+  max-height: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: var(--selected-tab-color);
+    box-shadow: var(--box-shadow-color) 0px 0.0625em 0.0625em,
+                var(--box-shadow-color) 0px 0.125em 0.5em,
+                rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--button-background-default-color);
+    border-radius: 20px;
+  }
+  
+  &-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 20px;
+  }
 
   &-avatar {
     overflow: hidden;
     border-radius: 50%;
     width: 250px;
     height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1px solid var(--base-text-color);
 
     img{
@@ -35,11 +65,25 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     gap: 5px;
     flex-wrap: wrap;
 
+    &:first-child{
+      justify-content: center;
+    }
     span{
       @include Paragraph_2;
+    }
+    &_online{
+      @include Paragraph;
+      color: var(--button-background-default-color);
+      font-weight: 700;
+
+      span{
+        font-weight: 400;
+        color: var(--base-text-color);
+      }
     }
   }
 }
