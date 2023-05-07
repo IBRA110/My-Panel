@@ -34,8 +34,9 @@ namespace API.SignalR
             string groupName = GetGroupName(user, otherUser);
 
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
-            GroupEntity group = await AddToGroup(groupName);
 
+            GroupEntity group = await AddToGroup(groupName);
+            
             await Clients.Group(groupName).SendAsync("UpdatedGroup", group);
 
             IEnumerable<MessageDTO> messages = await _unitOfWork.messageRepository.GetMessageThread(user, otherUser);
@@ -52,6 +53,7 @@ namespace API.SignalR
         public override async Task OnDisconnectedAsync(Exception exception)
         {
             GroupEntity group = await RemoveFromMessageGroup();
+
             await Clients.Group(group.Name).SendAsync("UpdatedGroup", group);
 
             await base.OnDisconnectedAsync(exception);
@@ -94,7 +96,7 @@ namespace API.SignalR
             }
             else
             {
-                List<string> connections = await _tracker.GetConnectionsForUser(recipient.UserName);
+                List<string> connections = await _tracker.GetConnectionsForUser(recipient.Id);
                 if (connections != null)
                 {
                     await _presenceHub.Clients.Clients(connections).SendAsync("NewMessageReceived", 
@@ -161,8 +163,11 @@ namespace API.SignalR
         private async Task<GroupEntity> RemoveFromMessageGroup()
         {
             GroupEntity group = await _unitOfWork.messageRepository.GetGroupForConnection(Context.ConnectionId);
+
             ConnectionEntity connection = group.Connections.FirstOrDefault(x => x.ConnectionId == Context.ConnectionId);
+
             _unitOfWork.messageRepository.RemoveConnection(connection);
+
             if (await _unitOfWork.Complete())
             {
                 return group;

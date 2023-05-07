@@ -92,8 +92,10 @@ export class ChatService {
   }
 
   public stopChatHubConnection(): void {
-    if (this.hubConnection) {
-      this.hubConnection.stop();
+    if (!!this.hubConnection) {
+      this.hubConnection
+      .stop()
+      .catch((error) => this.alertMessageService.callErrorMessage(error));
     }
   }
 
@@ -109,7 +111,7 @@ export class ChatService {
       .catch((error) => this.alertMessageService.callErrorMessage(error));
   }
 
-  public deleteMessage(id: string): Promise<HubConnection> {
+  public async deleteMessage(id: string): Promise<HubConnection> {
     return this.hubConnection
       .invoke('DeleteMessage', id)
       .catch((error) => this.alertMessageService.callErrorMessage(error));

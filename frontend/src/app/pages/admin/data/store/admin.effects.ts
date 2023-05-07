@@ -19,6 +19,7 @@ import { PopupService } from 'src/app/core/services/popup.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MySettingsComponent } from 'src/app/core/components/my-settings/my-settings.component';
 import { PresenceService } from 'src/app/core/services/presence.service';
+import { ChatService } from '../../pages/chat/data/services/chat.service';
 
 @Injectable()
 export class AdminEffects {
@@ -29,6 +30,7 @@ export class AdminEffects {
     private popupService: PopupService,
     private translateService: TranslateService,
     private presenceService: PresenceService,
+    private chatService: ChatService,
   ) {}
 
   private loadUserEffect$ = createEffect(() => {
@@ -103,7 +105,10 @@ export class AdminEffects {
     () => {
       return this.actions$.pipe(
         ofType(destroyAdminPanel),
-        tap(() => this.presenceService.stopHubConnection()),
+        tap(() => {
+          this.chatService.stopChatHubConnection();
+          this.presenceService.stopHubConnection();
+        }),
       );
     },
     { dispatch: false },

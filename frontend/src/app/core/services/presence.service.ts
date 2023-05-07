@@ -53,7 +53,7 @@ export class PresenceService {
 
     this.hubConnection.on('NewMessageReceived', ({ username, knownAs }) => {
       this.alertMessageService.callInfoMessage(
-        knownAs + this.translateService.instant('PRESENCE_SERVISE'),
+        username + this.translateService.instant('PRESENCE_SERVISE'),
       );
     });
   }

@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { destroyAdminPanel, initAdminPanel } from './data/store/admin.actions';
-import { PresenceService } from 'src/app/core/services/presence.service';
 
 @Component({
   selector: 'app-admin',
