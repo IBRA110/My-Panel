@@ -55,6 +55,17 @@ export class UiAlertMessagesService {
     );
   }
 
+  public callNewMessage(message: string, func: Function) {
+    this.alert(
+      new Alert({
+        type: AlertType.MESSAGE,
+        message,
+        icon: 'assets/images/alert-message-icons/message.svg',
+        function: func,
+      }),
+    );
+  }
+
   private alert(alert: Alert) {
     alert.id = alert.id || this.defaultId;
     this.subject.next(alert);

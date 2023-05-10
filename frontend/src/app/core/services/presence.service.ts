@@ -9,6 +9,8 @@ import {
   getOnlineUsers,
   removeOfflineUser,
 } from 'src/app/pages/admin/data/store/admin.actions';
+import { setRecipient } from 'src/app/pages/admin/pages/chat/data/store/chat.actions';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +23,7 @@ export class PresenceService {
     private alertMessageService: UiAlertMessagesService,
     private translateService: TranslateService,
     private store: Store,
+    private router: Router,
   ) {}
 
   public createHubConnection(): void {
@@ -52,8 +55,9 @@ export class PresenceService {
     });
 
     this.hubConnection.on('NewMessageReceived', ({ username, knownAs }) => {
-      this.alertMessageService.callInfoMessage(
+      this.alertMessageService.callNewMessage(
         username + this.translateService.instant('PRESENCE_SERVISE'),
+        () => this.redirectToChat(username),
       );
     });
   }
@@ -62,5 +66,10 @@ export class PresenceService {
     this.hubConnection
       .stop()
       .catch((error) => this.alertMessageService.callErrorMessage(error));
+  }
+
+  public redirectToChat(username: string): void {
+    this.store.dispatch(setRecipient({ recipientUsername: username }));
+    this.router.navigate(['admin/chat']);
   }
 }

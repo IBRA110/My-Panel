@@ -4,15 +4,16 @@
     class="{{ alert.type }}"
     [ngClass]="{ hideAlertMessage: alert.isHide }"
     [@flyInOut]="'in'"
+    (click)="runFunction(alert)"
   >
     <div class="icon">
       <img src="{{ alert.icon }}" alt="svg" />
     </div>
     <div *ngIf="!!alert.type">
-      <p class="message-type">{{ alert.type.toUpperCase() }}!</p>
+      <p class="message-type"><span *ngIf="alert.type === 'message'">NEW</span> {{ alert.type.toUpperCase() }}!</p>
       <p>{{ alert.message }}</p>
     </div>
-    <button class="close" (click)="removeAlert(alert)">
+    <button class="close" (click)="removeAlert($event, alert)">
       <img src="assets/images/alert-message-icons/union.svg" alt="svg" />
     </button>
   </div>

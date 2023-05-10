@@ -4,6 +4,7 @@ export class Alert {
   public message?: string;
   public icon?: string;
   public isHide: boolean = false;
+  public function?: Function;
 
   public constructor(init?: Partial<Alert>) {
     Object.assign(this, init);
@@ -15,4 +16,5 @@ export enum AlertType {
   ERROR = 'error',
   INFO = 'information',
   WARNING = 'warning',
+  MESSAGE = 'message',
 }

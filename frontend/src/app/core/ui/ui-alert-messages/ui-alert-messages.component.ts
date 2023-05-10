@@ -57,10 +57,17 @@ export class UiAlertMessagesComponent implements OnInit {
     });
   }
 
-  public removeAlert(alert: Alert) {
+  public removeAlert(event: Event, alert: Alert): void {
+    event.stopPropagation();
     setTimeout(() => {
       this.alerts = this.alerts.filter((x) => x !== alert);
       this.changeDetectorRef.detectChanges();
     }, 250);
+  }
+
+  public runFunction(alert: Alert): void {
+    if (!!alert.function) {
+      alert.function();
+    }
   }
 }

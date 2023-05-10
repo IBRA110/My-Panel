@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: flex-start;
   
-  .success, .error, .warning, .information{
+  .success, .error, .warning, .information, .message {
     width: 300px;
     min-height: 50px;
     background-color: var(--base-backgound-color);
@@ -76,7 +76,7 @@
   .error{
       border-left: 4px solid var(--error);
   }
-  .warning{
+  .warning, .message{
       border-left: 4px solid var(--warning);
   }
   .information{

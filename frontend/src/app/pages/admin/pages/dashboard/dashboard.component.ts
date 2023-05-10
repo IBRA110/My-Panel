@@ -4,6 +4,7 @@ import { selectUser } from '../../data/store/admin.selectors';
 import { User } from '../../data/interfaces/user.interfase';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +21,7 @@ export class DashboardComponent {
   public constructor(
     private store: Store,
     private translateService: TranslateService,
+    private alertMessage: UiAlertMessagesService,
   ) {}
 
   public getTimeOfTheDay(): string {
