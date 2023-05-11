@@ -16,5 +16,6 @@ namespace Core.Interfaces
         Task<MessageEntity> GetMessage(string id);
         Task<PagedList<MessageDTO>> GetMessagesForUser(MessageParams messageParams);
         Task<IEnumerable<MessageDTO>> GetMessageThread(string currentUserName, string recipientUserName);
+        Task<string> GetCountOfUnreadMessages(string userName);
     }
 }

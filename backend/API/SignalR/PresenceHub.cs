@@ -21,10 +21,13 @@ namespace API.SignalR
             string userId = Context.User.FindFirst("Id")?.Value;
             
             bool isOnline = await _tracker.UserConnected(userId, Context.ConnectionId);
+            
             if (isOnline)
             {
                 await Clients.Others.SendAsync("UserIsOnline", userId);
-            }            
+            }
+            
+            await _unitOfWork.messageRepository.GetCountOfUnreadMessages(Context.User.FindFirst("UserName")?.Value);
 
             string[] currentUsers = await _tracker.GetOnlineUsers();
             await Clients.Caller.SendAsync("GetOnlineUsers", currentUsers);

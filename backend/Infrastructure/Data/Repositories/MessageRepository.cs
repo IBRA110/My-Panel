@@ -86,20 +86,10 @@ namespace Infrastructure.Data.Repositories
                     || m.Recipient.UserName == recipientUserName
                     && m.Sender.UserName == currentUserName && m.SenderDeleted == false
                 )
+                .MarkUnreadAsRead(currentUserName)
                 .OrderBy(m => m.MessageSent)
                 .ProjectTo<MessageDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync();
-
-            List<MessageDTO> unreadMessages = messages.Where(m => m.DateRead == null
-                && m.RecipientUserName == currentUserName).ToList();
-
-            if (unreadMessages.Any())
-            {
-                foreach (var message in unreadMessages)
-                {
-                    message.DateRead = DateTime.UtcNow;
-                }
-            }
 
             return messages;
         }
@@ -110,6 +100,17 @@ namespace Infrastructure.Data.Repositories
                 .Include(c => c.Connections)
                 .Where(c => c.Connections.Any(x => x.ConnectionId == connectionId))
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<string> GetCountOfUnreadMessages(string userName)
+        {
+            List<MessageDTO> messages = await _context.Messages
+                .Where(m => m.RecipientUserName == userName)
+                .ProjectTo<MessageDTO>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            messages.ForEach(m => Console.WriteLine(m.DateRead));
+            return "Success!";
         }
     }
 }
