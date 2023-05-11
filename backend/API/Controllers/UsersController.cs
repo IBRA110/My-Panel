@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Core.Interfaces;
-using Core.DTOs;
 using AutoMapper;
 using Core.Entities;
 using Core.Helpers;
 using API.Extensions;
+using Core.DTOs.ImageDTOs;
+using Core.DTOs.UserDTOs;
 
 namespace API.Controllers
 {

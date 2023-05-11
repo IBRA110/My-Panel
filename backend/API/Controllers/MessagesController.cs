@@ -1,10 +1,10 @@
-using Core.DTOs;
 using API.Extensions;
 using Core.Helpers;
 using Core.Interfaces;
 using Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Core.DTOs.MessageDTOs;
 
 namespace API.Controllers
 {

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Core.DTOs
+namespace Core.DTOs.MessageDTOs
 {
     public class MessageDTO
     {
@@ -17,6 +17,7 @@ namespace Core.DTOs
 
         [JsonIgnore]
         public bool SenderDeleted { get; set; }
+
         [JsonIgnore]
         public bool RecipientDeleted { get; set; }
     }

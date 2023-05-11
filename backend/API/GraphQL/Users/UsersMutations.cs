@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using Core.DTOs;
+using Core.DTOs.ImageDTOs;
+using Core.DTOs.UserDTOs;
 using Core.Entities;
 using Core.Interfaces;
 using HotChocolate.Authorization;

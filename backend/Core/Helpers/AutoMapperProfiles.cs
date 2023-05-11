@@ -1,6 +1,9 @@
-using Core.DTOs;
 using Core.Entities;
 using AutoMapper;
+using Core.DTOs.ImageDTOs;
+using Core.DTOs.MessageDTOs;
+using Core.DTOs.AccountDTOs;
+using Core.DTOs.UserDTOs;
 
 namespace Core.Helpers
 {

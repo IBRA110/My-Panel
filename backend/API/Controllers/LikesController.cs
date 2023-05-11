@@ -1,8 +1,8 @@
-using Core.DTOs;
 using Core.Interfaces;
 using Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Core.DTOs.ImageDTOs;
 
 namespace API.Controllers
 {

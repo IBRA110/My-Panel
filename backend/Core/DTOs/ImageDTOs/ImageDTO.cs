@@ -1,6 +1,6 @@
 using Core.Entities;
 
-namespace Core.DTOs
+namespace Core.DTOs.ImageDTOs
 {
     public class ImageDTO
     {

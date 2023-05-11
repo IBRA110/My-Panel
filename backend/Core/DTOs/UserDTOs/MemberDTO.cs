@@ -1,4 +1,6 @@
-namespace Core.DTOs
+using Core.DTOs.ImageDTOs;
+
+namespace Core.DTOs.UserDTOs
 {
     public class MemberDTO
     {

@@ -7,6 +7,7 @@ using HotChocolate.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
+using Core.DTOs.AccountDTOs;
 
 namespace API.GraphQL.Account
 {

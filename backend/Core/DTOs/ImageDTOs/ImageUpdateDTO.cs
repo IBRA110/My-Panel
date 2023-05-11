@@ -1,5 +1,4 @@
-﻿
-namespace Core.DTOs
+﻿namespace Core.DTOs.ImageDTOs
 {
     public class ImageUpdateDTO
     {

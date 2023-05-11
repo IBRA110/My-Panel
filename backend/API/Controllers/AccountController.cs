@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
+using Core.DTOs.AccountDTOs;
 
 namespace API.Controllers
 {

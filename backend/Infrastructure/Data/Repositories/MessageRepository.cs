@@ -1,10 +1,10 @@
-using Core.DTOs;
 using Core.Helpers;
 using Core.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Core.DTOs.MessageDTOs;
 
 namespace Infrastructure.Data.Repositories
 {
@@ -103,7 +103,6 @@ namespace Infrastructure.Data.Repositories
 
             return messages;
         }
-
 
         public async Task<GroupEntity> GetGroupForConnection(string connectionId)
         {

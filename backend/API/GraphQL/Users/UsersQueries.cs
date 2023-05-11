@@ -1,4 +1,4 @@
-using Core.DTOs;
+using Core.DTOs.UserDTOs;
 using Core.Interfaces;
 using HotChocolate.Authorization;
 using System.Security.Claims;

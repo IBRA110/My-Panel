@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
-using Core.DTOs;
 using Core.Helpers;
 using Core.Interfaces;
 using Core.Entities;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Core.DTOs.UserDTOs;
 
 namespace Infrastructure.Data.Repositories
 {

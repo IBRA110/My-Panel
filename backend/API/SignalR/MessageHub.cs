@@ -1,4 +1,3 @@
-using Core.DTOs;
 using Core.Interfaces;
 using AutoMapper;
 using Core.Entities;
@@ -6,6 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 using Infrastructure.Data;
 using System.Security.Claims;
 using Org.BouncyCastle.Cms;
+using Core.DTOs.MessageDTOs;
 
 namespace API.SignalR
 {

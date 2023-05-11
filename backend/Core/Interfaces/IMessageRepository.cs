@@ -1,6 +1,6 @@
-using Core.DTOs;
 using Core.Helpers;
 using Core.Entities;
+using Core.DTOs.MessageDTOs;
 
 namespace Core.Interfaces
 {
