@@ -89,7 +89,7 @@ namespace API.SignalR
             string groupName = GetGroupName(sender.UserName, recipient.UserName);
     
             GroupEntity group = await _unitOfWork.messageRepository.GetMessageGroup(groupName);
-
+            
             if (group.Connections.Any(x => x.UserName == recipient.UserName))
             {
                 message.DateRead = DateTime.UtcNow;

@@ -102,15 +102,28 @@ namespace Infrastructure.Data.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<string> GetCountOfUnreadMessages(string userName)
+        public async Task<CountOfUnreadMessages> GetCountOfUnreadMessages(string userName)
         {
             List<MessageDTO> messages = await _context.Messages
-                .Where(m => m.RecipientUserName == userName)
+                .Where(m => m.RecipientUserName == userName && m.DateRead == null)
                 .ProjectTo<MessageDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
-            messages.ForEach(m => Console.WriteLine(m.DateRead));
-            return "Success!";
+            CountOfUnreadMessages unreadMessages = new CountOfUnreadMessages(messages.Count);
+                        
+            messages.ForEach(m =>
+            {
+                if (unreadMessages.CountBySender.ContainsKey(m.SenderUserName) == true)
+                {
+                    unreadMessages.CountBySender[m.SenderUserName] += 1;
+                }
+                else
+                {
+                    unreadMessages.CountBySender.Add(m.SenderUserName, 1);
+                }
+            });
+
+            return unreadMessages;
         }
     }
 }

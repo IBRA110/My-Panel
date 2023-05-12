@@ -2,13 +2,11 @@
 {
     public class CountOfUnreadMessages
     {
+        public CountOfUnreadMessages(int count) 
+        {
+            TotalCount = count;
+        }
         public int TotalCount { get; set; }
-        public IEnumerable<CountBySender> CountBySender { get; set; }
-    }
-
-    public class CountBySender
-    {
-        public string SenderName { get; set; }
-        public int Count { get; set; }
+        public Dictionary<string, int> CountBySender { get; set; } = new Dictionary<string, int>();
     }
 }

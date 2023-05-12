@@ -1,3 +1,4 @@
+using Core.DTOs.MessageDTOs;
 using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -16,6 +17,7 @@ namespace API.SignalR
             _unitOfWork = unitOfwWork;
 
         }
+
         public override async Task OnConnectedAsync()
         {
             string userId = Context.User.FindFirst("Id")?.Value;
@@ -26,12 +28,16 @@ namespace API.SignalR
             {
                 await Clients.Others.SendAsync("UserIsOnline", userId);
             }
-            
-            await _unitOfWork.messageRepository.GetCountOfUnreadMessages(Context.User.FindFirst("UserName")?.Value);
 
+            CountOfUnreadMessages countOfUnreadMessages = await _unitOfWork.messageRepository.GetCountOfUnreadMessages(Context.User.FindFirst("UserName")?.Value);
+            
+            await Clients.Caller.SendAsync("GetCountOfUnreadMessages", countOfUnreadMessages);
+            
             string[] currentUsers = await _tracker.GetOnlineUsers();
+
             await Clients.Caller.SendAsync("GetOnlineUsers", currentUsers);
         }
+
         public override async Task OnDisconnectedAsync(Exception exception)
         {
             string userId = Context.User.FindFirst("Id")?.Value;
