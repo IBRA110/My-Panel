@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { AdminActionsEnum } from './admin.enum';
 import { UpdateUser, User } from '../interfaces/user.interfase';
+import { CountOfUnreadMessages } from 'src/app/core/interfaces/count-of-unread-messages.interface';
 
 export const toggleSidebar = createAction(AdminActionsEnum.TOGGLE_SIDEBAR);
 
@@ -53,4 +54,9 @@ export const getOnlineUser = createAction(
 export const removeOfflineUser = createAction(
   AdminActionsEnum.USER_IS_OFFLINE,
   props<{ user: string }>(),
+);
+
+export const getCountOfUnreadMessages = createAction(
+  AdminActionsEnum.COUNT_OF_UNREAD_MESSAGES,
+  props<{ payload: CountOfUnreadMessages }>(),
 );

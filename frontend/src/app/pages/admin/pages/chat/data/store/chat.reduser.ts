@@ -12,8 +12,13 @@ import {
 } from './chat.actions';
 import {
   getOnlineUser,
+  loadUserFailed,
   removeOfflineUser,
 } from 'src/app/pages/admin/data/store/admin.actions';
+import {
+  refreshTokenFailed,
+  signOutSuccess,
+} from 'src/app/pages/authentication/data/store/authentication.actions';
 
 export const chatFeatureKey = 'chat';
 
@@ -89,6 +94,7 @@ const chatReducer = createRehydrateReducer(
     ...state,
     recipient: action.recipient,
   })),
+  on(refreshTokenFailed, signOutSuccess, loadUserFailed, () => initialState),
 );
 
 export function reducer(state: ChatState | undefined, action: Action) {

@@ -14,4 +14,5 @@ export enum AdminActionsEnum {
   GET_ONLINE_USERS = '[Admin] get online users',
   USER_IS_ONLINE = '[Admin] user is online',
   USER_IS_OFFLINE = '[Admin] user is offline',
+  COUNT_OF_UNREAD_MESSAGES = '[Admin] get count of unread messages',
 }

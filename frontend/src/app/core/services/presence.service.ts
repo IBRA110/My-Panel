@@ -5,12 +5,14 @@ import { UiAlertMessagesService } from './ui-alert-messages.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
 import {
+  getCountOfUnreadMessages,
   getOnlineUser,
   getOnlineUsers,
   removeOfflineUser,
 } from 'src/app/pages/admin/data/store/admin.actions';
 import { setRecipient } from 'src/app/pages/admin/pages/chat/data/store/chat.actions';
 import { Router } from '@angular/router';
+import { CountOfUnreadMessages } from '../interfaces/count-of-unread-messages.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -60,6 +62,15 @@ export class PresenceService {
         () => this.redirectToChat(username),
       );
     });
+
+    this.hubConnection.on(
+      'GetCountOfUnreadMessages',
+      (countOfUnreadMessages: CountOfUnreadMessages) => {
+        this.store.dispatch(
+          getCountOfUnreadMessages({ payload: countOfUnreadMessages }),
+        );
+      },
+    );
   }
 
   public stopHubConnection(): void {

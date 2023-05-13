@@ -1,6 +1,7 @@
 import { Action, on } from '@ngrx/store';
 import { createRehydrateReducer } from 'src/app/core/reducers/rehydrate-reducer';
 import {
+  getCountOfUnreadMessages,
   getOnlineUser,
   getOnlineUsers,
   loadUserFailed,
@@ -60,6 +61,10 @@ const adminReducer = createRehydrateReducer(
   on(removeOfflineUser, (state, { user }) => ({
     ...state,
     onlineUsers: [...state.onlineUsers.filter((x) => x !== user)],
+  })),
+  on(getCountOfUnreadMessages, (state, { payload }) => ({
+    ...state,
+    countOfUnreadMessages: payload,
   })),
   on(refreshTokenFailed, signOutSuccess, loadUserFailed, () => initialState),
 );

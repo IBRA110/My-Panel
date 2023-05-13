@@ -27,3 +27,8 @@ export const selectOnlineUsers = createSelector(
   selectAdminState,
   (adminState: AdminState) => adminState?.onlineUsers,
 );
+
+export const selectTotalCountOfUnreadMessages = createSelector(
+  selectAdminState,
+  (adminState: AdminState) => adminState?.countOfUnreadMessages.totalCount,
+);
