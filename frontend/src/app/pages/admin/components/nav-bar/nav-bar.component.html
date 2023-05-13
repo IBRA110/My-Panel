@@ -1,4 +1,4 @@
-<div class="nav-bar" [ngClass]="{ active: isSideBarToggled$ | async }">
+<div class="nav-bar" [ngClass]="{ active: data.isSideBarToggled }">
   <div class="nav-bar_btn" (click)="toggleButtonActive()"></div>
   <ul class="nav-bar_menu">
     <li class="menu-item">
@@ -37,14 +37,14 @@
         </svg>
       </a>
     </li>
-    <li class="menu-user" *ngIf="user$ | async as user" (click)="openSettings()">
-      <div class="user-img" *ngIf="!!(userAvatar$ | async) === true">
-        <img [src]="baseUrl + (userAvatar$ | async)" alt="User image" />
+    <li class="menu-user" (click)="openSettings()">
+      <div class="user-img" *ngIf="!!data.user.photoUrl">
+        <img [src]="baseUrl + data.user.photoUrl" alt="User image" />
       </div>
-      <div class="user-img" *ngIf="!!(userAvatar$ | async) === false">
+      <div class="user-img" *ngIf="!!!data.user.photoUrl">
         <img [src]="defaultAvatarUrl" alt="User image" />
       </div>
-      <p class="user-name">{{ user.firstName }} {{ user.lastName }}</p>
+      <p class="user-name">{{ data.user.firstName }} {{ data.user.lastName }}</p>
     </li>
     <li class="menu-item">
       <button (click)="signOut()">

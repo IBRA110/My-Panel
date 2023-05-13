@@ -8,6 +8,16 @@ export const selectIsSideBarToggled = createSelector(
   (adminState: AdminState) => adminState.isSideBarToggled,
 );
 
+export const selectDataForNavSideBar = createSelector(
+  selectAdminState,
+  (adminState: AdminState) => {
+    return {
+      isSideBarToggled: adminState.isSideBarToggled,
+      user: adminState.user,
+    };
+  },
+);
+
 export const selectUser = createSelector(
   selectAdminState,
   (adminState: AdminState) => adminState?.user,

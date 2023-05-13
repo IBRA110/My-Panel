@@ -1,7 +1,4 @@
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { selectIsSideBarToggled } from '../../data/store/admin.selectors';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-side-bar',
@@ -9,9 +6,5 @@ import { selectIsSideBarToggled } from '../../data/store/admin.selectors';
   styleUrls: ['./side-bar.component.scss'],
 })
 export class SideBarComponent {
-  public isSidebarToggled$: Observable<boolean> = this.store.select(
-    selectIsSideBarToggled,
-  );
-
-  public constructor(private store: Store) {}
+  @Input() public isSidebarToggled: boolean;
 }

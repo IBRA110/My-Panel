@@ -1,7 +1,12 @@
 <div class="admin">
-  <app-nav-bar></app-nav-bar>
+  <app-nav-bar
+    [data]="dataForNavSideBar$ | async"
+    (toggleButton)="toggleButtonActive()"
+    (out)="signOut()"
+    (openPopup)="openSettings()"
+  ></app-nav-bar>
   <div class="admin-wrapper">
-    <app-side-bar></app-side-bar>
+    <app-side-bar [isSidebarToggled]="(dataForNavSideBar$ | async).isSideBarToggled"></app-side-bar>
     <div class="admin-wrapper_router">
       <router-outlet></router-outlet>
     </div>
