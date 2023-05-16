@@ -36,7 +36,7 @@
           />
         </svg>
       </a>
-      <div class="menu-item_count">
+      <div *ngIf="!!data.totalCountOfUnreadMessages" class="menu-item_count">
         {{ data.totalCountOfUnreadMessages }}
       </div>
     </li>

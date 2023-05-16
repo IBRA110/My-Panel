@@ -127,6 +127,7 @@
       align-items: center;
       justify-content: center;
       border-radius: 10px;
+      position: relative;
       padding: 10px;
       border: 1px solid var(--selected-tab-color);
       cursor: pointer;
@@ -143,6 +144,17 @@
             fill: var(--button-background-default-color);
           }
         }
+      }
+      &__count {
+        position: absolute;
+        top: 0;
+        right: 0; 
+        padding: 3px 6px;
+        background-color: var(--information);
+        color: var(--button-text-color);
+        border-radius: 50%;
+
+        @include Message_Date;
       }
       svg {
         width: 20px;
