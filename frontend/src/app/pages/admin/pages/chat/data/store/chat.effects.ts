@@ -19,7 +19,10 @@ import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { ChatService } from '../services/chat.service';
 import { ChatUsers } from '../interfaces/users.interface';
 import { Store } from '@ngrx/store';
-import { selectOnlineUsers } from 'src/app/pages/admin/data/store/admin.selectors';
+import {
+  selectCountOfUnreadMessagesBySender,
+  selectOnlineUsers,
+} from 'src/app/pages/admin/data/store/admin.selectors';
 import { UiAlertMessagesService } from 'src/app/core/services/ui-alert-messages.service';
 
 @Injectable()
@@ -34,8 +37,11 @@ export class ChatEffects {
   private loadUsersEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadUsers),
-      concatLatestFrom(() => [this.store.select(selectOnlineUsers)]),
-      switchMap(([action, onlineUsers]) => {
+      concatLatestFrom(() => [
+        this.store.select(selectOnlineUsers),
+        this.store.select(selectCountOfUnreadMessagesBySender),
+      ]),
+      switchMap(([action, onlineUsers, messagesBySender]) => {
         return this.chatService.getUsers(action).pipe(
           map((data) => {
             const users: ChatUsers[] = data.data.users
@@ -48,6 +54,9 @@ export class ChatEffects {
                   photoUrl: u.photoUrl,
                   lastName: !!u.lastName ? u.lastName : '',
                   isOnline: onlineUsers.some((id) => id === u.id),
+                  countOfUnreadMessages: !!messagesBySender[u.userName]
+                    ? messagesBySender[u.userName]
+                    : 0,
                 };
               })
               .sort((x) => (x.isOnline ? -1 : 1));

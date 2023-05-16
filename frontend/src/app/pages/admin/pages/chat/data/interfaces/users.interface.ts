@@ -6,6 +6,7 @@ export interface ChatUsers {
   lastActive: string;
   photoUrl: string;
   isOnline: boolean;
+  countOfUnreadMessages?: number;
 }
 
 export interface Recipient {

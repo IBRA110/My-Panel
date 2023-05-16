@@ -6,7 +6,7 @@
     (openPopup)="openSettings()"
   ></app-nav-bar>
   <div class="admin-wrapper">
-    <app-side-bar [isSidebarToggled]="(dataForNavSideBar$ | async).isSideBarToggled"></app-side-bar>
+    <app-side-bar [isSidebarToggled]="(dataForNavSideBar$ | async)?.isSideBarToggled"></app-side-bar>
     <div class="admin-wrapper_router">
       <router-outlet></router-outlet>
     </div>
