@@ -41,13 +41,13 @@
       </div>
     </li>
     <li class="menu-user" (click)="openSettings()">
-      <div class="user-img" *ngIf="!!data.user.photoUrl">
-        <img [src]="baseUrl + data.user.photoUrl" alt="User image" />
+      <div class="user-img" *ngIf="!!data.user?.photoUrl">
+        <img [src]="baseUrl + data.user?.photoUrl" alt="User image" />
       </div>
-      <div class="user-img" *ngIf="!!!data.user.photoUrl">
+      <div class="user-img" *ngIf="!!!data.user?.photoUrl">
         <img [src]="defaultAvatarUrl" alt="User image" />
       </div>
-      <p class="user-name">{{ data.user.firstName }} {{ data.user.lastName }}</p>
+      <p class="user-name">{{ data.user?.firstName }} {{ data.user?.lastName }}</p>
     </li>
     <li class="menu-item">
       <button (click)="signOut()">

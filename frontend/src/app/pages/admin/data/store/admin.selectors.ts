@@ -12,9 +12,9 @@ export const selectDataForNavSideBar = createSelector(
   selectAdminState,
   (adminState: AdminState) => {
     return {
-      isSideBarToggled: adminState.isSideBarToggled,
+      isSideBarToggled: adminState?.isSideBarToggled,
       user: adminState.user,
-      totalCountOfUnreadMessages: adminState.countOfUnreadMessages.totalCount,
+      totalCountOfUnreadMessages: adminState.countOfUnreadMessages?.totalCount,
     };
   },
 );
@@ -41,5 +41,5 @@ export const selectOnlineUsers = createSelector(
 
 export const selectCountOfUnreadMessagesBySender = createSelector(
   selectAdminState,
-  (adminState: AdminState) => adminState?.countOfUnreadMessages.countBySender,
+  (adminState: AdminState) => adminState?.countOfUnreadMessages?.countBySender,
 );
