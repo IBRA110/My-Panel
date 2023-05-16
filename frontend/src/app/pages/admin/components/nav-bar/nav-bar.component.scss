@@ -66,6 +66,7 @@
     .menu-item {
       height: 80%;
       width: 60px;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -88,7 +89,18 @@
         }
       }
 
-      
+      &_count {
+        position: absolute;
+        top: 0;
+        right: 0; 
+        padding: 3px 6px;
+        background-color: var(--information);
+        color: var(--button-text-color);
+        border-radius: 50%;
+
+        @include Message_Date;
+      }
+
       button{
         width: 30px;
       }

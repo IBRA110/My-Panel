@@ -8,7 +8,6 @@ import {
 import {
   selectDataForNavSideBar,
   selectIsSideBarToggled,
-  selectTotalCountOfUnreadMessages,
 } from './data/store/admin.selectors';
 import { Observable } from 'rxjs';
 import { DataForNavSideBar } from './data/interfaces/data-for-nav-side-bar.interface';
@@ -22,13 +21,6 @@ import { PopupService } from 'src/app/core/services/popup.service';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit, OnDestroy {
-  public totalCountOfUnreadMessages: Observable<number> = this.store.select(
-    selectTotalCountOfUnreadMessages,
-  );
-  public isSidebarToggled$: Observable<boolean> = this.store.select(
-    selectIsSideBarToggled,
-  );
-
   public dataForNavSideBar$: Observable<DataForNavSideBar> = this.store.select(
     selectDataForNavSideBar,
   );

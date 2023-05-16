@@ -36,6 +36,9 @@
           />
         </svg>
       </a>
+      <div class="menu-item_count">
+        {{ data.totalCountOfUnreadMessages }}
+      </div>
     </li>
     <li class="menu-user" (click)="openSettings()">
       <div class="user-img" *ngIf="!!data.user.photoUrl">
