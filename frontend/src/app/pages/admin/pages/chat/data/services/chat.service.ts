@@ -94,8 +94,8 @@ export class ChatService {
   public stopChatHubConnection(): void {
     if (!!this.hubConnection) {
       this.hubConnection
-      .stop()
-      .catch((error) => this.alertMessageService.callErrorMessage(error));
+        .stop()
+        .catch((error) => this.alertMessageService.callErrorMessage(error));
     }
   }
 
