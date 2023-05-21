@@ -7,6 +7,7 @@ import {
   loadUserFailed,
   loadUserSuccess,
   removeOfflineUser,
+  setNewMessageCount,
   toggleSidebar,
   updateUserSuccess,
   uploadAvatarSuccess,
@@ -64,11 +65,36 @@ const adminReducer = createRehydrateReducer(
   })),
   on(getCountOfUnreadMessages, (state, { payload }) => ({
     ...state,
-    countOfUnreadMessages: payload,
+    countOfUnreadMessages: {
+      totalCount: payload.totalCount,
+      countBySender: payload.countBySender,
+    },
+  })),
+  on(setNewMessageCount, (state, { username }) => ({
+    ...state,
+    countOfUnreadMessages: {
+      totalCount: state.countOfUnreadMessages.totalCount + 1,
+      countBySender: setNewMessage(
+        { ...state.countOfUnreadMessages.countBySender },
+        username,
+      ),
+    },
   })),
   on(refreshTokenFailed, signOutSuccess, loadUserFailed, () => initialState),
 );
 
 export function reducer(state: AdminState | undefined, action: Action) {
   return adminReducer(state, action);
+}
+
+function setNewMessage(
+  dict: Record<string, number>,
+  username: string,
+): Record<string, number> {
+  if (!!dict[username]) {
+    dict[username] += 1;
+    return dict;
+  }
+  dict[username] = 1;
+  return dict;
 }

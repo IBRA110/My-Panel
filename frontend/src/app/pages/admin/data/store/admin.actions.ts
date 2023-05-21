@@ -60,3 +60,8 @@ export const getCountOfUnreadMessages = createAction(
   AdminActionsEnum.COUNT_OF_UNREAD_MESSAGES,
   props<{ payload: CountOfUnreadMessages }>(),
 );
+
+export const setNewMessageCount = createAction(
+  AdminActionsEnum.NEW_MESSAGE,
+  props<{ username: string }>(),
+);

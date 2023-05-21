@@ -12,5 +12,5 @@ export const initialState: AdminState = {
   isSideBarToggled: false,
   user: null,
   onlineUsers: null,
-  countOfUnreadMessages: null,
+  countOfUnreadMessages: { totalCount: 0, countBySender: null },
 };

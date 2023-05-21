@@ -14,6 +14,7 @@ import {
   getOnlineUser,
   loadUserFailed,
   removeOfflineUser,
+  setNewMessageCount,
 } from 'src/app/pages/admin/data/store/admin.actions';
 import {
   refreshTokenFailed,
@@ -93,6 +94,17 @@ const chatReducer = createRehydrateReducer(
   on(loadRecipientSuccess, (state, action) => ({
     ...state,
     recipient: action.recipient,
+  })),
+  on(setNewMessageCount, (state, action) => ({
+    ...state,
+    users: [
+      ...state.users.map((u) => {
+        if (u.userName === action.username) {
+          return { ...u, countOfUnreadMessages: u.countOfUnreadMessages + 1 };
+        }
+        return u;
+      }),
+    ],
   })),
   on(refreshTokenFailed, signOutSuccess, loadUserFailed, () => initialState),
 );

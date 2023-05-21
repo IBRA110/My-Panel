@@ -9,6 +9,7 @@ import {
   getOnlineUser,
   getOnlineUsers,
   removeOfflineUser,
+  setNewMessageCount,
 } from 'src/app/pages/admin/data/store/admin.actions';
 import { setRecipient } from 'src/app/pages/admin/pages/chat/data/store/chat.actions';
 import { Router } from '@angular/router';
@@ -57,6 +58,7 @@ export class PresenceService {
     });
 
     this.hubConnection.on('NewMessageReceived', ({ username, knownAs }) => {
+      this.store.dispatch(setNewMessageCount({ username: username }));
       this.alertMessageService.callNewMessage(
         username + this.translateService.instant('PRESENCE_SERVISE'),
         () => this.redirectToChat(username),
@@ -67,7 +69,9 @@ export class PresenceService {
       'GetCountOfUnreadMessages',
       (countOfUnreadMessages: CountOfUnreadMessages) => {
         this.store.dispatch(
-          getCountOfUnreadMessages({ payload: countOfUnreadMessages }),
+          getCountOfUnreadMessages({
+            payload: countOfUnreadMessages,
+          }),
         );
       },
     );
