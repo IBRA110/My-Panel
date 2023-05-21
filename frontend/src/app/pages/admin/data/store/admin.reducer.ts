@@ -1,37 +1,27 @@
 import { Action, on } from '@ngrx/store';
 import { createRehydrateReducer } from 'src/app/core/reducers/rehydrate-reducer';
-import {
-  getCountOfUnreadMessages,
-  getOnlineUser,
-  getOnlineUsers,
-  loadUserFailed,
-  loadUserSuccess,
-  removeOfflineUser,
-  setNewMessageCount,
-  toggleSidebar,
-  updateUserSuccess,
-  uploadAvatarSuccess,
-} from './admin.actions';
+import * as adminActions from './admin.actions';
 import { AdminState, initialState } from './admin.state';
 import {
   refreshTokenFailed,
   signOutSuccess,
 } from 'src/app/pages/authentication/data/store/authentication.actions';
+import { setRecipient } from '../../pages/chat/data/store/chat.actions';
 
 export const adminFeatureKey = 'admin';
 
 const adminReducer = createRehydrateReducer(
   adminFeatureKey,
   initialState,
-  on(toggleSidebar, (state) => ({
+  on(adminActions.toggleSidebar, (state) => ({
     ...state,
     isSideBarToggled: !state.isSideBarToggled,
   })),
-  on(loadUserSuccess, (state, { user }) => ({
+  on(adminActions.loadUserSuccess, (state, { user }) => ({
     ...state,
     user: user,
   })),
-  on(updateUserSuccess, (state, { updateUser }) => ({
+  on(adminActions.updateUserSuccess, (state, { updateUser }) => ({
     ...state,
     user: {
       ...state.user,
@@ -44,33 +34,33 @@ const adminReducer = createRehydrateReducer(
       country: updateUser.country,
     },
   })),
-  on(uploadAvatarSuccess, (state, { url }) => ({
+  on(adminActions.uploadAvatarSuccess, (state, { url }) => ({
     ...state,
     user: {
       ...state.user,
       photoUrl: url,
     },
   })),
-  on(getOnlineUsers, (state, { users }) => ({
+  on(adminActions.getOnlineUsers, (state, { users }) => ({
     ...state,
     onlineUsers: users,
   })),
-  on(getOnlineUser, (state, { user }) => ({
+  on(adminActions.getOnlineUser, (state, { user }) => ({
     ...state,
     onlineUsers: [...state.onlineUsers, user],
   })),
-  on(removeOfflineUser, (state, { user }) => ({
+  on(adminActions.removeOfflineUser, (state, { user }) => ({
     ...state,
     onlineUsers: [...state.onlineUsers.filter((x) => x !== user)],
   })),
-  on(getCountOfUnreadMessages, (state, { payload }) => ({
+  on(adminActions.getCountOfUnreadMessages, (state, { payload }) => ({
     ...state,
     countOfUnreadMessages: {
       totalCount: payload.totalCount,
       countBySender: payload.countBySender,
     },
   })),
-  on(setNewMessageCount, (state, { username }) => ({
+  on(adminActions.setNewMessageCount, (state, { username }) => ({
     ...state,
     countOfUnreadMessages: {
       totalCount: state.countOfUnreadMessages.totalCount + 1,
@@ -80,7 +70,26 @@ const adminReducer = createRehydrateReducer(
       ),
     },
   })),
-  on(refreshTokenFailed, signOutSuccess, loadUserFailed, () => initialState),
+  on(setRecipient, (state, action) => ({
+    ...state,
+    countOfUnreadMessages: {
+      totalCount:
+        state.countOfUnreadMessages.totalCount -
+        state.countOfUnreadMessages.countBySender[action.recipientUsername]
+          ? state.countOfUnreadMessages.countBySender[action.recipientUsername]
+          : 0,
+      countBySender: removeUnreadMessageCount(
+        { ...state.countOfUnreadMessages.countBySender },
+        action.recipientUsername,
+      ),
+    },
+  })),
+  on(
+    refreshTokenFailed,
+    signOutSuccess,
+    adminActions.loadUserFailed,
+    () => initialState,
+  ),
 );
 
 export function reducer(state: AdminState | undefined, action: Action) {
@@ -96,5 +105,17 @@ function setNewMessage(
     return dict;
   }
   dict[username] = 1;
+  return dict;
+}
+
+function removeUnreadMessageCount(
+  dict: Record<string, number>,
+  username: string,
+): Record<string, number> {
+  if (!!dict[username]) {
+    dict[username] = 0;
+    return dict;
+  }
+  dict[username] = 0;
   return dict;
 }

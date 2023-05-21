@@ -86,6 +86,14 @@ const chatReducer = createRehydrateReducer(
   on(setRecipient, (state, action) => ({
     ...state,
     recipientUserName: action.recipientUsername,
+    users: [
+      ...state.users.map((u) => {
+        if (u.userName === action.recipientUsername) {
+          return { ...u, countOfUnreadMessages: 0 };
+        }
+        return u;
+      }),
+    ],
   })),
   on(messageDeleted, (state, action) => ({
     ...state,
