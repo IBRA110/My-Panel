@@ -8,5 +8,9 @@
       [userId]="userId$ | async"
     ></app-messages>
   </div>
-  <app-users-list (recipient)="createChatConnection($event)" [users]="users$ | async"></app-users-list>
+  <app-users-list
+    (onInput)="search($event)"
+    (recipient)="createChatConnection($event)"
+    [users]="users$ | async"
+  ></app-users-list>
 </div>

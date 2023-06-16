@@ -69,6 +69,10 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
+  public search(value: string): void {
+    this.store.dispatch(loadUsers({ userName: value }));
+  }
+
   public deleteMessage(id: string): void {
     this.store.dispatch(deleteMessage({ id: id }));
   }
