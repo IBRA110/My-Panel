@@ -12,9 +12,9 @@ namespace Core.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<AppUserEntity, MemberDTO>()
-                .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => 
+                .ForMember(desk => desk.PhotoUrl, opt => opt.MapFrom(src => 
                     src.Images.FirstOrDefault(x => x.IsMain).Url))
-                .ForMember(dest => dest.Age, opt => opt.MapFrom(src =>
+                .ForMember(desk => desk.Age, opt => opt.MapFrom(src =>
                     src.DateOfBirth.CalculateAge()));
             CreateMap<ImageEntity, ImageDTO>();
             CreateMap<MemberUpdateDTO, AppUserEntity>();

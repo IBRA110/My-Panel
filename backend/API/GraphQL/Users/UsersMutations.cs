@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace API.GraphQL.Users
 {
-    [ExtendObjectType("Mutation")]
+    [ExtendObjectType("Mutations")]
     public class UsersMutations
     {
         [UseProjection]

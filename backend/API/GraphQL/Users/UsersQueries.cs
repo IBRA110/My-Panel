@@ -5,7 +5,7 @@ using System.Security.Claims;
 
 namespace API.GraphQL.Users
 {
-    [ExtendObjectType("Query")]
+    [ExtendObjectType("Queries")]
     public class UsersQueries
     {
         [UseProjection]
@@ -29,7 +29,7 @@ namespace API.GraphQL.Users
         public async Task<IQueryable<MemberDTO>> GetUsers(
             [Service] IUnitOfWork unitOfWork, 
             ClaimsPrincipal claimsPrincipal, 
-            string? userName)
+            string userName)
         {
             string id = claimsPrincipal.FindFirst("Id").Value;
 

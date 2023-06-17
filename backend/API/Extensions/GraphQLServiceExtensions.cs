@@ -13,12 +13,14 @@ namespace API.Extensions
                 .AddAuthorization()
                 .AddFiltering()
                 .AddSorting()
-                .AddMutationType(m => m.Name("Mutation")) 
+                .AddMutationType(m => m.Name("Mutations")) 
                 .AddType<AccountMutations>()
                 .AddType<UsersMutations>()
                 .AddType<UploadType>()
-                .AddQueryType(q => q.Name("Query"))
-                .AddType<UsersQueries>()                
+                .AddQueryType(q => q.Name("Queries"))
+                .AddType<MemberDTOTypeExtension>()
+                .AddType<ImageDTOTypeExtension>()
+                .AddType<UsersQueries>()
                 .AddErrorFilter(er =>
                 {
                     switch (er.Exception)

@@ -11,7 +11,7 @@ using Core.DTOs.AccountDTOs;
 
 namespace API.GraphQL.Account
 {
-    [ExtendObjectType("Mutation")]
+    [ExtendObjectType("Mutations")]
     public class AccountMutations
     {
         public async Task<SuccessDTO> Registration(
