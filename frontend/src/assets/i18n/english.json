@@ -46,7 +46,9 @@
     "PROFILE_UPDATE": "Profile updated successfully!"
   },
   "DISPLAY":{
-    "DISPLAY": "Display"
+    "DISPLAY": "Display",
+    "LIGHT": "Light Theme",
+    "DARK": "Dark Theme"
   },
   "DASHBOARD": {
     "GOOD_MORNING": "Good Morning!",

@@ -1,0 +1,37 @@
+@import "src/app/core/mixins/fonts";
+
+.display {
+  &-themes {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+
+    &_color {
+      border-radius: 5px;
+      border: 1px solid var(--base-text-color);
+      overflow: hidden;
+
+      &-name {
+        display: flex;
+        justify-content: flex-start;
+        padding-left: 10px;
+        align-items: center;
+        gap: 10px;
+        color: var(--base-text-color);
+        @include Paragraph;
+
+        &__image {
+          width: 20px;
+          height: 20px;
+          
+          svg {
+            path {
+              fill: var(--base-text-color);
+            }
+          }
+        }
+      }
+    }
+  }
+}
