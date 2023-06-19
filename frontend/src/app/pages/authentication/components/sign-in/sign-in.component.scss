@@ -52,7 +52,7 @@
       border-radius: 3px;
       padding: 0 10px;
       @include Input;
-      color: var(--light-text-color);
+      color: var(--input-text-color);
 
       &::-ms-reveal {
         display: none;

@@ -13,12 +13,6 @@
     width: 6px;
   }
   
-  &::-webkit-scrollbar-track {
-    background: var(--selected-tab-color);
-    box-shadow: var(--box-shadow-color) 0px 0.0625em 0.0625em,
-                var(--box-shadow-color) 0px 0.125em 0.5em,
-                rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
-  }
   
   &::-webkit-scrollbar-thumb {
     background-color: var(--button-background-default-color);
@@ -62,7 +56,7 @@
         border-radius: 3px;
         padding: 0 10px;
         @include Input;
-        color: var(--light-text-color);
+        color: var(--input-text-color);
               
         &:focus{
           box-shadow: var(--box-shadow-color) 0px 0px 0px 2px;

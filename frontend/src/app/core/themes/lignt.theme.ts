@@ -15,6 +15,9 @@ export const lightTheme: Theme = {
     '--button-background-active-color': 'rgb(2, 43, 110)',
     '--button-outline-basic-background-color': 'rgb(143, 155, 179)',
 
+    '--input-backgound-color': 'rgb(255,255,255)',
+    '--input-text-color': 'rgb(0, 48, 93)',
+
     '--selected-tab-color': 'rgba(199, 207, 214, 0.5)',
 
     '--success': 'rgb(46, 178, 59)',

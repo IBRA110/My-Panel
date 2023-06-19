@@ -12,8 +12,11 @@ export const darkTheme: Theme = {
     '--button-text-color': 'rgb(237, 245, 252)',
 
     '--button-background-default-color': 'rgb(14, 125, 22)',
-    '--button-background-active-color': 'rgb(2, 43, 110)',
+    '--button-background-active-color': 'rgb(11, 97, 16)',
     '--button-outline-basic-background-color': 'rgb(143, 155, 179)',
+
+    '--input-backgound-color': 'rgb(255,255,255)',
+    '--input-text-color': 'rgb(0, 48, 93)',
 
     '--selected-tab-color': 'rgba(199, 207, 214, 0.5)',
 
