@@ -1,6 +1,7 @@
 @import "src/app/core/mixins/fonts";
 
 .profile{
+  color: var(--base-text-color);
 
   &-header{
     display: flex;

@@ -52,6 +52,12 @@
       border: none;
       border-radius: 0;
       background-color: transparent;
+      
+      svg {
+        path {
+          fill: var(--base-text-color);
+        }
+      }
     }
     .close:active{
       transform: translate(0, 0);
