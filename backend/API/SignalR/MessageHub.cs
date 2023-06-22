@@ -61,7 +61,7 @@ namespace API.SignalR
 
         public async Task SendMessage(CreateMessageDTO createMessageDTO)
         {
-            AppUserEntity sender = await _unitOfWork.userRepository.GetUserByIdAsync(Context.User.FindFirst("Id").Value);
+            AppUserEntity sender = await _unitOfWork.userRepository.GetUserByIdAsync(Ulid.Parse(Context.User.FindFirst("Id").Value));
             
             if (sender.FirstName == createMessageDTO.RecipientUserName.ToLower())
             {
@@ -96,7 +96,7 @@ namespace API.SignalR
             }
             else
             {
-                List<string> connections = await _tracker.GetConnectionsForUser(recipient.Id);
+                List<string> connections = await _tracker.GetConnectionsForUser(recipient.Id.ToString());
                 if (connections != null)
                 {
                     await _presenceHub.Clients.Clients(connections).SendAsync("NewMessageReceived", 
@@ -112,7 +112,7 @@ namespace API.SignalR
             }
         }
 
-        public async Task DeleteMessage(string id)
+        public async Task DeleteMessage(Ulid id)
         {
             string userName = Context.User.FindFirst("UserName")?.Value;
 
@@ -142,7 +142,7 @@ namespace API.SignalR
         private async Task<GroupEntity> AddToGroup(string groupName)
         {
             GroupEntity group = await _unitOfWork.messageRepository.GetMessageGroup(groupName);
-            ConnectionEntity connection = new ConnectionEntity(Context.ConnectionId, Context.User.FindFirst("UserName").Value);
+            ConnectionEntity connection = new ConnectionEntity(Ulid.Parse(Context.ConnectionId), Context.User.FindFirst("UserName").Value);
 
             if (group == null)
             {
@@ -162,9 +162,9 @@ namespace API.SignalR
 
         private async Task<GroupEntity> RemoveFromMessageGroup()
         {
-            GroupEntity group = await _unitOfWork.messageRepository.GetGroupForConnection(Context.ConnectionId);
+            GroupEntity group = await _unitOfWork.messageRepository.GetGroupForConnection(Ulid.Parse(Context.ConnectionId));
 
-            ConnectionEntity connection = group.Connections.FirstOrDefault(x => x.ConnectionId == Context.ConnectionId);
+            ConnectionEntity connection = group.Connections.FirstOrDefault(x => x.ConnectionId == Ulid.Parse(Context.ConnectionId));
 
             _unitOfWork.messageRepository.RemoveConnection(connection);
 

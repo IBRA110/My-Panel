@@ -2,7 +2,7 @@
 {
     public class CalendarEventEntity
     {
-        public string Id { get; set; } = Ulid.NewUlid().ToString();
+        public Ulid Id { get; set; } = Ulid.NewUlid();
         public string Title { get; set; }
         public AppUserEntity Creator { get; set; }
         public string Content { get; set; }

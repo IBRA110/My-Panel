@@ -40,11 +40,11 @@ namespace API.SignalR
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
-            string userId = Context.User.FindFirst("Id")?.Value;
+            Ulid userId = Ulid.Parse(Context.User.FindFirst("Id")?.Value);
             
             AppUserEntity user = await _unitOfWork.userRepository.GetUserByIdAsync(userId);
 
-            bool isOffline = await _tracker.UserDisconnected(userId, Context.ConnectionId);
+            bool isOffline = await _tracker.UserDisconnected(userId.ToString(), Context.ConnectionId);
             
             user.LastActive = DateTime.UtcNow;
             

@@ -27,11 +27,11 @@ namespace Infrastructure.Data.Repositories
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<MemberDTO> GetMemberByIdAsync(string id)
+        public async Task<MemberDTO> GetMemberByIdAsync(Ulid id)
         {
             return await _context.Users
                  .Where(x => x.Id == id)
-                 .Include(p => p.Images).ThenInclude(subItem => subItem.Likes)
+                 .Include(p => p.Images)
                  .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider)
                  .SingleOrDefaultAsync();
         }
@@ -53,10 +53,10 @@ namespace Infrastructure.Data.Repositories
                     userParams.PageNumber, userParams.PageSize);
         }
 
-        public async Task<AppUserEntity> GetUserByIdAsync(string id)
+        public async Task<AppUserEntity> GetUserByIdAsync(Ulid id)
         {
             return await _context.Users
-                .Include(p => p.Images).ThenInclude(subItem => subItem.Likes)
+                .Include(p => p.Images)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
@@ -67,7 +67,7 @@ namespace Infrastructure.Data.Repositories
                 .SingleOrDefaultAsync(x => x.UserName == username);
         }
 
-        public async Task<IQueryable<MemberDTO>> GetMembersAsyncGraphQL(string userName, string id)
+        public async Task<IQueryable<MemberDTO>> GetMembersAsyncGraphQL(string userName, Ulid id)
         {
             IQueryable<MemberDTO> users = _context.Users
                     .AsQueryable()

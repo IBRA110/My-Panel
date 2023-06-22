@@ -26,7 +26,7 @@ namespace API.GraphQL.Users
             string introduction
             )
         {
-            AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
+            AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(Ulid.Parse(claimsPrincipal.FindFirst("Id").Value));
 
             MemberUpdateDTO memberUpdateDTO = new MemberUpdateDTO
             {
@@ -64,7 +64,7 @@ namespace API.GraphQL.Users
         [Authorize]
         public async Task<ImageUpdateDTO> UploadUserAvatar([Service] IUnitOfWork unitOfWork, ClaimsPrincipal claimsPrincipal, IFile file)
         {
-            AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
+            AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(Ulid.Parse(claimsPrincipal.FindFirst("Id").Value));
 
             string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.Name;
 

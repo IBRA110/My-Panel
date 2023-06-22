@@ -12,7 +12,7 @@ namespace API.GraphQL.Users
         [Authorize]
         public async Task<MemberDTO> GetUser([Service] IUnitOfWork unitOfWork, ClaimsPrincipal claimsPrincipal)
         {
-            MemberDTO user = await unitOfWork.userRepository.GetMemberByIdAsync(claimsPrincipal.FindFirst("Id").Value);
+            MemberDTO user = await unitOfWork.userRepository.GetMemberByIdAsync(Ulid.Parse(claimsPrincipal.FindFirst("Id").Value));
             return user;
         }
         
@@ -31,7 +31,7 @@ namespace API.GraphQL.Users
             ClaimsPrincipal claimsPrincipal, 
             string userName)
         {
-            string id = claimsPrincipal.FindFirst("Id").Value;
+            Ulid id = Ulid.Parse(claimsPrincipal.FindFirst("Id").Value);
 
             IQueryable<MemberDTO> users = await unitOfWork.userRepository.GetMembersAsyncGraphQL(userName, id);
 

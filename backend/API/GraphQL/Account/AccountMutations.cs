@@ -108,7 +108,7 @@ namespace API.GraphQL.Account
             string refreshToken)
         {
 
-            AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
+            AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(Ulid.Parse(claimsPrincipal.FindFirst("Id").Value));
 
             if (user == null || refreshToken != user.RefreshToken)
             {
@@ -131,7 +131,7 @@ namespace API.GraphQL.Account
             string refreshToken)
         {
 
-            AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(claimsPrincipal.FindFirst("Id").Value);
+            AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(Ulid.Parse(claimsPrincipal.FindFirst("Id").Value));
 
             if (user == null || refreshToken != user.RefreshToken)
             {
