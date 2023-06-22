@@ -1,8 +1,5 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Core.Entities
-{
-    [Table("Images")]
+{ 
     public class ImageEntity
     {
         public string Id { get; set; } = Ulid.NewUlid().ToString();

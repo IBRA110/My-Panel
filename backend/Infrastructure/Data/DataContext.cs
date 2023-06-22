@@ -17,7 +17,8 @@ namespace Infrastructure.Data
         public DbSet<MessageEntity> Messages { get; set; }
         public DbSet<GroupEntity> Groups { get; set; }
         public DbSet<ConnectionEntity> Connections { get; set; }
-        
+        public DbSet<CalendarEventEntity> CalendarEvents { get; set; }
+                
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -50,6 +51,9 @@ namespace Infrastructure.Data
                 .HasOne(u => u.Sender)
                 .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<CalendarEventEntity>()
+                .HasOne(u => u.Creator);
 
             modelBuilder.ApplyUtcDateTimeConverter();
         }
