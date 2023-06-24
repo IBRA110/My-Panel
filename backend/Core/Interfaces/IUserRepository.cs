@@ -10,7 +10,7 @@ namespace Core.Interfaces
         Task<AppUserEntity> GetUserByIdAsync(Ulid id);
         Task<AppUserEntity> GetUserByUsernameAsync(string username);
         Task<PagedList<MemberDTO>> GetMembersAsync(UserParams userParams);
-        Task<IQueryable<MemberDTO>> GetMembersAsyncGraphQL(string? userName, Ulid id);
+        Task<List<MemberDTO>> GetMembersAsyncGraphQL(string? userName, Ulid id);
         Task<MemberDTO> GetMemberAsync(string username);
         Task<MemberDTO> GetMemberByIdAsync(Ulid id);
     }

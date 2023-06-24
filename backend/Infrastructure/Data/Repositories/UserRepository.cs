@@ -67,16 +67,15 @@ namespace Infrastructure.Data.Repositories
                 .SingleOrDefaultAsync(x => x.UserName == username);
         }
 
-        public async Task<IQueryable<MemberDTO>> GetMembersAsyncGraphQL(string userName, Ulid id)
+        public async Task<List<MemberDTO>> GetMembersAsyncGraphQL(string userName, Ulid id)
         {
-            IQueryable<MemberDTO> users = _context.Users
-                    .AsQueryable()
+            List<MemberDTO> users = await _context.Users
                     .Where(x => x.Id != id)
-                    .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider);
+                    .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider).ToListAsync();
 
             if (!string.IsNullOrEmpty(userName))
             {
-                users = users.Where(e => e.UserName.Contains(userName) 
+                users = (List<MemberDTO>)users.Where(e => e.UserName.Contains(userName) 
                     || e.FirstName.Contains(userName) 
                     || e.LastName.Contains(userName));
             }
