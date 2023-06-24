@@ -69,18 +69,19 @@ namespace Infrastructure.Data.Repositories
 
         public async Task<List<MemberDTO>> GetMembersAsyncGraphQL(string userName, Ulid id)
         {
-            List<MemberDTO> users = await _context.Users
-                    .Where(x => x.Id != id)
-                    .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider).ToListAsync();
-
             if (!string.IsNullOrEmpty(userName))
             {
-                users = (List<MemberDTO>)users.Where(e => e.UserName.Contains(userName) 
-                    || e.FirstName.Contains(userName) 
-                    || e.LastName.Contains(userName));
+                return await _context.Users
+                    .Where(e => e.UserName.Contains(userName)
+                        || e.FirstName.Contains(userName)
+                        || e.LastName.Contains(userName))
+                    .Where(x => x.Id != id)
+                    .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider).ToListAsync();
             }
 
-            return users;
+            return await _context.Users
+                .Where(x => x.Id != id)
+                .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
         public void Update(AppUserEntity user)
