@@ -17,6 +17,8 @@ namespace API.GraphQL.CalendarEvents
             ClaimsPrincipal claimsPrincipal,
             string title,
             string content,
+            bool isPrivate,
+            string color,
             DateTime startDate,
             DateTime endDate)
         {
@@ -30,6 +32,8 @@ namespace API.GraphQL.CalendarEvents
                 StartDate = startDate,
                 EndDate = endDate,
                 DateCreated = DateTime.Now,
+                IsPrivate = isPrivate,
+                Color = color,
             };
             
 
@@ -50,6 +54,7 @@ namespace API.GraphQL.CalendarEvents
                 StartDate = calendarEvent.StartDate,
                 EndDate = calendarEvent.EndDate,
                 DateCreated = calendarEvent.DateCreated,
+                Color = calendarEvent.Color,
             };
         }
 
@@ -61,8 +66,10 @@ namespace API.GraphQL.CalendarEvents
             string id,
             string title,
             string content,
+            string color,
             DateTime startDate,
-            DateTime endDate)
+            DateTime endDate,
+            bool isPrivate)
         {
             AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(Ulid.Parse(claimsPrincipal.FindFirst("Id").Value));
                         
@@ -78,6 +85,8 @@ namespace API.GraphQL.CalendarEvents
             calendarEvent.DateUpdated = DateTime.Now;
             calendarEvent.EndDate = endDate;
             calendarEvent.StartDate = startDate;
+            calendarEvent.IsPrivate = isPrivate;
+            calendarEvent.Color = color;
 
             unitOfWork.CalendarEvent.UpdateEvent(calendarEvent);
             
@@ -97,6 +106,7 @@ namespace API.GraphQL.CalendarEvents
                 DateUpdated = calendarEvent.DateUpdated,
                 StartDate = calendarEvent.StartDate,
                 EndDate = calendarEvent.EndDate,
+                Color = calendarEvent.Color
             };
         }
 

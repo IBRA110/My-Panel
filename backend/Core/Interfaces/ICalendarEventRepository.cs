@@ -10,6 +10,6 @@ namespace Core.Interfaces
         void UpdateEvent(CalendarEventEntity ev);
         void DeleteEvent(CalendarEventEntity ev);
         Task<CalendarEventEntity> GetEventById(Ulid id);
-        Task<List<CalendarEventDTO>> GetEvents(DateTime startDate, DateTime endDate);
+        Task<List<CalendarEventDTO>> GetEvents(DateTime startDate, DateTime endDate, string userName);
     }
 }

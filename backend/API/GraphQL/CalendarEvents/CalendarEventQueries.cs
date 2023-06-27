@@ -2,6 +2,7 @@
 using Core.Entities;
 using Core.Interfaces;
 using HotChocolate.Authorization;
+using System.Security.Claims;
 
 namespace API.GraphQL.CalendarEvents
 {
@@ -10,9 +11,15 @@ namespace API.GraphQL.CalendarEvents
     {
         [UseProjection]
         [Authorize]
-        public async Task<List<CalendarEventDTO>> GetCalendarEvent([Service] IUnitOfWork unitOfWork, DateTime startDate, DateTime endDate)
+        public async Task<List<CalendarEventDTO>> GetCalendarEvent(
+            [Service] IUnitOfWork unitOfWork, 
+            ClaimsPrincipal claimsPrincipal, 
+            DateTime startDate, 
+            DateTime endDate)
         {
-            return await unitOfWork.CalendarEvent.GetEvents(startDate, endDate);
+            AppUserEntity user = await unitOfWork.userRepository.GetUserByIdAsync(Ulid.Parse(claimsPrincipal.FindFirst("Id").Value));
+
+            return await unitOfWork.CalendarEvent.GetEvents(startDate, endDate, user.UserName);
         }
     }
 }

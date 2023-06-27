@@ -26,10 +26,11 @@ namespace Infrastructure.Data.Repositories
             _context.CalendarEvents.Remove(ev);
         }
 
-        public async Task<List<CalendarEventDTO>> GetEvents(DateTime startDate, DateTime endDate)
+        public async Task<List<CalendarEventDTO>> GetEvents(DateTime startDate, DateTime endDate, string userName)
         {
             return await _context.CalendarEvents
                 .Where(c => startDate >= c.StartDate && endDate <= c.EndDate)
+                .Where(c => !c.IsPrivate || c.Creator.UserName == userName)
                 .ProjectTo<CalendarEventDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
