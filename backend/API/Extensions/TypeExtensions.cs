@@ -1,4 +1,5 @@
-﻿using Core.DTOs.ImageDTOs;
+﻿using Core.DTOs.CalendarEventDTOs;
+using Core.DTOs.ImageDTOs;
 using Core.DTOs.UserDTOs;
 
 namespace API.Extensions
@@ -29,7 +30,7 @@ namespace API.Extensions
                 .Type<MemberDTOTypeExtension>()
                 .Resolve(context =>
                 {
-                    var id = context.ArgumentValue<string>("id");
+                    string id = context.ArgumentValue<string>("id");
 
                     return id;
                 });
@@ -58,10 +59,39 @@ namespace API.Extensions
                 .Type<ImageDTOTypeExtension>()
                 .Resolve(context =>
                 {
-                    var id = context.ArgumentValue<string>("id");
+                    string id = context.ArgumentValue<string>("id");
 
                     return id;
                 });
         }
     }
+    public class CalendarEventDTOTypeExtension : ObjectType<CalendarEventDTO>
+    {
+        protected override void Configure(IObjectTypeDescriptor<CalendarEventDTO> descriptor)
+        {
+            descriptor.Name("CalendarEventDTO");
+
+            descriptor.Field(f => f.Id).Type<IdType>();
+        }
+    }
+
+    public class CalendarEventDTOExtension : ObjectType
+    {
+        protected override void Configure(IObjectTypeDescriptor descriptor)
+        {
+            descriptor.Name(OperationTypeNames.Query);
+
+            descriptor
+                .Field("CalendarEventDTO")
+                .Argument("id", a => a.Type<IdType>())
+                .Type<CalendarEventDTOTypeExtension>()
+                .Resolve(context =>
+                {
+                    string id = context.ArgumentValue<string>("id");
+
+                    return id;
+                });
+        }
+    }
+
 }

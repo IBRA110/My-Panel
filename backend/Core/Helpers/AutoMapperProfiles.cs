@@ -4,6 +4,7 @@ using Core.DTOs.ImageDTOs;
 using Core.DTOs.MessageDTOs;
 using Core.DTOs.AccountDTOs;
 using Core.DTOs.UserDTOs;
+using Core.DTOs.CalendarEventDTOs;
 
 namespace Core.Helpers
 {
@@ -17,6 +18,9 @@ namespace Core.Helpers
                 .ForMember(desk => desk.Age, opt => opt.MapFrom(src =>
                     src.DateOfBirth.CalculateAge()));
             CreateMap<ImageEntity, ImageDTO>();
+            CreateMap<CalendarEventEntity, CalendarEventDTO>()
+                .ForMember(desk => desk.CreatorUserName, opt => opt.MapFrom(src =>
+                    src.Creator.UserName));
             CreateMap<MemberUpdateDTO, AppUserEntity>();
             CreateMap<RegisterDTO, AppUserEntity>();
             CreateMap<MessageEntity, MessageDTO>()

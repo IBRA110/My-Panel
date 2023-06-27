@@ -4,7 +4,6 @@ using AutoMapper;
 using Core.Helpers;
 using Core.Interfaces;
 using Core.Entities;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Core.DTOs.UserDTOs;
 
 namespace Infrastructure.Data.Repositories

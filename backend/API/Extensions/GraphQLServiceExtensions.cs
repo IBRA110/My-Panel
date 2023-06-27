@@ -1,4 +1,5 @@
 ﻿using API.GraphQL.Account;
+using API.GraphQL.CalendarEvents;
 using API.GraphQL.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,12 +16,15 @@ namespace API.Extensions
                 .AddSorting()
                 .AddMutationType(m => m.Name("Mutations")) 
                 .AddType<AccountMutations>()
+                .AddType<CalendarEventMutations>()
                 .AddType<UsersMutations>()
                 .AddType<UploadType>()
                 .AddQueryType(q => q.Name("Queries"))
                 .AddType<MemberDTOTypeExtension>()
+                .AddType<CalendarEventDTOExtension>()
                 .AddType<ImageDTOTypeExtension>()
                 .AddType<UsersQueries>()
+                .AddType<CalendarEventQueries>()
                 .AddErrorFilter(er =>
                 {
                     switch (er.Exception)

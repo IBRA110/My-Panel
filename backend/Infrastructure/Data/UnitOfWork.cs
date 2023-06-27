@@ -23,6 +23,8 @@ namespace Infrastructure.Data
 
         public IMessageRepository messageRepository => new MessageRepository(_context, _mapper);
 
+        public ICalendarEventRepository CalendarEvent => new CalendarEventRepository(_context, _mapper);
+
         public async Task<bool> Complete()
         {
             return await _context.SaveChangesAsync() > 0;

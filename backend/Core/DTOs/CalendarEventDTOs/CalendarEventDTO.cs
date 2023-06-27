@@ -1,10 +1,10 @@
-﻿namespace Core.Entities
+﻿namespace Core.DTOs.CalendarEventDTOs
 {
-    public class CalendarEventEntity
+    public class CalendarEventDTO
     {
-        public Ulid Id { get; set; } = Ulid.NewUlid();
+        public string Id { get; set; }
         public string Title { get; set; }
-        public AppUserEntity Creator { get; set; }
+        public string CreatorUserName { get; set; }
         public string Content { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
         public DateTime DateUpdated { get; set; }
