@@ -16,6 +16,7 @@ export class AuthenticationComponent {
     this.store.select(selectIsFormToggled);
 
   public constructor(private store: Store) {}
+
   public get scssClass(): typeof UiButtonStyleEnum {
     return UiButtonStyleEnum;
   }

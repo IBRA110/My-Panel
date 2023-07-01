@@ -12,6 +12,7 @@ export class UiSelectTabsComponent {
   @Input() public selectedTab: string = '';
   @Input() public tabs: string[] = [];
   @Output() public onClick = new EventEmitter<string>();
+  @Input() public scssClass: string;
 
   public getMarginBySelectedTab(): string {
     let indexOfSelectedTab: number = 0;

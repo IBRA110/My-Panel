@@ -1,1 +1,15 @@
-<p>calendar works!</p>
+<div class="calendar">
+  <div class="calendar-header">
+    <app-ui-select-tabs
+      [tabs]="['prev', 'today', 'next']"
+      [scssClass]="scssClass.BUTTONS"
+      (onClick)="changeDate($event)"
+    ></app-ui-select-tabs>
+    <app-ui-select-tabs
+      [tabs]="['Daily', 'Weekly', 'Monthly']"
+      [selectedTab]="selectedTab"
+      [scssClass]="scssClass.SELECT_BUTTONS"
+      (onClick)="changeCalendar($event)"
+    ></app-ui-select-tabs>
+  </div>
+</div>

@@ -4,7 +4,7 @@ import { LocalStorageService } from './core/services/local-storage.service';
 import { ThemeService } from './core/services/theme.service';
 import { LocalStorageKeysEnum } from './core/enums/local-storage-keys.enum';
 import { TranslateService } from '@ngx-translate/core';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { rootRouterAnimation } from './core/animations/root-router.animation';
 
 @Component({
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     translate.setDefaultLang('english');
   }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.currentTheme = this.localStorageService.getData(
       LocalStorageKeysEnum.CURRENT_THEME,
     );
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  public getRouterOutletState(outlet: RouterOutlet) {
+  public getRouterOutletState(outlet: RouterOutlet): ActivatedRoute | '' {
     return outlet.isActivated ? outlet.activatedRoute : '';
   }
 }

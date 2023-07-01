@@ -3,6 +3,7 @@
 .select{
   position: relative;
   z-index: 1;
+ 
   &-tabs {
     display: flex;
     gap: 2px;
@@ -23,10 +24,90 @@
       color: var(--base-text-color);
     }
   }
-  &-line{
+  &-line {
     width: 200px;
     height: 5px;
     background-color: var(--button-background-default-color);
     transition: all ease-in 300ms;
+  }
+}
+
+.buttons {
+  position: relative;
+  z-index: 1;
+  
+  .select-line {
+    display: none;
+  }
+  
+  .select-tabs {
+    display: flex;
+    gap: 2px;
+
+    button {
+      cursor: pointer;
+      background-color: var(--button-background-default-color);
+      width: 125px;
+      height: 40px;
+      color: var(--button-text-color);
+      transition: all 100ms ease;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    }
+
+    button:first-child {
+      border-radius: 10px 0 0 10px;      
+      box-shadow: none;
+    }
+    
+    button:last-child {
+      border-radius: 0 10px 10px 0;
+      box-shadow: none;
+    }
+
+    button:active {
+      background-color: var(--button-background-active-color);
+    }
+  }
+}
+
+.select-buttons {
+  position: relative;
+  z-index: 1;
+  
+  .select-line {
+    display: none;
+  }
+  
+  .select-tabs {
+    display: flex;
+    gap: 2px;
+
+    button {
+      cursor: pointer;
+      background-color: var(--button-background-default-color);
+      width: 125px;
+      height: 40px;
+      color: var(--button-text-color);
+      transition: all 100ms ease;
+      box-shadow: none;
+    }
+
+    button:first-child {
+      border-radius: 10px 0 0 10px;      
+      box-shadow: none;
+    }
+    
+    button:last-child {
+      border-radius: 0 10px 10px 0;
+      box-shadow: none;
+    }
+
+    button:active {
+      background-color: var(--button-background-active-color);
+    }
+    
+    button.active {
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    }
   }
 }
