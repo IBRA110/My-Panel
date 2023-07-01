@@ -12,7 +12,19 @@
   
     &_router{
       width: 100%;
+      overflow-y: scroll;
+      height: 100vh;
       padding: 100px 110px 50px 50px;
+
+      &::-webkit-scrollbar {
+        position: absolute;
+        width: 8px;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--button-background-default-color);
+        border-radius: 20px;
+      }
     }
   }
 }

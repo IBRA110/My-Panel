@@ -12,7 +12,7 @@ export const lightTheme: Theme = {
     '--button-text-color': 'rgb(237, 245, 252)',
 
     '--button-background-default-color': 'rgba(5, 60, 149)',
-    '--button-background-active-color': 'rgb(2, 43, 110)',
+    '--button-background-active-color': 'rgb(2, 48, 123)',
     '--button-outline-basic-background-color': 'rgb(143, 155, 179)',
 
     '--input-backgound-color': 'rgb(255,255,255)',
