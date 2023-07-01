@@ -7,6 +7,7 @@ import { MonthlyCalendarComponent } from './components/monthly-calendar/monthly-
 import { TranslateModule } from '@ngx-translate/core';
 import { MomentPipe } from 'src/app/core/pipes/moment.pipe';
 import { WeeklyCalendarComponent } from './components/weekly-calendar/weekly-calendar.component';
+import { DailyCalendarComponent } from './components/daily-calendar/daily-calendar.component';
 
 @NgModule({
   declarations: [CalendarComponent],
@@ -15,6 +16,7 @@ import { WeeklyCalendarComponent } from './components/weekly-calendar/weekly-cal
     UiSelectTabsComponent,
     MonthlyCalendarComponent,
     WeeklyCalendarComponent,
+    DailyCalendarComponent,
     MomentPipe,
     TranslateModule,
     RouterModule.forChild([{ path: '', component: CalendarComponent }]),

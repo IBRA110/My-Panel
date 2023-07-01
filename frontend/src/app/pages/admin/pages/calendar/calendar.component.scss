@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: 10px;
   @include Paragraph;
+  position: relative;
   
   &-header {
     display: flex;

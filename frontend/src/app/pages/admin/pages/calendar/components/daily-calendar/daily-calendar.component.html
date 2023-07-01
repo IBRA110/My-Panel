@@ -1,0 +1,18 @@
+<div class="daily-calendar">
+  <div class="daily-calendar_container">
+    <div class="daily-calendar_container-body">
+      <div class="week" *ngFor="let week of calendar">
+        <div
+          class="day"
+          *ngFor="let day of week.days"
+          [ngClass]="{ active: day.active, disabled: day.disabled, selected: day.selected }"
+          (click)="selected(day.value)"
+        >
+          <div *ngFor="let hour of hours" class="hour">
+            <p>{{ hour }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

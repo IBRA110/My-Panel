@@ -2,7 +2,7 @@
   <div class="weekly-calendar_container">
     <div class="weekly-calendar_container-header" *ngFor="let week of calendar">
       <div *ngFor="let day of week.days; let i = index" class="title">
-        <p>{{ daysOfTheWeek[i] }}</p>
+        <p>{{ 'CALENDAR.' + daysOfTheWeek[i] | translate }}</p>
         <span>{{ day.value | moment : 'DD MMM' }}</span>
       </div>
     </div>
