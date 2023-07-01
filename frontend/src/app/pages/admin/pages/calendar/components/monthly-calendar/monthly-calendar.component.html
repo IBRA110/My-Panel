@@ -1,0 +1,24 @@
+<div class="monthly-calendar">
+  <div class="monthly-calendar_container">
+    <div class="monthly-calendar_container-header">
+      <div *ngFor="let day of week" class="title">
+        <p>{{ 'CALENDAR.' + day | translate }}</p>
+      </div>
+    </div>
+    <div class="monthly-calendar_container-body">
+      <div class="week" *ngFor="let week of calendar">
+        <div
+          class="day"
+          *ngFor="let day of week.days"
+          [ngClass]="{ active: day.active, disabled: day.disabled, selected: day.selected }"
+          (click)="!day.disabled ? selected(day.value) : ''"
+        >
+          <span>{{ day.value | moment : 'DD' }}</span>
+          <div *ngFor="let task of day.tasks">
+            {{ task.event }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

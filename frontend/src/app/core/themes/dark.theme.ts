@@ -7,6 +7,8 @@ export const darkTheme: Theme = {
     '--base-backgound-color': 'rgb(34, 43, 69)',
     '--box-shadow-color': 'rgb(25, 31, 57)',
 
+    '--today-color': 'rgba(5, 60, 149, 0.2)',
+
     '--base-text-color': 'rgb(227, 228, 230)',
     '--transparent-text-color': 'rgba(0, 48, 93, 0.5)',
     '--button-text-color': 'rgb(237, 245, 252)',

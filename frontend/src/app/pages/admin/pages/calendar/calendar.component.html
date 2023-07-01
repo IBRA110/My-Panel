@@ -5,11 +5,16 @@
       [scssClass]="scssClass.BUTTONS"
       (onClick)="changeDate($event)"
     ></app-ui-select-tabs>
+    <p *ngIf="selectedTab !== 'Daily'">{{ dateService.date | async | moment : 'MMMM YYYY' }}</p>
+    <p *ngIf="selectedTab === 'Daily'">{{ dateService.date | async | moment : 'MMMM DD YYYY' }}</p>
     <app-ui-select-tabs
-      [tabs]="['Daily', 'Weekly', 'Monthly']"
+      [tabs]="['CALENDAR.DAY' | translate, 'CALENDAR.WEEK' | translate, 'CALENDAR.MONTH' | translate]"
       [selectedTab]="selectedTab"
       [scssClass]="scssClass.SELECT_BUTTONS"
       (onClick)="changeCalendar($event)"
     ></app-ui-select-tabs>
+  </div>
+  <div class="calendar-body">
+    <app-monthly-calendar></app-monthly-calendar>
   </div>
 </div>

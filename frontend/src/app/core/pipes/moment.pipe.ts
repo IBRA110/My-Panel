@@ -4,6 +4,7 @@ import * as moment from 'moment';
 @Pipe({
   name: 'moment',
   pure: false,
+  standalone: true,
 })
 export class MomentPipe implements PipeTransform {
   public transform(m: moment.Moment, format: string = 'MMMM YYYY'): string {

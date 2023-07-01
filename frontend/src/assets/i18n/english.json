@@ -67,5 +67,17 @@
     "INTERESTS": "Interests",
     "INTRODUCTION": "Introduction",
     "LAST_ACTIVE": "Last active"
+  },
+  "CALENDAR": {
+    "MONTH": "Monthly",
+    "DAY": "Daily",
+    "WEEK": "Weekly",
+    "Sunday": "Sunday",
+    "Monday": "Monday",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Thursday": "Thursday",
+    "Friday": "Friday",
+    "Saturday": "Saturday"
   }
 }
