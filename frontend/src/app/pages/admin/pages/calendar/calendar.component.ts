@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { UiSelectTabsStyleEnum } from 'src/app/core/enums/ui-select-tabs-style.enum';
 import { DateService } from './data/services/date.service';
+import { fadeAnimationMySettings } from 'src/app/core/animations/fade.animation';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
+  animations: [fadeAnimationMySettings],
 })
 export class CalendarComponent {
   public selectedTab: string = 'Monthly';

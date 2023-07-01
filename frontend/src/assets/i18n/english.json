@@ -69,6 +69,7 @@
     "LAST_ACTIVE": "Last active"
   },
   "CALENDAR": {
+    "SELECTED_DAY": "Selected day:",
     "MONTH": "Monthly",
     "DAY": "Daily",
     "WEEK": "Weekly",

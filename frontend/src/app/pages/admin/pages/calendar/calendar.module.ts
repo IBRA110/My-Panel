@@ -6,6 +6,7 @@ import { UiSelectTabsComponent } from 'src/app/core/ui/ui-select-tabs/ui-select-
 import { MonthlyCalendarComponent } from './components/monthly-calendar/monthly-calendar.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { MomentPipe } from 'src/app/core/pipes/moment.pipe';
+import { WeeklyCalendarComponent } from './components/weekly-calendar/weekly-calendar.component';
 
 @NgModule({
   declarations: [CalendarComponent],
@@ -13,6 +14,7 @@ import { MomentPipe } from 'src/app/core/pipes/moment.pipe';
     CommonModule,
     UiSelectTabsComponent,
     MonthlyCalendarComponent,
+    WeeklyCalendarComponent,
     MomentPipe,
     TranslateModule,
     RouterModule.forChild([{ path: '', component: CalendarComponent }]),
