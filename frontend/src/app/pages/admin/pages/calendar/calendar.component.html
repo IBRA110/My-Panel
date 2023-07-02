@@ -1,21 +1,33 @@
-<div class="calendar">
+<div class="calendar" *ngIf="selectedTab | async as tab">
   <div class="calendar-header">
     <app-ui-select-tabs
       [tabs]="['prev', 'today', 'next']"
       [scssClass]="scssClass.BUTTONS"
-      (onClick)="changeDate($event)"
+      (onClick)="changeDate($event, tab)"
     ></app-ui-select-tabs>
-    <p>{{ 'CALENDAR.SELECTED_DAY' | translate }} {{ dateService.date | async | moment : 'DD MMMM YYYY' }}</p>
+    <p *ngIf="date | async as date">
+      {{ 'CALENDAR.SELECTED_DAY' | translate }} {{ date.toString() | date : 'dd MMMM YYYY' }}
+    </p>
     <app-ui-select-tabs
       [tabs]="['CALENDAR.DAY' | translate, 'CALENDAR.WEEK' | translate, 'CALENDAR.MONTH' | translate]"
-      [selectedTab]="selectedTab"
+      [selectedTab]="selectedTab | async"
       [scssClass]="scssClass.SELECT_BUTTONS"
       (onClick)="changeCalendar($event)"
     ></app-ui-select-tabs>
   </div>
   <div class="calendar-body">
-    <app-monthly-calendar @fadeAnimationMySettings *ngIf="selectedTab === 'Monthly'"></app-monthly-calendar>
-    <app-weekly-calendar @fadeAnimationMySettings *ngIf="selectedTab === 'Weekly'"></app-weekly-calendar>
-    <app-daily-calendar @fadeAnimationMySettings *ngIf="selectedTab === 'Daily'"></app-daily-calendar>
+    <app-monthly-calendar
+      [date]="date | async"
+      @fadeAnimationMySettings
+      *ngIf="tab === 'Monthly'"
+      (selectDate)="selectDay($event)"
+    ></app-monthly-calendar>
+    <app-weekly-calendar
+      [date]="date | async"
+      @fadeAnimationMySettings
+      *ngIf="tab === 'Weekly'"
+      (selectDate)="selectDay($event)"
+    ></app-weekly-calendar>
+    <app-daily-calendar @fadeAnimationMySettings *ngIf="tab === 'Daily'"></app-daily-calendar>
   </div>
 </div>

@@ -8,6 +8,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MomentPipe } from 'src/app/core/pipes/moment.pipe';
 import { WeeklyCalendarComponent } from './components/weekly-calendar/weekly-calendar.component';
 import { DailyCalendarComponent } from './components/daily-calendar/daily-calendar.component';
+import { StoreModule } from '@ngrx/store';
+import { calendarFeatureKey, reducer } from './data/store/calendar.reduser';
 
 @NgModule({
   declarations: [CalendarComponent],
@@ -19,6 +21,7 @@ import { DailyCalendarComponent } from './components/daily-calendar/daily-calend
     DailyCalendarComponent,
     MomentPipe,
     TranslateModule,
+    StoreModule.forFeature(calendarFeatureKey, reducer),
     RouterModule.forChild([{ path: '', component: CalendarComponent }]),
   ],
   exports: [],

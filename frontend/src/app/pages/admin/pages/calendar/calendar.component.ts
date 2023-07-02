@@ -1,7 +1,19 @@
 import { Component } from '@angular/core';
 import { UiSelectTabsStyleEnum } from 'src/app/core/enums/ui-select-tabs-style.enum';
-import { DateService } from './data/services/date.service';
 import { fadeAnimationMySettings } from 'src/app/core/animations/fade.animation';
+import { Store } from '@ngrx/store';
+import {
+  changeCalendar,
+  changeDate,
+  changeDateToToday,
+  selectDay,
+} from './data/store/calendar.actions';
+import {
+  selectCurrentCalendar,
+  selectDate,
+} from './data/store/calendar.selectors';
+import { Observable } from 'rxjs';
+import { CalendarType } from './data/types/calendar.type';
 
 @Component({
   selector: 'app-calendar',
@@ -10,29 +22,36 @@ import { fadeAnimationMySettings } from 'src/app/core/animations/fade.animation'
   animations: [fadeAnimationMySettings],
 })
 export class CalendarComponent {
-  public selectedTab: string = 'Monthly';
+  public selectedTab: Observable<CalendarType> = this.store.select(
+    selectCurrentCalendar,
+  );
   private dateDict: Record<string, string> = {
     Monthly: 'month',
     Weekly: 'week',
     Daily: 'day',
   };
+  public date: Observable<moment.Moment> = this.store.select(selectDate);
 
-  public constructor(public dateService: DateService) {}
+  public constructor(private store: Store) {}
 
   public changeCalendar(tab: string): void {
-    this.selectedTab = tab;
+    this.store.dispatch(changeCalendar({ calendar: tab as CalendarType }));
   }
 
-  public changeDate(tab: string): void {
-    const unitOfTime: string = this.dateDict[this.selectedTab].toLowerCase();
+  public changeDate(tab: string, selectedTab: string): void {
+    const unitOfTime: string = this.dateDict[selectedTab].toLowerCase();
     if (tab === 'prev') {
-      this.dateService.changeMonthWeekDay(-1, unitOfTime);
+      this.store.dispatch(changeDate({ dir: -1, event: unitOfTime }));
       return;
     } else if (tab === 'next') {
-      this.dateService.changeMonthWeekDay(1, unitOfTime);
+      this.store.dispatch(changeDate({ dir: 1, event: unitOfTime }));
       return;
     }
-    this.dateService.goToNow();
+    this.store.dispatch(changeDateToToday());
+  }
+
+  public selectDay(day: moment.Moment): void {
+    this.store.dispatch(selectDay({ day: day }));
   }
 
   public get scssClass(): typeof UiSelectTabsStyleEnum {

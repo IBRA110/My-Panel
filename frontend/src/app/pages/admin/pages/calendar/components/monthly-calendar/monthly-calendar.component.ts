@@ -1,13 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Week } from 'src/app/core/interfaces/date.interface';
 import * as moment from 'moment';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { DateService } from '../../data/services/date.service';
 import { MomentPipe } from 'src/app/core/pipes/moment.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 
-@UntilDestroy()
 @Component({
   selector: 'app-monthly-calendar',
   templateUrl: './monthly-calendar.component.html',
@@ -15,7 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [CommonModule, MomentPipe, TranslateModule],
 })
-export class MonthlyCalendarComponent implements OnInit {
+export class MonthlyCalendarComponent implements OnChanges {
   public calendar: Week[];
   public week: string[] = [
     'Sunday',
@@ -26,21 +30,29 @@ export class MonthlyCalendarComponent implements OnInit {
     'Friday',
     'Saturday',
   ];
+  @Input() public date: moment.Moment = moment();
 
-  public constructor(private dateService: DateService) {}
+  @Output() public selectDate: EventEmitter<moment.Moment> =
+    new EventEmitter<moment.Moment>();
 
-  public ngOnInit(): void {
-    this.dateService.date
-      .pipe(untilDestroyed(this))
-      .subscribe(this.generate.bind(this));
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['date'].currentValue) {
+      this.generate(this.date);
+    }
   }
 
   private generate(now: moment.Moment): void {
-    const startDay = now.clone().startOf('month').startOf('week');
-    const endDay = now.clone().endOf('month').endOf('week');
+    const startDay: moment.Moment = moment(now)
+      .clone()
+      .startOf('month')
+      .startOf('week');
+    const endDay: moment.Moment = moment(now)
+      .clone()
+      .endOf('month')
+      .endOf('week');
 
-    const date = startDay.clone().subtract(1, 'day');
-    const calendar = [];
+    const date: moment.Moment = startDay.clone().subtract(1, 'day');
+    const calendar: Week[] = [];
 
     while (date.isBefore(endDay, 'day')) {
       calendar.push({
@@ -49,8 +61,8 @@ export class MonthlyCalendarComponent implements OnInit {
           .map(() => {
             const value = date.add(1, 'day').clone();
             const active = moment().isSame(value, 'date');
-            const disabled = !now.isSame(value, 'month');
-            const selected = now.isSame(value, 'date');
+            const disabled = !moment(now).isSame(value, 'month');
+            const selected = moment(now).isSame(value, 'date');
 
             return {
               value,
@@ -65,6 +77,6 @@ export class MonthlyCalendarComponent implements OnInit {
   }
 
   public selected(day: moment.Moment): void {
-    this.dateService.changeDate(day);
+    this.selectDate.emit(day);
   }
 }
