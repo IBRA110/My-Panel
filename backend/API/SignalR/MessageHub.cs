@@ -33,7 +33,7 @@ namespace API.SignalR
             string otherUser = httpContext.Request.Query["user"].ToString();
             string groupName = GetGroupName(user, otherUser);
 
-            await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+            await Groups.AddToGroupAsync(Context.ConnectionId.ToString(), groupName);
 
             GroupEntity group = await AddToGroup(groupName);
             
@@ -142,7 +142,7 @@ namespace API.SignalR
         private async Task<GroupEntity> AddToGroup(string groupName)
         {
             GroupEntity group = await _unitOfWork.messageRepository.GetMessageGroup(groupName);
-            ConnectionEntity connection = new ConnectionEntity(Ulid.Parse(Context.ConnectionId), Context.User.FindFirst("UserName").Value);
+            ConnectionEntity connection = new ConnectionEntity(Context.ConnectionId, Context.User.FindFirst("UserName").Value);
 
             if (group == null)
             {
@@ -162,9 +162,9 @@ namespace API.SignalR
 
         private async Task<GroupEntity> RemoveFromMessageGroup()
         {
-            GroupEntity group = await _unitOfWork.messageRepository.GetGroupForConnection(Ulid.Parse(Context.ConnectionId));
+            GroupEntity group = await _unitOfWork.messageRepository.GetGroupForConnection(Context.ConnectionId);
 
-            ConnectionEntity connection = group.Connections.FirstOrDefault(x => x.ConnectionId == Ulid.Parse(Context.ConnectionId));
+            ConnectionEntity connection = group.Connections.FirstOrDefault(x => x.ConnectionId == Context.ConnectionId);
 
             _unitOfWork.messageRepository.RemoveConnection(connection);
 

@@ -57,13 +57,6 @@ namespace Infrastructure.Data
             foreach (IMutableEntityType entityType in modelBuilder.Model.GetEntityTypes())
             {
                 
-
-                if (typeof(ConnectionEntity).IsAssignableFrom(entityType.ClrType))
-                {
-                    modelBuilder.Entity(entityType.ClrType)
-                        .Property<Ulid>(nameof(ConnectionEntity.ConnectionId)).ValueGeneratedNever();
-                }
-
                 if (typeof(ImageEntity).IsAssignableFrom(entityType.ClrType))
                 {
                     modelBuilder.Entity(entityType.ClrType)

@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "DrawMyDream": {
+    "My-Panel": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,

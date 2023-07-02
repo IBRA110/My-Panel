@@ -28,7 +28,7 @@ namespace Infrastructure.Data.Repositories
             _context.Connections.Remove(connection);
         }
 
-        public async Task<ConnectionEntity> GetConnection(Ulid connectionId)
+        public async Task<ConnectionEntity> GetConnection(string connectionId)
         {
             return await _context.Connections.FindAsync(connectionId);
         }
@@ -94,7 +94,7 @@ namespace Infrastructure.Data.Repositories
             return messages;
         }
 
-        public async Task<GroupEntity> GetGroupForConnection(Ulid connectionId)
+        public async Task<GroupEntity> GetGroupForConnection(string connectionId)
         {
             return await _context.Groups
                 .Include(c => c.Connections)
