@@ -115,8 +115,26 @@
           
     &:focus{
       box-shadow: var(--box-shadow-color) 0px 0px 0px 2px;
-    }      
+    }
   }
+  input[type="date"]{
+    background-color: var(--input-backgound-color);
+    height: 30px;
+    width: 250px;
+    box-shadow: var(--box-shadow-color) 0px 0px 0px 1px;
+    padding: 0 10px;
+    font-family: "Roboto Mono",monospace;
+    color: var(--input-text-color);
+    @include Input;
+    border-radius: 5px;
+  }
+  ::-webkit-calendar-picker-indicator{
+      background-color: var(--input-backgound-color);
+      padding: 5px;
+      cursor: pointer;
+      border-radius: 3px;
+  } 
+
 
   &_textarea{
     height: 50px;
