@@ -36,7 +36,11 @@ export class WeeklyCalendarComponent implements OnChanges {
   public constructor() {}
 
   @Input() public date: moment.Moment = moment();
+
   @Output() public selectDate: EventEmitter<moment.Moment> =
+    new EventEmitter<moment.Moment>();
+
+  @Output() public openPopup: EventEmitter<moment.Moment> =
     new EventEmitter<moment.Moment>();
 
   public ngOnChanges(changes: SimpleChanges): void {

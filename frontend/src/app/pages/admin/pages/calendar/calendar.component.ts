@@ -14,6 +14,8 @@ import {
 } from './data/store/calendar.selectors';
 import { Observable } from 'rxjs';
 import { CalendarType } from './data/types/calendar.type';
+import { PopupService } from 'src/app/core/services/popup.service';
+import { CalendarEventFormComponent } from 'src/app/core/components/calendar-event-form/calendar-event-form.component';
 
 @Component({
   selector: 'app-calendar',
@@ -32,7 +34,10 @@ export class CalendarComponent {
   };
   public date: Observable<moment.Moment> = this.store.select(selectDate);
 
-  public constructor(private store: Store) {}
+  public constructor(
+    private store: Store,
+    private popupService: PopupService,
+  ) {}
 
   public changeCalendar(tab: string): void {
     this.store.dispatch(changeCalendar({ calendar: tab as CalendarType }));
@@ -56,5 +61,13 @@ export class CalendarComponent {
 
   public get scssClass(): typeof UiSelectTabsStyleEnum {
     return UiSelectTabsStyleEnum;
+  }
+
+  public openPopup(event: moment.Moment): void {
+    this.popupService.open(
+      'calendar-event-form',
+      CalendarEventFormComponent,
+      event,
+    );
   }
 }

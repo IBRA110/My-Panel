@@ -20,14 +20,21 @@
       [date]="date | async"
       @fadeAnimationMySettings
       *ngIf="tab === 'Monthly'"
+      (openPopup)="openPopup($event)"
       (selectDate)="selectDay($event)"
     ></app-monthly-calendar>
     <app-weekly-calendar
       [date]="date | async"
       @fadeAnimationMySettings
       *ngIf="tab === 'Weekly'"
+      (openPopup)="openPopup($event)"
       (selectDate)="selectDay($event)"
     ></app-weekly-calendar>
-    <app-daily-calendar @fadeAnimationMySettings *ngIf="tab === 'Daily'"></app-daily-calendar>
+    <app-daily-calendar
+      @fadeAnimationMySettings
+      [date]="date | async"
+      *ngIf="tab === 'Daily'"
+      (openPopup)="openPopup($event)"
+    ></app-daily-calendar>
   </div>
 </div>

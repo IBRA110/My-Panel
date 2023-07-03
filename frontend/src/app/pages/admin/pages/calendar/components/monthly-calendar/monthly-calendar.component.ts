@@ -35,6 +35,9 @@ export class MonthlyCalendarComponent implements OnChanges {
   @Output() public selectDate: EventEmitter<moment.Moment> =
     new EventEmitter<moment.Moment>();
 
+  @Output() public openPopup: EventEmitter<moment.Moment> =
+    new EventEmitter<moment.Moment>();
+
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['date'].currentValue) {
       this.generate(this.date);

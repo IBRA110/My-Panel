@@ -1,4 +1,11 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import moment from 'moment';
 import { Day } from 'src/app/core/interfaces/date.interface';
 import { CommonModule } from '@angular/common';
@@ -13,11 +20,14 @@ import { MomentPipe } from 'src/app/core/pipes/moment.pipe';
   imports: [CommonModule, MomentPipe, TranslateModule],
 })
 export class DailyCalendarComponent implements OnChanges {
-  public calendar: Day;
+  public day: Day;
 
   public hours: string[] = this.createHours();
   @Input() public date: moment.Moment = moment();
   public constructor() {}
+
+  @Output() public openPopup: EventEmitter<moment.Moment> =
+    new EventEmitter<moment.Moment>();
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['date'].currentValue) {
@@ -26,11 +36,12 @@ export class DailyCalendarComponent implements OnChanges {
   }
 
   private generate(now: moment.Moment): void {
-    this.calendar = {
-      value: now,
-      active: moment().isSame(now, 'date'),
-      disabled: !now.isSame(now, 'month'),
-      selected: now.isSame(now, 'date'),
+    const val: moment.Moment = moment(now);
+    this.day = {
+      value: val,
+      active: moment().isSame(val, 'date'),
+      disabled: !val.isSame(val, 'month'),
+      selected: val.isSame(val, 'date'),
     };
   }
 
