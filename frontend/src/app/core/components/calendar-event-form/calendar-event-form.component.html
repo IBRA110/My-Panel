@@ -1,3 +1,55 @@
 <app-ui-popup [dataLoaded]="true" [popupCode]="'calendar-event-form'">
-  <div>asdf</div>
+  <form class="event" [formGroup]="eventForm" (ngSubmit)="save()">
+    <div class="event-header">
+      <h3>{{ 'EVENT_FORM.ADD_EDIT_EVENT' | translate }}</h3>
+    </div>
+    <div class="event-body">
+      <div class="event-body_colors">
+        <div class="form-control">
+          <label class="form-control_label" for="title">{{ 'EVENT_FORM.TITLE' | translate }}</label>
+          <input class="form-control_input" formControlName="title" type="text" />
+        </div>
+        <div class="event-body_colors-radio">
+          <h3>{{ 'EVENT_FORM.COLORS' | translate }}</h3>
+          <div class="event-body_colors-radio__buttons">
+            <input type="radio" formControlName="color" id="radioBlue" name="color" value="rgb(23, 112, 213)" />
+            <label class="blue" for="radioBlue"></label>
+
+            <input type="radio" formControlName="color" id="radioGreen" name="color" value="rgb(23, 213, 55)" />
+            <label class="green" for="radioGreen"></label>
+
+            <input type="radio" formControlName="color" id="radioOrange" name="color" value="rgb(255, 128, 0)" />
+            <label class="orange" for="radioOrange"></label>
+
+            <input type="radio" formControlName="color" id="radioRed" name="color" value="rgb(193, 27, 27)" />
+            <label class="red" for="radioRed"></label>
+
+            <input type="radio" formControlName="color" id="radioViolet" name="color" value="rgb(146, 27, 193)" />
+            <label class="violet" for="radioViolet"></label>
+          </div>
+        </div>
+      </div>
+      <div class="event-body_description">
+        <div class="form-control">
+          <label class="form-control_label" for="Description">{{ 'EVENT_FORM.DESCRIPTION' | translate }}</label>
+          <textarea class="form-control_textarea" id="Description" formControlName="content" type="text"></textarea>
+        </div>
+      </div>
+      <div class="event-body_time">
+        <div class="form-control">
+          <label class="form-control_label" for="date">{{ 'EVENT_FORM.START' | translate }}</label>
+          <input type="datetime-local" className="date-picker" formControlName="startDate" name="date" />
+        </div>
+        <div class="form-control">
+          <label class="form-control_label" for="date">{{ 'EVENT_FORM.END' | translate }}</label>
+          <input type="datetime-local" className="date-picker" formControlName="endDate" name="date" />
+        </div>
+      </div>
+    </div>
+    <div class="event-footer">
+      <div class="event-footer_button">
+        <app-ui-button [type]="'submit'" [text]="'SAVE' | translate" [scssClass]="buttonStyle.DEFAULT"></app-ui-button>
+      </div>
+    </div>
+  </form>
 </app-ui-popup>

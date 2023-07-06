@@ -1,0 +1,178 @@
+@import "src/app/core/mixins/fonts";
+
+.event {
+  width: 800px;
+  height: 500px;
+  color: var(--base-text-color);
+
+  &-header {
+    @include Heading_3;
+    color: var(--base-text-color);
+  }
+
+  &-body {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &_colors {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+
+      &-radio {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+
+        h3 {
+          @include Input_Label;
+        }
+        
+        &__buttons {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 20px;
+
+          input[type="radio"] {
+            opacity: 0;
+            position: fixed;
+            width: 0;
+          }
+          
+          label {
+            display: inline-block;
+            cursor: pointer;
+            padding: 15px 15px;
+            border-radius: 4px;
+          }
+          .blue {
+            background-color: rgb(23, 112, 213);
+          }
+          .green {
+            background-color: rgb(23, 213, 55);
+          }
+          .orange {
+            background-color: rgb(255, 128, 0);
+          }
+          .red {
+            background-color: rgb(193, 27, 27);
+          }
+          .violet {
+            background-color: rgb(146, 27, 193);
+          }
+          
+          input[type="radio"]:checked + .blue {
+            background-color: rgba(23, 112, 213, 0.8);
+            border: 5px solid rgb(23, 112, 213);
+            box-shadow: rgb(255,255,255) 0px 0px 2px 2px inset, rgb(255,255,255) 0px 0px 6px 2px inset;
+          }
+          input[type="radio"]:checked + .green {
+            background-color: rgba(23, 213, 55, 0.8);
+            border: 5px solid rgb(23, 213, 55);
+            box-shadow: rgb(255,255,255) 0px 0px 2px 2px inset, rgb(255,255,255) 0px 0px 6px 2px inset;
+          }
+          input[type="radio"]:checked + .orange {
+            background-color: rgba(255, 128, 0, 0.8);
+            border: 5px solid rgb(255, 128, 0);
+            box-shadow: rgb(255,255,255) 0px 0px 2px 2px inset, rgb(255,255,255) 0px 0px 6px 2px inset;
+          }
+          input[type="radio"]:checked + .red {
+            background-color: rgba(193, 27, 27, 0.8);
+            border: 5px solid rgb(193, 27, 27);
+            box-shadow: rgb(255,255,255) 0px 0px 2px 2px inset, rgb(255,255,255) 0px 0px 6px 2px inset;
+          }
+          input[type="radio"]:checked + .violet {
+            background-color: rgba(146, 27, 193, 0.8);
+            border: 5px solid rgb(146, 27, 193);
+            box-shadow: rgb(255,255,255) 0px 0px 2px 2px inset, rgb(255,255,255) 0px 0px 6px 2px inset;
+          }
+        }
+      }
+    }
+    &_time {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 20px;
+    }
+  }
+  &-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+
+    &_button{
+      height: 50px;
+      width: 120px;
+    }
+  }
+}
+
+
+.form-control{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  position: relative;
+  
+  &_label{
+    display: block;
+    @include Input_Label;
+  }
+  
+  &_input{
+    display: block;
+    height: 30px;
+    width: 250px;
+    background-color: var(--input-backgound-color);
+    box-shadow: var(--box-shadow-color) 0px 0px 0px 1px;
+    border-radius: 3px;
+    padding: 0 10px;
+    @include Input;
+    color: var(--input-text-color);
+          
+    &:focus{
+      box-shadow: var(--box-shadow-color) 0px 0px 0px 2px;
+    }
+  }
+  input[type="datetime-local"]{
+    background-color: var(--input-backgound-color);
+    height: 30px;
+    width: 250px;
+    box-shadow: var(--box-shadow-color) 0px 0px 0px 1px;
+    padding: 0 10px;
+    font-family: "Roboto Mono",monospace;
+    color: var(--input-text-color);
+    @include Input;
+    border-radius: 5px;
+  }
+  ::-webkit-calendar-picker-indicator{
+      background-color: var(--input-backgound-color);
+      padding: 5px;
+      cursor: pointer;
+      border-radius: 3px;
+  } 
+
+
+  &_textarea{
+    height: 150px;
+    width: 100%;
+    background-color: var(--input-backgound-color);
+    box-shadow: var(--box-shadow-color) 0px 0px 0px 1px;
+    border-radius: 3px;
+    padding: 10px;
+    @include Input;
+    resize: none;
+    color: var(--input-text-color);
+
+    &:focus{
+      box-shadow: var(--box-shadow-color) 0px 0px 0px 2px;
+    }  
+  }
+}

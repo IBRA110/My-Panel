@@ -56,19 +56,19 @@
         } 
       }
       
-      img{
+      img {
         object-fit: fill;
         width: 100%;
         height: 100%;
       }
     }
-    &_fields{
+    &_fields {
       display: flex;
       flex-direction: column;
       gap: 20px;
     }
   }
-  &-body{
+  &-body {
     padding: 20px 0;
 
     &_fields{
@@ -78,7 +78,7 @@
       gap: 20px;
     }
   }
-  &-footer{
+  &-footer {
     display: flex;
     justify-content: flex-end;
     align-items: center;

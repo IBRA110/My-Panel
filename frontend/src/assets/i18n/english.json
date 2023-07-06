@@ -80,5 +80,13 @@
     "Thursday": "Thursday",
     "Friday": "Friday",
     "Saturday": "Saturday"
+  },
+  "EVENT_FORM": {
+    "TITLE": "Title",
+    "ADD_EDIT_EVENT": "Add/Edit event",
+    "COLORS": "Colors",
+    "DESCRIPTION": "Description",
+    "START": "Start date and time",
+    "END": "End date and time"
   }
 }
