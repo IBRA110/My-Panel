@@ -44,6 +44,13 @@
           <label class="form-control_label" for="date">{{ 'EVENT_FORM.END' | translate }}</label>
           <input type="datetime-local" className="date-picker" formControlName="endDate" name="date" />
         </div>
+        <div class="form-control">
+          <label class="container-checkbox" for="isPrivate">
+            {{ 'EVENT_FORM.IS_PRIVATE' | translate }}
+            <input type="checkbox" formControlName="isPrivate" id="isPrivate" name="checkbox" />
+            <span class="checkmark"></span
+          ></label>
+        </div>
       </div>
     </div>
     <div class="event-footer">

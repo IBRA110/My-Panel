@@ -41,5 +41,7 @@ export class CalendarEventFormComponent implements OnInit {
     return UiButtonStyleEnum;
   }
 
-  public save(): void {}
+  public save(): void {
+    console.log(this.eventForm.value);
+  }
 }
