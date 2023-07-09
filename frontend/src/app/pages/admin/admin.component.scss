@@ -6,8 +6,6 @@
   color: var(--base-text-color);
 
   &-wrapper {
-    width: 100%;
-    min-height: 100vh;
     display: flex;
   
     &_router{
@@ -15,6 +13,7 @@
       overflow-y: scroll;
       height: 100vh;
       padding: 100px 110px 50px 50px;
+      position: relative;
 
       &::-webkit-scrollbar {
         position: absolute;

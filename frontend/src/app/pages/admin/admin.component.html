@@ -7,8 +7,8 @@
   ></app-nav-bar>
   <div class="admin-wrapper">
     <app-side-bar [isSidebarToggled]="(dataForNavSideBar$ | async)?.isSideBarToggled"></app-side-bar>
-    <div class="admin-wrapper_router">
-      <router-outlet></router-outlet>
+    <div class="admin-wrapper_router" [@adminRouterAnimation]="getRouterOutletState(o)">
+      <router-outlet #o="outlet"></router-outlet>
     </div>
   </div>
 </div>
