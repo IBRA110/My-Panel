@@ -89,7 +89,7 @@ export class PopupService {
         });
         this.event.next([]);
       }
-    }, 300);
+    }, 100);
   }
 
   /**

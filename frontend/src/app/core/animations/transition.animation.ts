@@ -10,19 +10,15 @@ import {
 export const transitionAnimation = [
   trigger('transitionAnimation', [
     transition('void => *', [
-      query(
-        '.popup-anim',
-        style({ transform: 'translateY(-100%)', opacity: 0 }),
-        {
-          optional: true,
-        },
-      ),
+      query('.popup-anim', style({ transform: 'scale(1.2)', opacity: 0 }), {
+        optional: true,
+      }),
       query(
         '.popup-anim',
         stagger('500ms', [
           animate(
-            '300ms 300ms ease-out',
-            style({ transform: 'translateY(0%)', opacity: 1 }),
+            '100ms 300ms ease-out',
+            style({ transform: 'scale(1)', opacity: 1 }),
           ),
         ]),
         { optional: true },

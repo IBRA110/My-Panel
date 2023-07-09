@@ -27,10 +27,10 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(#000000, 0.6);
-  -webkit-transition: all 0.3s ease-in;
-  -moz-transition: all 0.3s ease-in;
-  -o-transition: all 0.3s ease-in;
-  transition: all 0.3s ease-in;
+  -webkit-transition: all 0.1s ease-in;
+  -moz-transition: all 0.1s ease-in;
+  -o-transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
 
   &.hide{
     opacity: 0;
@@ -43,13 +43,13 @@
   justify-content: center;
   overflow: hidden;
   position: relative;
-  -webkit-transition: all 0.3s ease-in;
-  -moz-transition: all 0.3s ease-in;
-  -o-transition: all 0.3s ease-in;
-  transition: all 0.3s ease-in;
+  -webkit-transition: all 0.1s ease-in;
+  -moz-transition: all 0.1s ease-in;
+  -o-transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
 
   &.hide{
-    transform: translateY(-100%);
+    transform: scale(1.2);
   }
 }
 
